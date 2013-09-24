@@ -55,7 +55,8 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
 
 void allerAlaLigne (FILE* fichier){
 	char carac;//un caractere quelconque
-    do {
+    do 
+    {
     	fscanf(fichier, "%c", &carac);
     } while (carac != '\n');
 }
@@ -254,12 +255,17 @@ Image chargerImage(char* nomImage){
 	int teinteMaximale;
 	int* teinte;
 	image = fopen(nomImage, "r");
-	recupType(type, image);
-	largeur = parametrage(image);
-	hauteur = parametrage(image);
-	teinteMaximale = teinteMax(type, image);
-	teinte = recupPixel(image, largeur, hauteur, type);
+	if (image != NULL)
+	{
+		recupType(type, image);
+		largeur = parametrage(image);
+		hauteur = parametrage(image);
+		teinteMaximale = teinteMax(type, image);
+		teinte = recupPixel(image, largeur, hauteur, type);
+		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);//création de l image
+	}else
+		erreur(IMAGE_NO_EXISTS);
 	fclose(image);
-	imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);
+	free(teinte);//libère la mémoire
 	return imageCharge;	
 }
