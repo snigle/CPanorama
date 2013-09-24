@@ -10,6 +10,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
 
 
 #define NO_INPUT_OR_OUTPUT 1

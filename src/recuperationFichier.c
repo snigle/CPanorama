@@ -36,6 +36,7 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
 	newImage.height = hauteur;
 	newImage.teinteMax = teinteMaximale;
 	newImage.teinte = pixel;
+	return newImage;
 }
 
 /*!
@@ -131,13 +132,10 @@ int parametrage(FILE* image)
 	result = 0;
 	sauterCommentaire(image);
 	test = fscanf(image, "%d", &result);
-	if (test == 1)
-	{
-    	return result;
-    }else
-    	{
-    		erreur(IMAGE_CORROMPUE);
-    	}
+	if (test != 1)
+		erreur(IMAGE_CORROMPUE);
+    
+    return result;
 }
 
 /*!

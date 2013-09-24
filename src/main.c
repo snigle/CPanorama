@@ -18,7 +18,7 @@
  	int num;
  	Image image;
  	num = 0;
- 	image = chargerImage("image.ppm");
+ 	image = chargerImage("./src/image.ppm");
  	if (num)
  		erreur(num);
  	return 0;
