@@ -34,7 +34,7 @@
  */
 typedef struct Image Image;
 struct Image {
-	char type[2];/*!< type P1 P2 ou P3 */
+	char* type;/*!< type P1 P2 ou P3 */
 	int width;/*!<width : la largeur de l'image*/
 	int height;/*!<height : la hauteur de l'image*/
 	int teinteMax;/*!<indique le teinte maximale*/
