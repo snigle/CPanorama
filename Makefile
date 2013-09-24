@@ -1,4 +1,3 @@
-
 #commandes
 CC = gcc -Wall
 CP = rsync -arv
