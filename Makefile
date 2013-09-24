@@ -11,7 +11,7 @@ SAVDIR = ./save/
 SRC = $(wildcard $(SRCDIR)*.c)
 OBJ = $(subst $(SRCDIR),$(BINDIR),$(SRC:.c=.o))
 HEAD = $(filter main.h,$(SRC:.c=.o))
-PROG = toto
+PROG = panorama
 
 
 all : $(PROG) 
@@ -19,8 +19,7 @@ all : $(PROG)
 $(PROG) : $(OBJ)
 	$(CC) $^ -o $@
 	mv ./$(PROG) ./bin
-	./*./make
-	
+
 #on compile le main ayant déja compilé les fichiers secondaires et les bibliothèques
 ./bin/main.o : ./src/main.c
 	$(CC) -c ./src/main.c -o ./bin/main.o

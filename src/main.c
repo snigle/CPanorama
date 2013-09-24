@@ -9,14 +9,16 @@
   */
   
   #include "ordonanceur.h"
+ #include "recuperationFichier.h"
  
 
  
  int main (int argc, char** argv)
  {
  	int num;
+ 	Image image;
  	num = 0;
- 	num = gererOptions(argc, argv);
+ 	image = chargerImage("image.ppm");
  	if (num)
  		erreur(num);
  	return 0;

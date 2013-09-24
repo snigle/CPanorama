@@ -8,19 +8,8 @@
  *
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-
-typedef struct Image Image;
-struct Image {
-	char* type;
-	int width;
-	int height;
-	int teinteMax;
-	int* teinte;
-};
+#include "header.h"
 
 /*!
        \fn creationImage
@@ -147,7 +136,7 @@ int parametrage(FILE* image)
     	return result;
     }else
     	{
-    		exit(1);
+    		erreur(IMAGE_CORROMPUE);
     	}
 }
 
@@ -208,7 +197,7 @@ void recuperationPixels(FILE* fichier, int* tab, int tailleTotale)
 			tab[i] = pixel;
 		}else
 			{
-				erreur();
+				erreur(IMAGE_CORROMPUE);
 			}
 	}
 }
