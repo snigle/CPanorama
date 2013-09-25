@@ -1,42 +1,71 @@
-#commandes
+#Variables
+dirsrc = src/
+dirbin = bin/
+dirsave = save/
+dirdoc = doc/
+
 CC = gcc -Wall
-CP = rsync -arv
 RM = rm -rf
-#varaibles de localisation
-SRCDIR = ./src/
-BINDIR = ./bin/
-DOCDIR = ./doc/
-SAVDIR = ./save/
-#recupération des fichiers
-SRC = $(wildcard $(SRCDIR)*.c)
-OBJ = $(subst $(SRCDIR),$(BINDIR),$(SRC:.c=.o))
-HEAD = $(filter main.h,$(SRC:.c=.o))
-PROG = panorama
+
+SRC = $(wildcard $(dirsrc)*.c)
+HEAD = $(filter main.o,$(SRC:.c=.h))
+OBJ = $(subst $(dirsrc), $(dirbin), $(SRC:.c=.o))
+
+AUTEUR = lamarche_ludovic
+PROG = toto
+
+#Sous directory
+DIR = $(shell find $(dirsrc) -maxdepth 5 -type d -print)
+
+all: $(PROG)
 
 
-all : $(PROG) 
-#on compile chaque objet .o en toto
-$(PROG) : $(OBJ)
-	$(CC) $^ -o $@
-	mv ./$(PROG) ./bin
-
-#on compile le main ayant déja compilé les fichiers secondaires et les bibliothèques
-./bin/main.o : ./src/main.c
-	$(CC) -c ./src/main.c -o ./bin/main.o
-#on compile chaque fichier .c avec son .h correspondant
-./bin/%.o : ./src/%.c ./src/%.h
+$(PROG): $(dirbin) $(OBJ)
+	$(CC) $(OBJ) -o $(dirbin)$@
+	@echo "Compilation terminée"
+$(dirbin) :
+	@mkdir $(dirbin)
+#$< est la premiere dependance
+#$@ est la cible
+$(dirbin)main.o: $(dirsrc)main.c
 	$(CC) -c $< -o $@
-#on force le clean
-.PHONY : clean save
+$(dirbin)%.o: $(dirsrc)%.c $(dirsrc)%.h
+	$(CC) -c $< -o $@
 
-#on detruit tout les fichiers objets, les feedback et le programme compilé. Seuls les fichiers nécessaires a la compilation sont conservés
-clean :
-	$(RM) ./src/*.o ./src/*~ ./bin/$(PROG)
 
-#on conserve un fichier de sauvegarde pour les plantages
-save :
-	$(CP) ./src/* ./save/
+.PHONY: clean save restore
+clean:
+	rm -f $(dirsrc)*~ $(dirsrc)\#*\# $(dirbin)*.o
 	
-#on remet les fichiers sauvegardé dans le répertoire source
-restore :
-	$(CP) ./save/* ./src/
+#$(dirsave):
+#	@mkdir $(dirsave)
+
+save:
+	@cp -r $(dirsrc)* $(dirsave)
+	@echo "Sauvegarde effectuée dans le dossier "$(dirsave)
+	
+restore: $(dirsave) $(dirsrc)
+	@rm -rf $(dirsrc)*
+	@cp -r $(dirsave)* $(dirsrc)
+	@echo "Restoration de la sauvegarde effectuée"
+
+give: $(dirsrc)
+	@rm -rf $(AUTEUR)
+	@mkdir $(AUTEUR)
+	@mkdir $(AUTEUR)/bin
+	@mkdir $(AUTEUR)/save
+	@mkdir $(AUTEUR)/doc
+	@mkdir $(AUTEUR)/src
+	@cp Makefile $(AUTEUR)/Makefile
+	@cp -r $(dirsrc)* $(AUTEUR)/src/
+	@cp -r $(dirdoc)* $(AUTEUR)/doc/
+	tar cvzf $(AUTEUR)-$(PROG).tar.gz $(AUTEUR)/
+	@rm -rf $(AUTEUR)
+	@tar xvzf $(AUTEUR)-$(PROG).tar.gz
+	make -C $(AUTEUR)
+	./$(AUTEUR)/bin/$(PROG)
+	
+$(dirsrc):
+	@mkdir $(dirsrc)
+	
+

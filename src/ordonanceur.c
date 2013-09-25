@@ -8,18 +8,18 @@
  *
  */
  #include "header.h"
-#include <string.h>
+
 
  
  /*!
-	\fn afficherManuel
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Mon 23 Sep 2013
-	\brief Affiche le manuel du programme en mode console
-	
-
-		\remarks ras
-
+	*	\fn afficherManuel
+	*	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	*	\date Mon 23 Sep 2013
+	*	\brief Affiche le manuel du programme en mode console
+	*
+	*
+	*	\remarks ras
+	*
 */
 void afficherManuel(void)
 {
@@ -46,18 +46,18 @@ void afficherManuel(void)
 
 
 /*!
-	\fn getOptionInputOutput
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Mon 23 Sep 2013
-	\brief Renvoie l'option correspondante à input et output en fonction de si c'est multiple ou unique
-	
-	\param	
-		int input : faux si vaut 0, vrai sinon
-		int multiple : faux si vaut 0, vrai sinon
-	\return 
-		
-		\remarks ras
-
+	* \fn char* getOptionInputOutput(int input, int multiple)
+	* \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	* \date Mon 23 Sep 2013
+	* \brief Renvoie l'option correspondante à input et output en fonction de si c'est multiple ou unique
+	*
+	*	\param input faux si vaut 0, vrai sinon
+	*	\param multiple faux si vaut 0, vrai sinon
+	*	\return smth
+	*
+	*	\remarks ras
+	*
+	*   Ici un peu de texte pour 
 */
 char* getOptionInputOutput(int input, int multiple)
 {
@@ -82,18 +82,17 @@ char* getOptionInputOutput(int input, int multiple)
 
 
 /*!
-	\fn recuperNombreInputOutput
+	\fn int recuperNombreInputOutput(int argc, char** argv, int input)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	\date Mon 23 Sep 2013
 	\brief Calcul le nombre de fichier après l'option -li
 	
-	\param	
-		int argc : nombre de paramètres
-		char** argv : tableau de paramètres
-		input : si vaut 0, on traite l'output sinon on traite l'input
+	\param	int argc : nombre de paramètres
+	\param char** argv : tableau de paramètres
+	\param input : si vaut 0, on traite l'output sinon on traite l'input
 	\return le nombre d'input dans la liste de paramètres
 		
-		\remarks ras
+	\remarks ras
 
 */
 int recuperNombreInputOutput(int argc, char** argv, int input)
@@ -125,7 +124,7 @@ int recuperNombreInputOutput(int argc, char** argv, int input)
 
 
 /*!
-	\fn remplirTableauInputOutput
+	\fn void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	\date Mon 23 Sep 2013
 	\brief Remplie le tableau d'input ou d'output 
@@ -137,7 +136,7 @@ int recuperNombreInputOutput(int argc, char** argv, int input)
 		int taille : taille du tableau a remplir
 		int input : si vaut 0, on traite l'output sinon on traite l'input
 		
-		\remarks ras
+	\remarks ras
 
 */
 void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input)
@@ -166,7 +165,7 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 	
 } 
 /*!
-	\fn recupererInputOutput
+	\fn char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	\date Mon 23 Sep 2013
 	\brief Génère un tableau contenant chaque fichier d'input et renvoie le nombre de fichier
@@ -178,7 +177,7 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 		int* nombre : pointeur qui contiendra le nombre d'input ou d'output
 	\return le nombre de fichiers importés
 		
-		\remarks ras
+	\remarks ras
 
 */
 char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
@@ -199,24 +198,6 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 
 
 
-/*!
-	\fn appelerFonction
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Tue 24 Sep 2013
-	\brief Appelle les fonctions correspondantes au options du terminal
-	
-	\param	
-		int argc : nombre de paramètres
-		char** argv : tableau de paramètres
-		char** input : tableau d'input
-		int nombreinput : nombre d'input
-		char** output : tableau d'output
-		int nombreoutput : nombre d'output
-	\return retourne 0 si il n'y a eut aucune erreur.
-		
-		\remarks Trop de lignes et il manque des erreurs pour convolution et -b
-
-*/
 int appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
 	int i;
@@ -256,20 +237,7 @@ int appelerFonction(int argc, char** argv, char** input, int nombreInput, char**
 } 
 
 
-/*!
-	\fn gererOptions
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Mon 23 Sep 2013
-	\brief Traite les options et exécute la fonction correspondante
-	
-	\param	
-		int argc : nombre d'options
-		char** argv : pointeur correspondant à chaque options
-	\return renvoie 0 si la fonction s'est déroulée correctement
-		
-		\remarks ras
 
-*/
 int gererOptions(int argc, char** argv)
 {
 	int nombreInput;

@@ -14,8 +14,8 @@
 /*!
        \fn creationImage
        \author Perales Quentin <peralesque@eisti.eu>
-       \date Tue 24 Sep 2013
-       \brief permet de créer une image pixmap avec toutes les informations en paramètres
+	\date Tue 24 Sep 2013
+	\brief permet de créer une image pixmap avec toutes les informations en paramètres
        
        \param       
        	char tab[3] : le type de pixmap
@@ -109,6 +109,7 @@ void recupType(char* tab, FILE* image)
 	sauterCommentaire(image);
 	fscanf(image, "%c", &tab[0]);
 	fscanf(image, "%c", &tab[1]);
+	tab[2] = '\0';
 }
 
 
