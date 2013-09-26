@@ -38,11 +38,17 @@ int greyScale (char* input,char* output)
 {
 	Image imagePPM;
 	Image imagePGM;
-
 	imagePPM = chargerImage(input);
+	if (!strcmp(imagePPM.type, "P3"))
+	{
+		imagePGM = creerGreyScale(imagePPM);
+		save(imagePGM, output);
+		printf("Le fichier %s a été converti en noir et blanc dans le fichier %s\n",input,output);
+	}
+	else
+	{
+		return MAUVAIS_FORMAT_GRAYSCALE;
+	}
 	
-	imagePGM = creerGreyScale(imagePPM);
-	printf("width :  %d", imagePGM.teinte[100]);
-	save(imagePGM, output);
 	return (0);
 }

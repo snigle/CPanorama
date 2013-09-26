@@ -15,6 +15,7 @@
 #define IMAGE_NO_EXISTS 3
 #define NO_MEMORY 4
 #define ERREUR_PARAMETRE 5
+#define MAUVAIS_FORMAT_GRAYSCALE 6
 
 typedef struct Image Image;
 struct Image {
@@ -59,6 +60,9 @@ void erreur(int numeroErreur)
 		break;
 		case NO_MEMORY:
 			printf("Il manque de l'espace mémoire pour faire un malloc\n");
+		break;
+		case MAUVAIS_FORMAT_GRAYSCALE:
+			printf("L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
 		break;
 		default :
 			printf("Une erreur est survenue\n");
