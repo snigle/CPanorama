@@ -7,16 +7,15 @@
  *
  *
  */
-#include "header.h"
-
-#include "save.h"
+//#include "header.h"
+#include "recuperationFichier.h"
 
 
 void creationTabGrayScale(int* tabGrey, Image image)
 {
 	int i;
 	int taille;
-	taille = image.width * image.heigth;
+	taille = image.width * image.height;
 	for(i = 0 ; i < taille ; i++)
 	{
 		tabGrey[i] = (image.teinte[i*3] + image.teinte[i*3+1] + image.teinte[i*3+2]) / 3;
@@ -26,7 +25,7 @@ void creationTabGrayScale(int* tabGrey, Image image)
 Image creerGreyScale (Image pixRGB)
 {
 	Image imagePGM;
-	char type[3];
+	char* type;
 	int* tabGrey;
 	type = "P2";
 	tabGrey = malloc(pixRGB.width * pixRGB.height * sizeof(int*));
@@ -39,8 +38,10 @@ int greyScale (char* input,char* output)
 {
 	Image imagePPM;
 	Image imagePGM;
+	printf("avant iinput");
 	imagePPM = chargerImage(input);
+	printf("apres input");
 	imagePGM = creerGreyScale(imagePPM);
-	save(imagePGM, ouput);
+	save(imagePGM, output);
 	return (0);
 }

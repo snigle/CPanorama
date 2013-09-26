@@ -9,35 +9,9 @@
  */
 
 
-#include "header.h"
+#include "recuperationFichier.h"
 
-/*!
-       \fn creationImage
-       \author Perales Quentin <peralesque@eisti.eu>
-	\date Tue 24 Sep 2013
-	\brief permet de créer une image pixmap avec toutes les informations en paramètres
-       
-       \param       
-       	char tab[3] : le type de pixmap
-       	int largeur : la largeur de l'image
-       	int hauteur : la hauteur de l'image
-       	int teintemaximale : la teinte maximale
-       	int* pixel : un tableau d'entier qui correspondent aux pixels de l'image
-       \return 
-               retourne un type image
-               \remarks 
 
-*/
-Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int* pixel)
-{
-	Image newImage;
-	newImage.type = tab;
-	newImage.width = largeur;
-	newImage.height = hauteur;
-	newImage.teinteMax = teinteMaximale;
-	newImage.teinte = pixel;
-	return newImage;
-}
 
 /*!
        \fn allerAlaLigne
@@ -270,3 +244,29 @@ Image chargerImage(char* nomImage){
 	free(teinte);//libère la mémoire
 	return imageCharge;	
 }
+
+
+
+int save(Image image, char* output)
+{
+	FILE* fich;
+	int taille;
+	taille = image.width * image.height;
+	int i;
+	fich=fopen(output, "w");
+	fprintf(fich,"%s\n",image.type);
+	fprintf(fich,"%d\t",image.width);
+	fprintf(fich,"%d\n",image.height);
+	fprintf(fich,"%d\n",image.teinteMax);
+	for(i=0;i<taille;i++)
+	{
+		if(!strcmp(image.type,"P3"))
+			fprintf(fich,"%d\t%d\t%d\n",image.teinte[i*3],image.teinte[i*3+1],image.teinte[i*3+2]);
+		else
+			fprintf(fich,"%d\n",image.teinte[i]);	
+	}
+	
+	fclose(fich);
+	return 0;
+}
+	

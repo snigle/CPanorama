@@ -61,3 +61,4 @@ void erreur(int numeroErreur);
 
 void* mallocBis(size_t taille);
 
+Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int* pixel);
