@@ -28,7 +28,7 @@ Image creerGreyScale (Image pixRGB)
 	char* type;
 	int* tabGrey;
 	type = "P2";
-	tabGrey = malloc(pixRGB.width * pixRGB.height * sizeof(int*));
+	tabGrey = malloc(pixRGB.width * pixRGB.height * sizeof(int));
 	creationTabGrayScale(tabGrey, pixRGB);
 	imagePGM = creationImage(type, pixRGB.width, pixRGB.height, pixRGB.teinteMax, tabGrey);
 	return imagePGM;
@@ -38,10 +38,11 @@ int greyScale (char* input,char* output)
 {
 	Image imagePPM;
 	Image imagePGM;
-	printf("avant iinput");
+
 	imagePPM = chargerImage(input);
-	printf("apres input");
+	
 	imagePGM = creerGreyScale(imagePPM);
+	printf("width :  %d", imagePGM.teinte[100]);
 	save(imagePGM, output);
 	return (0);
 }

@@ -9,7 +9,7 @@
  */
 
 
-#include "recuperationFichier.h"
+#include "header.h"
 
 
 
@@ -199,10 +199,10 @@ int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
 	int* tab;
 	if (!strcmp(type, "P1") || !strcmp(type, "P2"))
 	{
-		tab = malloc(largeur * hauteur * sizeof(int*));
+		tab = malloc(largeur * hauteur * sizeof(int));
 		recuperationPixels(fichier, tab, largeur * hauteur);
 	}else{
-			tab = malloc(3 * largeur * hauteur * sizeof(int*));
+			tab = malloc(3 * largeur * hauteur * sizeof(int));
 			recuperationPixels(fichier, tab, 3 * largeur * hauteur);
 		 }
 	return tab;
@@ -241,7 +241,7 @@ Image chargerImage(char* nomImage){
 	}else
 		erreur(IMAGE_NO_EXISTS);
 	fclose(image);
-	free(teinte);//libère la mémoire
+	//free(teinte);//libère la mémoire
 	return imageCharge;	
 }
 

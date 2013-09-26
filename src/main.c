@@ -16,6 +16,7 @@
  int main (int argc, char** argv)
  {
  	int num;
+ 	printf("Debut du programme");
  	num = gererOptions(argc,argv);
  	if (num)
  		erreur(num);

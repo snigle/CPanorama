@@ -248,7 +248,7 @@ int gererOptions(int argc, char** argv)
 
 	result = 0;
 	input = recupererInputOutput(argc, argv, 1, &nombreInput);
-	output = recupererInputOutput(argc, argv, 9, &nombreOutput);
+	output = recupererInputOutput(argc, argv, 0, &nombreOutput);
 	
 	if(nombreInput>0 && nombreOutput>0)
 	{
