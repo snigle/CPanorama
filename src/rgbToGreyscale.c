@@ -7,6 +7,9 @@
  *
  *
  */
+#include "header.h"
+
+#include "save.h"
 
 
 void creationTabGrayScale(int* tabGrey, Image image)
@@ -38,6 +41,6 @@ int greyScale (char* input,char* output)
 	Image imagePGM;
 	imagePPM = chargerImage(input);
 	imagePGM = creerGreyScale(imagePPM);
-	sauvegarder(imagePGM, ouput);
+	save(imagePGM, ouput);
 	return (0);
 }

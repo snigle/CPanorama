@@ -16,9 +16,7 @@
  int main (int argc, char** argv)
  {
  	int num;
- 	Image image;
- 	num = 0;
- 	image = chargerImage("./src/image.ppm");
+ 	num = gererOptions(argc,argv);
  	if (num)
  		erreur(num);
  	return 0;
