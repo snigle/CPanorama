@@ -12,7 +12,7 @@ HEAD = $(filter main.o,$(SRC:.c=.h))
 OBJ = $(subst $(dirsrc), $(dirbin), $(SRC:.c=.o))
 
 AUTEUR = lamarche_ludovic
-PROG = toto
+PROG = panorama
 
 #Sous directory
 DIR = $(shell find $(dirsrc) -maxdepth 5 -type d -print)
