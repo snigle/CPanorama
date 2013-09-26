@@ -1,0 +1,41 @@
+#include "header.h"
+/*!
+       \fn void creationTabGrayScale(int* tabGrey, Image image)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Thu 26 Sep 2013
+       \brief creation d'un tableau de pixels en noir et blanc a partir d'une image en RGB               
+       \param tabgrey : (int*) un tableau vide qui se remplit de teintes de gris
+       \param image : (image) une image du type PPM
+       
+               
+       \remarks 
+
+*/
+void creationTabGrayScale(int* tabGrey, Image image);
+
+/*!
+       \fn Image creerGreyScale(Image pixRGB)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Thu 26 Sep 2013
+       \brief creer une image en noir et blanc qui correspond à l'image couleur pixRGB               
+       \param pixrgb : (image) une image en couleur type pixmap P3
+       \return une image pixmap en type P2, qui est alors l'image en noir et blanc
+               
+       \remarks 
+
+*/
+Image creerGreyScale (Image pixRGB);
+
+/*!
+       \fn int greyScale(char* input, char* output)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Thu 26 Sep 2013
+       \brief recupere en parametre le nm de l'image ppm en input et le nom de l'image crée en pgm pour creer une image pgm à partir de l'image ppm correspondante               
+       \param input : (char*) une chaine de caractère qui est le nom de l'image ppm existante
+       \param output : (char*) une chaine correspondant au nom de l image pgm créée
+       \return retourne 0 si la fonction s'est exécutée correctement
+               
+       \remarks 
+
+*/
+int greyScale (char* input,char* output);
