@@ -7,23 +7,10 @@
  *
  *
  */
- #include <stdlib.h>
-#include <stdio.h>
 
-#define NO_INPUT_OR_OUTPUT 1
-#define IMAGE_CORROMPUE 2
-#define IMAGE_NO_EXISTS 3
-#define NO_MEMORY 4
-#define ERREUR_PARAMETRE 5
+#include "header.h"
 
-typedef struct Image Image;
-struct Image {
-	char* type;/*!< type P1 P2 ou P3 */
-	int width;/*!<width : la largeur de l'image*/
-	int height;/*!<height : la hauteur de l'image*/
-	int teinteMax;/*!<indique le teinte maximale*/
-	int* teinte;/*!< 	teinte un tableau d'entier définissant les teintes de pixels*/
-};
+
 
 /*!
 	\fn erreur
