@@ -86,6 +86,15 @@ void erreur(int numeroErreur)
 
 
 
+int getType(char* tab)
+{
+	int result;
+	char car[2];
+	car[0]=tab[1];
+	car[1]='\0';
+	result = atoi(car);
+	return result;
+}
 /*!
        \fn creationImage
        \author Perales Quentin <peralesque@eisti.eu>
@@ -106,7 +115,7 @@ void erreur(int numeroErreur)
 Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int* pixel)
 {
 	Image newImage;
-	newImage.type = tab;
+	newImage.type = getType(tab);
 	newImage.width = largeur;
 	newImage.height = hauteur;
 	newImage.teinteMax = teinteMaximale;

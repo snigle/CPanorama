@@ -36,7 +36,7 @@
  */
 typedef struct Image Image;
 struct Image {
-	char* type;/*!< type P1 P2 ou P3 */
+	int type;/*!< type P1 P2 ou P3 */
 	int width;/*!<width : la largeur de l'image*/
 	int height;/*!<height : la hauteur de l'image*/
 	int teinteMax;/*!<indique le teinte maximale*/
@@ -60,5 +60,7 @@ struct ListeStr {
 void erreur(int numeroErreur);
 
 void* mallocBis(size_t taille);
+
+
 
 Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int* pixel);

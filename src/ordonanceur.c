@@ -7,20 +7,11 @@
  *
  *
  */
-// #include "header.h"
+
 #include "rgbToGreyscale.h"
+#include "ordonanceur.h"
 
  
- /*!
-	*	\fn afficherManuel
-	*	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	*	\date Mon 23 Sep 2013
-	*	\brief Affiche le manuel du programme en mode console
-	*
-	*
-	*	\remarks ras
-	*
-*/
 void afficherManuel(void)
 {
 	printf("PANORAMA(7)\n\nNAME\n\tpanorama - automatically create panoramas\n\n");
@@ -45,20 +36,6 @@ void afficherManuel(void)
 
 
 
-/*!
-	* \fn char* getOptionInputOutput(int input, int multiple)
-	* \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	* \date Mon 23 Sep 2013
-	* \brief Renvoie l'option correspondante à input et output en fonction de si c'est multiple ou unique
-	*
-	*	\param input faux si vaut 0, vrai sinon
-	*	\param multiple faux si vaut 0, vrai sinon
-	*	\return smth
-	*
-	*	\remarks ras
-	*
-	*   Ici un peu de texte pour 
-*/
 char* getOptionInputOutput(int input, int multiple)
 {
 	char* result;
@@ -81,20 +58,7 @@ char* getOptionInputOutput(int input, int multiple)
 
 
 
-/*!
-	\fn int recuperNombreInputOutput(int argc, char** argv, int input)
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Mon 23 Sep 2013
-	\brief Calcul le nombre de fichier après l'option -li
-	
-	\param	int argc : nombre de paramètres
-	\param char** argv : tableau de paramètres
-	\param input : si vaut 0, on traite l'output sinon on traite l'input
-	\return le nombre d'input dans la liste de paramètres
-		
-	\remarks ras
 
-*/
 int recuperNombreInputOutput(int argc, char** argv, int input)
 {
 	int i;
@@ -123,22 +87,7 @@ int recuperNombreInputOutput(int argc, char** argv, int input)
 
 
 
-/*!
-	\fn void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input)
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Mon 23 Sep 2013
-	\brief Remplie le tableau d'input ou d'output 
-	
-	\param	
-		int argc : nombre de paramètres
-		char** argv : tableau de paramètres
-		char** input : tableau a remplir
-		int taille : taille du tableau a remplir
-		int input : si vaut 0, on traite l'output sinon on traite l'input
-		
-	\remarks ras
 
-*/
 void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input)
 {
 	int i;
@@ -164,22 +113,8 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 	}
 	
 } 
-/*!
-	\fn char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Mon 23 Sep 2013
-	\brief Génère un tableau contenant chaque fichier d'input et renvoie le nombre de fichier
-	
-	\param	
-		int argc : nombre de paramètres
-		char** argv : tableau de paramètres
-		int bool_input : vaut 1 si il faut créer le tableau d'input et 0 pour l'output
-		int* nombre : pointeur qui contiendra le nombre d'input ou d'output
-	\return le nombre de fichiers importés
-		
-	\remarks ras
 
-*/
+
 char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 {
 	char** char_input;
@@ -197,6 +132,30 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 } 
 
 
+int testOptionAvecParametre(char* option, int* i, int argc, char** argv)
+{
+	int result = 0;
+	
+	if(*i < argc && !strcmp(argv[*i],option))
+	{
+		//Si l'option n'est pas à la fin
+		if( *i < argc - 1)
+		{
+			if(argv[*i+1][0] != '-')
+			{
+				result = 1;
+				*i = *i + 1;
+			}
+			else
+				erreur(ERREUR_PARAMETRE);
+		}
+		else
+		{
+			erreur(ERREUR_PARAMETRE);
+		}
+	}
+	return result;
+}
 
 int appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
@@ -213,25 +172,12 @@ int appelerFonction(int argc, char** argv, char** input, int nombreInput, char**
 			printf("Appel de la fonction erode\n");
 		else if(!strcmp(argv[i],"-d"))
 			printf("Appel de la fonction dilate\n");
-		else if(!strcmp(argv[i],"-b") && i < (argc -1))
-		{
-			if(argv[i+1][0] != '-')
-			{
-				i++;
-				printf("Appel de la fonction theshole avec le parametre %s\n",argv[i]);
-			}
-			else
-				erreur(ERREUR_PARAMETRE);
-		}
-		else if(!strcmp(argv[i],"-c") && i < (argc -1))
-		{
-			i++;
+		else if(testOptionAvecParametre("-b",&i,argc,argv))
+			printf("Appel de la fonction theshole avec le parametre %s\n",argv[i]);
+		else if(testOptionAvecParametre("-c",&i,argc,argv))
 			printf("Appel de la fonction convolution avec le fichier %s\n",argv[i]);
-		}
 		else if(!strcmp(argv[i],"-p"))
-		{
 			printf("Appel de la fonction panorama\n");
-		}
 	}
 	return result;
 } 

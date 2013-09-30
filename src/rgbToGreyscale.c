@@ -25,12 +25,14 @@ void creationTabGrayScale(int* tabGrey, Image image)
 Image creerGreyScale (Image pixRGB)
 {
 	Image imagePGM;
-	char* type;
+	char p2[3];
 	int* tabGrey;
-	type = "P2";
 	tabGrey = malloc(pixRGB.width * pixRGB.height * sizeof(int));
+	p2[0] = 'P';
+	p2[1] = '2';
+	p2[2] = '\0';
 	creationTabGrayScale(tabGrey, pixRGB);
-	imagePGM = creationImage(type, pixRGB.width, pixRGB.height, pixRGB.teinteMax, tabGrey);
+	imagePGM = creationImage(p2, pixRGB.width, pixRGB.height, pixRGB.teinteMax, tabGrey);
 	return imagePGM;
 }
 
@@ -39,7 +41,7 @@ int greyScale (char* input,char* output)
 	Image imagePPM;
 	Image imagePGM;
 	imagePPM = chargerImage(input);
-	if (!strcmp(imagePPM.type, "P3"))
+	if (imagePPM.type == 3)
 	{
 		imagePGM = creerGreyScale(imagePPM);
 		save(imagePGM, output);

@@ -251,19 +251,18 @@ int save(Image image, char* output)
 {
 	FILE* fich;
 	int taille;
-	taille = image.width * image.height;
+	if(image.type == 3)
+		taille = image.width * image.height * 3;
+	else taille = image.width * image.height;
 	int i;
 	fich=fopen(output, "w");
-	fprintf(fich,"%s\n",image.type);
+	fprintf(fich,"P%d\n",image.type);
 	fprintf(fich,"%d\t",image.width);
 	fprintf(fich,"%d\n",image.height);
 	fprintf(fich,"%d\n",image.teinteMax);
 	for(i=0;i<taille;i++)
 	{
-		if(!strcmp(image.type,"P3"))
-			fprintf(fich,"%d\t%d\t%d\n",image.teinte[i*3],image.teinte[i*3+1],image.teinte[i*3+2]);
-		else
-			fprintf(fich,"%d\n",image.teinte[i]);	
+		fprintf(fich,"%d\n",image.teinte[i]);	
 	}
 	
 	fclose(fich);

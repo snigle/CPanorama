@@ -9,11 +9,100 @@
  */
  
  
+ 
+ 
+
+ /*!
+	*	\fn afficherManuel
+	*	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	*	\date Mon 23 Sep 2013
+	*	\brief Affiche le manuel du programme en mode console
+	*
+	*
+	*	\remarks ras
+	*
+*/
 void afficherManuel(void);
+
+
+
+/*!
+	* \fn char* getOptionInputOutput(int input, int multiple)
+	* \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	* \date Mon 23 Sep 2013
+	* \brief Renvoie l'option correspondante à input et output en fonction de si c'est multiple ou unique
+	* \param input faux si vaut 0, vrai sinon
+	* \param multiple faux si vaut 0, vrai sinon
+	* \return smth
+	*
+	* \remarks ras
+	*
+*/
 char* getOptionInputOutput(int input, int multiple);
+
+
+/*!
+	\fn int recuperNombreInputOutput(int argc, char** argv, int input)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 23 Sep 2013
+	\brief Calcul le nombre de fichier après l'option -li
+	\param argc : nombre de paramètres
+	\param argv : tableau de paramètres
+	\param input : si vaut 0, on traite l'output sinon on traite l'input
+	\return le nombre d'input dans la liste de paramètres	
+	\remarks ras
+
+*/
 int recuperNombreInputOutput(int argc, char** argv, int input);
+
+/*!
+	\fn void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 23 Sep 2013
+	\brief Remplie le tableau d'input ou d'output 
+	\param argc : nombre de paramètres
+	\param argv : tableau de paramètres
+	\param input : tableau a remplir
+	\param taille : taille du tableau a remplir
+	\param input : si vaut 0, on traite l'output sinon on traite l'input	
+	\remarks ras
+
+*/
 void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input);
+
+/*!
+	\fn char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 23 Sep 2013
+	\brief Génère un tableau contenant chaque fichier d'input et renvoie le nombre de fichier
+	\param argc : nombre de paramètres
+	\param argv : tableau de paramètres
+	\param bool_input : vaut 1 si il faut créer le tableau d'input et 0 pour l'output
+	\param nombre : pointeur qui contiendra le nombre d'input ou d'output
+	\return le nombre de fichiers importés
+		
+	\remarks ras
+
+*/
 char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre);
+
+
+/*!
+	\fn int testOptionAvecParametre(char* option, int* i, int argc, char** argv)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 30 Sep 2013
+	\brief Test une option qui nécessite un paramètre		
+	\param option : (char*) l'option à tester
+	\param i : (int*) index qui sera incrémenté si l'option est valide
+	\param argc : (int) nombre de paramètres
+	\param argv : (char**) tableau de parametres
+	\return Retourne 1 si l'option est valide, 0 sinon
+		
+	\remarks 
+
+*/
+int testOptionAvecParametre(char* option, int* i, int argc, char** argv);
+
 
 /*!
 	\fn int appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
