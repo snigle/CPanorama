@@ -8,17 +8,10 @@
  *
  */
 
-<<<<<<< HEAD
-#define NO_INPUT_OR_OUTPUT 1
-#define IMAGE_CORROMPUE 2
-#define IMAGE_NO_EXISTS 3
-#define NO_MEMORY 4
-#define ERREUR_PARAMETRE 5
-#define MAUVAIS_FORMAT_GRAYSCALE 6
-=======
+
 #include "header.h"
 
->>>>>>> 310742e2700c692510f48f82edc7bdaa2ea9d053
+
 
 
 /*!
