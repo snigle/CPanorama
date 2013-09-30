@@ -19,7 +19,7 @@
 #define IMAGE_NO_EXISTS 3
 #define NO_MEMORY 4
 #define ERREUR_PARAMETRE 5
-
+#define MAUVAIS_FORMAT_GRAYSCALE 6
 
 /*! \struct Image  
 	\author Perales Quentin <peralesque@eisti.eu>

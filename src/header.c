@@ -7,23 +7,12 @@
  *
  *
  */
- #include <stdlib.h>
-#include <stdio.h>
 
-#define NO_INPUT_OR_OUTPUT 1
-#define IMAGE_CORROMPUE 2
-#define IMAGE_NO_EXISTS 3
-#define NO_MEMORY 4
-#define ERREUR_PARAMETRE 5
 
-typedef struct Image Image;
-struct Image {
-	char* type;/*!< type P1 P2 ou P3 */
-	int width;/*!<width : la largeur de l'image*/
-	int height;/*!<height : la hauteur de l'image*/
-	int teinteMax;/*!<indique le teinte maximale*/
-	int* teinte;/*!< 	teinte un tableau d'entier définissant les teintes de pixels*/
-};
+#include "header.h"
+
+
+
 
 /*!
 	\fn erreur
@@ -59,6 +48,9 @@ void erreur(int numeroErreur)
 		break;
 		case NO_MEMORY:
 			printf("Il manque de l'espace mémoire pour faire un malloc\n");
+		break;
+		case MAUVAIS_FORMAT_GRAYSCALE:
+			printf("L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
 		break;
 		default :
 			printf("Une erreur est survenue\n");

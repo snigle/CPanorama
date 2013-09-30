@@ -206,7 +206,7 @@ int appelerFonction(int argc, char** argv, char** input, int nombreInput, char**
 	for (i = 0; i < argc; i += 1)
 	{
 		if(!strcmp(argv[i],"-g"))
-			greyScale(input[0],output[0]);
+			result = greyScale(input[0],output[0]);
 		else if(!strcmp(argv[i],"-h"))
 			printf("Appel de la fonction histogram\n");
 		else if(!strcmp(argv[i],"-e"))

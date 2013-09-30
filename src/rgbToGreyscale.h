@@ -1,4 +1,6 @@
 #include "header.h"
+
+
 /*!
        \fn void creationTabGrayScale(int* tabGrey, Image image)
        \author PERALES Quentin <peralesque@eisti.eu>
