@@ -11,14 +11,14 @@
 #include "recuperationFichier.h"
 
 
-void creationTabGrayScale(int* tabGrey, Image image)
+void creationTabGrayScale(int** tabGrey, Image image)
 {
 	int i;
-	int taille;
-	taille = image.width * image.height;
-	for(i = 0 ; i < taille ; i++)
+	int j;
+	for(i = 0 ; i < image.height ; i++)
 	{
-		tabGrey[i] = (image.teinte[i*3] + image.teinte[i*3+1] + image.teinte[i*3+2]) / 3;
+		for (j = 0; j < image.width; j += 1)
+			tabGrey[i][j] = (image.teinte[i][j*3] + image.teinte[i][j*3+1] + image.teinte[i][j*3+2]) / 3;	
 	}	
 }
 
@@ -26,8 +26,8 @@ Image creerGreyScale (Image pixRGB)
 {
 	Image imagePGM;
 	char p2[3];
-	int* tabGrey;
-	tabGrey = malloc(pixRGB.width * pixRGB.height * sizeof(int));
+	int** tabGrey;
+	tabGrey = initMatrice(pixRGB.width,pixRGB.height);
 	p2[0] = 'P';
 	p2[1] = '2';
 	p2[2] = '\0';

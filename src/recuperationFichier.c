@@ -156,23 +156,25 @@ int teinteMax(char type[3], FILE* image)
 
 */
 
-void recuperationPixels(FILE* fichier, int* tab, int tailleTotale)
+void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 {
 	int i;
+	int j;
 	int pixel;
 	int test; // permet de savoir si le scanf ne génère pas d'erreur
 	pixel = 0;
-	for (i = 0 ; i < tailleTotale ; i++)
+	for (i = 0 ; i < hauteur ; i++)
 	{
-		sauterCommentaire(fichier);
-		test = fscanf(fichier, "%d", &pixel);
-		if (test == 1)
+		for (j = 0; j < largeur; j += 1)
 		{
-			tab[i] = pixel;
-		}else
-			{
+			sauterCommentaire(fichier);
+			test = fscanf(fichier, "%d", &pixel);
+			if (test == 1)
+				tab[i][j] = pixel;
+			else
 				erreur(IMAGE_CORROMPUE);
-			}
+	
+		}
 	}
 }
 
@@ -194,17 +196,13 @@ void recuperationPixels(FILE* fichier, int* tab, int tailleTotale)
                \remarks 
 
 */
-int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
+int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
 {
-	int* tab;
-	if (!strcmp(type, "P1") || !strcmp(type, "P2"))
-	{
-		tab = malloc(largeur * hauteur * sizeof(int));
-		recuperationPixels(fichier, tab, largeur * hauteur);
-	}else{
-			tab = malloc(3 * largeur * hauteur * sizeof(int));
-			recuperationPixels(fichier, tab, 3 * largeur * hauteur);
-		 }
+	int** tab;
+	if (!strcmp(type, "P3"))
+		largeur *= 3;
+	tab = initMatrice(largeur,hauteur);	
+	recuperationPixels(fichier, tab, largeur, hauteur);
 	return tab;
 }
 
@@ -228,7 +226,7 @@ Image chargerImage(char* nomImage){
 	int largeur;
 	int hauteur;
 	int teinteMaximale;
-	int* teinte;
+	int** teinte;
 	image = fopen(nomImage, "r");
 	if (image != NULL)
 	{
@@ -241,7 +239,7 @@ Image chargerImage(char* nomImage){
 	}else
 		erreur(IMAGE_NO_EXISTS);
 	fclose(image);
-	//free(teinte);//libère la mémoire
+
 	return imageCharge;	
 }
 
@@ -250,21 +248,25 @@ Image chargerImage(char* nomImage){
 int save(Image image, char* output)
 {
 	FILE* fich;
-	int taille;
-	if(image.type == 3)
-		taille = image.width * image.height * 3;
-	else taille = image.width * image.height;
 	int i;
+	int j;
+	int largeur;
+	if(image.type == 3)
+		largeur = 3 * image.width;
+	else
+		largeur = image.width;	
 	fich=fopen(output, "w");
 	fprintf(fich,"P%d\n",image.type);
 	fprintf(fich,"%d\t",image.width);
 	fprintf(fich,"%d\n",image.height);
 	fprintf(fich,"%d\n",image.teinteMax);
-	for(i=0;i<taille;i++)
+	for(i=0;i<image.height;i++)
 	{
-		fprintf(fich,"%d\n",image.teinte[i]);	
+		for (j = 0; j < largeur; j += 1)
+		{
+			fprintf(fich,"%d\n",image.teinte[i][j]);
+		}
 	}
-	
 	fclose(fich);
 	return 0;
 }

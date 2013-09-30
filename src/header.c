@@ -52,6 +52,9 @@ void erreur(int numeroErreur)
 		case MAUVAIS_FORMAT_GRAYSCALE:
 			printf("L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
 		break;
+		case ERREUR_PARAMETRE:
+			printf("Les paramètres ne sont pas entrés correctement, entrez panorama -h pour plus d'informations\n");
+		break;
 		default :
 			printf("Une erreur est survenue\n");
 		break;
@@ -85,6 +88,15 @@ void erreur(int numeroErreur)
  }
 
 
+int** initMatrice(int largeur, int hauteur)
+{
+	int** tab;
+	int i;
+	tab = mallocBis(hauteur * sizeof(int*));
+	for (i = 0; i < hauteur; i += 1)
+		tab[i] = mallocBis(largeur * sizeof(int));
+	return tab;
+}
 
 int getType(char* tab)
 {
@@ -112,7 +124,7 @@ int getType(char* tab)
                \remarks 
 
 */
-Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int* pixel)
+Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel)
 {
 	Image newImage;
 	newImage.type = getType(tab);

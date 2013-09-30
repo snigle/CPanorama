@@ -40,7 +40,7 @@ struct Image {
 	int width;/*!<width : la largeur de l'image*/
 	int height;/*!<height : la hauteur de l'image*/
 	int teinteMax;/*!<indique le teinte maximale*/
-	int* teinte;/*!< 	teinte un tableau d'entier définissant les teintes de pixels*/
+	int** teinte;/*!< 	teinte un tableau d'entier définissant les teintes de pixels*/
 };
 
 /*! \struct ListeStr
@@ -61,6 +61,7 @@ void erreur(int numeroErreur);
 
 void* mallocBis(size_t taille);
 
+int** initMatrice(int largeur, int hauteur);
 
 
-Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int* pixel);
+Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel);
