@@ -111,15 +111,7 @@ int largeurMatriceImage (Image image)
 	return largeur;
 }
 
-int getType(char* tab)
-{
-	int result;
-	char car[2];
-	car[0]=tab[1];
-	car[1]='\0';
-	result = atoi(car);
-	return result;
-}
+
 /*!
        \fn creationImage
        \author Perales Quentin <peralesque@eisti.eu>
@@ -137,10 +129,10 @@ int getType(char* tab)
                \remarks 
 
 */
-Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel)
+Image creationImage(char* type, int largeur, int hauteur, int teinteMaximale, int** pixel)
 {
 	Image newImage;
-	newImage.type = getType(tab);
+	newImage.type = strdup(type);
 	newImage.width = largeur;
 	newImage.height = hauteur;
 	newImage.teinteMax = teinteMaximale;
