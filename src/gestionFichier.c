@@ -136,7 +136,7 @@ Image chargerImage(char* nomImage){
 }
 
 
-void ecritureFichier(Image fichier){
+void ecritureFichier(Image image, FILE* fich){
 	int i;
 	int j;
 	int largeur;
@@ -164,7 +164,7 @@ int save(Image image, char* output)
 	fich=fopen(output, "w");
 	if(fich != NULL)
 	{
-		ecritureFichier(image);
+		ecritureFichier(image, fich);
 		fclose(fich);
 		return 0;
 	}

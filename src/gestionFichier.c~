@@ -136,7 +136,11 @@ Image chargerImage(char* nomImage){
 }
 
 
-void ecritureFichier(Image fichier){
+void ecritureFichier(Image image, FILE* fich){
+	int i;
+	int j;
+	int largeur;
+	largeur = largeurMatriceImage (image);
 	fprintf(fich,"P%d\n",image.type);
 	fprintf(fich,"%d\t",image.width);
 	fprintf(fich,"%d\n",image.height);
@@ -157,14 +161,10 @@ void ecritureFichier(Image fichier){
 int save(Image image, char* output)
 {
 	FILE* fich;
-	int i;
-	int j;
-	int largeur;
-	largeur = largeurMatriceImage (image);
 	fich=fopen(output, "w");
 	if(fich != NULL)
 	{
-		ecritureFichier(image);
+		ecritureFichier(image, fich);
 		fclose(fich);
 		return 0;
 	}
