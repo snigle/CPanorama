@@ -8,7 +8,6 @@
  *
  */
 
-#include "rgbToGreyscale.h"
 #include "ordonanceur.h"
 
  

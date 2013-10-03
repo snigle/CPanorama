@@ -7,6 +7,10 @@
  *
  *
  */
+#ifndef __HEADER_H__
+#define __HEADER_H__
+
+
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -54,3 +58,6 @@ int** initMatrice(int largeur, int hauteur);
 int largeurMatriceImage (Image image);
 
 Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel);
+
+
+#endif /* __HEADER_H__ */

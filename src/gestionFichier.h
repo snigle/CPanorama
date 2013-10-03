@@ -1,3 +1,8 @@
+#ifndef __GESTIONFICHIER_H__
+#define __GESTIONFICHIER_H__
+
+	
+
 #include "header.h"
 
 /*!
@@ -117,3 +122,5 @@ Image chargerImage(char* nomImage);
 
 */
 int save(Image image, char* output);
+
+#endif /* __GESTIONFICHIER_H__ */
