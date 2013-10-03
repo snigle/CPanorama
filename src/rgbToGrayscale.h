@@ -1,3 +1,7 @@
+#ifndef __RGBTOGRAYSCALE_H__
+#define __RGBTOGRAYSCALE_H__
+
+#include "gestionFichier.h"
 #include "header.h"
 
 
@@ -13,10 +17,10 @@
        \remarks 
 
 */
-void creationTabGrayScale(int* tabGrey, Image image);
+void creationTabGrayScale(int** tabGrey, Image image);
 
 /*!
-       \fn Image creerGreyScale(Image pixRGB)
+       \fn Image creerGrayScale(Image pixRGB)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 26 Sep 2013
        \brief creer une image en noir et blanc qui correspond à l'image couleur pixRGB               
@@ -26,10 +30,10 @@ void creationTabGrayScale(int* tabGrey, Image image);
        \remarks 
 
 */
-Image creerGreyScale (Image pixRGB);
+Image creerGrayScale (Image pixRGB);
 
 /*!
-       \fn int greyScale(char* input, char* output)
+       \fn int grayScale(char* input, char* output)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 26 Sep 2013
        \brief recupere en parametre le nm de l'image ppm en input et le nom de l'image crée en pgm pour creer une image pgm à partir de l'image ppm correspondante               
@@ -40,4 +44,6 @@ Image creerGreyScale (Image pixRGB);
        \remarks 
 
 */
-int greyScale (char* input,char* output);
+int grayScale (char* input,char* output);
+
+#endif /* __RGBTOGRAYSCALE_H__ */

@@ -7,8 +7,13 @@
  *
  *
  */
- 
- 
+
+#ifndef __ORDONANCEUR_H__
+#define __ORDONANCEUR_H__
+
+#include "header.h" 
+#include "rgbToGrayscale.h"
+
  
  
 
@@ -138,3 +143,5 @@ int appelerFonction(int argc, char** argv, char** input, int nombreInput, char**
 int gererOptions(int argc, char** argv);
 
 
+
+#endif /* __ORDONANCEUR_H__ */
