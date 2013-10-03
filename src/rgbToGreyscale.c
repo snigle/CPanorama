@@ -7,7 +7,6 @@
  *
  *
  */
-//#include "header.h"
 #include "recuperationFichier.h"
 
 
@@ -41,16 +40,17 @@ int greyScale (char* input,char* output)
 	Image imagePPM;
 	Image imagePGM;
 	imagePPM = chargerImage(input);
+	int result;
+	result = 0;
 	if (imagePPM.type == 3)
 	{
 		imagePGM = creerGreyScale(imagePPM);
-		save(imagePGM, output);
-		printf("Le fichier %s a été converti en noir et blanc dans le fichier %s\n",input,output);
+		result = save(imagePGM, output);
+		if(!result)
+			printf("Le fichier %s a été converti en noir et blanc dans le fichier %s\n",input,output);
 	}
 	else
-	{
-		return MAUVAIS_FORMAT_GRAYSCALE;
-	}
+		result = MAUVAIS_FORMAT_GRAYSCALE;
 	
-	return (0);
+	return result;
 }

@@ -55,6 +55,9 @@ void erreur(int numeroErreur)
 		case ERREUR_PARAMETRE:
 			printf("Les paramètres ne sont pas entrés correctement, entrez panorama -h pour plus d'informations\n");
 		break;
+		case ERREUR_OUTPUT:
+			printf("Le programme n'a pas la permission d'écrire dans le fichier en output\n");
+		break;
 		default :
 			printf("Une erreur est survenue\n");
 		break;
@@ -96,6 +99,16 @@ int** initMatrice(int largeur, int hauteur)
 	for (i = 0; i < hauteur; i += 1)
 		tab[i] = mallocBis(largeur * sizeof(int));
 	return tab;
+}
+
+int largeurMatriceImage (Image image)
+{
+	int largeur;
+	if(image.type == 3)
+		largeur = 3 * image.width;
+	else
+		largeur = image.width;
+	return largeur;
 }
 
 int getType(char* tab)

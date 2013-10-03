@@ -136,22 +136,17 @@ Image chargerImage(char* nomImage){
 }
 
 
-
-int save(Image image, char* output)
-{
-	FILE* fich;
+void ecritureFichier(Image fichier){
 	int i;
 	int j;
 	int largeur;
-	if(image.type == 3)
-		largeur = 3 * image.width;
-	else
-		largeur = image.width;	
-	fich=fopen(output, "w");
+	largeur = largeurMatriceImage (image);
 	fprintf(fich,"P%d\n",image.type);
 	fprintf(fich,"%d\t",image.width);
 	fprintf(fich,"%d\n",image.height);
-	fprintf(fich,"%d\n",image.teinteMax);
+	if (image.type != 1){
+		fprintf(fich,"%d\n",image.teinteMax);
+	}
 	for(i=0;i<image.height;i++)
 	{
 		for (j = 0; j < largeur; j += 1)
@@ -159,7 +154,21 @@ int save(Image image, char* output)
 			fprintf(fich,"%d\n",image.teinte[i][j]);
 		}
 	}
-	fclose(fich);
-	return 0;
 }
-	
+
+
+
+int save(Image image, char* output)
+{
+	FILE* fich;
+	fich=fopen(output, "w");
+	if(fich != NULL)
+	{
+		ecritureFichier(image);
+		fclose(fich);
+		return 0;
+	}
+	else{
+		return ERREUR_OUTPUT;
+		}
+}

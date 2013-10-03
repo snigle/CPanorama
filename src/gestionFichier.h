@@ -104,6 +104,21 @@ int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type);
 */
 Image chargerImage(char* nomImage);
 
+
+
+/*!
+       \fn void ecritureFichier(Image fichier)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Thu 03 Oct 2013
+       \brief permet d'ecrire toutes les infromations d'une image dans un fichier               
+       \param image : (fichier) une image 
+       
+               
+       \remarks 
+
+*/
+void ecritureFichier(Image fichier);
+
 /*!
        \fn int save(Image image, char* ouput)
        \author Poussou Elie <poussoueli@eisti.eu>
