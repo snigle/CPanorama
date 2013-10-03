@@ -80,6 +80,7 @@ if (c = '1')
 	return (0);
 else
 	return (1);
+}
 
 void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 {
