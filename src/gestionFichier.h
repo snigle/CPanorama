@@ -40,7 +40,7 @@ void sauterCommentaire(FILE* fichier);
       		\remarks ras
 
 */
-void recupType(char* tab, FILE* image);
+char* recupType(FILE* image) ;
 
 /*!
        \fn int parametrage(FILE* image)
