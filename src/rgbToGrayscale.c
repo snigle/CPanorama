@@ -7,7 +7,10 @@
  *
  *
  */
-#include "recuperationFichier.h"
+
+
+#include "rgbToGrayscale.h"
+
 
 
 void creationTabGrayScale(int** tabGrey, Image image)
@@ -21,7 +24,7 @@ void creationTabGrayScale(int** tabGrey, Image image)
 	}	
 }
 
-Image creerGreyScale (Image pixRGB)
+Image creerGrayScale (Image pixRGB)
 {
 	Image imagePGM;
 	char p2[3];
@@ -35,7 +38,7 @@ Image creerGreyScale (Image pixRGB)
 	return imagePGM;
 }
 
-int greyScale (char* input,char* output)
+int grayScale (char* input,char* output)
 {
 	Image imagePPM;
 	Image imagePGM;
@@ -44,9 +47,9 @@ int greyScale (char* input,char* output)
 	result = 0;
 	if (imagePPM.type == 3)
 	{
-		imagePGM = creerGreyScale(imagePPM);
-		result = save(imagePGM, output);
 		if(!result)
+			imagePGM = creerGrayScale(imagePPM);
+			save(imagePGM, output);
 			printf("Le fichier %s a été converti en noir et blanc dans le fichier %s\n",input,output);
 	}
 	else

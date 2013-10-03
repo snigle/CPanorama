@@ -9,7 +9,7 @@
  */
 
 
-#include "header.h"
+#include "gestionFichier.h"
 
 
 
@@ -102,8 +102,7 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
 {
 	int** tab;
-	if (!strcmp(type, "P3"))
-		largeur *= 3;
+	largeur = largeurMatriceImage(image);
 	tab = initMatrice(largeur,hauteur);	
 	recuperationPixels(fichier, tab, largeur, hauteur);
 	return tab;

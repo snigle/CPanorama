@@ -1,38 +1,29 @@
 **************TODO**************
 
+
+*Elie
+--------------------------------
+(Créer la fonction libererType(Type truc) en pensant à liberer les sous array
+Choisir le type int pour gérer les erreurs)
+Creation et liberation image manière propre
+
+
+
 *Quentin
 --------------------------------
+Gérer l'erreur pour le type P1 (test pour la charge)
 Modifier le typedef de sorte que ça suive :
 	typedef int entier;
-DONE
 
-*Elie
---------------------------------
-Changer le fonction créerType de sorte à allouer la mémoire dans la fonction plutôt que de simplement copier l'adresse mémoire.
 
-*Elie
---------------------------------
-Créer la fonction libererType(Type truc) en pensant à liberer les sous array
-Choisir le type int pour gérer les erreurs
-
-*Quentin
---------------------------------
-Gérer l'erreur pour le type P1 (test pour le save)
-
-*Ludo/Quentin/Elie
---------------------------------
-Remettre le type en char* (utiliser strdup)
-
-*LuDo
---------------------------------
-Utiliser les listes pour la gestion des options
 
 *LuDo
 --------------------------------
 Vérifier tout les malloc par mallocBis
-
---------------------------------
+Remettre le type en char* (utiliser strdup)
 Vérifier les fuites de mémoires
+
+
 
 *****HEADERS*****
 #if n def __F1_H___
