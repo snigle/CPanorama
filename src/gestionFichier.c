@@ -76,7 +76,7 @@ int teinteMax(char type[3], FILE* image)
 }
 
 int charToInt(char c){
-if (c = '1')
+if (c == '0')
 	return (0);
 else
 	return (1);

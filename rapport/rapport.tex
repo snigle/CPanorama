@@ -73,13 +73,20 @@
 		    Pour tester ces fonctions, nous avons écrit une fonction qui permet de passer d'une image couleur à une image en teinte de gris comme demandée pour le livrable 2.\\
 		    Les teintes noires et banches sont données par l'équation suivante : teinteNoire = teinteR + teinteG + teinteB.\\
 		\section{Ce qu'il reste à faire}
-		    Cependant, tout le code du second livrable ainsi que celui du panorama entier reste à faire même si la réflexion sur le code a été importante au cours de ce premier mois de travail.\\
+		    Cependant, tout le code du second livrable ainsi que celui du panorama entier reste à faire même si la réflexion sur le code a été importante au cours de ce premier mois de travail. Plusieurs recherches ont été faites pour comprendre les fonctions à coder pour le livrable 2, notamment la convolution, qui est un produit matriciel entre une matrice de pixel et une matrice en paramètre dans un fichier. Cela fonctionne un peu comme un filtre appliqué à une image. Il suffit ensuite de mettre en place le code dans le programme.\\
 	\chapter{Les différentes façons de faire un panorama}
+	      Cette seconde partie met en oeuvre les recherches effectuées durant ce premier mois pour savoir comment automatiser un panorama en C. On a dégagé quelques méthodes qui nous semblent poqqibles pour assembler des images, et donc réaliser le panorama.
 		\section{Pré-assemblage}
+		    Les pré-conditions de la fonction Assembler sera de convertir toutes les images en teintes de gris pour éviter de parcourir des tableaux trop importants comme un tableau d'une image couleur (en effet, la largeur de l'image est multipliée par 3). \\
+		    Les deux premières méthodes ont été plus ou moins mises en place par nous, ces méthodes sont lourdes pour l'ordinateur mais sont certaines de fonctionner. \\
+		    La dernière méthode est une synthèse des recherches, cette méthode revient souvent mais n'est pas clairement expliquée. Le but est de récupérer un ensemble de points appelés "coins" de l'image. Le point obscur de cette méthode est donc de savoir comment les repérer dans les deux images pour les assembler.
 		\section{Première méthode : Point par point}
+		    %Quentin
+		    
 		\section{Seconde méthode : Les lignes}
-	%	\section{Troisième méthode : Correspondance des distances}
-
+		    explication %Elie
+		\section{Troisième méthode : Méthode des coins}
+		    explication %Quentin
 		\section{Post-assemblage}
 	\chapter*{Conclusion}
 \end{document}
