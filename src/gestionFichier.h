@@ -30,13 +30,12 @@ void allerAlaLigne (FILE* fichier);
 void sauterCommentaire(FILE* fichier);
 
 /*!
-       \fn void recupType(char* tab, FILE* image)
+       \fn char* recupType(FILE* image) ;
        \author Perales Quentin <peralesque@eisti.eu>
        \date MON 23 Sep 2013
        \brief récupère le type d'une image pixmap            
-       \param tab : (char*) : un tableau vide qui sera ensuite rempli par le type P1 P2 ou P3
        \param image : (file*) : le code de l'image en ppm
-               
+       \return Retourne la chaine de caractères correspondant au type P1 P2 ou P3       
       		\remarks ras
 
 */
@@ -66,21 +65,14 @@ int parametrage(FILE* image);
       		\remarks ras
 
 */
-int teinteMax(char type[3], FILE* image);
+int teinteMax(char* type, FILE* image);
 
-/*!
-       \fn void recuperationPixels(FILE* fichier, int* tab, int tailleTotale)
-       \author Perales Quentin <peralesque@eisti.eu>
-       \date MON 23 Sep 2013
-       \brief recupération de chaque teintes de pixel, quelque soit le type P1 P2 ou P3
-       \param fichier : (file*) :  un fichier, ici l'image a charger
-       \param tab : (int*) : un tableau vide qui se remplis d'entiers qui correspondent a des teintes 
-       \param tailleTotale : (int) : un entier qui prend en considération la taille totale du tableau en fonction du Type
-               
-      		\remarks ras
 
-*/
-void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur);
+int charToInt(char c);
+
+
+
+void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type);
 
 /*!
        \fn int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type)

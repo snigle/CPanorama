@@ -45,7 +45,7 @@ int grayScale (char* input,char* output)
 	imagePPM = chargerImage(input);
 	int result;
 	result = 0;
-	if (!strcmp(imagePPM.type,"P3")
+	if (!strcmp(imagePPM.type,"P3"))
 	{
 		if(!result)
 			imagePGM = creerGrayScale(imagePPM);

@@ -157,7 +157,7 @@ void ecritureFichier(Image image, FILE* fich){
 	fprintf(fich,"%s\n",image.type);
 	fprintf(fich,"%d\t",image.width);
 	fprintf(fich,"%d\n",image.height);
-	if (strcmp(image.type,"P1")){
+	if (strcmp(image.type,"P1"){
 		fprintf(fich,"%d\n",image.teinteMax);
 	}
 	for(i=0;i<image.height;i++)

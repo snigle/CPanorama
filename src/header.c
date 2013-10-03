@@ -104,7 +104,7 @@ int** initMatrice(int largeur, int hauteur)
 int largeurMatriceImage (Image image)
 {
 	int largeur;
-	if(image.type == 3)
+	if(!strcmp(image.type, "P3"))
 		largeur = 3 * image.width;
 	else
 		largeur = image.width;
@@ -140,7 +140,7 @@ int getType(char* tab)
 Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel)
 {
 	Image newImage;
-	newImage.type = getType(tab);
+	newImage.type = strdup(tab);
 	newImage.width = largeur;
 	newImage.height = hauteur;
 	newImage.teinteMax = teinteMaximale;
