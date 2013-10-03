@@ -41,6 +41,7 @@ clean:
 #	@mkdir $(dirsave)
 
 save:
+	mkdir save/
 	@cp -r $(dirsrc)* $(dirsave)
 	@echo "Sauvegarde effectuée dans le dossier "$(dirsave)
 	
