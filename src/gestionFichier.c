@@ -38,12 +38,15 @@ void sauterCommentaire(FILE* fichier)
 			 }
 }
 
-void recupType(char* tab, FILE* image) 
+char* recupType(FILE* image) 
 {
+	char* result;
+	result = malloc(3*sizeof(char));
 	sauterCommentaire(image);
-	fscanf(image, "%c", &tab[0]);
-	fscanf(image, "%c", &tab[1]);
-	tab[2] = '\0';
+	fscanf(image, "%c", &result[0]);
+	fscanf(image, "%c", &result[1]);
+	result[2] = '\0';
+	return result;
 }
 
 
@@ -62,7 +65,7 @@ int parametrage(FILE* image)
 }
 
 
-int teinteMax(char type[3], FILE* image)
+int teinteMax(char* type, FILE* image)
 {
     int result;
     result = 0;
@@ -82,13 +85,14 @@ else
 	return (1);
 }
 
-void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
+void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type)
 {
 	int i;
 	int j;
 	int pixel;
 	int test; // permet de savoir si le scanf ne génère pas d'erreur
 	pixel = 0;
+	test = 1;
 	for (i = 0 ; i < hauteur ; i++)
 	{
 		for (j = 0; j < largeur; j += 1)
@@ -111,9 +115,10 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
 {
 	int** tab;
-	largeur = largeurMatriceImage(image);
+	if(!strcmp(type,"P3"))	
+		largeur *= 3;
 	tab = initMatrice(largeur,hauteur);	
-	recuperationPixels(fichier, tab, largeur, hauteur);
+	recuperationPixels(fichier, tab, largeur, hauteur, type);
 	return tab;
 }
 
@@ -122,7 +127,7 @@ int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
 Image chargerImage(char* nomImage){
 	Image imageCharge;
 	FILE* image;
-	char type[3];
+	char* type;
 	int largeur;
 	int hauteur;
 	int teinteMaximale;
@@ -130,7 +135,7 @@ Image chargerImage(char* nomImage){
 	image = fopen(nomImage, "r");
 	if (image != NULL)
 	{
-		recupType(type, image);
+		type = recupType(image);
 		largeur = parametrage(image);
 		hauteur = parametrage(image);
 		if (!strcmp(type, "P2") || !strcmp(type,"P3"))
@@ -149,10 +154,10 @@ void ecritureFichier(Image image, FILE* fich){
 	int j;
 	int largeur;
 	largeur = largeurMatriceImage (image);
-	fprintf(fich,"P%d\n",image.type);
+	fprintf(fich,"%s\n",image.type);
 	fprintf(fich,"%d\t",image.width);
 	fprintf(fich,"%d\n",image.height);
-	if (image.type != 1){
+	if (strcmp(image.type,"P1")){
 		fprintf(fich,"%d\n",image.teinteMax);
 	}
 	for(i=0;i<image.height;i++)

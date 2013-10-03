@@ -22,7 +22,7 @@ Modifier le typedef de sorte que ça suive :
 *LuDo
 --------------------------------
 Vérifier tout les malloc par mallocBis
-Remettre le type en char* (utiliser strdup)
+->Remettre le type en char* (utiliser strdup)
 Vérifier les fuites de mémoires
 
 

@@ -104,7 +104,7 @@ int** initMatrice(int largeur, int hauteur)
 int largeurMatriceImage (Image image)
 {
 	int largeur;
-	if(image.type == 3)
+	if(!strcmp(image.type, "P3"))
 		largeur = 3 * image.width;
 	else
 		largeur = image.width;
