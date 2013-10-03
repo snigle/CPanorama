@@ -75,6 +75,11 @@ int teinteMax(char type[3], FILE* image)
 	return result;
 }
 
+int charToInt(char c){
+if (c = '1')
+	return (0);
+else
+	return (1);
 
 void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 {
@@ -88,7 +93,10 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 		for (j = 0; j < largeur; j += 1)
 		{
 			sauterCommentaire(fichier);
-			test = fscanf(fichier, "%d", &pixel);
+			if (!strcmp(type, "P2") || !strcmp(type,"P3"))
+				test = fscanf(fichier, "%d", &pixel);
+			else
+				pixel = charToInt(fgetc(fichier));
 			if (test == 1)
 				tab[i][j] = pixel;
 			else
@@ -124,13 +132,13 @@ Image chargerImage(char* nomImage){
 		recupType(type, image);
 		largeur = parametrage(image);
 		hauteur = parametrage(image);
-		teinteMaximale = teinteMax(type, image);
+		if (!strcmp(type, "P2") || !strcmp(type,"P3"))
+			teinteMaximale = teinteMax(type, image);
 		teinte = recupPixel(image, largeur, hauteur, type);
 		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);//création de l image
 	}else
 		erreur(IMAGE_NO_EXISTS);
 	fclose(image);
-
 	return imageCharge;	
 }
 

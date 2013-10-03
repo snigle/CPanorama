@@ -88,7 +88,10 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 		for (j = 0; j < largeur; j += 1)
 		{
 			sauterCommentaire(fichier);
-			test = fscanf(fichier, "%d", &pixel);
+			if (!strcmp(type, "P2") || !strcmp(type,"P3"))
+				test = fscanf(fichier, "%d", &pixel);
+			else
+				pixel = charToInt(fgetc(fichier));
 			if (test == 1)
 				tab[i][j] = pixel;
 			else
@@ -102,8 +105,7 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur)
 int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
 {
 	int** tab;
-	if (!strcmp(type, "P3"))
-		largeur *= 3;
+	largeur = largeurMatriceImage(image);
 	tab = initMatrice(largeur,hauteur);	
 	recuperationPixels(fichier, tab, largeur, hauteur);
 	return tab;
@@ -125,13 +127,13 @@ Image chargerImage(char* nomImage){
 		recupType(type, image);
 		largeur = parametrage(image);
 		hauteur = parametrage(image);
-		teinteMaximale = teinteMax(type, image);
+		if (!strcmp(type, "P2") || !strcmp(type,"P3"))
+			teinteMaximale = teinteMax(type, image);
 		teinte = recupPixel(image, largeur, hauteur, type);
 		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);//création de l image
 	}else
 		erreur(IMAGE_NO_EXISTS);
 	fclose(image);
-
 	return imageCharge;	
 }
 

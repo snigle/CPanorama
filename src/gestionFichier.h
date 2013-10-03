@@ -80,6 +80,9 @@ int teinteMax(char type[3], FILE* image);
       		\remarks ras
 
 */
+
+int charToInt(char c);
+
 void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur);
 
 /*!
