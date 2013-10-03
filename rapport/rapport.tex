@@ -79,14 +79,17 @@
 		\section{Pré-assemblage}
 		    Les pré-conditions de la fonction Assembler sera de convertir toutes les images en teintes de gris pour éviter de parcourir des tableaux trop importants comme un tableau d'une image couleur (en effet, la largeur de l'image est multipliée par 3). \\
 		    Les deux premières méthodes ont été plus ou moins mises en place par nous, ces méthodes sont lourdes pour l'ordinateur mais sont certaines de fonctionner. \\
-		    La dernière méthode est une synthèse des recherches, cette méthode revient souvent mais n'est pas clairement expliquée. Le but est de récupérer un ensemble de points appelés "coins" de l'image. Le point obscur de cette méthode est donc de savoir comment les repérer dans les deux images pour les assembler.
+		    La dernière méthode est une synthèse des recherches, cette méthode revient souvent mais n'est pas clairement expliquée. Le but est de récupérer un ensemble de points appelés "coins" de l'image. Le point obscur de cette méthode est donc de savoir comment les repérer dans les deux images pour les assembler.\\
+		    Pour assembler les images, on n'en considère que deux à la fois.
 		\section{Première méthode : Point par point}
 		    %Quentin
-		    
+		    Cette méthode est la plus précise et la plus simple à comprendre. On cherche à faire correspondre chaque pixel d'une image, à une autre image.
+		    On prend un pixel dans la première image et on cherche un pixel d'une même teinte dans l'autre image. Ce qui veut dire que l'autre image va être parcouru en entier pour trouver une correspondance. Si une correspondance est trouvée, on cherche à agrandir cette correspondance en faisans corespondre une matrice de pixel, plus elle va être grande, plus l'assemblage entre les images est probable. Si une matrice sur le bord d'une image correspond a une matrice sur le bord d'une autre image, on les assemble en enregistrant les décalages en hauteur et largeur. Ce code est très coûteux pour la machine, surtout si la taille des images est importante. Il faudra alors manipuler des matrices de plus d'un million d'entier chacune.
 		\section{Seconde méthode : Les lignes}
 		    explication %Elie
 		\section{Troisième méthode : Méthode des coins}
 		    explication %Quentin
 		\section{Post-assemblage}
+		    En fin d'assemblage, 
 	\chapter*{Conclusion}
 \end{document}
