@@ -80,7 +80,7 @@ int teinteMax(char type[3], FILE* image);
       		\remarks ras
 
 */
-void recuperationPixels(FILE* fichier, int** tab, int tailleTotale);
+void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur);
 
 /*!
        \fn int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
@@ -96,7 +96,7 @@ void recuperationPixels(FILE* fichier, int** tab, int tailleTotale);
       		\remarks ras
 
 */
-int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type);
+int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type);
 
 /*!
        \fn Image chargerImage(char* nomImage)

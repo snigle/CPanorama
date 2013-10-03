@@ -1,7 +1,7 @@
 #ifndef __RGBTOGRAYSCALE_H__
 #define __RGBTOGRAYSCALE_H__
 
-#include "recuperationFichier.h"
+#include "gestionFichier.h"
 #include "header.h"
 
 
@@ -17,7 +17,7 @@
        \remarks 
 
 */
-void creationTabGrayScale(int* tabGrey, Image image);
+void creationTabGrayScale(int** tabGrey, Image image);
 
 /*!
        \fn Image creerGrayScale(Image pixRGB)

@@ -8,7 +8,7 @@
  *
  */
 
-#include "rgbToGreyscale.h"
+#include "rgbToGrayscale.h"
 
 
 
