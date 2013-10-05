@@ -58,6 +58,17 @@ int** initMatrice(int largeur, int hauteur);
 int largeurMatriceImage (Image image);
 
 Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel);
+/*!
+       \fn int libererImage(Image image)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 05 Oct 2013
+       \brief libère la mémoire utilisée par l'image chargée               
+       \param image : (image) : l'image chargée
+       \return 
+               
+       \remarks 
 
+*/
+int libererImage(Image image)
 
 #endif /* __HEADER_H__ */
