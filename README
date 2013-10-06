@@ -1,6 +1,7 @@
 **************TODO**************
 
 GENERER UNE ERREUR POUR TYPE P5
+Ajouter/Compléter les cartouches
 
 
 *Elie
@@ -8,16 +9,6 @@ GENERER UNE ERREUR POUR TYPE P5
 (Créer la fonction libererType(Type truc) en pensant à liberer les sous array
 Choisir le type int pour gérer les erreurs)
 Creation et liberation image manière propre
-
-
-
-*Quentin
---------------------------------
-Gérer l'erreur pour le type P1 (test pour la charge)
-Modifier le typedef de sorte que ça suive :
-	typedef int entier;
-
-
 
 *LuDo
 --------------------------------

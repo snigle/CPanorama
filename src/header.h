@@ -48,6 +48,12 @@ typedef struct Image
 	int** teinte;/*!< 	teinte un tableau d'entier définissant les teintes de pixels*/
 }Image;
 
+
+
+
+void erreursImage (int numeroErreur);
+void autreErreurs(int numeroErreur);
+
 /*!
 	\fn erreur
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>

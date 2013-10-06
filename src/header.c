@@ -12,47 +12,70 @@
 #include "header.h"
 
 
-void erreur(int numeroErreur)//ajouter un parametre pour savoir si on doit exit ou pas. Pour limiter la taille, associer les erreurs des images dans une fonction, et les autres dans une autre. Ne pas envoyer dans printf mais dans fprintf_stderr
-{
-	int result;
-	result = 1;
+void erreursImage (int numeroErreur){
 	switch(numeroErreur)
 	{
-		case 0:
-			printf("Le programme s'est terminé correctement\n");
-			result = 0;
-		break;
-		case NO_INPUT_OR_OUTPUT:
-			printf("Il n'y a aucun fichier en input ou en output\n");
-		break;
 		case IMAGE_CORROMPUE:
-			printf("Le fichier image est corrompu\n");
+			fprintf(stderr,"Le fichier image est corrompu\n");
 		break;
 		case IMAGE_NO_EXISTS:
-			printf("Le fichier image n'existe pas\n");
-		break;
-		case NO_MEMORY:
-			printf("Il manque de l'espace mémoire pour faire un malloc\n");
+			fprintf(stderr,"Le fichier image n'existe pas\n");
 		break;
 		case MAUVAIS_FORMAT_GRAYSCALE:
-			printf("L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
-		break;
-		case ERREUR_PARAMETRE:
-			printf("Les paramètres ne sont pas entrés correctement, entrez panorama -h pour plus d'informations\n");
-		break;
-		case ERREUR_OUTPUT:
-			printf("Le programme n'a pas la permission d'écrire dans le fichier en output\n");
+			fprintf(stderr,"L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
 		break;
 		default :
-			printf("Une erreur est survenue\n");
+			fprintf(stderr,"Erreur non répertoriée\n");
 		break;
 	}
-	exit(result);
+}
+
+void autreErreurs(int numeroErreur){
+switch(numeroErreur)
+	{
+		case NO_INPUT_OR_OUTPUT:
+			fprintf(stderr,"Il n'y a aucun fichier en input ou en output\n");
+		break;
+		case NO_MEMORY:
+			fprintf(stderr,"Il manque de l'espace mémoire pour faire un malloc\n");
+		break;
+		case ERREUR_PARAMETRE:
+			fprintf(stderr,"Les paramètres ne sont pas entrés correctement, entrez panorama -h pour plus d'informations\n");
+		break;
+		case ERREUR_OUTPUT:
+			fprintf(stderr,"Le programme n'a pas la permission d'écrire dans le fichier en output\n");
+		break;
+		default :
+			fprintf(stderr,"Erreur non répertoriée\n");
+		break;
+	}
 }
 
 
 
- void* mallocBis(size_t taille)
+void erreur(int numeroErreur)//ajouter un parametre pour savoir si on doit exit ou pas. Pour limiter la taille, associer les erreurs des images dans une fonction, et les autres dans une autre. Ne pas envoyer dans printf mais dans fprintf(stderr, );
+{
+	int result;
+	result = 1;
+	if (numeroErreur == NO_INPUT_OR_OUTPUT || numeroErreur == NO_MEMORY || numeroErreur == ERREUR_OUTPUT || numeroErreur == ERREUR_PARAMETRE)
+	{
+		autreErreurs(numeroErreur);
+		exit(result);
+	}else if (numeroErreur == IMAGE_CORROMPUE || numeroErreur == IMAGE_NO_EXISTS || numeroErreur == MAUVAIS_FORMAT_GRAYSCALE)
+			{
+				erreursImage(numeroErreur);
+				exit(result);
+			}else if (numeroErreur == 0){
+						printf("Le programme s'est terminé correctement\n");
+					}else{
+							fprintf(stderr,"Une erreur est survenue\n");
+							exit(result);
+						}
+}
+
+
+
+void* mallocBis(size_t taille)
  {
  	void* result;
  	
