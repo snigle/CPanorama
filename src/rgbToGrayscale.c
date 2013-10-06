@@ -50,7 +50,7 @@ int grayScale (char* input,char* output)
 		if(!result)
 			imagePGM = creerGrayScale(imagePPM);
 			save(imagePGM, output);
-			printf("Le fichier %s a été converti en noir et blanc dans le fichier %s\n",input,output);
+			printf("Le fichier %s a été converti en échelle de gris dans le fichier %s\n",input,output);
 	}
 	else
 		result = MAUVAIS_FORMAT_GRAYSCALE;
