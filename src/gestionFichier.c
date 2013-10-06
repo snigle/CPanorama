@@ -179,9 +179,11 @@ int save(Image image, char* output)
 	{
 		ecritureFichier(image, fich);
 		fclose(fich);
+		libererImage(image);
 		return 0;
 	}
 	else{
 		return ERREUR_OUTPUT;
 		}
+	
 }

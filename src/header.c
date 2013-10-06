@@ -95,3 +95,18 @@ Image creationImage(char* type, int largeur, int hauteur, int teinteMaximale, in
 	return newImage;
 }
 
+int libererImage(Image image)
+{
+	int largeur;
+	largeur = largeurMatriceImage(image);
+	int i;
+	
+	free(image.type);
+	
+	for(i=0;i<largeur;i++)
+	{
+		free(image.teinte[i]);	
+	}
+	return 0 ;
+}
+
