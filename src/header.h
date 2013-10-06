@@ -113,6 +113,6 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
        \remarks 
 
 */
-int libererImage(Image image)
+int libererImage(Image image);
 
 #endif /* __HEADER_H__ */

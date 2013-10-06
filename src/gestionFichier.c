@@ -184,6 +184,5 @@ int save(Image image, char* output)
 	}
 	else{
 		return ERREUR_OUTPUT;
-		}
-	
+		}	
 }
