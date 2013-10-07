@@ -59,7 +59,7 @@ int parametrage(FILE* image)
 	sauterCommentaire(image);
 	test = fscanf(image, "%d", &result);
 	if (test != 1)
-		erreur(IMAGE_CORROMPUE);
+		erreur(IMAGE_CORROMPUE, EXIT);
     
     return result;
 }
@@ -105,7 +105,7 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char
 			if (test == 1)
 				tab[i][j] = pixel;
 			else
-				erreur(IMAGE_CORROMPUE);
+				erreur(IMAGE_CORROMPUE, EXIT);
 	
 		}
 	}
@@ -143,7 +143,7 @@ Image chargerImage(char* nomImage){
 		teinte = recupPixel(image, largeur, hauteur, type);
 		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);//création de l image
 	}else
-		erreur(IMAGE_NO_EXISTS);
+		erreur(IMAGE_NO_EXISTS, EXIT);
 	fclose(image);
 	return imageCharge;	
 }
@@ -179,7 +179,6 @@ int save(Image image, char* output)
 	{
 		ecritureFichier(image, fich);
 		fclose(fich);
-		libererImage(image);
 		return 0;
 	}
 	else{
