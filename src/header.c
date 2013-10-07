@@ -33,20 +33,54 @@ void erreursImage (int numeroErreur){
 	}
 }
 
-void autreErreurs(int numeroErreur){
-switch(numeroErreur)
+
+void erreurParametre(int numeroErreur)
+{
+	switch(numeroErreur)
+	{
+		case ERREUR_PARAMETRE:
+			fprintf(stderr,"Les paramètres ne sont pas entrés correctement, entrez panorama -h pour plus d'informations\n");
+		break;
+		case NO_DOSSIER:
+			fprintf(stderr,"Le dossier choisit n'existe pas\n");
+		break;
+		default :
+			fprintf(stderr,"Erreur non répertoriée\n");
+		break;
+	}
+}
+
+
+void erreurInputOutput(int numeroErreur)
+{
+	switch(numeroErreur)
 	{
 		case NO_INPUT_OR_OUTPUT:
 			fprintf(stderr,"Il n'y a aucun fichier en input ou en output\n");
 		break;
+		case ERREUR_OUTPUT:
+			fprintf(stderr,"Le programme n'a pas la permission d'écrire dans le fichier en output\n");
+		break;
+		case PAS_ASSEZ_D_INPUTS:
+			fprintf(stderr,"Il manque des inputs pour effectuer toutes les options");
+		break;
+		default :
+			fprintf(stderr,"Erreur non répertoriée\n");
+		break;
+	}
+}
+
+void autreErreurs(int numeroErreur){
+switch(numeroErreur)
+	{
 		case NO_MEMORY:
 			fprintf(stderr,"Il manque de l'espace mémoire pour faire un malloc\n");
 		break;
-		case ERREUR_PARAMETRE:
-			fprintf(stderr,"Les paramètres ne sont pas entrés correctement, entrez panorama -h pour plus d'informations\n");
+		case NO_DOSSIER:
+			fprintf(stderr,"Le dossier n'existe pas");
 		break;
-		case ERREUR_OUTPUT:
-			fprintf(stderr,"Le programme n'a pas la permission d'écrire dans le fichier en output\n");
+		case TROP_D_OPTIONS:
+			fprintf(stderr,"Le nombre d'option est limité à 50");
 		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
@@ -65,7 +99,11 @@ void erreur(int numeroErreur, int sortir)
 		if (numeroErreur <= 10)
 			autreErreurs(numeroErreur);
 		else if (numeroErreur <= 20)
-				erreursImage(numeroErreur);
+			erreursImage(numeroErreur);
+		else if (numeroErreur <= 30)
+			erreurInputOutput(numeroErreur);
+		else if (numeroErreur <= 40)
+			erreurParametre(numeroErreur);
 			else
 				fprintf(stderr,"Une erreur est survenue\n");
 		if (sortir)

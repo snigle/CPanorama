@@ -12,6 +12,88 @@
 #include "gestionFichier.h"
 
 
+//NEW CODE
+
+
+char* recupererExtension(char* nom)
+{
+	int i;
+	i = 0;
+	while (nom[i]!='.' && nom[i] != '\0')
+	{
+		i++;
+	}
+	if(nom[i] != '\0')
+		return &nom[i+1];
+	else
+		return &nom[i];
+}
+
+
+int recupererNbFichierRepertoire(DIR* rep)
+{
+	char* ext;
+	int taille;
+	taille = 0;
+    struct dirent* ent;
+    while ((ent = readdir(rep)) != NULL)
+    {
+		ext = recupererExtension(ent->d_name);
+		if (!strcmp(ext, "ppm") || !strcmp(ext, "pgm") || !strcmp(ext, "pbm"))
+     		taille++;
+    }	
+	return taille;
+}
+
+char** listeInputDossier(DIR* rep, int taille, char* nomDossier)
+{
+	char* ext;
+	char** resultat;
+	int i;
+	i = 0;
+	resultat = mallocBis(taille*sizeof(char*));
+	rewinddir(rep);
+    struct dirent* ent;
+    while ((ent = readdir(rep)) != NULL)
+    {
+		ext = recupererExtension(ent->d_name);
+		if (!strcmp(ext, "ppm") || !strcmp(ext, "pgm") || !strcmp(ext, "pbm"))
+     	{
+     		resultat[i] = mallocBis(sizeof(ent->d_name)+sizeof(nomDossier)-1);
+     		sprintf(resultat[i],"%s%s",nomDossier,ent->d_name);
+     		i++;
+     	} 
+    }
+    
+	return resultat;
+}
+
+char** recupererListeInputDossier(char* dossier, int* taille)
+{
+    char** result;
+    DIR* rep;
+    rep = opendir(dossier);
+    if (rep != NULL)
+	{
+		*taille = recupererNbFichierRepertoire(rep);
+		if (*taille != 0)
+			result = listeInputDossier(rep, *taille,dossier);
+		else
+			erreur(NO_INPUT_OR_OUTPUT, EXIT);
+	}else
+		erreur(NO_DOSSIER, EXIT);
+	closedir(rep);
+	return result;
+}
+
+
+
+//END NEW CODE
+
+
+
+
+
 
 
 void allerAlaLigne (FILE* fichier){
@@ -189,7 +271,7 @@ int save(Image image, char* output)
 		}	
 }
 
-void testchargerImage(char* input, char* output)
+void testChargerImage(char* input, char* output)
 {
 	Image image;
 	char* type;

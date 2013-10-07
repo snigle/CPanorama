@@ -13,6 +13,7 @@
 
 #include "header.h" 
 #include "rgbToGrayscale.h"
+#include "gestionFichier.h"
 
  
  

@@ -114,18 +114,20 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 } 
 
 
-char* recupererDossierInput(int argc, char** argv, int* taille)
+char** recupererDossierInput(int argc, char** argv, int* taille)
 {
 	int i;
-	char* result;
+	char** result;
 	result = NULL;
 	
 	for (i = 0; i < argc; i += 1)
 	{
-		if(strcmp(argv[i],"-r"))
+		if(!strcmp(argv[i],"-r"))
 		{
 			if((i+1)<argc)
+			{
 				result = recupererListeInputDossier(argv[i+1],taille);
+			}
 		}
 	}
 	return result;
@@ -134,23 +136,20 @@ char* recupererDossierInput(int argc, char** argv, int* taille)
 char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 {
 	char** char_input;
-	char* dossier;
+	char** dossier;
 	int optionR;
 	dossier = NULL;
-	
 	*nombre = recuperNombreInputOutput(argc,argv,bool_input);
-	dossier = recupererDossierInput(argc,argv);
+	/*if(bool_input)
+	{
+		char_input = recupererDossierInput(argc,argv,nombre);
+	}*/
 	
 	if(*nombre != -1)
 	{
 		char_input = mallocBis(*nombre * sizeof(char*));
 		remplirTableauInputOutput(argc, argv,char_input,*nombre, bool_input);
 	}
-	if(dossier != NULL)
-	{
-		
-	}
-	
 	
 	
 	return char_input;
@@ -228,10 +227,13 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 		else if(!strcmp(argv[i],"-p"))
 			printf("Appel de la fonction panorama\n");
 		else if(!strcmp(argv[i],"-s"))
-			testerChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
+			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
 	}
-	if (idInput != nombreInput)
-		erreur(TROP_D_INPUTS,NO_EXIT);
+	/*while (idInput < nombreInput)
+	{
+		printf("Option à lancer : %s\n",argv[i-1]);
+		idInput++;
+	}*/
 } 
 
 
@@ -247,7 +249,7 @@ int gererOptions(int argc, char** argv)
 	result = 0;
 	input = recupererInputOutput(argc, argv, 1, &nombreInput);
 	output = recupererInputOutput(argc, argv, 0, &nombreOutput);
-	
+
 	if(nombreInput>0)
 	{
 		appelerFonction(argc,argv,input,nombreInput,output,nombreOutput);

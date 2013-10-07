@@ -85,6 +85,14 @@
 		    %Quentin
 		    Cette méthode est la plus précise et la plus simple à comprendre. On cherche à faire correspondre chaque pixel d'une image, à une autre image.
 		    On prend un pixel dans la première image et on cherche un pixel d'une même teinte dans l'autre image. Ce qui veut dire que l'autre image va être parcourue en entier pour trouver une correspondance. Si une correspondance est trouvée, on cherche à agrandir cette correspondance en faisant corespondre une matrice de pixel, plus elle va être grande, plus l'assemblage entre les images est probable. Si une matrice sur le bord d'une image correspond à une matrice sur le bord d'une autre image, on les assemble en enregistrant les décalages en hauteur et largeur. Ce code est très coûteux pour la machine, surtout si la taille des images est importante. Il faudra alors manipuler des matrices de plus d'un million d'entiers chacune.
+		    
+		    \begin{figure}[h]
+		     \begin{center}
+		      \includegraphics[scale=.23]{images/panorama3.png}
+		      \caption{Schéma du panorama avec la méthode des coins}
+		     \end{center}
+  
+		    \end{figure}
 		\section{Seconde méthode : Les lignes ou colonnes}
 		    %Elie
 		    Pour cette deuxième méthode, on prend les lignes et les colonnes de pixels qui se situent sur les bords des deux images que l'on souhaite assembler. \\
@@ -94,11 +102,20 @@
 		    Il faudra ensuite gérer le décalage qui fait apparaitre des zones noires.\\
 		   Cette seconde méthode est moins gourmande que la précédente car on se concentrera sur les lignes et colonnes qui se situent sur le bord de l'image.
 		    
+		    \begin{figure}[h]
+		     \begin{center}
+		      \includegraphics[scale=.18]{images/panorama2.png} \includegraphics[scale=.18]{images/panorama1.png}
+		      \caption{Schéma du panorama avec la méthode des coins}
+		     \end{center}
+  
+		    \end{figure}
 		    
 		\section{Troisième méthode : Méthode des coins}
 		    %Quentin
 		    Dans un premier temps, il faut repérer les "coins" de l'image. Une des possibilités peut être l'utilisation de l'algorithme Features from Accelerated Segment Test (FAST). Pour cela, il faut définir un seuil inférieur et un seuil supérieur. Ensuite, on défini le rayon d'un cercle qui sera constant. On choisit ensuite un pixel quelconque et on repère les pixels sur le contour du cercle de ce pixel. Voici un schéma de la situation autour d'un pixel.\\
 		    
+		    
+
 		    %schema LUDO
 		    %http://operationpixel.free.fr/pointinteret_fast.php
 		    %http://www.enseignement.polytechnique.fr/profs/informatique/Francois.Sillion/Majeure/Projets/teyssier/projet.html

@@ -4,6 +4,17 @@
 	
 
 #include "header.h"
+#include <dirent.h>
+
+
+char* recupererExtension(char* nom);
+int recupererNbFichierRepertoire (DIR* rep);
+char** listeInputDossier(DIR* rep, int taille, char* nomDossier);
+char** recupererListeInputDossier(char* dossier, int* taille);
+
+
+
+
 
 /*!
        \fn void allerAlaLigne(FILE* fichier)
@@ -167,5 +178,5 @@ int save(Image image, char* output);
        \remarks 
 
 */
-void testchargerImage(char* input, char* output);
+void testChargerImage(char* input, char* output);
 #endif /* __GESTIONFICHIER_H__ */
