@@ -2,13 +2,9 @@
 
 GENERER UNE ERREUR POUR TYPE P5
 Ajouter/Compléter les cartouches
+Corriger l'ordonnanceur, créer output si necessaire, ne pas forcer nbinput = nboutput et 
 
 
-*Elie
---------------------------------
-(Créer la fonction libererType(Type truc) en pensant à liberer les sous array
-Choisir le type int pour gérer les erreurs)
-Creation et liberation image manière propre
 
 *LuDo
 --------------------------------

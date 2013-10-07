@@ -125,7 +125,7 @@ int testOptionAvecParametre(char* option, int* i, int argc, char** argv);
 	\remarks ras
 
 */
-int appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput);
+void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput);
 
 
 /*!

@@ -53,24 +53,18 @@ switch(numeroErreur)
 
 
 
-void erreur(int numeroErreur)//ajouter un parametre pour savoir si on doit exit ou pas. Pour limiter la taille, associer les erreurs des images dans une fonction, et les autres dans une autre. Ne pas envoyer dans printf mais dans fprintf(stderr, );
+void erreur(int numeroErreur, int sortir)//ajouter un parametre pour savoir si on doit exit ou pas. Pour limiter la taille, associer les erreurs des images dans une fonction, et les autres dans une autre. Ne pas envoyer dans printf mais dans fprintf(stderr, );
 {
 	int result;
 	result = 1;
-	if (numeroErreur == NO_INPUT_OR_OUTPUT || numeroErreur == NO_MEMORY || numeroErreur == ERREUR_OUTPUT || numeroErreur == ERREUR_PARAMETRE)
-	{
+	if (numeroErreur <= 10)
 		autreErreurs(numeroErreur);
+	else if (numeroErreur <= 20)
+			erreursImage(numeroErreur);
+		else
+			fprintf(stderr,"Une erreur est survenue\n");
+	if (sortir)
 		exit(result);
-	}else if (numeroErreur == IMAGE_CORROMPUE || numeroErreur == IMAGE_NO_EXISTS || numeroErreur == MAUVAIS_FORMAT_GRAYSCALE)
-			{
-				erreursImage(numeroErreur);
-				exit(result);
-			}else if (numeroErreur == 0){
-						printf("Le programme s'est terminé correctement\n");
-					}else{
-							fprintf(stderr,"Une erreur est survenue\n");
-							exit(result);
-						}
 }
 
 
@@ -81,7 +75,7 @@ void* mallocBis(size_t taille)
  	
 	result = malloc(taille);
 	if(result == NULL)
-		erreur(NO_MEMORY);
+		erreur(NO_MEMORY, EXIT);
 	return result;
  }
 

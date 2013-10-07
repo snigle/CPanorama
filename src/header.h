@@ -18,13 +18,18 @@
 
 
 
-#define NO_INPUT_OR_OUTPUT 1
-#define IMAGE_CORROMPUE 2
-#define IMAGE_NO_EXISTS 3
-#define NO_MEMORY 4
-#define ERREUR_PARAMETRE 5
-#define MAUVAIS_FORMAT_GRAYSCALE 6
-#define ERREUR_OUTPUT 7
+
+#define IMAGE_CORROMPUE 11
+#define IMAGE_NO_EXISTS 12
+#define MAUVAIS_FORMAT_GRAYSCALE 13
+
+#define NO_MEMORY 1
+#define ERREUR_PARAMETRE 2
+#define NO_INPUT_OR_OUTPUT 4
+#define ERREUR_OUTPUT 3
+
+#define EXIT 1
+#define NO_EXIT 0
 
 /*! \struct Image  
 	\author Perales Quentin <peralesque@eisti.eu>
@@ -67,7 +72,7 @@ void autreErreurs(int numeroErreur);
 		\remarks ras
 
 */
-void erreur(int numeroErreur);
+void erreur(int numeroErreur, int sortir);
 
 
  /*!

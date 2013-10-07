@@ -146,25 +146,23 @@ int testOptionAvecParametre(char* option, int* i, int argc, char** argv)
 				*i = *i + 1;
 			}
 			else
-				erreur(ERREUR_PARAMETRE);
+				erreur(ERREUR_PARAMETRE, EXIT);
 		}
 		else
 		{
-			erreur(ERREUR_PARAMETRE);
+			erreur(ERREUR_PARAMETRE, EXIT);
 		}
 	}
 	return result;
 }
 
-int appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
+void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
 	int i;
-	int result;
-	result = 0;
 	for (i = 0; i < argc; i += 1)
 	{
 		if(!strcmp(argv[i],"-g"))
-			result = grayScale(input[0],output[0]);
+			erreur(grayScale(input[0],output[0]), NO_EXIT);
 		else if(!strcmp(argv[i],"-h"))
 			printf("Appel de la fonction histogram\n");
 		else if(!strcmp(argv[i],"-e"))
@@ -178,7 +176,6 @@ int appelerFonction(int argc, char** argv, char** input, int nombreInput, char**
 		else if(!strcmp(argv[i],"-p"))
 			printf("Appel de la fonction panorama\n");
 	}
-	return result;
 } 
 
 
@@ -197,7 +194,7 @@ int gererOptions(int argc, char** argv)
 	
 	if(nombreInput>0 && nombreOutput>0)
 	{
-		result = appelerFonction(argc,argv,input,nombreInput,output,nombreOutput);
+		appelerFonction(argc,argv,input,nombreInput,output,nombreOutput);
 	}
 	else
 	{

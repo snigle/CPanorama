@@ -21,6 +21,7 @@ all: $(PROG)
 
 
 $(PROG): $(dirbin) $(OBJ)
+	@clear
 	$(CC) $(OBJ) -o $(dirbin)$@
 	@echo "Compilation terminée"
 $(dirbin) :
