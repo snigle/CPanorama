@@ -186,3 +186,22 @@ int save(Image image, char* output)
 		return ERREUR_OUTPUT;
 		}	
 }
+
+void testchargerImage(char* input, char* output)
+{
+	Image image;
+	char* type;
+	image = chargerImage(input);
+	type=image.type;
+	
+	if(verifType(type))
+	{
+		erreur(ERREUR_TYPE, EXIT);
+	}
+	else
+	{
+		save(image, output);
+	}
+}
+
+

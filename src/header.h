@@ -185,6 +185,6 @@ int libererImage(Image image);
        \remarks 
 
 */
-void verifType(char* type)
+void verifType(char* type);
 
 #endif /* __HEADER_H__ */
