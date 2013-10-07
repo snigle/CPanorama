@@ -68,10 +68,35 @@ int parametrage(FILE* image);
 int teinteMax(char* type, FILE* image);
 
 
+/*!
+       \fn int charToInt(char c)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief fonction qui recoit un caractère (0 ou 1) et le transforme en entier, cette fonction n'est utilisée que lorsque le type de l'image à charger est P1               
+       \param c : (char) 
+       \return retourne un entier, 0 ou 1, et génère une erreur si le caractère n'est pas '0' ou '1'
+               
+       \remarks 
+
+*/
+
 int charToInt(char c);
 
 
+/*!
+       \fn void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief Description Complète un tableau d'entiers qui correspondent aux pixels de l'image
+       \return
+               \param fichier : (FILE) e fichier contenant l'image à charger
+               \param tab : (int**) la matrice a compléter
+               \param largeur (int) : la largeur de l'image
+               \param hauteur (int) : la hauteur de l'image
+               \param type (char*) : une chaine de caractere contenant le type de l'image a charger
+       \remarks 
 
+*/
 void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type);
 
 /*!
