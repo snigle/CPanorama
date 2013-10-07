@@ -155,4 +155,17 @@ void ecritureFichier(Image image, FILE* fich);
 */
 int save(Image image, char* output);
 
+/*!
+       \fn int chargerImage(char* input, char* output)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief fonction test qui charge une image si elle est de type P1 P2 ou P3            
+       \param input : (char*) : nom de l'image à charger
+       \param output : (char*) : nom du fichier de sauvegarde
+       \return 
+               
+       \remarks 
+
+*/
+void testchargerImage(char* input, char* output);
 #endif /* __GESTIONFICHIER_H__ */

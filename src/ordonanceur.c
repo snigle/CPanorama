@@ -228,7 +228,7 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 		else if(!strcmp(argv[i],"-p"))
 			printf("Appel de la fonction panorama\n");
 		else if(!strcmp(argv[i],"-s"))
-			printf("Appel de la fonction save\n");
+			testerChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
 	}
 	if (idInput != nombreInput)
 		erreur(TROP_D_INPUTS,NO_EXIT);

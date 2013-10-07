@@ -22,6 +22,7 @@
 #define IMAGE_CORROMPUE 11
 #define IMAGE_NO_EXISTS 12
 #define MAUVAIS_FORMAT_GRAYSCALE 13
+#define ERREUR_TYPE 14
 
 #define ERREUR_PARAMETRE 21
 #define NO_INPUT_OR_OUTPUT 22
@@ -183,7 +184,7 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
 void libererMatrice(void** mat, int largeur);
 
 /*!
-       \fn int libererImage(Image image)
+       \fn void libererImage(Image image)
        \author Poussou Elie <poussoueli@eisti.eu>
        \date Sat 05 Oct 2013
        \brief libère la mémoire utilisée par l'image chargée               
@@ -193,6 +194,21 @@ void libererMatrice(void** mat, int largeur);
        \remarks 
 
 */
+
 void libererImage(Image image);
+
+
+/*!
+       \fn void verifType(char* type)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief Envoie une erreur si le type n'est pas P1 ou P2 ou P3        
+       \return 
+               
+       \remarks 
+
+*/
+int verifType(char* type);
+
 
 #endif /* __HEADER_H__ */
