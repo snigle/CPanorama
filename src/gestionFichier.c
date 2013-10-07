@@ -106,6 +106,7 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char
 				tab[i][j] = pixel;
 			else
 				erreur(IMAGE_CORROMPUE,EXIT);
+
 	
 		}
 	}
@@ -144,6 +145,7 @@ Image chargerImage(char* nomImage){
 		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);//création de l image
 	}else
 		erreur(IMAGE_NO_EXISTS,EXIT);
+
 	fclose(image);
 	free(type);
 	return imageCharge;	

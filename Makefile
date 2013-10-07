@@ -19,6 +19,7 @@ DIR = $(shell find $(dirsrc) -maxdepth 5 -type d -print)
 
 all: $(PROG)
 
+
 $(PROG): $(dirbin) $(OBJ) 
 	$(CC) $(OBJ) -o $(dirbin)$@
 	@echo "Compilation terminée"
@@ -69,6 +70,8 @@ $(dirsrc):
 	@mkdir $(dirsrc)
 	
 test:
+	@echo "******TEST NORMAL************"
 	./bin/panorama -i src/image.ppm -o src/image.pgm -g
+	
 	
 

@@ -114,15 +114,41 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 } 
 
 
+char* recupererDossierInput(int argc, char** argv, int* taille)
+{
+	int i;
+	char* result;
+	result = NULL;
+	
+	for (i = 0; i < argc; i += 1)
+	{
+		if(strcmp(argv[i],"-r"))
+		{
+			if((i+1)<argc)
+				result = recupererListeInputDossier(argv[i+1],taille);
+		}
+	}
+	return result;
+}
+
 char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 {
 	char** char_input;
+	char* dossier;
+	int optionR;
+	dossier = NULL;
 	
 	*nombre = recuperNombreInputOutput(argc,argv,bool_input);
+	dossier = recupererDossierInput(argc,argv);
+	
 	if(*nombre != -1)
 	{
 		char_input = mallocBis(*nombre * sizeof(char*));
 		remplirTableauInputOutput(argc, argv,char_input,*nombre, bool_input);
+	}
+	if(dossier != NULL)
+	{
+		
 	}
 	
 	
@@ -156,13 +182,39 @@ int testOptionAvecParametre(char* option, int* i, int argc, char** argv)
 	return result;
 }
 
+
+char* incrementerInputOutput(char** tab, int* id, int max, int bool_input)
+{
+	char* result;
+	if(*id < max)
+		result = tab[*id];
+	else if(!bool_input)
+	{
+		if(*id < 100)
+		{
+			result = mallocBis(sizeof(char) * 11);
+			sprintf(result,"output_%d",*id);
+		}
+		else
+			erreur(TROP_D_OPTIONS, EXIT);		
+	}
+	else
+		erreur(PAS_ASSEZ_D_INPUTS, EXIT);
+	*id = *id + 1;
+	return result;
+}
+
+
+
 void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
 	int i;
-	for (i = 0; i < argc; i += 1)
+	int idInput;
+	int idOutput;
+	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
 		if(!strcmp(argv[i],"-g"))
-			erreur(grayScale(input[0],output[0]), NO_EXIT);
+			erreur(grayScale(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0)), NO_EXIT);
 		else if(!strcmp(argv[i],"-h"))
 			printf("Appel de la fonction histogram\n");
 		else if(!strcmp(argv[i],"-e"))
@@ -175,7 +227,11 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 			printf("Appel de la fonction convolution avec le fichier %s\n",argv[i]);
 		else if(!strcmp(argv[i],"-p"))
 			printf("Appel de la fonction panorama\n");
+		else if(!strcmp(argv[i],"-s"))
+			printf("Appel de la fonction save\n");
 	}
+	if (idInput != nombreInput)
+		erreur(TROP_D_INPUTS,NO_EXIT);
 } 
 
 
@@ -192,7 +248,7 @@ int gererOptions(int argc, char** argv)
 	input = recupererInputOutput(argc, argv, 1, &nombreInput);
 	output = recupererInputOutput(argc, argv, 0, &nombreOutput);
 	
-	if(nombreInput>0 && nombreOutput>0)
+	if(nombreInput>0)
 	{
 		appelerFonction(argc,argv,input,nombreInput,output,nombreOutput);
 	}

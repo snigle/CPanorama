@@ -57,14 +57,17 @@ void erreur(int numeroErreur, int sortir)
 {
 	int result;
 	result = 1;
-	if (numeroErreur <= 10)
-		autreErreurs(numeroErreur);
-	else if (numeroErreur <= 20)
-			erreursImage(numeroErreur);
-		else
-			fprintf(stderr,"Une erreur est survenue\n");
-	if (sortir)
-		exit(result);
+	if(numeroErreur)
+	{
+		if (numeroErreur <= 10)
+			autreErreurs(numeroErreur);
+		else if (numeroErreur <= 20)
+				erreursImage(numeroErreur);
+			else
+				fprintf(stderr,"Une erreur est survenue\n");
+		if (sortir)
+			exit(result);
+	}
 }
 
 

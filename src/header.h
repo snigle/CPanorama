@@ -23,10 +23,15 @@
 #define IMAGE_NO_EXISTS 12
 #define MAUVAIS_FORMAT_GRAYSCALE 13
 
+#define ERREUR_PARAMETRE 21
+#define NO_INPUT_OR_OUTPUT 22
+#define ERREUR_OUTPUT 23
+#define PAS_ASSEZ_D_INPUTS 24
+#define TROP_D_OPTIONS 25
+#define TROP_D_INPUTS 26
+
 #define NO_MEMORY 1
-#define ERREUR_PARAMETRE 2
-#define NO_INPUT_OR_OUTPUT 4
-#define ERREUR_OUTPUT 3
+
 
 #define EXIT 1
 #define NO_EXIT 0
@@ -54,9 +59,33 @@ typedef struct Image
 }Image;
 
 
+/*!
+       \fn void erreursImage(int numeroErreur)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief spécifie l'erreur à l'utilisateur en fonction du numéro de celle ci. Toutes les erreurs sont issues d'un traitement de l'image               
+       \param numeroerreur : (int) un entier qui donne le numéro de l'erreur
+       
+               
+       \remarks 
 
+*/
 
 void erreursImage (int numeroErreur);
+
+
+/*!
+       \fn void autreErreurs(int numeroErreur)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief spécifie l'erreur à l'utilisateur en fonction du numéro de celle ci. Toutes les erreurs correspondent à une erreur autre qu'un traitement de l'image.
+       \param numeroErreur : (int) le num qui renseigne l'erreur au cours du programme
+       
+               
+       \remarks 
+
+*/
+
 void autreErreurs(int numeroErreur);
 
 /*!
@@ -90,7 +119,32 @@ void erreur(int numeroErreur, int sortir);
  */
 void* mallocBis(size_t taille);
 
+/*!
+       \fn int** initMatrice(int largeur, int hauteur)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief initialise une matrice correspondant à la taille de l'image à traiter               
+       \param largeur : (int) la largeur de l'image
+       \param hauteur : (int) la hauteur de l'image
+       \return une matrice d'entiers à compléter
+               
+       \remarks 
+
+*/
+
 int** initMatrice(int largeur, int hauteur);
+
+/*!
+       \fn int largeurMatriceImage(Image image)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief permet de connaitre la largeur à parcourir en fonction u type de l'image               
+       \param image : (image) 
+       \return un entier correspondant au nombre de chiffres à parcourir par ligne de matrice en fonction du type de l'image
+               
+       \remarks 
+
+*/
 
 int largeurMatriceImage (Image image);
 

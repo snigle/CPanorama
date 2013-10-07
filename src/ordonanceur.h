@@ -110,6 +110,22 @@ int testOptionAvecParametre(char* option, int* i, int argc, char** argv);
 
 
 /*!
+	\fn char* incrementerInputOutput(char** tab, int* id, int max, int bool_input)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 07 Oct 2013
+	\brief Parcourt le tableau input ou output et gère les erreurs		
+	\param tab : (char**) tableau d'input ou d'output
+	\param id : (int*) index en cours de tu tableau
+	\param max : (int) taille du tableau
+	\param bool_input : (int) vrai si c'est un output, faux sinon
+	\return retourne l'id incrémenté.
+		
+	\remarks si on dépasse la taille du tableau d'output, on en crée un.
+
+*/
+char* incrementerInputOutput(char** tab, int* id, int max, int bool_input);
+
+/*!
 	\fn int appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	\date Tue 24 Sep 2013
