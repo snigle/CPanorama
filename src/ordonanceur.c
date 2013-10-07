@@ -202,6 +202,9 @@ int gererOptions(int argc, char** argv)
 		result = NO_INPUT_OR_OUTPUT;
 	}
 	
+	//libererMatrice(input,nombreInput);
+	//libererMatrice(output,nombreOutput);
+	
 	return result;
 } 
 

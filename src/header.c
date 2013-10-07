@@ -53,7 +53,7 @@ switch(numeroErreur)
 
 
 
-void erreur(int numeroErreur, int sortir)//ajouter un parametre pour savoir si on doit exit ou pas. Pour limiter la taille, associer les erreurs des images dans une fonction, et les autres dans une autre. Ne pas envoyer dans printf mais dans fprintf(stderr, );
+void erreur(int numeroErreur, int sortir)
 {
 	int result;
 	result = 1;
@@ -112,18 +112,22 @@ Image creationImage(char* type, int largeur, int hauteur, int teinteMaximale, in
 	return newImage;
 }
 
-int libererImage(Image image)
+void libererMatrice(void** mat, int hauteur)
+{
+	int i;
+	for(i=0;i<hauteur;i++)
+	{
+		free(mat[i]);	
+	}
+	free(mat);
+}
+
+void libererImage(Image image)
 {
 	int largeur;
-	largeur = largeurMatriceImage(image);
-	int i;
 	
 	free(image.type);
-	
-	for(i=0;i<largeur;i++)
-	{
-		free(image.teinte[i]);	
-	}
-	return 0 ;
+	libererMatrice(image.teinte, image.height);
+
 }
 

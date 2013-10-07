@@ -113,6 +113,21 @@ int largeurMatriceImage (Image image);
 
 */
 Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel);
+
+/*!
+	\fn void libererMatrice(void** mat, int largeur)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 07 Oct 2013
+	\brief Libère une matrice		
+	\param mat : (void**) Matrice à libérer
+	\param largeur : (int) Longueur de la première composante de la matrice
+	
+		
+	\remarks 
+
+*/
+void libererMatrice(void** mat, int largeur);
+
 /*!
        \fn int libererImage(Image image)
        \author Poussou Elie <poussoueli@eisti.eu>
@@ -124,6 +139,6 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
        \remarks 
 
 */
-int libererImage(Image image);
+void libererImage(Image image);
 
 #endif /* __HEADER_H__ */

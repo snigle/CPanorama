@@ -19,9 +19,7 @@ DIR = $(shell find $(dirsrc) -maxdepth 5 -type d -print)
 
 all: $(PROG)
 
-
-$(PROG): $(dirbin) $(OBJ)
-	@clear
+$(PROG): $(dirbin) $(OBJ) 
 	$(CC) $(OBJ) -o $(dirbin)$@
 	@echo "Compilation terminée"
 $(dirbin) :
@@ -34,7 +32,7 @@ $(dirbin)%.o: $(dirsrc)%.c $(dirsrc)%.h
 	$(CC) -c $< -o $@
 
 
-.PHONY: clean save restore
+.PHONY: clean save restore test
 clean:
 	rm -f $(dirsrc)*~ $(dirsrc)\#*\# $(dirbin)*.o
 	
@@ -69,5 +67,8 @@ give: $(dirsrc)
 	
 $(dirsrc):
 	@mkdir $(dirsrc)
+	
+test:
+	./bin/panorama -i src/image.ppm -o src/image.pgm -g
 	
 

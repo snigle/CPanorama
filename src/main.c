@@ -18,7 +18,7 @@
  	int num;
  	num = gererOptions(argc,argv);
  	if (num)
- 		erreur(num);
+ 		erreur(num,EXIT);
  	return 0;
  }
  
