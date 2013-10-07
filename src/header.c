@@ -56,18 +56,21 @@ switch(numeroErreur)
 
 
 
-void erreur(int numeroErreur, int sortir)//ajouter un parametre pour savoir si on doit exit ou pas. Pour limiter la taille, associer les erreurs des images dans une fonction, et les autres dans une autre. Ne pas envoyer dans printf mais dans fprintf(stderr, );
+void erreur(int numeroErreur, int sortir)
 {
 	int result;
 	result = 1;
-	if (numeroErreur <= 10)
-		autreErreurs(numeroErreur);
-	else if (numeroErreur <= 20)
-			erreursImage(numeroErreur);
-		else
-			fprintf(stderr,"Une erreur est survenue\n");
-	if (sortir)
-		exit(result);
+	if(numeroErreur)
+	{
+		if (numeroErreur <= 10)
+			autreErreurs(numeroErreur);
+		else if (numeroErreur <= 20)
+				erreursImage(numeroErreur);
+			else
+				fprintf(stderr,"Une erreur est survenue\n");
+		if (sortir)
+			exit(result);
+	}
 }
 
 
@@ -130,8 +133,9 @@ int libererImage(Image image)
 	return 0 ;
 }
 
-void verifType(char* type)
+int verifType(char* type)
 {
-	return (strcmp(type, "P1") && strcmp(type, "P2") && strcmp(type, "P3"));
+	
+	return(strcmp(type, "P1") && strcmp(type, "P2") && strcmp(type, "P3"));
 }
 

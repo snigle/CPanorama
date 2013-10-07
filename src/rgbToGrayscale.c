@@ -54,6 +54,6 @@ int grayScale (char* input,char* output)
 	}
 	else
 		result = MAUVAIS_FORMAT_GRAYSCALE;
-	
+		
 	return result;
 }

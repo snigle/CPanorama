@@ -167,5 +167,5 @@ int save(Image image, char* output);
        \remarks 
 
 */
-int testchargerImage(char* input, char* output);
+void testchargerImage(char* input, char* output);
 #endif /* __GESTIONFICHIER_H__ */
