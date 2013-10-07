@@ -163,7 +163,7 @@ void libererMatrice(void** mat, int hauteur)
 	{
 		for(i=0;i<hauteur;i++)
 		{
-	//		free(mat[i]);	
+			free(mat[i]);	
 		}
 	
 		free(mat);

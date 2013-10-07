@@ -12,8 +12,6 @@
 #include "gestionFichier.h"
 
 
-//NEW CODE
-
 
 char* recupererExtension(char* nom)
 {
@@ -85,12 +83,6 @@ char** recupererListeInputDossier(char* dossier, int* taille)
 	closedir(rep);
 	return result;
 }
-
-
-
-//END NEW CODE
-
-
 
 
 
@@ -259,16 +251,23 @@ void ecritureFichier(Image image, FILE* fich){
 int save(Image image, char* output)
 {
 	FILE* fich;
-	fich=fopen(output, "w");
-	if(fich != NULL)
+	DIR* repertoire;
+	repertoire = opendir(output);
+	if(repertoire == NULL)//si le fichier de sorti n'est pas un fichier mais un repertoire, on generer une erreur
 	{
-		ecritureFichier(image, fich);
-		fclose(fich);
-		return 0;
-	}
-	else{
+		fich=fopen(output, "w");
+		if(fich != NULL)
+		{
+			ecritureFichier(image, fich);
+			fclose(fich);
+			return 0;
+		}
+		else{
+			return ERREUR_OUTPUT;
+			}	
+	}else{
 		return ERREUR_OUTPUT;
-		}	
+	}
 }
 
 void testChargerImage(char* input, char* output)

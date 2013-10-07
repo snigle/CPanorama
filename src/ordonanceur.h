@@ -119,12 +119,13 @@ int testOptionAvecParametre(char* option, int i, int argc, char** argv);
 	\param id : (int*) index en cours de tu tableau
 	\param max : (int) taille du tableau
 	\param bool_input : (int) vrai si c'est un output, faux sinon
+	\param extension : (char*) chaine de caractère précisant l'exension de l'image à approer s'il manque un output 
 	\return retourne l'id incrémenté.
 		
 	\remarks si on dépasse la taille du tableau d'output, on en crée un.
 
 */
-char* incrementerInputOutput(char** tab, int* id, int max, int bool_input);
+char* incrementerInputOutput(char** tab, int* id, int max, int bool_input, char* extension);
 
 /*!
 	\fn int derniereOption(int argc, char** argv)

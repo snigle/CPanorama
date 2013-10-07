@@ -207,7 +207,7 @@ int testOptionAvecParametre(char* option, int i, int argc, char** argv)
 }
 
 
-char* incrementerInputOutput(char** tab, int* id, int max, int bool_input)
+char* incrementerInputOutput(char** tab, int* id, int max, int bool_input, char* extension)
 {
 	char* result;
 	if(*id < max)
@@ -217,7 +217,7 @@ char* incrementerInputOutput(char** tab, int* id, int max, int bool_input)
 		if(*id < 100)
 		{
 			result = mallocBis(sizeof(char) * 11);
-			sprintf(result,"output_%d",*id);
+			sprintf(result,"output_%d%s",*id, extension);
 		}
 		else
 			erreur(TROP_D_OPTIONS, EXIT);		
@@ -241,7 +241,7 @@ int derniereOption(int argc, char** argv)
 void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
 {
 	if(!strcmp(argv[*i],"-g"))
-		erreur(grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+		erreur(grayScale(incrementerInputOutput(input,idInput,nombreInput,1, ".pgm"),incrementerInputOutput(output,idOutput,nombreOutput,0, ".pgm")), NO_EXIT);
 	else if(!strcmp(argv[*i],"-h"))
 		printf("Appel de la fonction histogram\n");
 	else if(!strcmp(argv[*i],"-e"))
@@ -255,7 +255,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	else if(!strcmp(argv[*i],"-p"))
 		printf("Appel de la fonction panorama\n");
 	else if(!strcmp(argv[*i],"-s"))
-		testChargerImage(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0));
+		testChargerImage(incrementerInputOutput(input,idInput,nombreInput,1,""),incrementerInputOutput(output,idOutput,nombreOutput,0,""));
 	
 }
 
@@ -304,10 +304,8 @@ int gererOptions(int argc, char** argv)
 		afficherManuel();
 		result = NO_INPUT_OR_OUTPUT;
 	}
-	
-	//libererMatrice(input,nombreInput);
-	//libererMatrice(output,nombreOutput);
-	
+	libererMatrice(input,nombreInput);
+	libererMatrice(output,nombreOutput);
 	return result;
 } 
 
