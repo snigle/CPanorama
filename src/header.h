@@ -22,6 +22,7 @@
 #define IMAGE_CORROMPUE 11
 #define IMAGE_NO_EXISTS 12
 #define MAUVAIS_FORMAT_GRAYSCALE 13
+#define ERREUR_TYPE 14
 
 #define NO_MEMORY 1
 #define ERREUR_PARAMETRE 2
@@ -125,5 +126,16 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
 
 */
 int libererImage(Image image);
+/*!
+       \fn void verifType(char* type)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief Envoie une erreur si le type n'est pas P1 ou P2 ou P3        
+       \return 
+               
+       \remarks 
+
+*/
+void verifType(char* type)
 
 #endif /* __HEADER_H__ */

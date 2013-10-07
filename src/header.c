@@ -24,6 +24,9 @@ void erreursImage (int numeroErreur){
 		case MAUVAIS_FORMAT_GRAYSCALE:
 			fprintf(stderr,"L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
 		break;
+		case ERREUR_TYPE:
+			fprintf(stderr,"Le type de cette image n'est pas géré\n");
+		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
 		break;
@@ -125,5 +128,13 @@ int libererImage(Image image)
 		free(image.teinte[i]);	
 	}
 	return 0 ;
+}
+
+void verifType(char* type)
+{
+	if((strcmp(type, "P1") & (strcmp(type, "P2") & (strcmp(type, "P3"))
+	{
+		erreur(ERREUR_TYPE, EXIT);
+	}
 }
 
