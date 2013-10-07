@@ -3,6 +3,7 @@
 GENERER UNE ERREUR POUR TYPE P5
 Ajouter/Compléter les cartouches
 Corriger l'ordonnanceur, créer output si necessaire, ne pas forcer nbinput = nboutput et 
+Charger un repertoire d'image si on entre -r dans la ligne de commande
 
 
 

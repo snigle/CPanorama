@@ -54,9 +54,33 @@ typedef struct Image
 }Image;
 
 
+/*!
+       \fn void erreursImage(int numeroErreur)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief spécifie l'erreur à l'utilisateur en fonction du numéro de celle ci. Toutes les erreurs sont issues d'un traitement de l'image               
+       \param numeroerreur : (int) un entier qui donne le numéro de l'erreur
+       
+               
+       \remarks 
 
+*/
 
 void erreursImage (int numeroErreur);
+
+
+/*!
+       \fn void autreErreurs(int numeroErreur)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief spécifie l'erreur à l'utilisateur en fonction du numéro de celle ci. Toutes les erreurs correspondent à une erreur autre qu'un traitement de l'image.
+       \param numeroErreur : (int) le num qui renseigne l'erreur au cours du programme
+       
+               
+       \remarks 
+
+*/
+
 void autreErreurs(int numeroErreur);
 
 /*!
@@ -90,7 +114,32 @@ void erreur(int numeroErreur, int sortir);
  */
 void* mallocBis(size_t taille);
 
+/*!
+       \fn int** initMatrice(int largeur, int hauteur)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief initialise une matrice correspondant à la taille de l'image à traiter               
+       \param largeur : (int) la largeur de l'image
+       \param hauteur : (int) la hauteur de l'image
+       \return une matrice d'entiers à compléter
+               
+       \remarks 
+
+*/
+
 int** initMatrice(int largeur, int hauteur);
+
+/*!
+       \fn int largeurMatriceImage(Image image)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief permet de connaitre la largeur à parcourir en fonction u type de l'image               
+       \param image : (image) 
+       \return un entier correspondant au nombre de chiffres à parcourir par ligne de matrice en fonction du type de l'image
+               
+       \remarks 
+
+*/
 
 int largeurMatriceImage (Image image);
 
