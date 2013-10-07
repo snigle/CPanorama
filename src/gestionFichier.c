@@ -12,6 +12,85 @@
 #include "gestionFichier.h"
 
 
+//NEW CODE
+
+
+char* recupererExtension(char* nom)
+{
+	int i;
+	i = 0;
+	while (nom[i]!='.' && nom[i] != '\0')
+	{
+		i++;
+	}
+	if(nom[i] != '\0')
+		return &nom[i+1];
+	else
+		return &nom[i];
+}
+
+
+int recupererNbFichierRepertoire(DIR* rep)
+{
+	char* ext;
+	int taille;
+	taille = 0;
+    struct dirent* ent;
+    while ((ent = readdir(rep)) != NULL)
+    {
+		ext = recupererExtension(ent->d_name);
+		if (!strcmp(ext, "ppm") || !strcmp(ext, "pgm") || !strcmp(ext, "pbm"))
+     		taille++;
+    }	
+    closedir(rep);
+	return taille;
+}
+
+char** listeInputDossier(DIR* rep, int taille)
+{
+	char* ext;
+	char** resultat;
+	int i;
+	i = 0;
+	resultat = mallocBis(taille);
+    struct dirent* ent;
+    while ((ent = readdir(rep)) != NULL)
+    {
+		ext = recupererExtension(ent->d_name);
+		if (!strcmp(ext, "ppm") || !strcmp(ext, "pgm") || !strcmp(ext, "pbm"))
+     	{
+     		resultat[i] = strdup(ent->d_name);
+     		i++;
+     	} 
+    }
+    closedir(rep);
+	return resultat;
+}
+
+char** recupererListeInputDossier(char* dossier, int* taille)
+{
+    char** result;
+    DIR* rep = opendir(dossier);
+    if (rep != NULL)
+	{
+		*taille = recupererNbFichierRepertoire(rep);
+		if (*taille != 0)
+			result = listeInputDossier(rep, *taille);
+		else
+			erreur(NO_INPUT_OR_OUTPUT, EXIT);
+	}else
+		erreur(NO_DOSSIER, EXIT);
+	return result;
+}
+
+
+
+//END NEW CODE
+
+
+
+
+
 
 
 void allerAlaLigne (FILE* fichier){

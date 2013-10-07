@@ -28,6 +28,7 @@
 #define ERREUR_PARAMETRE 2
 #define NO_INPUT_OR_OUTPUT 4
 #define ERREUR_OUTPUT 3
+#define NO_DOSSIER 5
 
 #define EXIT 1
 #define NO_EXIT 0

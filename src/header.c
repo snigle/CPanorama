@@ -48,6 +48,9 @@ switch(numeroErreur)
 		case ERREUR_OUTPUT:
 			fprintf(stderr,"Le programme n'a pas la permission d'écrire dans le fichier en output\n");
 		break;
+		case NO_DOSSIER:
+			fprintf(stderr,"Le dossier choisit n'existe pas\n");
+		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
 		break;

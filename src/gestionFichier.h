@@ -4,6 +4,17 @@
 	
 
 #include "header.h"
+#include <dirent.h>
+
+
+char* recupererExtension(char* nom);
+int recupererNbFichierRepertoire (DIR* rep);
+char** listeInput(DIR* rep);
+char** recupererListeInputDossier(char* dossier, int* taille);
+
+
+
+
 
 /*!
        \fn void allerAlaLigne(FILE* fichier)
