@@ -182,19 +182,18 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 } 
 
 //Vérifie si le paramètre suivant n'est pas une option
-int testOptionAvecParametre(char* option, int* i, int argc, char** argv)
+int testOptionAvecParametre(char* option, int i, int argc, char** argv)
 {
 	int result = 0;
 	
-	if(*i < argc && !strcmp(argv[*i],option))
+	if(i < argc && !strcmp(argv[i],option))
 	{
 		//Si l'option n'est pas à la fin
-		if( *i < argc - 1)
+		if( i < argc - 1)
 		{
-			if(argv[*i+1][0] != '-')
+			if(argv[i+1][0] != '-')
 			{
 				result = 1;
-				*i = *i + 1;
 			}
 			else
 				erreur(ERREUR_PARAMETRE, EXIT);
@@ -249,10 +248,10 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 		printf("Appel de la fonction erode\n");
 	else if(!strcmp(argv[*i],"-d"))
 		printf("Appel de la fonction dilate\n");
-	else if(testOptionAvecParametre("-b",i,argc,argv))
-		printf("Appel de la fonction theshole avec le parametre %s\n",argv[*i]);
-	else if(testOptionAvecParametre("-c",i,argc,argv))
-		printf("Appel de la fonction convolution avec le fichier %s\n",argv[*i]);
+	else if(testOptionAvecParametre("-b",*i,argc,argv))
+		printf("Appel de la fonction theshole avec le parametre %s\n",argv[*i+1]);
+	else if(testOptionAvecParametre("-c",*i,argc,argv))
+		printf("Appel de la fonction convolution avec le fichier %s\n",argv[*i+1]);
 	else if(!strcmp(argv[*i],"-p"))
 		printf("Appel de la fonction panorama\n");
 	else if(!strcmp(argv[*i],"-s"))

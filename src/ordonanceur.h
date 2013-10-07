@@ -107,7 +107,7 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	\remarks 
 
 */
-int testOptionAvecParametre(char* option, int* i, int argc, char** argv);
+int testOptionAvecParametre(char* option, int i, int argc, char** argv);
 
 
 /*!
