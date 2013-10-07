@@ -159,11 +159,15 @@ Image creationImage(char* type, int largeur, int hauteur, int teinteMaximale, in
 void libererMatrice(void** mat, int hauteur)
 {
 	int i;
-	for(i=0;i<hauteur;i++)
+	if(mat!=NULL && hauteur > 0)
 	{
-		free(mat[i]);	
+		for(i=0;i<hauteur;i++)
+		{
+	//		free(mat[i]);	
+		}
+	
+		free(mat);
 	}
-	free(mat);
 }
 
 void libererImage(Image image)

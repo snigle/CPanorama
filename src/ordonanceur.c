@@ -95,20 +95,19 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 	
 	i = 0;
 	trouve = 0;
-	while(i < argc && !trouve)
+	for (i = 0; i < argc; i += 1)
 	{
 		if(!strcmp(argv[i],getOptionInputOutput(bool_input,1)) || !strcmp(argv[i],getOptionInputOutput(bool_input,0)))
-			trouve = 1;
-		if(trouve)
 		{
+			if(trouve)
+				erreur(ERREUR_PARAMETRE,EXIT);
 			for (k = 0; k < taille; k += 1)
 			{
-				char_input[k] = mallocBis(sizeof(argv[i+k+1]));
-				char_input[k] = argv[i+k+1];
+				char_input[k] = strdup(argv[i+k+1]);
 			}
+			trouve = 1;
 		}
 		
-		i++;
 	}
 	
 } 
@@ -118,17 +117,40 @@ char** recupererDossierInput(int argc, char** argv, int* taille)
 {
 	int i;
 	char** result;
+	int trouve;
+	trouve = 0;
 	result = NULL;
 	
 	for (i = 0; i < argc; i += 1)
 	{
 		if(!strcmp(argv[i],"-r"))
 		{
+			if(trouve)
+				erreur(ERREUR_PARAMETRE,EXIT);
 			if((i+1)<argc)
 			{
 				result = recupererListeInputDossier(argv[i+1],taille);
+				trouve = 1;
 			}
 		}
+		
+	}
+	return result;
+}
+
+char** associerTableauString(char** tab1, char** tab2, int taille1, int taille2)
+{
+	int i;
+	int j;
+	char** result;
+	result = mallocBis(sizeof(char*)*(taille1 + taille2));
+	for (i = 0; i < taille1; i += 1)
+	{
+		result[i] = strdup(tab1[i]);
+	}
+	for (j = 0; j < taille2; j += 1, i++)
+	{
+		result[i] = strdup(tab2[j]);
 	}
 	return result;
 }
@@ -137,25 +159,29 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 {
 	char** char_input;
 	char** dossier;
-	int optionR;
+	char** result;
+	int tmp;
 	dossier = NULL;
-	*nombre = recuperNombreInputOutput(argc,argv,bool_input);
-	/*if(bool_input)
+	char_input = NULL;
+	*nombre = 0;
+	tmp = recuperNombreInputOutput(argc,argv,bool_input);
+	if(tmp != -1)
 	{
-		char_input = recupererDossierInput(argc,argv,nombre);
-	}*/
-	
-	if(*nombre != -1)
-	{
-		char_input = mallocBis(*nombre * sizeof(char*));
-		remplirTableauInputOutput(argc, argv,char_input,*nombre, bool_input);
+		char_input = mallocBis(tmp * sizeof(char*));
+		remplirTableauInputOutput(argc, argv,char_input,tmp, bool_input);
 	}
-	
-	
-	return char_input;
+	else
+		tmp = 0;
+	if(bool_input)
+		dossier = recupererDossierInput(argc,argv,nombre);
+	result = associerTableauString(dossier,char_input,*nombre, tmp);
+	//if (tmp) libererMatrice(char_input,tmp);
+	//if(*nombre) libererMatrice(dossier,*nombre);
+	*nombre = *nombre + tmp;
+	return result;
 } 
 
-
+//Vérifie si le paramètre suivant n'est pas une option
 int testOptionAvecParametre(char* option, int* i, int argc, char** argv)
 {
 	int result = 0;
@@ -204,36 +230,56 @@ char* incrementerInputOutput(char** tab, int* id, int max, int bool_input)
 }
 
 
+int derniereOption(int argc, char** argv)
+{
+	argc--;
+	while(argc > 0 && (argv[argc][0]!='-' || !strcmp(argv[argc],"-r") || !strcmp(argv[argc],"-i") || !strcmp(argv[argc],"-o")|| !strcmp(argv[argc],"-lo") || !strcmp(argv[argc],"-li")))
+		argc--;
+	return argc;
+}
+
+
+void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
+{
+	if(!strcmp(argv[*i],"-g"))
+		erreur(grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+	else if(!strcmp(argv[*i],"-h"))
+		printf("Appel de la fonction histogram\n");
+	else if(!strcmp(argv[*i],"-e"))
+		printf("Appel de la fonction erode\n");
+	else if(!strcmp(argv[*i],"-d"))
+		printf("Appel de la fonction dilate\n");
+	else if(testOptionAvecParametre("-b",i,argc,argv))
+		printf("Appel de la fonction theshole avec le parametre %s\n",argv[*i]);
+	else if(testOptionAvecParametre("-c",i,argc,argv))
+		printf("Appel de la fonction convolution avec le fichier %s\n",argv[*i]);
+	else if(!strcmp(argv[*i],"-p"))
+		printf("Appel de la fonction panorama\n");
+	else if(!strcmp(argv[*i],"-s"))
+		testChargerImage(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0));
+	
+}
 
 void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
 	int i;
+	int tmp; //Pour prévenir du cas où la dernière option ne fait rien
 	int idInput;
 	int idOutput;
+
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
-		if(!strcmp(argv[i],"-g"))
-			erreur(grayScale(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0)), NO_EXIT);
-		else if(!strcmp(argv[i],"-h"))
-			printf("Appel de la fonction histogram\n");
-		else if(!strcmp(argv[i],"-e"))
-			printf("Appel de la fonction erode\n");
-		else if(!strcmp(argv[i],"-d"))
-			printf("Appel de la fonction dilate\n");
-		else if(testOptionAvecParametre("-b",&i,argc,argv))
-			printf("Appel de la fonction theshole avec le parametre %s\n",argv[i]);
-		else if(testOptionAvecParametre("-c",&i,argc,argv))
-			printf("Appel de la fonction convolution avec le fichier %s\n",argv[i]);
-		else if(!strcmp(argv[i],"-p"))
-			printf("Appel de la fonction panorama\n");
-		else if(!strcmp(argv[i],"-s"))
-			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
+		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
 	}
-	/*while (idInput < nombreInput)
-	{
-		printf("Option à lancer : %s\n",argv[i-1]);
-		idInput++;
-	}*/
+	tmp = 0;
+	i = derniereOption(argc,argv);
+	while (idInput < nombreInput)
+	{	
+		if(tmp == idInput)
+			idInput++;
+		tmp = idInput;
+		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);	
+	}
 } 
 
 

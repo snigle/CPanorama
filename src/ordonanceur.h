@@ -127,6 +127,21 @@ int testOptionAvecParametre(char* option, int* i, int argc, char** argv);
 char* incrementerInputOutput(char** tab, int* id, int max, int bool_input);
 
 /*!
+	\fn int derniereOption(int argc, char** argv)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 07 Oct 2013
+	\brief Récupère la dernière option demandée		
+	\param argc : (int) nombre de paramètres
+	\param argv : (char**) tableau de paramètres
+	\return retourne la position de la dernière option de argv
+		
+	\remarks 
+
+*/
+int derniereOption(int argc, char** argv);
+
+
+/*!
 	\fn int appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	\date Tue 24 Sep 2013

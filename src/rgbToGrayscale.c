@@ -45,7 +45,6 @@ int grayScale (char* input,char* output)
 	imagePPM = chargerImage(input);
 	int result;
 	result = 0;
-	printf("Le type est %s \n",imagePPM.type);
 	if (!strcmp(imagePPM.type,"P3"))
 	{
 		imagePGM = creerGrayScale(imagePPM);
