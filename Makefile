@@ -70,17 +70,22 @@ $(dirsrc):
 	@mkdir $(dirsrc)
 	
 test:
-
 	@echo "***********TEST normal grayScale****************"
 	#./bin/panorama -i ./src/poivron.ppm -o ./src/poivron.pgm -g
-	"***********TEST image déjà pgm grayScale****************"
+	
+	@echo "***********TEST image déjà pgm grayScale****************"
 	#./bin/panorama -i ./src/image_P2.pgm -o ./src/image_P3_rtg.pgm -g
 	#./bin/panorama -i ./src/image_P1.pbm -o ./src/image_P3_rtg.pgm -g
-	"***********TEST plusieurs images grayScale****************"
-	./bin/panorama -li ./src/image_P3.ppm ./src/poivron.ppm -lo ./src/image_P3_rtg.pgm ./src/poivron_rtg.pgm -g
-	"***********TEST image corrompue grayScale****************"
-	./bin/panorama -i ./src/poivron_corrompu.ppm -o ./src/poivron_corrompu.pgm -g
-	"***********TEST avec un répertoire grayScale****************"
+	
+	@echo "***********TEST plusieurs images grayScale****************"
+	#./bin/panorama -li ./src/exemple.ppm ./src/poivron.ppm -lo ./src/exemple_rtg.pgm ./src/poivron_rtg.pgm -g
+	
+	@echo"***********TEST avec un répertoire****************"
+	./bin/panorama -r ./src/images/ -g
+	
+	@echo"***********TEST image corrompue grayScale****************"
+	#./bin/panorama -i ./src/poivron_corrompu.ppm -o ./src/poivron_corrompu.pgm -g
+	
 	
 	 #faire tout les cas possibles avec tout les cas d\images en input et output (images corrompues)
 	 #P1 pbm, P2 pgm, P3 ppm
