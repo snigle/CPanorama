@@ -70,8 +70,23 @@ $(dirsrc):
 	@mkdir $(dirsrc)
 	
 test:
-	@echo "******TEST NORMAL************"
-	./bin/panorama -i src/image.ppm -o src/image.pgm -g
+	@echo "***********TEST normal grayScale****************"
+	#./bin/panorama -i ./src/poivron.ppm -o ./src/poivron.pgm -g
 	
+	@echo "***********TEST image déjà pgm grayScale****************"
+	#./bin/panorama -i ./src/image_P2.pgm -o ./src/image_P3_rtg.pgm -g
+	#./bin/panorama -i ./src/image_P1.pbm -o ./src/image_P3_rtg.pgm -g
+	
+	@echo "***********TEST plusieurs images grayScale****************"
+	#./bin/panorama -li ./src/exemple.ppm ./src/poivron.ppm -lo ./src/exemple_rtg.pgm ./src/poivron_rtg.pgm -g
+	
+	@echo "***********TEST image corrompue****************"
+	./bin/panorama -i ./src/poivron_corrompu.ppm -o ./src/poivron_corrompu.pgm -g
+	
+	@echo "***********TEST avec un répertoire****************"
+	#./bin/panorama -r ./src/images/ -g
+
+	
+
 	
 
