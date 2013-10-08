@@ -255,6 +255,7 @@ int save(Image image, char* output)
 	ext = recupererExtension(output);
 	if (!strcmp(ext,""))
 		sprintf(output,"%s%s",output, ".pgm");
+
 	fich=fopen(output, "w");
 	if(fich != NULL)
 	{
@@ -265,6 +266,7 @@ int save(Image image, char* output)
 	else{
 		return ERREUR_OUTPUT;
 		}	
+
 }
 
 void testChargerImage(char* input, char* output)

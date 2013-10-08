@@ -164,7 +164,7 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	dossier = NULL;
 	char_input = NULL;
 	*nombre = 0;
-	tmp = recuperNombreInputOutput(argc,argv,bool_input);
+	tmp = recuperNombreInputOutput(argc,argv,bool_input);//Option -li
 	if(tmp != -1)
 	{
 		char_input = mallocBis(tmp * sizeof(char*));
@@ -172,7 +172,7 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	}
 	else
 		tmp = 0;
-	if(bool_input)
+	if(bool_input)//Option -r
 		dossier = recupererDossierInput(argc,argv,nombre);
 	result = associerTableauString(dossier,char_input,*nombre, tmp);
 	libererMatrice((void**)char_input,tmp);
@@ -243,20 +243,17 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	if(!strcmp(argv[*i],"-g"))
 		erreur(grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if(!strcmp(argv[*i],"-h"))
-		printf("Appel de la fonction histogram\n");
+		erreur(histogramme(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if(!strcmp(argv[*i],"-e"))
-		printf("Appel de la fonction erode\n");
+		erreur(erode(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if(!strcmp(argv[*i],"-d"))
-		printf("Appel de la fonction dilate\n");
+		erreur(dilate(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if(testOptionAvecParametre("-b",*i,argc,argv))
-		printf("Appel de la fonction theshole avec le parametre %s\n",argv[*i+1]);
+		erreur(binaire(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1]), NO_EXIT);
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
-		printf("Appel de la fonction convolution avec le fichier %s\n",argv[*i+1]);
+		erreur(convolution(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1]), NO_EXIT);
 	else if(!strcmp(argv[*i],"-p"))
-		printf("Appel de la fonction panorama\n");
-	else if(!strcmp(argv[*i],"-s"))
-		testChargerImage(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0));
-	
+		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);	
 }
 
 void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
@@ -265,19 +262,22 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 	int tmp; //Pour prévenir du cas où la dernière option ne fait rien
 	int idInput;
 	int idOutput;
-
+	//Parcourt de toute les options présente
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
 		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
 	}
-	tmp = 0;
-	i = derniereOption(argc,argv);
+	tmp = 0;		
+	i = derniereOption(argc,argv);//Continu de charger les inputs avec la derniere option
 	while (idInput < nombreInput)
 	{	
-		if(tmp == idInput)
+		if(tmp == idInput) //Au cas où l'option n'amène à rien on incrémente
 			idInput++;
 		tmp = idInput;
-		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);	
+		if(!i)//Si il n'y a pas d'option
+			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
+		else
+			listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);	
 	}
 } 
 
