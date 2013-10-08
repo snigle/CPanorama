@@ -27,14 +27,10 @@ void creationTabGrayScale(int** tabGrey, Image image)
 Image creerGrayScale (Image pixRGB)
 {
 	Image imagePGM;
-	char p2[3];
 	int** tabGrey;
 	tabGrey = initMatrice(pixRGB.width,pixRGB.height);
-	p2[0] = 'P';
-	p2[1] = '2';
-	p2[2] = '\0';
 	creationTabGrayScale(tabGrey, pixRGB);
-	imagePGM = creationImage(p2, pixRGB.width, pixRGB.height, pixRGB.teinteMax, tabGrey);
+	imagePGM = creationImage("P2", pixRGB.width, pixRGB.height, pixRGB.teinteMax, tabGrey);
 	return imagePGM;
 }
 

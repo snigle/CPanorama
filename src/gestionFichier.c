@@ -251,7 +251,11 @@ void ecritureFichier(Image image, FILE* fich){
 int save(Image image, char* output)
 {
 	FILE* fich;
-	
+	char* ext;
+	ext = recupererExtension(output);
+	if (!strcmp(ext,""))
+		sprintf(output,"%s%s",output, ".pgm");
+
 	fich=fopen(output, "w");
 	if(fich != NULL)
 	{
@@ -262,7 +266,7 @@ int save(Image image, char* output)
 	else{
 		return ERREUR_OUTPUT;
 		}	
-	
+
 }
 
 void testChargerImage(char* input, char* output)
@@ -271,7 +275,8 @@ void testChargerImage(char* input, char* output)
 	char* type;
 	image = chargerImage(input);
 	type = image.type;
-	
+	if (!strcmp(recupererExtension(output),""))
+		sprintf(output,"%s.%s",output, recupererExtension(input));	
 	if(verifType(type))
 	{
 		erreur(ERREUR_TYPE, EXIT);
@@ -279,6 +284,7 @@ void testChargerImage(char* input, char* output)
 	else
 	{
 		save(image, output);
+		printf("L'image %s a été sauvegardé dans le fichier %s \n", input, output);
 	}
 }
 

@@ -173,11 +173,8 @@ void libererMatrice(void** mat, int hauteur)
 
 void libererImage(Image image)
 {
-	int largeur;
-	
 	free(image.type);
-	libererMatrice(image.teinte, image.height);
-
+	libererMatrice((void**)image.teinte, image.height);
 }
 
 int verifType(char* type)
