@@ -273,7 +273,8 @@ void testChargerImage(char* input, char* output)
 	char* type;
 	image = chargerImage(input);
 	type = image.type;
-	
+	if (!strcmp(recupererExtension(output),""))
+		sprintf(output,"%s.%s",output, recupererExtension(input));	
 	if(verifType(type))
 	{
 		erreur(ERREUR_TYPE, EXIT);
@@ -281,6 +282,7 @@ void testChargerImage(char* input, char* output)
 	else
 	{
 		save(image, output);
+		printf("L'image %s a été sauvegardé dans le fichier %s \n", input, output);
 	}
 }
 
