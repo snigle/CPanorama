@@ -175,8 +175,8 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	if(bool_input)
 		dossier = recupererDossierInput(argc,argv,nombre);
 	result = associerTableauString(dossier,char_input,*nombre, tmp);
-	//if (tmp) libererMatrice(char_input,tmp);
-	//if(*nombre) libererMatrice(dossier,*nombre);
+	libererMatrice((void**)char_input,tmp);
+	libererMatrice((void**)dossier,*nombre);
 	*nombre = *nombre + tmp;
 	return result;
 } 
@@ -207,7 +207,7 @@ int testOptionAvecParametre(char* option, int i, int argc, char** argv)
 }
 
 
-char* incrementerInputOutput(char** tab, int* id, int max, int bool_input, char* extension)
+char* incrementerInputOutput(char** tab, int* id, int max, int bool_input)
 {
 	char* result;
 	if(*id < max)
@@ -217,7 +217,7 @@ char* incrementerInputOutput(char** tab, int* id, int max, int bool_input, char*
 		if(*id < 100)
 		{
 			result = mallocBis(sizeof(char) * 11);
-			sprintf(result,"output_%d%s",*id, extension);
+			sprintf(result,"output_%d",*id);
 		}
 		else
 			erreur(TROP_D_OPTIONS, EXIT);		
@@ -241,7 +241,7 @@ int derniereOption(int argc, char** argv)
 void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
 {
 	if(!strcmp(argv[*i],"-g"))
-		erreur(grayScale(incrementerInputOutput(input,idInput,nombreInput,1, ".pgm"),incrementerInputOutput(output,idOutput,nombreOutput,0, ".pgm")), NO_EXIT);
+		erreur(grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if(!strcmp(argv[*i],"-h"))
 		printf("Appel de la fonction histogram\n");
 	else if(!strcmp(argv[*i],"-e"))
@@ -255,7 +255,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	else if(!strcmp(argv[*i],"-p"))
 		printf("Appel de la fonction panorama\n");
 	else if(!strcmp(argv[*i],"-s"))
-		testChargerImage(incrementerInputOutput(input,idInput,nombreInput,1,""),incrementerInputOutput(output,idOutput,nombreOutput,0,""));
+		testChargerImage(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0));
 	
 }
 
@@ -290,7 +290,7 @@ int gererOptions(int argc, char** argv)
 	int result;
 	char** input;
 	char** output;
-
+	
 	result = 0;
 	input = recupererInputOutput(argc, argv, 1, &nombreInput);
 	output = recupererInputOutput(argc, argv, 0, &nombreOutput);
@@ -304,8 +304,8 @@ int gererOptions(int argc, char** argv)
 		afficherManuel();
 		result = NO_INPUT_OR_OUTPUT;
 	}
-	libererMatrice(input,nombreInput);
-	libererMatrice(output,nombreOutput);
+	libererMatrice((void**)input,nombreInput);
+	libererMatrice((void**)output,nombreOutput);
 	return result;
 } 
 

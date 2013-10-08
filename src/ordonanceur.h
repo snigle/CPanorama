@@ -125,7 +125,7 @@ int testOptionAvecParametre(char* option, int i, int argc, char** argv);
 	\remarks si on dépasse la taille du tableau d'output, on en crée un.
 
 */
-char* incrementerInputOutput(char** tab, int* id, int max, int bool_input, char* extension);
+char* incrementerInputOutput(char** tab, int* id, int max, int bool_input);
 
 /*!
 	\fn int derniereOption(int argc, char** argv)
