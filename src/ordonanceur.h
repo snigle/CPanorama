@@ -14,6 +14,13 @@
 #include "header.h" 
 #include "rgbToGrayscale.h"
 #include "gestionFichier.h"
+#include "convolution.h"
+#include "erode.h"
+#include "dilate.h"
+#include "histogramme.h"
+#include "panorama.h"
+#include "binaire.h"
+
 
  
  

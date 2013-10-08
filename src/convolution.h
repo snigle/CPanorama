@@ -16,7 +16,7 @@
        \remarks 
 
 */
-int convultion (char* input, char* ouput, char* fichierMatrice);
+int convolution (char* input, char* ouput, char* fichierMatrice);
 
 #endif /* __CONVOLUTION_H__ */
 

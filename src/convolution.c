@@ -9,7 +9,7 @@
  */
 #include "convolution.h"
 
-int convultion (char* input, char* ouput, char* fichierMatrice)
+int convolution (char* input, char* ouput, char* fichierMatrice)
 {
 	printf("Appel de la fonction convolution\n");
 	return (0);
