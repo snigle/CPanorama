@@ -4,6 +4,63 @@
 	
 
 #include "header.h"
+#include <dirent.h>
+
+/*!
+       \fn char* recupererExtension(char* nom)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief permet de recuperer l'extension d'un fichier selectionné               
+       \param nom : (char*) le nom du fichier
+       \return l'extension du fichier
+               
+       \remarks 
+
+*/
+char* recupererExtension(char* nom);
+
+/*!
+       \fn int recupererNbFichierRepertoire(DIR* rep)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief permet de récuperer le nombre de fichier exploitable par le programme dans un répertoire spécifié               
+       \param rep : (dir*) le répertoire choisit par l'utilisateur
+       \return le nombre de fichier dont l extension est .ppm .pgm ou .pbm
+               
+       \remarks 
+
+*/
+int recupererNbFichierRepertoire (DIR* rep);
+
+/*!
+       \fn char** listeInputDossier(DIR* rep, int taille, char* nomDossier)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief permet de renvoyer un tableau de chaine de caractère constituant l'ensembles des images du dossier               
+       \param rep : (dir*) le flux de fichier dans le dossier
+       \param taille : (int) le nombre de fichiers exploitables
+       \param nomdossier : (char*) le dossier selectionné par l'utilisateur
+       \return retourne un tableau qui spécifie les fichiers a utiliser
+               
+       \remarks 
+
+*/
+char** listeInputDossier(DIR* rep, int taille, char* nomDossier);
+
+/*!
+       \fn char** recupererListeInputDossier(char* dossier, int* taille)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Mon 07 Oct 2013
+       \brief recupere le tableau des images exploitables du dossier et genere une erreur si l'opération est impossible               
+       \param dossier : (char*) le nom du dossier
+       \param taille : (int*) un poiteur qui permet de récuperer le nombre de paramètres ouput a créer
+       \return retourne le tableau de fichiers input
+               
+       \remarks 
+
+*/
+char** recupererListeInputDossier(char* dossier, int* taille);
+
 
 /*!
        \fn void allerAlaLigne(FILE* fichier)
@@ -167,5 +224,5 @@ int save(Image image, char* output);
        \remarks 
 
 */
-void testchargerImage(char* input, char* output);
+void testChargerImage(char* input, char* output);
 #endif /* __GESTIONFICHIER_H__ */

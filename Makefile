@@ -20,7 +20,7 @@ DIR = $(shell find $(dirsrc) -maxdepth 5 -type d -print)
 all: $(PROG)
 
 
-$(PROG): $(dirbin) $(OBJ)
+$(PROG): $(dirbin) $(OBJ) 
 	$(CC) $(OBJ) -o $(dirbin)$@
 	@echo "Compilation terminée"
 $(dirbin) :
@@ -70,6 +70,7 @@ $(dirsrc):
 	@mkdir $(dirsrc)
 	
 test:
+
 	@echo "***********TEST normal grayScale****************"
 	#./bin/panorama -i ./src/poivron.ppm -o ./src/poivron.pgm -g
 	"***********TEST image déjà pgm grayScale****************"
@@ -83,5 +84,8 @@ test:
 	
 	 #faire tout les cas possibles avec tout les cas d\images en input et output (images corrompues)
 	 #P1 pbm, P2 pgm, P3 ppm
+
+	
+
 	
 

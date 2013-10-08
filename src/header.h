@@ -24,10 +24,17 @@
 #define MAUVAIS_FORMAT_GRAYSCALE 13
 #define ERREUR_TYPE 14
 
+
+#define NO_INPUT_OR_OUTPUT 21
+#define ERREUR_OUTPUT 22
+#define PAS_ASSEZ_D_INPUTS 23
+
+#define NO_DOSSIER 31
+#define ERREUR_PARAMETRE 32
+#define TROP_D_OPTIONS 33
+
 #define NO_MEMORY 1
-#define ERREUR_PARAMETRE 2
-#define NO_INPUT_OR_OUTPUT 4
-#define ERREUR_OUTPUT 3
+
 
 #define EXIT 1
 #define NO_EXIT 0
@@ -163,8 +170,23 @@ int largeurMatriceImage (Image image);
 
 */
 Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel);
+
 /*!
-       \fn int libererImage(Image image)
+	\fn void libererMatrice(void** mat, int largeur)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 07 Oct 2013
+	\brief Libère une matrice		
+	\param mat : (void**) Matrice à libérer
+	\param largeur : (int) Longueur de la première composante de la matrice
+	
+		
+	\remarks 
+
+*/
+void libererMatrice(void** mat, int largeur);
+
+/*!
+       \fn void libererImage(Image image)
        \author Poussou Elie <poussoueli@eisti.eu>
        \date Sat 05 Oct 2013
        \brief libère la mémoire utilisée par l'image chargée               
@@ -174,7 +196,10 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
        \remarks 
 
 */
-int libererImage(Image image);
+
+void libererImage(Image image);
+
+
 /*!
        \fn void verifType(char* type)
        \author Poussou Elie <poussoueli@eisti.eu>
@@ -186,5 +211,6 @@ int libererImage(Image image);
 
 */
 int verifType(char* type);
+
 
 #endif /* __HEADER_H__ */

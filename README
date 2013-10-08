@@ -2,15 +2,18 @@
 
 GENERER UNE ERREUR POUR TYPE P5
 Ajouter/Compléter les cartouches
-Corriger l'ordonnanceur, créer output si necessaire, ne pas forcer nbinput = nboutput et 
-Charger un repertoire d'image si on entre -r dans la ligne de commande
+#Corriger l'ordonnanceur, créer output si necessaire, ne pas forcer nbinput = nboutput et 
+#Charger un repertoire d'image si on entre -r dans la ligne de commande
 
+Si il n'y a pas d'extension sur l'output, on l'ajoute
 
+#Utilisation de la dernière option pour le reste des inputs
+Gérer plusieurs -li -i et -r
 
 *LuDo
 --------------------------------
-Vérifier tout les malloc par mallocBis
-->Remettre le type en char* (utiliser strdup)
+#Vérifier tout les malloc par mallocBis
+#Remettre le type en char* (utiliser strdup)
 Vérifier les fuites de mémoires
 
 
