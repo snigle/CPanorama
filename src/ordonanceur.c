@@ -164,7 +164,7 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	dossier = NULL;
 	char_input = NULL;
 	*nombre = 0;
-	tmp = recuperNombreInputOutput(argc,argv,bool_input);
+	tmp = recuperNombreInputOutput(argc,argv,bool_input);//Option -li
 	if(tmp != -1)
 	{
 		char_input = mallocBis(tmp * sizeof(char*));
@@ -172,11 +172,11 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	}
 	else
 		tmp = 0;
-	if(bool_input)
+	if(bool_input)//Option -r
 		dossier = recupererDossierInput(argc,argv,nombre);
 	result = associerTableauString(dossier,char_input,*nombre, tmp);
-	//if (tmp) libererMatrice(char_input,tmp);
-	//if(*nombre) libererMatrice(dossier,*nombre);
+	libererMatrice(char_input,tmp);
+	libererMatrice(dossier,*nombre);
 	*nombre = *nombre + tmp;
 	return result;
 } 
@@ -265,13 +265,13 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 	int tmp; //Pour prévenir du cas où la dernière option ne fait rien
 	int idInput;
 	int idOutput;
-
+	//Parcourt de toute les options présente
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
 		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
 	}
 	tmp = 0;
-	i = derniereOption(argc,argv);
+	i = derniereOption(argc,argv);//Continu de charger les inputs avec la derniere option
 	while (idInput < nombreInput)
 	{	
 		if(tmp == idInput)

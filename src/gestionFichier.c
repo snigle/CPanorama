@@ -251,23 +251,18 @@ void ecritureFichier(Image image, FILE* fich){
 int save(Image image, char* output)
 {
 	FILE* fich;
-	DIR* repertoire;
-	repertoire = opendir(output);
-	if(repertoire == NULL)//si le fichier de sorti n'est pas un fichier mais un repertoire, on generer une erreur
+	
+	fich=fopen(output, "w");
+	if(fich != NULL)
 	{
-		fich=fopen(output, "w");
-		if(fich != NULL)
-		{
-			ecritureFichier(image, fich);
-			fclose(fich);
-			return 0;
-		}
-		else{
-			return ERREUR_OUTPUT;
-			}	
-	}else{
-		return ERREUR_OUTPUT;
+		ecritureFichier(image, fich);
+		fclose(fich);
+		return 0;
 	}
+	else{
+		return ERREUR_OUTPUT;
+		}	
+	
 }
 
 void testChargerImage(char* input, char* output)

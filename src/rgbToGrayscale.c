@@ -48,7 +48,7 @@ int grayScale (char* input,char* output)
 	if (!strcmp(imagePPM.type,"P3"))
 	{
 		imagePGM = creerGrayScale(imagePPM);
-		save(imagePGM, output);
+		result = save(imagePGM, output);
 		libererImage(imagePGM);
 		printf("Le fichier %s a été converti en échelle de gris dans le fichier %s\n",input,output);
 	}

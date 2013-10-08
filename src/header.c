@@ -156,6 +156,7 @@ Image creationImage(char* type, int largeur, int hauteur, int teinteMaximale, in
 	return newImage;
 }
 
+
 void libererMatrice(void** mat, int hauteur)
 {
 	int i;
