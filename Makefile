@@ -80,15 +80,11 @@ test:
 	@echo "***********TEST plusieurs images grayScale****************"
 	#./bin/panorama -li ./src/exemple.ppm ./src/poivron.ppm -lo ./src/exemple_rtg.pgm ./src/poivron_rtg.pgm -g
 	
-	@echo"***********TEST avec un répertoire****************"
-	./bin/panorama -r ./src/images/ -g
+	@echo "***********TEST image corrompue****************"
+	./bin/panorama -i ./src/poivron_corrompu.ppm -o ./src/poivron_corrompu.pgm -g
 	
-	@echo"***********TEST image corrompue grayScale****************"
-	#./bin/panorama -i ./src/poivron_corrompu.ppm -o ./src/poivron_corrompu.pgm -g
-	
-	
-	 #faire tout les cas possibles avec tout les cas d\images en input et output (images corrompues)
-	 #P1 pbm, P2 pgm, P3 ppm
+	@echo "***********TEST avec un répertoire****************"
+	#./bin/panorama -r ./src/images/ -g
 
 	
 
