@@ -10,6 +10,7 @@
  
 #ifndef __BINAIRE_H__
 #define __BINAIRE_H__
+#include "header.h"
 
 /*!
 	\fn int binaire(char* input, char* output, int seuil)
@@ -24,7 +25,7 @@
 	\remarks ras
 
 */
-int binaire(char* input, char* output, int seuil);
+int binaire(char* input, char* output, char* seuil);
 
 #endif /* __BINAIRE_H__ */
 

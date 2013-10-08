@@ -1,3 +1,13 @@
+/*! \file convolution.h
+ *  \author Lamarche Ludovic <lamarchelu@eisti.eu>
+ *  \version 0.1
+ *  \date Tue 08 Oct 2013
+ *
+ *  \brief Converti l'input dans l'output avec une convolution
+ *
+ *
+ */
+ 
 #ifndef __CONVOLUTION_H__
 #define __CONVOLUTION_H__
 

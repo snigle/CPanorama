@@ -31,6 +31,7 @@ void afficherManuel(void)
 	printf("\tUsing multiple files\n");
 	printf("\t\t-li file1, file2, ..., filen Define a set of files as the input\n");
 	printf("\t\t-lo file1, file2, ..., filen Define a set of files as the output\n");
+	printf("\t\t-r dir Search a list of input in the directory\n");
 } 
 
 
