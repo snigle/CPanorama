@@ -254,27 +254,24 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
 		erreur(convolution(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1]), NO_EXIT);
 	else if(!strcmp(argv[*i],"-p"))
-		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);	
+		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
+		afficherManuel();
 }
 
 void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
 	int i;
-	int tmp; //Pour prévenir du cas où la dernière option ne fait rien
 	int idInput;
 	int idOutput;
 	//Parcourt de toute les options présente
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
 		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
-	}
-	tmp = 0;		
+	}	
 	i = derniereOption(argc,argv);//Continu de charger les inputs avec la derniere option
 	while (idInput < nombreInput)
 	{	
-		if(tmp == idInput) //Au cas où l'option n'amène à rien on incrémente
-			idInput++;
-		tmp = idInput;
 		if(!i)//Si il n'y a pas d'option
 			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
 		else
@@ -296,15 +293,8 @@ int gererOptions(int argc, char** argv)
 	input = recupererInputOutput(argc, argv, 1, &nombreInput);
 	output = recupererInputOutput(argc, argv, 0, &nombreOutput);
 
-	if(nombreInput>0)
-	{
-		appelerFonction(argc,argv,input,nombreInput,output,nombreOutput);
-	}
-	else
-	{
-		afficherManuel();
-		result = NO_INPUT_OR_OUTPUT;
-	}
+	appelerFonction(argc,argv,input,nombreInput,output,nombreOutput);
+
 	libererMatrice((void**)input,nombreInput);
 	libererMatrice((void**)output,nombreOutput);
 	return result;
