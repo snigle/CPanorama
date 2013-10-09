@@ -67,7 +67,7 @@ typedef struct Image
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief spécifie l'erreur à l'utilisateur en fonction du numéro de celle ci. Toutes les erreurs sont issues d'un traitement de l'image               
-       \param numeroerreur : (int) un entier qui donne le numéro de l'erreur
+       \param numeroErreur : (int) un entier qui donne le numéro de l'erreur
        
                
        \remarks 
@@ -97,9 +97,8 @@ void autreErreurs(int numeroErreur);
 	\date Tue 24 Sep 2013
 	\brief Coupe le programme et affiche une erreur
 	
-	\param	
-		int numeroerreur : entier correspondant à un nombre d'erreur
-	
+	\param int numeroerreur : entier correspondant à un nombre d'erreur
+	\param int sortir : entier qui precise s'il faut arreter le programme
 		
 		\remarks ras
 
@@ -113,8 +112,7 @@ void erreur(int numeroErreur, int sortir);
  	\date Mon 23 Sep 2013
  	\brief Description
  	
- 	\param 	
- 		size_t taille : mémoire à allouer
+ 	\param taille : (size_t) mémoire à allouer
  	\return 
  		
  		\remarks a tester
@@ -142,7 +140,7 @@ int** initMatrice(int largeur, int hauteur);
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief permet de connaitre la largeur à parcourir en fonction u type de l'image               
-       \param image : (image) 
+       \param image : (image) l'image utilisée
        \return un entier correspondant au nombre de chiffres à parcourir par ligne de matrice en fonction du type de l'image
                
        \remarks 
@@ -159,11 +157,11 @@ int largeurMatriceImage (Image image);
 	\brief permet de créer une image pixmap avec toutes les informations en paramètres
        
        \param       
-       	char tab[3] : le type de pixmap
-       	int largeur : la largeur de l'image
-       	int hauteur : la hauteur de l'image
-       	int teintemaximale : la teinte maximale
-       	int* pixel : un tableau d'entier qui correspondent aux pixels de l'image
+       \param tab : (char*) : le type de l'image
+       \param largeur : (int) : la largeur de l'image
+       \param hauteur : (int) : la hauteur de l'image
+       \param teinteMax : (int) : la teinte maximale (pour le type P2 et P3)
+       \param pixel : (int**) : matrice de pixels
        \return 
                retourne un type image
                \remarks 

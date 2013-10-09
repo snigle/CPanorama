@@ -17,6 +17,8 @@
        \remarks 
 
 */
+
+
 char* recupererExtension(char* nom);
 
 /*!
@@ -111,11 +113,11 @@ char* recupType(FILE* image) ;
 int parametrage(FILE* image);
 
 /*!
-       \fn int teinteMax(char type[3], FILE* image)
+       \fn int teinteMax(char* type, FILE* image)
        \author Perales Quentin <peralesque@eisti.eu>
        \date MON 23 Sep 2013
        \brief récupère la teinte maximale de l'image P2 ou P3 en modèle pixmap 
-       \param type : (char) : le type de l'image   
+       \param type : (char*) : le type de l'image   
        \param image : (file*) : l'image en pixmap
        
                
@@ -177,7 +179,7 @@ int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type);
        \author Perales Quentin <peralesque@eisti.eu>
        \date MON 23 Sep 2013
        \brief permet de sauvegarder l'image chargée
-       
+       \param nomImage : (char*) le nom de l'image a charger
       		\remarks ras
 
 */

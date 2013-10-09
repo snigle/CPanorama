@@ -101,7 +101,7 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 		if(!strcmp(argv[i],getOptionInputOutput(bool_input,1)) || !strcmp(argv[i],getOptionInputOutput(bool_input,0)))
 		{
 			if(trouve)
-				erreur(ERREUR_PARAMETRE,EXIT);
+				erreur(ERREUR_PARAMETRE, EXIT);
 			for (k = 0; k < taille; k += 1)
 			{
 				char_input[k] = strdup(argv[i+k+1]);
