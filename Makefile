@@ -3,6 +3,7 @@ dirsrc = src/
 dirbin = bin/
 dirsave = save/
 dirdoc = doc/
+dirrapport = rapport/
 
 CC = gcc -Wall
 RM = rm -rf
@@ -11,7 +12,7 @@ SRC = $(wildcard $(dirsrc)*.c)
 HEAD = $(filter main.o,$(SRC:.c=.h))
 OBJ = $(subst $(dirsrc), $(dirbin), $(SRC:.c=.o))
 
-AUTEUR = lamarche_ludovic
+AUTEUR = lamarche-perales-poussou
 PROG = panorama
 
 #Sous directory
@@ -33,7 +34,7 @@ $(dirbin)%.o: $(dirsrc)%.c $(dirsrc)%.h
 	$(CC) -c $< -o $@
 
 
-.PHONY: clean save restore test
+.PHONY: clean save restore test doc
 clean:
 	rm -f $(dirsrc)*~ $(dirsrc)\#*\# $(dirbin)*.o
 	
@@ -41,7 +42,6 @@ clean:
 #	@mkdir $(dirsave)
 
 save:
-	mkdir save/
 	@cp -r $(dirsrc)* $(dirsave)
 	@echo "Sauvegarde effectuée dans le dossier "$(dirsave)
 	
@@ -50,42 +50,29 @@ restore: $(dirsave) $(dirsrc)
 	@cp -r $(dirsave)* $(dirsrc)
 	@echo "Restoration de la sauvegarde effectuée"
 
+doc:
+	doxygen Doxyfile
+
 give: $(dirsrc)
 	@rm -rf $(AUTEUR)
 	@mkdir $(AUTEUR)
-	@mkdir $(AUTEUR)/bin
-	@mkdir $(AUTEUR)/save
-	@mkdir $(AUTEUR)/doc
-	@mkdir $(AUTEUR)/src
+	@mkdir $(AUTEUR)/$(dirsrc)
+	@mkdir $(AUTEUR)/$(dirdoc)
+	@mkdir $(AUTEUR)/$(dirbin)
+	@mkdir $(AUTEUR)/$(dirrapport)
 	@cp Makefile $(AUTEUR)/Makefile
-	@cp -r $(dirsrc)* $(AUTEUR)/src/
-	@cp -r $(dirdoc)* $(AUTEUR)/doc/
+	@cp -r $(dirsrc)* $(AUTEUR)/$(dirsrc)
+	@cp -r $(dirdoc)* $(AUTEUR)/$(dirdoc)
+	@cp -r $(dirrapport)rapport.pdf $(AUTEUR)/$(dirrapport)
 	tar cvzf $(AUTEUR)-$(PROG).tar.gz $(AUTEUR)/
 	@rm -rf $(AUTEUR)
 	@tar xvzf $(AUTEUR)-$(PROG).tar.gz
 	make -C $(AUTEUR)
-	./$(AUTEUR)/bin/$(PROG)
+	./$(AUTEUR)/$(dirbin)$(PROG) --help
 	
 $(dirsrc):
 	@mkdir $(dirsrc)
 	
-test:
-	@echo "***********TEST normal grayScale****************"
-	#./bin/panorama -i ./src/poivron.ppm -o ./src/poivron.pgm -g
-	
-	@echo "***********TEST image déjà pgm grayScale****************"
-	#./bin/panorama -i ./src/image_P2.pgm -o ./src/image_P3_rtg.pgm -g
-	#./bin/panorama -i ./src/image_P1.pbm -o ./src/image_P3_rtg.pgm -g
-	
-	@echo "***********TEST plusieurs images grayScale****************"
-	#./bin/panorama -li ./src/exemple.ppm ./src/poivron.ppm -lo ./src/exemple_rtg.pgm ./src/poivron_rtg.pgm -g
-	
-	@echo "***********TEST image corrompue****************"
-	./bin/panorama -i ./src/poivron_corrompu.ppm -o ./src/poivron_corrompu.pgm -g
-	
-	@echo "***********TEST avec un répertoire****************"
-	#./bin/panorama -r ./src/images/ -g
-
 	
 
 	

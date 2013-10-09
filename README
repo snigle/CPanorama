@@ -1,10 +1,13 @@
-**************TODO**************
+*********Documentation**********
+Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
 
-GENERER UNE ERREUR POUR TYPE P5
+
+
+
+
+**************TODO**************
 Ajouter/Compléter les cartouches
 
-*LuDo
---------------------------------
 Vérifier tout les malloc par mallocBis
 Vérifier les fuites de mémoires
 
@@ -12,6 +15,7 @@ Vérifier les fuites de mémoires
 Lors d'un exit envoyer une liste de matrice à libérer
 	par exemple : exit(TRUCMUCH,EXIT,listeMAtrice)
 
+****Liens utiles***
 Jankins (test du code : build)
 Sonar vérifie le build
 

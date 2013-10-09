@@ -62,7 +62,7 @@ void erreurInputOutput(int numeroErreur)
 			fprintf(stderr,"Le programme n'a pas la permission d'écrire dans le fichier en output\n");
 		break;
 		case PAS_ASSEZ_D_INPUTS:
-			fprintf(stderr,"Il manque des inputs pour effectuer toutes les options");
+			fprintf(stderr,"Il manque des inputs pour effectuer toutes les options\n");
 		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
@@ -77,10 +77,10 @@ switch(numeroErreur)
 			fprintf(stderr,"Il manque de l'espace mémoire pour faire un malloc\n");
 		break;
 		case NO_DOSSIER:
-			fprintf(stderr,"Le dossier n'existe pas");
+			fprintf(stderr,"Le dossier n'existe pas\n");
 		break;
 		case TROP_D_OPTIONS:
-			fprintf(stderr,"Le nombre d'option est limité à 50");
+			fprintf(stderr,"Le nombre d'option est limité à 50\n");
 		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
