@@ -76,6 +76,31 @@ typedef struct Image
 
 void erreursImage (int numeroErreur);
 
+/*!
+       \fn void erreurInputOutput(int numeroErreur)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mer. 16 oct. 2013
+       \brief Affiche les erreurs en rapport avec les inputs et les outputs               
+       \param numeroerreur : (int) numéro de l'erreur
+       
+               
+       \remarks 
+
+*/
+void erreurInputOutput(int numeroErreur);
+
+/*!
+       \fn void erreurParametre(int numeroErreur)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mer. 16 oct. 2013
+       \brief Affiche les erreurs en rapport avec les paramètres               
+       \param numeroerreur : (int) numéro de l'erreur
+       
+               
+       \remarks 
+
+*/
+void erreurParametre(int numeroErreur);
 
 /*!
        \fn void autreErreurs(int numeroErreur)

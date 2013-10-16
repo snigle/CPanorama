@@ -100,6 +100,59 @@ void remplirTableauInputOutput(int argc, char** argv, char** char_input, int tai
 char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre);
 
 
+
+/*!
+       \fn char** recuperDossierInput(int argc, char** argv, int* taille)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mer. 16 oct. 2013
+       \brief Récupère un tableau d'inputs contenue dans un dossier               
+       \param argc : (int) nombre de paramètres
+       \param argv : (char**) tableau de paramètres
+       \param taille : (int*) pointeur sur un int libre pour stocker le nombre d'inputs
+       \return retourne le tableau d'inputs et le nombre d'inputs trouvés
+               
+       \remarks ras
+
+*/
+char** recupererDossierInput(int argc, char** argv, int* taille);
+
+/*!
+       \fn char** associerTableauString(char** tab1, char** tab2, int taille1, int taille2)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mer. 16 oct. 2013
+       \brief Associe deux chaine en créant un nouvel espace mémoire               
+       \param tab1 : (char**) 
+       \param tab2 : (char**) 
+       \param taille1 : (int) 
+       \param taille2 : (int) 
+       \return 
+               
+       \remarks 
+
+*/
+char** associerTableauString(char** tab1, char** tab2, int taille1, int taille2);
+
+/*!
+       \fn void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mer. 16 oct. 2013
+       \brief Effectue tout les test sur une option donnée               
+       \param argc : (int) nombre de paramètres
+       \param argv : (char**) tableau de paramètres
+       \param i : (int*) position dans le tableau argv
+       \param input : (char**) tableau d'inputs
+       \param idinput : (int*) position dans le tableau d'inputs
+       \param nombreinput : (int) taille du tableau d'inputs
+       \param output : (char**) tableau d'output
+       \param idoutput : (int*) position dans le tableau d'output
+       \param nombreoutput : (int) taille du tableau d'output
+       
+               
+       \remarks 
+
+*/
+void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput);
+
 /*!
 	\fn int testOptionAvecParametre(char* option, int* i, int argc, char** argv)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
