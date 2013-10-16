@@ -200,6 +200,23 @@ Image chargerImage(char* nomImage);
 */
 void ecritureFichier(Image image, FILE* fich);
 
+
+
+
+/*!
+       \fn void setExtention(Image image, char* output)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Wed 16 Oct 2013
+       \brief permet d'ajouter l'extention au fichier de sortie si elle n'est pas précisée, en fonction du type de l'image               
+       \param image : (image) l'image en question
+       \param output : (char*) le nom du fichier de sortie
+       
+               
+       \remarks 
+
+*/
+void setExtention (Image image, char* output);
+
 /*!
        \fn int save(Image image, char* ouput)
        \author Poussou Elie <poussoueli@eisti.eu>
@@ -212,6 +229,9 @@ void ecritureFichier(Image image, FILE* fich);
        \remarks ras
 
 */
+
+
+
 int save(Image image, char* output);
 
 /*!

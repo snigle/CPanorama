@@ -12,7 +12,15 @@
 #define __CONVOLUTION_H__
 
 #include "header.h"
+#include "gestionFichier.h"
 
+
+
+int** recupFiltre(FILE* filtre);
+int associationPossible(int x, int y, int i, int j, int largeur, int hauteur);
+int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre);
+int** applicationFiltre(Image image, int** filtre);
+int applicationConvolution(Image image, int** filtre, char* output);
 /*!
        \fn int convolution(char* input, char* output, char* fichierMatrice)
        \author PERALES Quentin <peralesque@eisti.eu>

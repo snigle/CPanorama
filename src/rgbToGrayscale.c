@@ -20,7 +20,7 @@ void creationTabGrayScale(int** tabGrey, Image image)
 	for(i = 0 ; i < image.height ; i++)
 	{
 		for (j = 0; j < image.width; j += 1)
-			tabGrey[i][j] = (image.teinte[i][j*3] + image.teinte[i][j*3+1] + image.teinte[i][j*3+2]) / 3;	
+			tabGrey[i][j] = 0.299 * image.teinte[i][j*3] + 0.587 * image.teinte[i][j*3+1] + 0.114 * image.teinte[i][j*3+2];	
 	}	
 }
 

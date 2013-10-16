@@ -247,6 +247,15 @@ void ecritureFichier(Image image, FILE* fich){
 }
 
 
+void setExtention (Image image, char* output)
+{
+	if(!strcmp(image.type, "P1"))
+		sprintf(output,"%s%s",output, ".pbm");
+	else if(!strcmp(image.type, "P2"))
+		sprintf(output,"%s%s",output, ".pgm");
+	else
+		sprintf(output,"%s%s",output, ".ppm");
+}
 
 int save(Image image, char* output)
 {
@@ -254,7 +263,7 @@ int save(Image image, char* output)
 	char* ext;
 	ext = recupererExtension(output);
 	if (!strcmp(ext,""))
-		sprintf(output,"%s%s",output, ".pgm");
+		setExtention(image, output);
 
 	fich=fopen(output, "w");
 	if(fich != NULL)
