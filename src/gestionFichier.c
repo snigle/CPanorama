@@ -32,8 +32,9 @@ int recupererNbFichierRepertoire(DIR* rep)
 {
 	char* ext;
 	int taille;
+	struct dirent* ent;
 	taille = 0;
-    struct dirent* ent;
+
     while ((ent = readdir(rep)) != NULL)
     {
 		ext = recupererExtension(ent->d_name);
@@ -48,10 +49,11 @@ char** listeInputDossier(DIR* rep, int taille, char* nomDossier)
 	char* ext;
 	char** resultat;
 	int i;
+	struct dirent* ent;
 	i = 0;
 	resultat = mallocBis(taille*sizeof(char*));
 	rewinddir(rep);
-    struct dirent* ent;
+
     while ((ent = readdir(rep)) != NULL)
     {
 		ext = recupererExtension(ent->d_name);
@@ -89,7 +91,7 @@ char** recupererListeInputDossier(char* dossier, int* taille)
 
 
 void allerAlaLigne (FILE* fichier){
-	char carac;//un caractere quelconque
+	char carac;
     do 
     {
     	fscanf(fichier, "%c", &carac);
@@ -98,7 +100,7 @@ void allerAlaLigne (FILE* fichier){
 
 void sauterCommentaire(FILE* fichier)
 {
-	char carac;//un caractere quelconque
+	char carac;
 	fscanf(fichier, "%c", &carac);
 	if (carac == '\n' || carac == ' ' || carac == '\t')
 	{
@@ -127,8 +129,8 @@ char* recupType(FILE* image)
 
 int parametrage(FILE* image)
 {
-	int result;//le resultat de la fonction (largeur de l'image)
-	int test; // permet de savoir si le scanf ne génère pas d'erreur
+	int result;
+	int test;
 	result = 0;
 	sauterCommentaire(image);
 	test = fscanf(image, "%d", &result);
@@ -164,7 +166,7 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char
 	int i;
 	int j;
 	int pixel;
-	int test; // permet de savoir si le scanf ne génère pas d'erreur
+	int test; /* permet de savoir si le scanf ne génère pas d'erreur*/
 	pixel = 0;
 	test = 1;
 	for (i = 0 ; i < hauteur ; i++)
@@ -216,7 +218,7 @@ Image chargerImage(char* nomImage){
 		if (!strcmp(type, "P2") || !strcmp(type,"P3"))
 			teinteMaximale = teinteMax(type, image);
 		teinte = recupPixel(image, largeur, hauteur, type);
-		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);//création de l image
+		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);/*création de l image*/
 	}else
 		erreur(IMAGE_NO_EXISTS,EXIT);
 

@@ -165,7 +165,7 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	dossier = NULL;
 	char_input = NULL;
 	*nombre = 0;
-	tmp = recuperNombreInputOutput(argc,argv,bool_input);//Option -li
+	tmp = recuperNombreInputOutput(argc,argv,bool_input);
 	if(tmp != -1)
 	{
 		char_input = mallocBis(tmp * sizeof(char*));
@@ -173,7 +173,7 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	}
 	else
 		tmp = 0;
-	if(bool_input)//Option -r
+	if(bool_input)
 		dossier = recupererDossierInput(argc,argv,nombre);
 	result = associerTableauString(dossier,char_input,*nombre, tmp);
 	libererMatrice((void**)char_input,tmp);
@@ -182,14 +182,14 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 	return result;
 } 
 
-//Vérifie si le paramètre suivant n'est pas une option
+
 int testOptionAvecParametre(char* option, int i, int argc, char** argv)
 {
 	int result = 0;
 	
 	if(i < argc && !strcmp(argv[i],option))
 	{
-		//Si l'option n'est pas à la fin
+		
 		if( i < argc - 1)
 		{
 			if(argv[i+1][0] != '-')
@@ -264,15 +264,15 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 	int i;
 	int idInput;
 	int idOutput;
-	//Parcourt de toute les options présente
+	/*Parcourt de toute les options présente*/
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
 		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
 	}	
-	i = derniereOption(argc,argv);//Continu de charger les inputs avec la derniere option
+	i = derniereOption(argc,argv);/*Continu de charger les inputs avec la derniere option*/
 	while (idInput < nombreInput)
 	{	
-		if(!i)//Si il n'y a pas d'option
+		if(!i)/*Si il n'y a pas d'option*/
 			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
 		else
 			listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);	

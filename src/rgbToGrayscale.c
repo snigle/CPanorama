@@ -38,8 +38,9 @@ int grayScale (char* input,char* output)
 {
 	Image imagePPM;
 	Image imagePGM;
-	imagePPM = chargerImage(input);
 	int result;
+	
+	imagePPM = chargerImage(input);
 	result = 0;
 	if (!strcmp(imagePPM.type,"P3"))
 	{
