@@ -18,6 +18,23 @@ récupérer le filtre
 pour chaque pixels sauf à l'exterieurs, appliquer le filtre
 */
 
+int testFinFichierFiltre(FILE* filtre)
+{
+	int k;
+	int test;
+	char caractere;
+	k = 0;
+	test = 1;
+	caractere = ' ';
+	while (caractere != EOF && test == 1)
+	{
+		test = fscanf(filtre, "%c", &caractere);
+		if (caractere != '\n' && caractere != ' ')
+			k++;
+	}
+	return k;
+}
+
 int** recupFiltre(FILE* filtre)
 {
 	int i;
@@ -25,6 +42,7 @@ int** recupFiltre(FILE* filtre)
 	int** matrice;
 	int coef;
 	int test;
+	int testFichier;
 	matrice = initMatrice(3,3);
 	for (i = 0; i < 3; i += 1)
 	{
@@ -34,12 +52,12 @@ int** recupFiltre(FILE* filtre)
 			if(test == 1)
 				matrice[i][j] = coef;
 			else
-				printf("Le fichier n'est pas adapté");
+				printf("Le fichier n'est pas adapté \n");
 		}
 	}
-	/*
-	test de fin
-	*/
+	testFichier = testFinFichierFiltre(filtre);
+	if (testFichier != 0)
+		printf("erreur fichier \n");
 	return matrice;
 }
 
@@ -125,6 +143,9 @@ int applicationConvolution(Image image, int** filtre, char* output)
 	return (0);
 }
 
+/*
+	changer tous les types de sortie des fonctions
+*/
 int convolution (char* input, char* output, char* nomFichier)
 {
 	FILE* fichierFiltre;
@@ -134,6 +155,7 @@ int convolution (char* input, char* output, char* nomFichier)
 	filtre = initMatrice(3,3);
 	fichierFiltre = fopen(nomFichier, "r");
 	image = chargerImage(input);
+	result = 0;
 	if(fichierFiltre != NULL)
 	{
 		filtre = recupFiltre(fichierFiltre);
