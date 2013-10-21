@@ -295,7 +295,7 @@ void testChargerImage(char* input, char* output)
 	else
 	{
 		save(image, output);
-		printf("L'image %s a été sauvegardé dans le fichier %s \n", input, output);
+		printf("L'image %s a été sauvegardée dans le fichier %s \n", input, output);
 	}
 }
 
