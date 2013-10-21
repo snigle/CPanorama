@@ -82,6 +82,9 @@ switch(numeroErreur)
 		case TROP_D_OPTIONS:
 			fprintf(stderr,"Le nombre d'option est limité à 50\n");
 		break;
+		case ERREUR_FILTRE:
+			fprintf(stderr,"Le filtre n'a pas pu être chargé correctement\n");
+		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
 		break;

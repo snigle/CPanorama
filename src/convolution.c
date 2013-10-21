@@ -52,12 +52,12 @@ int** recupFiltre(FILE* filtre)
 			if(test == 1)
 				matrice[i][j] = coef;
 			else
-				printf("Le fichier n'est pas adapté \n");
+				erreur(ERREUR_FILTRE, 1);
 		}
 	}
 	testFichier = testFinFichierFiltre(filtre);
 	if (testFichier != 0)
-		printf("erreur fichier \n");
+		erreur(ERREUR_FILTRE, 1);
 	return matrice;
 }
 
@@ -163,11 +163,10 @@ int convolution (char* input, char* output, char* nomFichier)
 		{
 			result = applicationConvolution(image, filtre, output);
 			libererImage(image);
-		}else{
-			printf("Erreur de type");
-		}
-	}else{
-		printf("Erreur de chargement");
-	}
+		}else
+			erreur(ERREUR_TYPE, 1);
+	}else
+		erreur(ERREUR_FILTRE, 1);
+	printf("La convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
 	return result;
 }

@@ -13,6 +13,7 @@
 #ifndef __BINAIRE_H__
 #define __BINAIRE_H__
 #include "header.h"
+#include "gestionFichier.h"
 
 /*!
        \fn int binaire(char* input, char* output, int seuil)
@@ -27,7 +28,7 @@
        \remarks 
 
 */
-int binaire(char* input, char* output, int seuil);
+int binaire(char* input, char* output, char* valeurDeBascule);
 
 #endif /* __BINAIRE_H__ */
 

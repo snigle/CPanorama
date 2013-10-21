@@ -9,32 +9,29 @@
 
 
 
-int binaire(char* input, char* output, int seuil)
+int binaire(char* input, char* output, char* valeurDeBascule)
 {
 	Image image;
-	image=chargerImage(input);
-	
+	Image sortie;	
 	int** teinteBinaire;
-	teinteBinaire=initMatrice(image.width,image.height);
-	
 	int i;
 	int j;
+	int seuil;
+	seuil = atoi(valeurDeBascule);
+	image=chargerImage(input);
+	teinteBinaire=initMatrice(image.width,image.height);
+	
 	for(i = 0 ; i < image.height ; i++)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
 			if(image.teinte[i][j]> seuil)
-				teinteBinaire[i][j]=1;
-			else
 				teinteBinaire[i][j]=0;
+			else
+				teinteBinaire[i][j]=1;
 		}
 	}	
-	
-	Image sortie;
-	sortie=creationImage("P1",image.width,image.height, seuil, teinteBinaire);
-	
-	printf("Appel de la fonction binaire avec le seuil %s\n",seuil);
+	sortie = creationImage("P1",image.width,image.height, seuil, teinteBinaire);
 	save(sortie, output);
 	return 0;
 }
-
