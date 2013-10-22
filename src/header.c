@@ -183,6 +183,6 @@ void libererImage(Image image)
 int verifType(char* type)
 {
 	
-	return(strcmp(type, "P1") && strcmp(type, "P2") && strcmp(type, "P3"));
+	return (strcmp(type, "P1") && strcmp(type, "P2") && strcmp(type, "P3"));
 }
 
