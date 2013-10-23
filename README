@@ -2,8 +2,9 @@
 Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
 
 
+appeler save dans l'ordonceur : save(erode()) etc...
 
-
+Finir cartouche et test dilateErode
 
 **************TODO**************
 Ajouter/Compléter les cartouches
