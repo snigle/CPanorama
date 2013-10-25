@@ -66,31 +66,19 @@ int** genererMatriceErode(Image imageInput)
 	int j;
 	int k;
 	int l;
-	int copy;
 	matriceErode = initMatrice(imageInput.width, imageInput.height);
-	for (i = 1; i < imageInput.height-1; i += 1)
+	for (i = 1; i < imageInput.height-2; i += 1)
 	{
-		for (j = 1; j < imageInput.width-1; j += 1)
+		for (j = 1; j < imageInput.width-2; j += 1)
 		{
-			if(estUnObjet(i,j,imageInput))
-			{	
-					/*If the pixel is an object pixel AND all its neighbouts are object pixels*/
-					copy = 1;
-					for (k = -1; k < 2; k += 1)
-					{
-						for (l = -1; l < 2; l += 1)
-						{
-							if(estDansLaMatrice(i+k,j+k,imageInput))
-								copy = copy && estUnObjet(i+k,j+l,imageInput);
-						}
-					}
-					if(copy)
-					matriceErode[i][j] = imageInput.teinte[i][j];
-					else
-						matriceErode[i][j] = 0;
+			matriceErode[i][j]=1;
+			for (k = -1; k < 2; k += 1)
+			{
+				for (l = -1; l < 2; l += 1)
+				{
+					matriceErode[i][j]=matriceErode[i][j] && imageInput.teinte[i+k][j+l];
+				}
 			}
-			else
-				matriceErode[i][j] = 1;
 		}
 	}
 	
