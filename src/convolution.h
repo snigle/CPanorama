@@ -90,33 +90,34 @@ int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre
 int** applicationFiltre(Image image, int** filtre);
 
 /*!
-       \fn int applicationConvolution(Image image, int** filtre, char* output)
+       \fn int applicationConvolution(Image image, FILE* filtre)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief permet d'enchainer les fonctions qui permettent d'appliquer la convolution               
-       \param image : (image) 
-       \param filtre : (int**) 
-       \param output : (char*) 
+       \param image : (image) Image à traiter
+       \param filtre : (FILE*) fichier contenant le filtre de convolution
        \return retourne un entier qui indique 0 pour le bon déroulement des fonctions
                
        \remarks 
 
 */
-int applicationConvolution(Image image, int** filtre, char* output);
+int** applicationConvolution(Image image, FILE* filtre);
 /*!
-       \fn int convolution(char* input, char* output, char* fichierMatrice)
+       \fn Image convolution (char* input, char* output, char* nomFichier, int bool_save, int* bool_erreur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Tue 08 Oct 2013
        \brief realise la convolution d une image en fonction d'une matrice en parametre               
        \param input : (char*) fichier d'entré
        \param output : (char*) fichier de sortie
        \param fichiermatrice : (char*) fichier contenant une matrice
-       \return retourne un entier qui correspond a l'avancement du programme
+       \param bool_save : si vaut 1 on affiche un message de sauvegarde pour l'utilisateur
+       \param bool_erreur : adresse pour stocker un int, on lui donnera 1 si il y a une erreur dans la fonction
+       \return l'image modifiée si !bool_save
                
        \remarks 
 
 */
-int convolution (char* input, char* ouput, char* fichierMatrice);
+Image convolution (char* input, char* output, char* nomFichier, int bool_save, int* bool_erreur);
 
 #endif /* __CONVOLUTION_H__ */
 

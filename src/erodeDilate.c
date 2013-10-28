@@ -109,43 +109,46 @@ int** genererMatriceDilate(Image imageInput)
 	return matriceDilate;
 }
 
-int erode (char* input, char* output)
+Image erode (char* input, char* output, int bool_save, int* bool_erreur)
 {
 	Image imageInput;
 	Image imageErode;
 	int** matriceErode;
-	
-	imageInput = chargerImage(input);
-	if(!strcmp(imageInput.type,"P1"))
+	printf("**%s -e %s**\n",input,output);
+	imageInput = chargerImage(input,bool_erreur);
+	if(!strcmp(imageInput.type,"P1") && !*bool_erreur)
 	{
 		matriceErode = genererMatriceErode(imageInput);
-	
 		imageErode = creationImage(imageInput.type,imageInput.width,imageInput.height,imageInput.teinteMax,matriceErode);
-		save(imageErode, output);
-		printf("L'image %s a été érodé dans le fichier %s\n",input,output);
-		libererImage(imageErode);
+		if(bool_save)
+		{	
+			save(imageErode, output, bool_erreur);
+			if(!*bool_erreur) printf("\tL'image %s a été érodé dans le fichier %s\n",input,output);
+		}
 	}
 	else
-		erreur(ERREUR_TYPE,0);
+		erreur(ERREUR_TYPE,EXIT);
 	libererImage(imageInput);
-	return (0);
+	return imageErode;
 }
 
-int dilate (char* input, char* output)
-{
+Image dilate (char* input, char* output, int bool_save, int* bool_erreur){
 	Image imageInput;
 	Image imageDilate;
 	int** matriceDilate;
-	
-	imageInput = chargerImage(input);
-	
-	matriceDilate = genererMatriceDilate(imageInput);
-	
-	imageDilate = creationImage(imageInput.type,imageInput.width,imageInput.height,imageInput.teinteMax,matriceDilate);
-	save(imageDilate, output);
-	printf("L'image %s a été dilaté dans le fichier %s\n",input,output);
+	printf("**%s -d %s**\n",input,output);
+	imageInput = chargerImage(input,bool_erreur);
+	if(testType(imageInput,"P1") && !*bool_erreur){
+		matriceDilate = genererMatriceDilate(imageInput);
+		imageDilate = creationImage(imageInput.type,imageInput.width,imageInput.height,imageInput.teinteMax,matriceDilate);
+		if(bool_save)
+		{
+			save(imageDilate, output, bool_erreur);
+			if(!*bool_erreur) printf("\tL'image %s a été dilaté dans le fichier %s\n",input,output);
+		}
+	}else
+		*bool_erreur = 1;
 	libererImage(imageInput);
-	libererImage(imageDilate);
-	return (0);
+	return imageDilate;
 }
 

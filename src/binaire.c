@@ -13,8 +13,7 @@ int** remplirMatriceBinaire (Image image, int seuil)
 	int i;
 	int j;
 	teinteBinaire=initMatrice(image.width,image.height);
-	if(!strcmp(image.type, "P2"))
-	{
+	
 		for(i = 0 ; i < image.height ; i++)
 		{
 			for (j = 0; j < image.width; j += 1)
@@ -25,26 +24,33 @@ int** remplirMatriceBinaire (Image image, int seuil)
 					teinteBinaire[i][j]=1;
 			}
 		}	
-	}
-	else
-	{
-		erreur(ERREUR_TYPE, 1);
-	}
+	
 	return teinteBinaire;
 }
 
-int binaire(char* input, char* output, char* valeurDeBascule)
+Image binaire(char* input, char* output, char* valeurDeBascule, int bool_save, int* bool_erreur)
 {
 	Image image;
 	Image sortie;	
 	int** teinteBinaire;
 	int seuil;
+	printf("**%s -b %s**\n",input,output);
 	seuil = atoi(valeurDeBascule);
-	image=chargerImage(input);
-	teinteBinaire = remplirMatriceBinaire(image, seuil);
-	sortie = creationImage("P1",image.width,image.height, seuil, teinteBinaire);
-	save(sortie, output);
-	libererImage(sortie);
+	image=chargerImage(input,bool_erreur);
+	if(testType(image, "P2") && !*bool_erreur)
+	{
+		teinteBinaire = remplirMatriceBinaire(image, seuil);
+		sortie = creationImage("P1",image.width,image.height, seuil, teinteBinaire);
+		if(bool_save)
+		{
+			save(sortie, output, bool_erreur);
+			if(!*bool_erreur) printf("\tL'image %s a été binarisée dans le fichier %s\n",input,output);
+		}
+		
+	}
+	else
+		*bool_erreur = 1;
+
 	libererImage(image);
-	return 0;
+	return sortie;
 }

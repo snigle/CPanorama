@@ -12,13 +12,13 @@
 #define __ORDONANCEUR_H__
 
 #include "header.h" 
-#include "rgbToGrayscale.h"
+//#include "rgbToGrayscale.h"
 #include "gestionFichier.h"
-#include "convolution.h"
+//#include "convolution.h"
 #include "erodeDilate.h"
-#include "histogramme.h"
-#include "panorama.h"
-#include "binaire.h"
+//#include "histogramme.h"
+//#include "panorama.h"
+//#include "binaire.h"
 
 
  

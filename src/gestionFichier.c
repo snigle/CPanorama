@@ -201,7 +201,7 @@ int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
 
 
 
-Image chargerImage(char* nomImage){
+Image chargerImage(char* nomImage, int* bool_erreur){
 	Image imageCharge;
 	FILE* image;
 	char* type;
@@ -219,9 +219,10 @@ Image chargerImage(char* nomImage){
 			teinteMaximale = teinteMax(type, image);
 		teinte = recupPixel(image, largeur, hauteur, type);
 		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);/*création de l image*/
-	}else
-		erreur(IMAGE_NO_EXISTS,EXIT);
-
+	}else{
+		erreur(IMAGE_NO_EXISTS,NO_EXIT);
+		*bool_erreur = 1;
+	}
 	fclose(image);
 	free(type);
 	return imageCharge;	
@@ -259,44 +260,55 @@ void setExtention (Image image, char* output)
 		sprintf(output,"%s%s",output, ".ppm");
 }
 
-int save(Image image, char* output)
+void save(Image image, char* output, int* bool_erreur)
 {
 	FILE* fich;
-	char* ext;
-	ext = recupererExtension(output);
-	if (!strcmp(ext,""))
-		setExtention(image, output);
 
-	fich=fopen(output, "w");
-	if(fich != NULL)
+	if(!*bool_erreur)
 	{
-		ecritureFichier(image, fich);
-		fclose(fich);
-		return 0;
+		ext = recupererExtension(output);
+		if (!strcmp(ext,""))
+			setExtention(image, output);
+		fich=fopen(output, "w");
+		if(fich != NULL)
+		{
+			ecritureFichier(image, fich);
+			fclose(fich);
+			libererImage(image);
+		}
+		else{
+			*bool_erreur = 1;
+			libererImage(image);
+			erreur(ERREUR_OUTPUT,NO_EXIT);
+			}
 	}
-	else{
-		return ERREUR_OUTPUT;
-		}	
 
 }
+
 
 void testChargerImage(char* input, char* output)
 {
 	Image image;
 	char* type;
-	image = chargerImage(input);
-	type = image.type;
-	if (!strcmp(recupererExtension(output),""))
-		sprintf(output,"%s.%s",output, recupererExtension(input));	
-	if(verifType(type))
+	int bool_erreur;
+	bool_erreur = 0;
+	image = chargerImage(input,&bool_erreur);
+	if(!bool_erreur)
 	{
-		erreur(ERREUR_TYPE, EXIT);
+		type = image.type;
+		if (!strcmp(recupererExtension(output),""))
+			sprintf(output,"%s.%s",output, recupererExtension(input));	
+		if(verifType(type))
+		{
+			erreur(ERREUR_TYPE, NO_EXIT);
+		}
+		else
+		{
+			save(image, output,&bool_erreur);
+			printf("L'image %s a été sauvegardée dans le fichier %s \n", input, output);
+		}
 	}
-	else
-	{
-		save(image, output);
-		printf("L'image %s a été sauvegardée dans le fichier %s \n", input, output);
-	}
+	
 }
 
 

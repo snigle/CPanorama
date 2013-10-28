@@ -89,18 +89,20 @@ int** genererMatriceDilate(Image imageInput);
 
 
 /*!
-       \fn int erode(char* input, char* output)
+       \fn int erode(char* input, char* output, int bool_save, int* bool_erreur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Tue 08 Oct 2013
        \brief erode l'image               
        \param input : (char*) fichier en entré
        \param ouput : (char*) fichier en sortie
-       \return un entier pour savoir comment s'est déroulé le programme
+       \param bool_save : si vaut 1 on affiche un message de sauvegarde pour l'utilisateur
+       \param bool_erreur : adresse pour stocker un int, on lui donnera 1 si il y a une erreur dans la fonction
+       \return l'image modifiée si !bool_save
   
        \remarks 
 
 */
-int erode (char* input, char* output);
+int erode (char* input, char* output, int bool_save, int* bool_erreur);
 
 /*!
        \fn int dilate(char* input, char* output)
@@ -109,12 +111,14 @@ int erode (char* input, char* output);
        \brief dilate l'image               
        \param input : (char*) fichier en entré
        \param ouput : (char*) fichier en sortie
-       \return un entier pour savoir comment s'est déroulé le programme
+       \param bool_save : si vaut 1 on affiche un message de sauvegarde pour l'utilisateur
+       \param bool_erreur : adresse pour stocker un int, on lui donnera 1 si il y a une erreur dans la fonction
+       \return l'image modifiée si !bool_save
   
        \remarks 
 
 */
-int dilate (char* input, char* output);
+Image dilate (char* input, char* output, int bool_save, int* bool_erreur);
 
 #endif /* __ERODEDILATE_H__ */
 
