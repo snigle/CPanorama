@@ -44,7 +44,7 @@ Image binaire(char* input, char* output, char* valeurDeBascule, int bool_save, i
 		if(bool_save)
 		{
 			save(sortie, output, bool_erreur);
-			if(!*bool_erreur) printf("\tL'image %s a été binarisée dans le fichier %s\n",input,output);
+			if(!*bool_erreur) printf("\tLa conversion en noir et blanc du fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
 		}
 		
 	}
