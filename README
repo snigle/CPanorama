@@ -1,10 +1,13 @@
 *********Documentation**********
 Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
 
-
+gérer erreur dans chargerImage sans quitter
+{
 appeler save dans l'ordonceur : save(erode()) etc...
-
-Finir cartouche et test dilateErode
+ajouter libererImage dans save, seulement après avoir mis à jour toutes les fonctions
+}
+OU
+créer une sous fonction pour chaque option qui sauvegarde (pour avoir un message personnalisé);
 
 **************TODO**************
 Ajouter/Compléter les cartouches

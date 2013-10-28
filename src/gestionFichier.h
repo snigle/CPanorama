@@ -180,10 +180,12 @@ int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type);
        \date MON 23 Sep 2013
        \brief permet de sauvegarder l'image chargée
        \param nomImage : (char*) le nom de l'image a charger
+       \param bool_erreur : (int*) adresse pour stocker un int
+       \return	Retourne une image si bool_erreur est nul, sinon il faut gérer l'erreur
       		\remarks ras
 
 */
-Image chargerImage(char* nomImage);
+Image chargerImage(char* nomImage, int* bool_erreur);
 
 
 
@@ -232,7 +234,7 @@ void setExtention (Image image, char* output);
 
 
 
-int save(Image image, char* output);
+void save(Image image, char* output, int* bool_erreur);
 
 /*!
        \fn int chargerImage(char* input, char* output)
@@ -241,7 +243,7 @@ int save(Image image, char* output);
        \brief fonction test qui charge une image si elle est de type P1 P2 ou P3            
        \param input : (char*) : nom de l'image à charger
        \param output : (char*) : nom du fichier de sauvegarde
-       \return 
+       \param bool_erreur : Si il y a une erreur on ne fait rien mais le programme continue
                
        \remarks 
 

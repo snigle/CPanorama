@@ -132,42 +132,54 @@ int** applicationFiltre(Image image, int** filtre)
 
 
 
-int applicationConvolution(Image image, int** filtre, char* output)
+Image applicationConvolution(Image image, FILE* fichierFiltre)
 {
 	int** apresConvolution;
+	int** filtre;
 	Image imageConvolution;	
+	filtre = recupFiltre(fichierFiltre);
+
 	apresConvolution = applicationFiltre(image, filtre);
 	imageConvolution = creationImage("P2", image.width, image.height, 255, apresConvolution);
-	save(imageConvolution, output);
-	libererImage(imageConvolution);
-	return (0);
+	
+	return imageConvolution;
+
 }
 
-/*
-	changer tous les types de sortie des fonctions
-*/
-int convolution (char* input, char* output, char* nomFichier)
+
+int testFiltre(FILE* filtre)
+{
+	int result;
+	if (filtre == NULL)
+	{
+		erreur(ERREUR_FILTRE, NO_EXIT);
+		result = 0;
+	}else
+		result = 1;
+		
+	return(result);
+}
+
+Image convolution (char* input, char* output, char* nomFichier, int bool_save, int* bool_erreur)
 {
 	FILE* fichierFiltre;
-	int** filtre;
 	Image image;
-	int result;
-	filtre = initMatrice(3,3);
+	Image result;
+	printf("**%s -c %s, filtre : %s**\n",input,output,nomFichier);
 	fichierFiltre = fopen(nomFichier, "r");
-	image = chargerImage(input);
-	result = 0;
-	if(fichierFiltre != NULL)
+	image = chargerImage(input, bool_erreur);
+	if(testFiltre(fichierFiltre) && testType(image, "P2") && !*bool_erreur)
 	{
-		filtre = recupFiltre(fichierFiltre);
-		if(!strcmp(image.type, "P2"))
+		result = applicationConvolution(image, fichierFiltre);
+		if(bool_save)
 		{
-			result = applicationConvolution(image, filtre, output);
-			libererImage(image);
-			libererMatrice((void**)filtre, 3);
-		}else
-			erreur(ERREUR_TYPE, 1);
-	}else
-		erreur(ERREUR_FILTRE, 1);
-	printf("La convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
+			save(result, output, bool_erreur);
+			if(!*bool_erreur) printf("\tLa convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
+		}
+	}
+	else
+		*bool_erreur = 1;
+	libererImage(image);
+	fclose(fichierFiltre);
 	return result;
 }

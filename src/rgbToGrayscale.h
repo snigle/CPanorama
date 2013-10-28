@@ -33,17 +33,19 @@ void creationTabGrayScale(int** tabGrey, Image image);
 Image creerGrayScale (Image pixRGB);
 
 /*!
-       \fn int grayScale(char* input, char* output)
+       \fn Image grayScale (char* input,char* output, int bool_save, int* bool_erreur);
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 26 Sep 2013
        \brief recupere en parametre le nm de l'image ppm en input et le nom de l'image crée en pgm pour creer une image pgm à partir de l'image ppm correspondante               
        \param input : (char*) une chaine de caractère qui est le nom de l'image ppm existante
        \param output : (char*) une chaine correspondant au nom de l image pgm créée
-       \return retourne 0 si la fonction s'est exécutée correctement
+       \param bool_save : si vaut 1 on affiche un message de sauvegarde pour l'utilisateur
+       \param bool_erreur : adresse pour stocker un int, on lui donnera 1 si il y a une erreur dans la fonction
+       \return l'image modifiée si !bool_save
                
        \remarks 
 
 */
-int grayScale (char* input,char* output);
+Image grayScale (char* input,char* output, int bool_save, int* bool_erreur);
 
 #endif /* __RGBTOGRAYSCALE_H__ */

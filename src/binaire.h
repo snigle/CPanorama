@@ -30,19 +30,21 @@
 int** remplirMatriceBinaire (Image image, int seuil);
 
 /*!
-       \fn int binaire(char* input, char* output, int seuil)
+       \fn Image binaire(char* input, char* output, int seuil, int bool_save, int* bool_erreur)
        \author Poussou Elie <poussoueli@eisti.eu>
        \date Wed 16 Oct 2013
        \brief Description               
        \param input : (char*) fichier d'entrée  
        \param output : (char*) ficier de sortie
        \param seuil : (int) Seuil
-       \return 0 si le traitement a été effectué
+       \param bool_save : si vaut 1 on affiche un message de sauvegarde pour l'utilisateur
+       \param bool_erreur : adresse pour stocker un int, on lui donnera 1 si il y a une erreur dans la fonction
+       \return l'image modifiée si !bool_save
                
        \remarks 
 
 */
-int binaire(char* input, char* output, char* valeurDeBascule);
+Image binaire(char* input, char* output, char* valeurDeBascule, int bool_save, int* bool_erreur);
 
 #endif /* __BINAIRE_H__ */
 

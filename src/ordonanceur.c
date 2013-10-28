@@ -241,18 +241,20 @@ int derniereOption(int argc, char** argv)
 
 void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
 {
+	int bool_erreur;
+	bool_erreur = 0;
 	if(!strcmp(argv[*i],"-g"))
-		erreur(grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+		grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-h"))
 		erreur(histogramme(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if(!strcmp(argv[*i],"-e"))
-		erreur(erode(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+		erode(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-d"))
-		erreur(dilate(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+		dilate(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(testOptionAvecParametre("-b",*i,argc,argv))
-		erreur(binaire(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1]), NO_EXIT);
+		binaire(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1],1,&bool_erreur);
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
-		erreur(convolution(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1]), NO_EXIT);
+		convolution(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1],1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-p"))
 		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
@@ -263,10 +265,17 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 {
 	int i;
 	int idInput;
+	int tmp;
 	int idOutput;
+	tmp = 0;
 	/*Parcourt de toute les options présente*/
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
+		if(tmp < idInput)
+		{	
+			idOutput--;
+			printf("**%s %s %s**",input[idInput-1],argv[i-1],incrementerInputOutput(output,&idOutput,nombreOutput,0));
+		}tmp = idInput;
 		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
 	}	
 	i = derniereOption(argc,argv);/*Continu de charger les inputs avec la derniere option*/
