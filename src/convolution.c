@@ -163,11 +163,11 @@ int convolution (char* input, char* output, char* nomFichier)
 		{
 			result = applicationConvolution(image, filtre, output);
 			libererImage(image);
+			libererMatrice((void**)filtre, 3);
 		}else
 			erreur(ERREUR_TYPE, 1);
 	}else
 		erreur(ERREUR_FILTRE, 1);
-	libererMatrice((void**)fichierFiltre, 3);
 	printf("La convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
 	return result;
 }

@@ -46,5 +46,6 @@ int binaire(char* input, char* output, char* valeurDeBascule)
 	save(sortie, output);
 	libererImage(sortie);
 	libererImage(image);
+	printf("La conversion en noir et blanc du fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
 	return 0;
 }
