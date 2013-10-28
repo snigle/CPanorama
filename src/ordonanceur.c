@@ -246,7 +246,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	if(!strcmp(argv[*i],"-g"))
 		grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-h"))
-		erreur(histogramme(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+		histogramme(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-e"))
 		erode(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-d"))
@@ -265,17 +265,10 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 {
 	int i;
 	int idInput;
-	int tmp;
 	int idOutput;
-	tmp = 0;
 	/*Parcourt de toute les options présente*/
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
-		if(tmp < idInput)
-		{	
-			idOutput--;
-			printf("**%s %s %s**",input[idInput-1],argv[i-1],incrementerInputOutput(output,&idOutput,nombreOutput,0));
-		}tmp = idInput;
 		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
 	}	
 	i = derniereOption(argc,argv);/*Continu de charger les inputs avec la derniere option*/
