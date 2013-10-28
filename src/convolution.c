@@ -132,26 +132,39 @@ int** applicationFiltre(Image image, int** filtre)
 
 
 
-int** applicationConvolution(Image image, FILE* filtre)
+Image applicationConvolution(Image image, FILE* fichierFiltre)
 {
 	int** apresConvolution;
 	int** filtre;
-	filtre = recupFiltre(fichierFiltre);
 	Image imageConvolution;	
+	filtre = recupFiltre(fichierFiltre);
+
 	apresConvolution = applicationFiltre(image, filtre);
 	imageConvolution = creationImage("P2", image.width, image.height, 255, apresConvolution);
-	return apresConvolution;
+	
+	return imageConvolution;
 
 }
 
-/*
-	changer tous les types de sortie des fonctions
-*/
+
+int testFiltre(FILE* filtre)
+{
+	int result;
+	if (filtre == NULL)
+	{
+		erreur(ERREUR_FILTRE, NO_EXIT);
+		result = 0;
+	}else
+		result = 1;
+		
+	return(result);
+}
+
 Image convolution (char* input, char* output, char* nomFichier, int bool_save, int* bool_erreur)
 {
 	FILE* fichierFiltre;
 	Image image;
-	int** result;
+	Image result;
 	printf("**%s -c %s, filtre : %s**\n",input,output,nomFichier);
 	fichierFiltre = fopen(nomFichier, "r");
 	image = chargerImage(input, bool_erreur);
@@ -160,7 +173,7 @@ Image convolution (char* input, char* output, char* nomFichier, int bool_save, i
 		result = applicationConvolution(image, fichierFiltre);
 		if(bool_save)
 		{
-			save(imageConvolution, output, bool_erreur);
+			save(result, output, bool_erreur);
 			if(!*bool_erreur) printf("\tLa convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
 		}
 	}

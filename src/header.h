@@ -236,5 +236,18 @@ void libererImage(Image image);
 */
 int verifType(char* type);
 
+/*!
+       \fn int testType(Image image, char* type)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mar. 22 oct. 2013
+       \brief Verifie si le type est correct pour appliquer une convolution 
+       \param image : image à tester
+       \param type : type à tester
+       \return 1 si le type de l'image correspond au paramètre, 0 sinon
+               
+       \remarks 
+
+*/
+int testType(Image image, char* type);
 
 #endif /* __HEADER_H__ */

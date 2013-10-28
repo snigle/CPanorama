@@ -186,3 +186,16 @@ int verifType(char* type)
 	return (strcmp(type, "P1") && strcmp(type, "P2") && strcmp(type, "P3"));
 }
 
+int testType(Image image, char* type)
+{
+	int result;
+	if (strcmp(image.type, type))
+	{
+		erreur(ERREUR_TYPE, NO_EXIT);
+		result = 0;
+	}else
+		result = 1;
+	
+	return(result);
+}
+

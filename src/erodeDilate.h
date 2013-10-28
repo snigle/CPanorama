@@ -89,7 +89,7 @@ int** genererMatriceDilate(Image imageInput);
 
 
 /*!
-       \fn int erode(char* input, char* output, int bool_save, int* bool_erreur)
+       \fn Image erode (char* input, char* output, int bool_save, int* bool_erreur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Tue 08 Oct 2013
        \brief erode l'image               
@@ -102,7 +102,7 @@ int** genererMatriceDilate(Image imageInput);
        \remarks 
 
 */
-int erode (char* input, char* output, int bool_save, int* bool_erreur);
+Image erode (char* input, char* output, int bool_save, int* bool_erreur);
 
 /*!
        \fn int dilate(char* input, char* output)

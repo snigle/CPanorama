@@ -248,7 +248,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	else if(!strcmp(argv[*i],"-h"))
 		erreur(histogramme(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
 	else if(!strcmp(argv[*i],"-e"))
-		erreur(erode(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+		erode(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-d"))
 		dilate(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if(testOptionAvecParametre("-b",*i,argc,argv))

@@ -90,7 +90,7 @@ int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre
 int** applicationFiltre(Image image, int** filtre);
 
 /*!
-       \fn int applicationConvolution(Image image, FILE* filtre)
+       \fn Image applicationConvolution(Image image, FILE* fichierFiltre)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief permet d'enchainer les fonctions qui permettent d'appliquer la convolution               
@@ -101,7 +101,23 @@ int** applicationFiltre(Image image, int** filtre);
        \remarks 
 
 */
-int** applicationConvolution(Image image, FILE* filtre);
+Image applicationConvolution(Image image, FILE* fichierFiltre);
+
+
+
+/*!
+       \fn int testFiltre(FILE* filtre)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mar. 22 oct. 2013
+       \brief Verifie le bon chargement du filtre
+       \param filtre : (FILE*) le fichier qui contient le filtre à appliquer a la convolution
+       \return 1 si le chargement est correct
+               
+       \remarks 
+
+*/
+int testFiltre(FILE* filtre);
+
 /*!
        \fn Image convolution (char* input, char* output, char* nomFichier, int bool_save, int* bool_erreur)
        \author PERALES Quentin <peralesque@eisti.eu>

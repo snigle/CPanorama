@@ -263,7 +263,8 @@ void setExtention (Image image, char* output)
 void save(Image image, char* output, int* bool_erreur)
 {
 	FILE* fich;
-
+	char* ext;
+	ext = "";
 	if(!*bool_erreur)
 	{
 		ext = recupererExtension(output);
