@@ -168,18 +168,20 @@ Image convolution (char* input, char* output, char* nomFichier, int bool_save, i
 	printf("**%s -c %s, filtre : %s**\n",input,output,nomFichier);
 	fichierFiltre = fopen(nomFichier, "r");
 	image = chargerImage(input, bool_erreur);
-	if(testFiltre(fichierFiltre) && testType(image, "P2") && !*bool_erreur)
-	{
-		result = applicationConvolution(image, fichierFiltre);
-		if(bool_save)
+	if(!*bool_erreur){
+		if(testFiltre(fichierFiltre) && testType(image, "P2"))
 		{
-			save(result, output, bool_erreur);
-			if(!*bool_erreur) printf("\tLa convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
+			result = applicationConvolution(image, fichierFiltre);
+			if(bool_save)
+			{
+				save(result, output, bool_erreur);
+				if(!*bool_erreur) printf("\tLa convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
+			}
 		}
+		else
+			*bool_erreur = 1;
+		libererImage(image);
 	}
-	else
-		*bool_erreur = 1;
-	libererImage(image);
 	fclose(fichierFiltre);
 	return result;
 }

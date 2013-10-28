@@ -114,20 +114,23 @@ void sauterCommentaire(FILE* fichier)
 			 }
 }
 
-char* recupType(FILE* image) 
+char* recupType(FILE* image, int* bool_erreur) 
 {
 	char* result;
 	result = malloc(3*sizeof(char));
 	sauterCommentaire(image);
-	fscanf(image, "%c", &result[0]);
-	fscanf(image, "%c", &result[1]);
+	if(!fscanf(image, "%c", &result[0]))
+		*bool_erreur = 1;
+	else
+		if(!fscanf(image, "%c", &result[1]))
+			*bool_erreur = 1;
 	result[2] = '\0';
 	return result;
 }
 
 
 
-int parametrage(FILE* image)
+int parametrage(FILE* image, int* bool_erreur)
 {
 	int result;
 	int test;
@@ -135,19 +138,22 @@ int parametrage(FILE* image)
 	sauterCommentaire(image);
 	test = fscanf(image, "%d", &result);
 	if (test != 1)
-		erreur(IMAGE_CORROMPUE,EXIT);
+	{
+		erreur(IMAGE_CORROMPUE,NO_EXIT);
+		*bool_erreur = 1;
+	}
     
     return result;
 }
 
 
-int teinteMax(char* type, FILE* image)
+int teinteMax(char* type, FILE* image, int* bool_erreur)
 {
     int result;
     result = 0;
     if (!strcmp(type, "P2") || !strcmp(type, "P3"))
 	{
-		result = parametrage(image);
+		result = parametrage(image,bool_erreur);
 	}else{
 		result = 0;
 	}
@@ -161,7 +167,7 @@ else
 	return (1);
 }
 
-void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type)
+void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type, int* bool_erreur)
 {
 	int i;
 	int j;
@@ -173,29 +179,32 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char
 	{
 		for (j = 0; j < largeur; j += 1)
 		{
-			sauterCommentaire(fichier);
-			if (!strcmp(type, "P2") || !strcmp(type,"P3"))
-				test = fscanf(fichier, "%d", &pixel);
-			else
-				pixel = charToInt(fgetc(fichier));
-			if (test == 1)
-				tab[i][j] = pixel;
-			else
-				erreur(IMAGE_CORROMPUE,EXIT);
-
-	
+			if(!*bool_erreur){
+				sauterCommentaire(fichier);
+				if (!strcmp(type, "P2") || !strcmp(type,"P3"))
+					test = fscanf(fichier, "%d", &pixel);
+				else
+					pixel = charToInt(fgetc(fichier));
+				if (test == 1)
+					tab[i][j] = pixel;
+				else
+				{
+					erreur(IMAGE_CORROMPUE,NO_EXIT);
+					*bool_erreur = 1;
+				}
+			}
 		}
 	}
 }
 
 
-int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
+int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_erreur)
 {
 	int** tab;
 	if(!strcmp(type,"P3"))	
 		largeur *= 3;
 	tab = initMatrice(largeur,hauteur);	
-	recuperationPixels(fichier, tab, largeur, hauteur, type);
+	recuperationPixels(fichier, tab, largeur, hauteur, type, bool_erreur);
 	return tab;
 }
 
@@ -210,21 +219,29 @@ Image chargerImage(char* nomImage, int* bool_erreur){
 	int teinteMaximale;
 	int** teinte;
 	image = fopen(nomImage, "r");
+
 	if (image != NULL)
 	{
-		type = recupType(image);
-		largeur = parametrage(image);
-		hauteur = parametrage(image);
+		type = recupType(image, bool_erreur);
+	
+		if(!*bool_erreur) largeur = parametrage(image, bool_erreur);
+
+		if(!*bool_erreur) hauteur = parametrage(image, bool_erreur);
+
 		if (!strcmp(type, "P2") || !strcmp(type,"P3"))
-			teinteMaximale = teinteMax(type, image);
-		teinte = recupPixel(image, largeur, hauteur, type);
-		imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);/*création de l image*/
+		{
+			if(!*bool_erreur) teinteMaximale = teinteMax(type, image, bool_erreur);
+		}
+		if(!*bool_erreur) teinte = recupPixel(image, largeur, hauteur, type, bool_erreur);
+		if(!*bool_erreur) imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);
+						
+		free(type);
 	}else{
 		erreur(IMAGE_NO_EXISTS,NO_EXIT);
 		*bool_erreur = 1;
 	}
 	fclose(image);
-	free(type);
+
 	return imageCharge;	
 }
 
@@ -302,6 +319,7 @@ void testChargerImage(char* input, char* output)
 		if(verifType(type))
 		{
 			erreur(ERREUR_TYPE, NO_EXIT);
+			libererImage(image);
 		}
 		else
 		{

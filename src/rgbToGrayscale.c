@@ -40,16 +40,19 @@ Image grayScale (char* input,char* output, int bool_save, int* bool_erreur)
 	Image imagePGM;
 	printf("**%s -g %s**\n",input,output);
 	imagePPM = chargerImage(input, bool_erreur);
-	if (testType(imagePPM,"P3") && !*bool_erreur)
-	{
-		imagePGM = creerGrayScale(imagePPM);
-		if(bool_save)
+	if(!*bool_erreur){
+		if (testType(imagePPM,"P3"))
 		{
-			save(imagePGM, output, bool_erreur);
-			if(!*bool_erreur) printf("\tLe fichier %s a été converti en échelle de gris dans le fichier %s\n",input,output);
+			imagePGM = creerGrayScale(imagePPM);
+			if(bool_save)
+			{
+				save(imagePGM, output, bool_erreur);
+				if(!*bool_erreur) printf("\tLe fichier %s a été converti en échelle de gris dans le fichier %s\n",input,output);
+			}
 		}
+		else
+			*bool_erreur = 1;
+		libererImage(imagePPM);
 	}
-
-	libererImage(imagePPM);
 	return imagePGM;
 }

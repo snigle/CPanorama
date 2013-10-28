@@ -37,20 +37,20 @@ Image binaire(char* input, char* output, char* valeurDeBascule, int bool_save, i
 	printf("**%s -b %s**\n",input,output);
 	seuil = atoi(valeurDeBascule);
 	image=chargerImage(input,bool_erreur);
-	if(testType(image, "P2") && !*bool_erreur)
-	{
-		teinteBinaire = remplirMatriceBinaire(image, seuil);
-		sortie = creationImage("P1",image.width,image.height, seuil, teinteBinaire);
-		if(bool_save)
+	if(!*bool_erreur){
+		if(testType(image, "P2"))
 		{
-			save(sortie, output, bool_erreur);
-			if(!*bool_erreur) printf("\tLa conversion en noir et blanc du fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
+			teinteBinaire = remplirMatriceBinaire(image, seuil);
+			sortie = creationImage("P1",image.width,image.height, seuil, teinteBinaire);
+			if(bool_save)
+			{
+				save(sortie, output, bool_erreur);
+				if(!*bool_erreur) printf("\tLa conversion en noir et blanc du fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
+			}
 		}
-		
+		else
+			*bool_erreur = 1;
+		libererImage(image);
 	}
-	else
-		*bool_erreur = 1;
-
-	libererImage(image);
 	return sortie;
 }

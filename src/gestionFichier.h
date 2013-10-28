@@ -89,7 +89,7 @@ void allerAlaLigne (FILE* fichier);
 void sauterCommentaire(FILE* fichier);
 
 /*!
-       \fn char* recupType(FILE* image) ;
+       \fn char* recupType(FILE* image, int* bool_erreur) ;
        \author Perales Quentin <peralesque@eisti.eu>
        \date MON 23 Sep 2013
        \brief récupère le type d'une image pixmap            
@@ -98,33 +98,34 @@ void sauterCommentaire(FILE* fichier);
       		\remarks ras
 
 */
-char* recupType(FILE* image) ;
+char* recupType(FILE* image, int* bool_erreur) ;
 
 /*!
-       \fn int parametrage(FILE* image)
+       \fn int parametrage(FILE* image, int* bool_erreur)
        \author Perales Quentin <peralesque@eisti.eu>
        \date MON 23 Sep 2013
        \brief retourne une caractéristique de l'image           
        \param image : (file*) : l'image en pixmap
+       \param bool_erreur : pointeur à mettre à 1 si il y a une erreur
                
       		\remarks ras
 
 */
-int parametrage(FILE* image);
+int parametrage(FILE* image, int* bool_erreur);
 
 /*!
-       \fn int teinteMax(char* type, FILE* image)
+       \fn int teinteMax(char* type, FILE* image, int* bool_erreur)
        \author Perales Quentin <peralesque@eisti.eu>
        \date MON 23 Sep 2013
        \brief récupère la teinte maximale de l'image P2 ou P3 en modèle pixmap 
        \param type : (char*) : le type de l'image   
        \param image : (file*) : l'image en pixmap
-       
+       \param bool_erreur : pointeur à mettre à 1 si il y a une erreur
                
       		\remarks ras
 
 */
-int teinteMax(char* type, FILE* image);
+int teinteMax(char* type, FILE* image, int* bool_erreur);
 
 
 /*!
@@ -143,7 +144,7 @@ int charToInt(char c);
 
 
 /*!
-       \fn void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type)
+       \fn void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type, int* bool_erreur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief Description Complète un tableau d'entiers qui correspondent aux pixels de l'image
@@ -153,13 +154,14 @@ int charToInt(char c);
                \param largeur (int) : la largeur de l'image
                \param hauteur (int) : la hauteur de l'image
                \param type (char*) : une chaine de caractere contenant le type de l'image a charger
+               \param bool_erreur : pointeur à mettre à 1 si il y a une erreur
        \remarks 
 
 */
-void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type);
+void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type, int* bool_erreur);
 
 /*!
-       \fn int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type)
+       \fn int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_erreur)
        \author Perales Quentin <peralesque@eisti.eu>
        \date MON 23 Sep 2013
        \brief Renvoie un tableau d'entier contenant l'ensemble des informations contenant l'image
@@ -167,12 +169,13 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char
        \param largeur : (int) : la largeur de l'image
        \param hauteur : (int) : la hauteur de l'image
        \param type : (char*) : type de l'image pixmap
+       \param bool_erreur : (int*) adresse pour stocker un int
        \return un tableau d'entiers
        
       		\remarks ras
 
 */
-int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type);
+int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_erreur);
 
 /*!
        \fn Image chargerImage(char* nomImage)

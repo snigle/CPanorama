@@ -73,11 +73,32 @@ give: $(dirsrc)
 $(dirsrc):
 	@mkdir $(dirsrc)
 	
-.IGNORE: test
+.IGNORE: test dilate erode binaire convolution grayscale histogramme enregistrer
 
-test:
+test: dilate erode binaire convolution grayscale histogramme enregistrer
+	@echo "**************Test de toutes les options***********"
+	
+dilate:
 	@echo "************TEST Dilate*********"
 	./bin/panorama -r src/images/ -d
 
+erode:
+	@echo "************TEST Erode**********"
+	./bin/panorama -r src/images/ -e
 	
-
+binaire:
+	@echo "************TEST Binaire**********"
+	./bin/panorama -r src/images/ -b 150
+convolution:
+	@echo "************TEST Convolution**********"
+	./bin/panorama -r src/images/ -c filtre.txt
+grayscale:
+	@echo "************TEST Grayscale**********"
+	./bin/panorama -r src/images/ -g
+histogramme:
+	@echo "************TEST Histogramme**********"
+	./bin/panorama -r src/images/ -h
+enregistrer:
+	@echo "************TEST Enregistrer**********"
+	./bin/panorama -r src/images/
+	
