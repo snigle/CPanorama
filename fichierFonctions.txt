@@ -1,0 +1,49 @@
+/*!
+       \fn int testFiltre(FILE* filtre)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mar. 22 oct. 2013
+       \brief Verifie le bon chargement du filtre
+       \param filtre : (FILE*) le fichier qui contient le filtre à appliquer a la convolution
+       \return 1 si le chargement est correct
+               
+       \remarks 
+
+*/
+
+int testFiltre(FILE* filtre)
+{
+	int result;
+	if (filtre == NULL)
+	{
+		erreur(ERREUR_FILTRE, NO_EXIT);
+		result = 0;
+	}else
+		result = 1;
+		
+	return(result)
+}
+
+/*!
+       \fn int testType(char* type)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mar. 22 oct. 2013
+       \brief Verifie si le type est correct pour appliquer une convolution 
+       \param type : (char*) le type a tester
+       \return 1 si le type est P2, 0 sinon
+               
+       \remarks 
+
+*/
+
+int testType(char* type)
+{
+	int result;
+	if (strcmp(type, "P2"))
+	{
+		erreur(ERREUR_TYPE, NO_EXIT);
+		result = 0;
+	}else
+		result = 1;
+	
+	return(result);
+}
