@@ -73,7 +73,11 @@ give: $(dirsrc)
 $(dirsrc):
 	@mkdir $(dirsrc)
 	
-	
+.IGNORE: test
+
+test:
+	@echo "************TEST Dilate*********"
+	./bin/panorama -r src/images/ -d
 
 	
 
