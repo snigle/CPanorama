@@ -250,4 +250,5 @@ int verifType(char* type);
 */
 int testType(Image image, char* type);
 
+
 #endif /* __HEADER_H__ */

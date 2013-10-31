@@ -329,5 +329,3 @@ void testChargerImage(char* input, char* output)
 	}
 	
 }
-
-

@@ -20,16 +20,14 @@ int* remplirTableauHist(Image image, int* bool_erreur)
 	int* TabHisto;
 	int i;
 	int j;
-	int n;
-	n=256;
-	TabHisto = mallocBis(n * sizeof(int));
+	TabHisto = mallocBis(256 * sizeof(int));
 	if(testType(image, "P2"))
 	{
-		for(i=0; i<n ; i++)
+		for (i=0; i<256;i++)
 		{
-			TabHisto[i] = 0;
+			TabHisto[i]=0;
 		}
-	
+		
 		for(i = 0 ; i < image.height ; i++)
 		{
 			for (j = 0; j < image.width; j++)
@@ -58,39 +56,46 @@ int calculMax(int* tabhist)
 	return(max);
 }
 
+int* tabPourcent(int* hist, int max, int taille)
+{
+	int* tabPourcent;
+	int i;
+	
+	
+	tabPourcent=mallocBis(256*sizeof(int));
+	for(i=0;i<256;i++)
+	{
+		
+		tabPourcent[i]=taille*hist[i]/max;
+	}
+	
+	return(tabPourcent);
+}
+
+
 int** Tracer(int* tabhist, int taille)
 {
 	int i;
 	int j;
 	int k;
-	int max;
 	int** trace;
 
-	max=calculMax(tabhist)/500;
-	trace=initMatrice(taille,max);
+	trace=initMatrice(256,taille);
 	
-	for (i = 0; i < taille; i += 1)
+	for (i = 0; i < 256; i += 1)
 	{
-		for (j = 0; j < max; j += 1)
+		for (j = 0; j < taille; j += 1)
 		{
 			trace[j][i]=0;
 		}
 	}
-	for(i=0 ; i<taille ; i++)
+	for(i=0 ; i<256 ; i++)
 	{
-		for(j=0; j<max ; j++)
+		for (k = taille - tabhist[i] ; k < taille ; k += 1)
 		{
-			if(j==tabhist[i])
-			{
-				for (k = max-1; k >= 0; k -= 1)
-				{
-					trace[k][i]=1;
-				}
-				
-			}
-		}
-	}
-	return(trace);
+			trace[k][i]=1;
+		}	
+	}return(trace);
 }
 
 Image histogramme (char* input, char* output, int bool_save, int* bool_erreur)
@@ -99,18 +104,20 @@ Image histogramme (char* input, char* output, int bool_save, int* bool_erreur)
 	Image sortie;
 	int* hist;
 	int** trace;
+	int* percent;
 	int max;
+	
 	image = chargerImage(input, bool_erreur);
-	
 	if(!*bool_erreur) hist=remplirTableauHist(image, bool_erreur);
+	
 	max=calculMax(hist);
-	
-	trace=Tracer(hist, 256);
-	
-	sortie = creationImage("P1",256,max/500, 0, trace);
-	save(sortie,output,bool_erreur);
+	percent=tabPourcent(hist,max, 500);
+	trace=Tracer(percent, 500);
+	sortie = creationImage("P1",256,500, 0, trace);
 
+	save(sortie,output,bool_erreur);
 	libererImage(image);
+	free(hist);
 	printf("Appel de la fonction histogramme\n");
 	return sortie;
 }

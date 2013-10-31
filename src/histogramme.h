@@ -58,5 +58,19 @@ int calculMax(int* tabhist);
 
 */
 int** Tracer(int* tabhist, int taille);
+
+/*!
+       \fn int* abPourcent(int* hist, int max)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Thu 31 Oct 2013
+       \brief Description               
+       \param hist : (int*) 
+       \param max : (int) 
+       \return 
+               
+       \remarks 
+
+*/
+int* tabPourcent(int* hist, int max, int h);
 #endif /* __HISTOGRAMME_H__ */
 
