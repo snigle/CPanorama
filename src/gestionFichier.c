@@ -209,6 +209,18 @@ int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_
 }
 
 
+void capterLesParametres(FILE* image, char* type, int* hauteur, int* largeur, int* teinteMaximale, int* bool_erreur)
+{
+	if(!*bool_erreur) 
+		*largeur = parametrage(image, bool_erreur);
+	if(!*bool_erreur) 
+		*hauteur = parametrage(image, bool_erreur);
+	if (!strcmp(type, "P2") || !strcmp(type,"P3"))
+	{
+		if(!*bool_erreur) *teinteMaximale = teinteMax(type, image, bool_erreur);
+	}
+}
+
 
 Image chargerImage(char* nomImage, int* bool_erreur){
 	Image imageCharge;
@@ -219,29 +231,17 @@ Image chargerImage(char* nomImage, int* bool_erreur){
 	int teinteMaximale;
 	int** teinte;
 	image = fopen(nomImage, "r");
-
-	if (image != NULL)
-	{
+	if (image != NULL){
 		type = recupType(image, bool_erreur);
-	
-		if(!*bool_erreur) largeur = parametrage(image, bool_erreur);
-
-		if(!*bool_erreur) hauteur = parametrage(image, bool_erreur);
-
-		if (!strcmp(type, "P2") || !strcmp(type,"P3"))
-		{
-			if(!*bool_erreur) teinteMaximale = teinteMax(type, image, bool_erreur);
-		}
+		capterLesParametres(image, type, &hauteur, &largeur, &teinteMaximale, bool_erreur);
 		if(!*bool_erreur) teinte = recupPixel(image, largeur, hauteur, type, bool_erreur);
 		if(!*bool_erreur) imageCharge = creationImage(type, largeur, hauteur, teinteMaximale, teinte);
-						
 		free(type);
+		fclose(image);
 	}else{
 		erreur(IMAGE_NO_EXISTS,NO_EXIT);
 		*bool_erreur = 1;
 	}
-	fclose(image);
-
 	return imageCharge;	
 }
 

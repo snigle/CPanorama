@@ -171,17 +171,18 @@ Image convolution (char* input, char* output, char* nomFichier, int bool_save, i
 	if(!*bool_erreur){
 		if(testFiltre(fichierFiltre) && testType(image, "P2"))
 		{
+	
 			result = applicationConvolution(image, fichierFiltre);
 			if(bool_save)
 			{
 				save(result, output, bool_erreur);
 				if(!*bool_erreur) printf("\tLa convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", input, output);
 			}
+			fclose(fichierFiltre);
 		}
 		else
 			*bool_erreur = 1;
 		libererImage(image);
 	}
-	fclose(fichierFiltre);
 	return result;
 }

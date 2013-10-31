@@ -177,6 +177,24 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char
 */
 int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_erreur);
 
+
+/*!
+       \fn void capterLesParametres(FILE* image, char* type, int* hauteur, int* largeur, int* teinteMaximale, int* bool_erreur)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Thu 31 Oct 2013
+       \brief permet de modifier les paramètres de l'image en chargeant le fichier               
+       \param image : (file*) l'image dans le fichiers
+       \param type : (char*) le type de l'image
+       \param hauteur : (int*) la hauteur de l'image
+       \param largeur : (int*) la largeur de l'image 
+       \param teintemaximale : (int*) la teinte maximale de l'image 
+       \param bool_erreur : (int*) un entier qui renvoie 1 s'il y a une erreur 
+       
+               
+       \remarks 
+
+*/
+void capterLesParametres(FILE* image, char* type, int* hauteur, int* largeur, int* teinteMaximale, int* bool_erreur);
 /*!
        \fn Image chargerImage(char* nomImage)
        \author Perales Quentin <peralesque@eisti.eu>
@@ -188,6 +206,7 @@ int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_
       		\remarks ras
 
 */
+
 Image chargerImage(char* nomImage, int* bool_erreur);
 
 

@@ -32,10 +32,10 @@
 #define NO_DOSSIER 31
 #define ERREUR_PARAMETRE 32
 #define TROP_D_OPTIONS 33
-#define	ERREUR_FILTRE 34
+
 
 #define NO_MEMORY 1
-
+#define	ERREUR_FILTRE 2
 
 #define EXIT 1
 #define NO_EXIT 0

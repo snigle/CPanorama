@@ -44,6 +44,9 @@ void erreurParametre(int numeroErreur)
 		case NO_DOSSIER:
 			fprintf(stderr,"Le dossier choisit n'existe pas\n");
 		break;
+		case TROP_D_OPTIONS:
+			fprintf(stderr,"Le nombre d'option est limité à 50\n");
+		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
 		break;
@@ -75,12 +78,6 @@ switch(numeroErreur)
 	{
 		case NO_MEMORY:
 			fprintf(stderr,"Il manque de l'espace mémoire pour faire un malloc\n");
-		break;
-		case NO_DOSSIER:
-			fprintf(stderr,"Le dossier n'existe pas\n");
-		break;
-		case TROP_D_OPTIONS:
-			fprintf(stderr,"Le nombre d'option est limité à 50\n");
 		break;
 		case ERREUR_FILTRE:
 			fprintf(stderr,"Le filtre n'a pas pu être chargé correctement\n");

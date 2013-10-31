@@ -1,6 +1,7 @@
 *********Documentation**********
 Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
 
+
 gérer erreur dans chargerImage sans quitter
 {
 appeler save dans l'ordonceur : save(erode()) etc...
@@ -24,3 +25,17 @@ Jankins (test du code : build)
 Sonar vérifie le build
 
 Cheak
+
+
+
+
+ #########################################################################   Quentin   #####################################################################################
+
+Méthodes des coins FAST
+
+http://operationpixel.free.fr/pointinteret_fast.php
+
+	- trouver algo pour tracer un cercle
+	- si 20% blanc - 80% noir -> ceci est un coin
+	- tester sur une image
+	- les relier (Comment ? RANSAC ?)
