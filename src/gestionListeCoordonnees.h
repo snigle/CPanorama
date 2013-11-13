@@ -1,5 +1,13 @@
 #include "header.h"
 
+typedef struct sListe
+{
+	int x;
+	int y;
+	int valeur;
+	struct sListe* suivant;
+}ListePoints;
+
 /*!
        \fn ListePoints nouveauListePoints(int x, int y, int valeur)
        \author PERALES Quentin <peralesque@eisti.eu>
@@ -88,4 +96,4 @@ void afficherCoordonnees(ListePoints* liste);
        \remarks 
 
 */
-void libererListe(ListePoints* liste;
+void libererListe(ListePoints* liste);

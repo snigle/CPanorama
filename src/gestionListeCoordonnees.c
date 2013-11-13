@@ -1,17 +1,5 @@
 #include "gestionListeCoordonnees.h"
 
-
-
-typedef struct sListe
-{
-	int x;
-	int y;
-	int valeur;
-	struct sListe* suivant;
-}ListePoints;
-
-
-
 /*Coordonnées*/
 ListePoints nouveauListePoints (int x, int y, int valeur)
 {
@@ -85,7 +73,7 @@ void libererListe(ListePoints* liste)
 	if (liste != NULL){
 		if (liste -> suivant != NULL)
 		{
-			liberer(liste->suivant);
+			libererListe(liste->suivant);
 		}
 		free(liste);
 	}
