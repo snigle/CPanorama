@@ -26,6 +26,12 @@
 */
 int testFinFichierFiltre(FILE* filtre);
 
+
+int retournerLaTaille(int taille);
+int calculTailleFiltre(FILE* filtre);
+void remplirFiltre(FILE* filtre, int** matrice, int taille);
+
+
 /*!
        \fn int** recupFiltre(FILE* filtre)
        \author PERALES Quentin <peralesque@eisti.eu>
@@ -37,7 +43,7 @@ int testFinFichierFiltre(FILE* filtre);
        \remarks 
 
 */
-int** recupFiltre(FILE* filtre);
+int** recupFiltre(FILE* filtre, int taille);
 
 /*!
        \fn int associationPossible(int x, int y, int i, int j, int largeur, int hauteur)
@@ -73,7 +79,7 @@ int associationPossible(int x, int y, int i, int j, int largeur, int hauteur);
        \remarks 
 
 */
-int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre);
+int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre, int taille, int decalage);
 
 /*!
        \fn int** applicationFiltre(Image image, int** filtre)
@@ -87,7 +93,7 @@ int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre
        \remarks 
 
 */
-int** applicationFiltre(Image image, int** filtre);
+int** applicationFiltre(Image image, int** filtre, int taille);
 
 /*!
        \fn Image applicationConvolution(Image image, FILE* fichierFiltre)
@@ -101,7 +107,7 @@ int** applicationFiltre(Image image, int** filtre);
        \remarks 
 
 */
-Image applicationConvolution(Image image, FILE* fichierFiltre);
+Image applicationConvolution(Image image, FILE* fichierFiltre, int taille);
 
 
 

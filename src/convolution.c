@@ -9,14 +9,7 @@
  */
 #include "convolution.h"
 
-/*
-récupérer le filtre
-	la longueur
-	la hauteur
-	les valeurs
-	
-pour chaque pixels sauf à l'exterieurs, appliquer le filtre
-*/
+
 
 int testFinFichierFiltre(FILE* filtre)
 {
@@ -35,18 +28,50 @@ int testFinFichierFiltre(FILE* filtre)
 	return k;
 }
 
-int** recupFiltre(FILE* filtre)
+int retournerLaTaille(int taille)
+{
+	int i;
+	i = 1;
+	while (i*i < taille)
+	{
+		i++;
+	}
+	if ((i != 1) && (i*i == taille) && (i%2 == 1))
+	{
+		return (i);
+	}else{
+		return (1);
+	}	
+}
+
+int calculTailleFiltre(FILE* filtre)
+{
+	int i;
+	int taille;
+	int test; /*vérifie si le scanf se déroule bien*/
+	taille = 0;
+	test = 1;
+	i = 0;
+	while (test == 1)
+	{
+		test = fscanf(filtre, "%d", &i);
+		if (test == 1)
+		{
+			taille++;
+		}
+	}
+	return retournerLaTaille(taille);
+}
+
+void remplirFiltre(FILE* filtre, int** matrice, int taille)
 {
 	int i;
 	int j;
-	int** matrice;
 	int coef;
 	int test;
-	int testFichier;
-	matrice = initMatrice(3,3);
-	for (i = 0; i < 3; i += 1)
+	for (i = 0; i < taille; i += 1)
 	{
-		for (j = 0; j < 3; j += 1)
+		for (j = 0; j < taille; j += 1)
 		{
 			test = fscanf(filtre, "%d", &coef);
 			if(test == 1)
@@ -55,11 +80,27 @@ int** recupFiltre(FILE* filtre)
 				erreur(ERREUR_FILTRE, 1);
 		}
 	}
-	testFichier = testFinFichierFiltre(filtre);
-	if (testFichier != 0)
-		erreur(ERREUR_FILTRE, 1);
-	return matrice;
 }
+
+int** recupFiltre(FILE* filtre, int taille)
+{
+
+	int** matrice;
+	int testFichier;
+	if (taille != 1)
+	{
+		rewind(filtre);
+		matrice = initMatrice(taille,taille);
+		remplirFiltre(filtre, matrice, taille);
+		testFichier = testFinFichierFiltre(filtre);
+		if (testFichier != 0)
+			erreur(ERREUR_FILTRE, 1);
+	}else{
+		erreur(ERREUR_FILTRE, 1);
+	}
+	return (matrice);
+}
+
 
 int associationPossible(int x, int y, int i, int j, int largeur, int hauteur)
 {
@@ -90,18 +131,18 @@ int associationPossible(int x, int y, int i, int j, int largeur, int hauteur)
 
 
 
-int setNumber(int x, int y, int largeur, int hauteur, int** pixels, int** filtre)
+
+int setNumber(int x, int y, int largeur, int hauteur, int** pixels, int** filtre, int taille, int decalage)
 {
 	int i;
 	int j;
 	int result;
 	result = 0;
-	for (i = 0; i < 3; i += 1)
+	for (i = 0; i < taille; i += 1)
 	{
-		for (j = 0; j < 3; j += 1)
+		for (j = 0; j < taille; j += 1)
 		{
-			if (associationPossible(x, y, i, j, largeur, hauteur))
-				result += filtre[i][j] * pixels[x-1+i][y-1+i];
+				result += filtre[i][j] * pixels[x-decalage+i][y-decalage+i];
 		}
 	}
 	if (result < 0)
@@ -114,17 +155,22 @@ int setNumber(int x, int y, int largeur, int hauteur, int** pixels, int** filtre
 
 
 
-int** applicationFiltre(Image image, int** filtre)
+int** applicationFiltre(Image image, int** filtre, int taille)
 {
 	int** result;
 	int i;
 	int j;
+	int decalage;
+	decalage = (taille - 1) / 2;
 	result = initMatrice(image.width, image.height);
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
-			result[i][j] = setNumber(i, j, image.width, image.height, image.teinte, filtre);
+			if ((i < decalage) || (j < decalage) || (i >= (image.height - decalage)) || (j >= (image.width - decalage)))
+				result[i][j] = image.teinte[i][j];
+			else
+				result[i][j] = setNumber(i, j, image.width, image.height, image.teinte, filtre, taille, decalage);
 		}
 	}
 	return result;
@@ -132,14 +178,14 @@ int** applicationFiltre(Image image, int** filtre)
 
 
 
-Image applicationConvolution(Image image, FILE* fichierFiltre)
+Image applicationConvolution(Image image, FILE* fichierFiltre, int taille)
 {
 	int** apresConvolution;
 	int** filtre;
 	Image imageConvolution;	
-	filtre = recupFiltre(fichierFiltre);
+	filtre = recupFiltre(fichierFiltre, taille);
 
-	apresConvolution = applicationFiltre(image, filtre);
+	apresConvolution = applicationFiltre(image, filtre, taille);
 	imageConvolution = creationImage("P2", image.width, image.height, 255, apresConvolution);
 	
 	return imageConvolution;
@@ -160,19 +206,19 @@ int testFiltre(FILE* filtre)
 	return(result);
 }
 
-Image convolution (char* input, char* output, char* nomFichier, int bool_save, int* bool_erreur)
-{
+Image convolution (char* input, char* output, char* nomFichier, int bool_save, int* bool_erreur){
 	FILE* fichierFiltre;
 	Image image;
 	Image result;
+	int taille;
 	printf("**%s -c %s, filtre : %s**\n",input,output,nomFichier);
 	fichierFiltre = fopen(nomFichier, "r");
 	image = chargerImage(input, bool_erreur);
 	if(!*bool_erreur){
 		if(testFiltre(fichierFiltre) && testType(image, "P2"))
 		{
-	
-			result = applicationConvolution(image, fichierFiltre);
+			taille = calculTailleFiltre(fichierFiltre);
+			result = applicationConvolution(image, fichierFiltre, taille);
 			if(bool_save)
 			{
 				save(result, output, bool_erreur);
@@ -184,5 +230,5 @@ Image convolution (char* input, char* output, char* nomFichier, int bool_save, i
 			*bool_erreur = 1;
 		libererImage(image);
 	}
-	return result;
+	return (result);
 }
