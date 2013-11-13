@@ -1,31 +1,24 @@
-/*! \file  binaire.c
-	\author Poussou Elie poussoueli@eisti.eu
-	\date Wed 16 Oct 2013
-	
-	\brief réalise la binarisation d'une image                                  
-*/
-
 #include "binaire.h"
 
-int** remplirMatriceBinaire (Image image, int seuil)
+int** remplirMatriceBinaire (Image im_image, int int_seuil)
 {
-	int** teinteBinaire;
-	int i;
-	int j;
-	teinteBinaire=initMatrice(image.width,image.height);
+	int** int_teinteBinaire;
+	int int_i;
+	int int_j;
+	int_teinteBinaire=initMatrice(im_image.width, im_image.height);
 	
-		for(i = 0 ; i < image.height ; i++)
+		for(int_i = 0 ; int_i < im_image.height ; int_i++)
 		{
-			for (j = 0; j < image.width; j += 1)
+			for (int_j = 0; int_j < im_image.width; int_j += 1)
 			{
-				if(image.teinte[i][j]> seuil)
-					teinteBinaire[i][j]=0;
+				if(im_image.teinte[i][j]> int_seuil)
+					int_teinteBinaire[i][j]=0;
 				else
-					teinteBinaire[i][j]=1;
+					int_teinteBinaire[i][j]=1;
 			}
 		}	
 	
-	return teinteBinaire;
+	return (int_teinteBinaire);
 }
 
 Image binaire(char* input, char* output, char* valeurDeBascule, int bool_save, int* bool_erreur)

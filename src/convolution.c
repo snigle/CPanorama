@@ -1,12 +1,3 @@
-/*! \file convolution.c
- *  \author Perales Quentin <peralesque@eisti.eu>
- *  \version 0.1
- *  \date  Tue 08 Oct 2013
- *
- *  \brief realise la convolution de l image a partir d'un fichier source
- *
- *
- */
 #include "convolution.h"
 
 
@@ -100,35 +91,6 @@ int** recupFiltre(FILE* filtre, int taille)
 	}
 	return (matrice);
 }
-
-
-int associationPossible(int x, int y, int i, int j, int largeur, int hauteur)
-{
-	int hautDroit;
-	int hautGauche;
-	int basDroit;
-	int basGauche;
-	int haut;
-	int bas;
-	int gauche;
-	int droit;
-	int quelconque;
-	
-	quelconque = (x >= 1) && (y>=1) && (x < hauteur-1) && (y < largeur-1);
-	
-	hautDroit = (x==0) && (y==0) && (i >= 1) && (j >= 1);
-	hautGauche = (x == 0) && (y == largeur-1) && (i >= 1) && (j >= 1);
-	basDroit = (x == hauteur-1) && (y == 0) && (i <= 1) && (j >= 1);
-	basGauche = (x == hauteur-1) && (y== largeur-1) && (i <= 1) && (j <= 1);
-	
-	droit = (x > 0) && (x < (hauteur-1)) && (y == 0) && (j >= 1);
-	gauche = (x > 0) && (x < (hauteur-1)) && (y <= (largeur-1)) && (j <= 1);
-	bas = (x == hauteur-1) && (y > 0) && (y < largeur-1) && (i <= 1);
-	haut = (x == 0) && (y > 0) && (y < largeur-1) && (i >= 1);
-	
-	return quelconque || hautDroit || hautGauche || basDroit || basGauche || droit || gauche || bas || haut ;
-}
-
 
 
 

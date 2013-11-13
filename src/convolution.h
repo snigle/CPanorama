@@ -1,9 +1,9 @@
 /*! \file convolution.h
- *  \author Lamarche Ludovic <lamarchelu@eisti.eu>
+ *  \author Perales Quentin <peralesque@eisti.eu>
  *  \version 0.1
- *  \date Tue 08 Oct 2013
+ *  \date  Tue 08 Oct 2013
  *
- *  \brief Converti l'input dans l'output avec une convolution
+ *  \brief realise la convolution de l image a partir d'un fichier source
  *
  *
  */
@@ -26,18 +26,55 @@
 */
 int testFinFichierFiltre(FILE* filtre);
 
+/*!
+       \fn int retournerLaTaille(int taille)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Wed 13 Nov 2013
+       \brief permet de retourner la taille du filtre en supposant qu'il soit saisi sans erreur               
+       \param taille : (int) la taille du filtre, elle sera calculée
+       \return un entier qui correspond a la taille et renvoie 1 sinon
+               
+       \remarks 
 
+*/
 int retournerLaTaille(int taille);
+
+/*!
+       \fn int calculTailleFiltre(FILE* filtre)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Wed 13 Nov 2013
+       \brief permet de calculer la taille du filtre               
+       \param filtre : (file*) le filtre dans un fichier
+       \return 
+               
+       \remarks 
+
+*/
 int calculTailleFiltre(FILE* filtre);
+
+/*!
+       \fn void remplirFiltre(FILE filtre, int** matrice, int taille)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Wed 13 Nov 2013
+       \brief remplit le filtre des chiffres indiqués dans le fichier               
+       \param filtre : (file) 
+       \param matrice : (int**) 
+       \param taille : (int) 
+       
+               
+       \remarks 
+
+*/
 void remplirFiltre(FILE* filtre, int** matrice, int taille);
 
 
 /*!
-       \fn int** recupFiltre(FILE* filtre)
+       \fn int** recupFiltre(FILE* filtre, int taille)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief renvoie le filtre dans une matrice de taille 3x3, taille normale d'un filtre pour une convolution               
        \param filtre : (file*) le filtre que l'on utilise pour la convolution
+       \param taille : (int) la taille du filtre
        \return une matrice de taille 3x3 contenant le filtre
                
        \remarks 
@@ -45,26 +82,9 @@ void remplirFiltre(FILE* filtre, int** matrice, int taille);
 */
 int** recupFiltre(FILE* filtre, int taille);
 
-/*!
-       \fn int associationPossible(int x, int y, int i, int j, int largeur, int hauteur)
-       \author PERALES Quentin <peralesque@eisti.eu>
-       \date Sat 19 Oct 2013
-       \brief renvoie un entier qui permet de savoir si la case à laquelle on applique le filtre est dans l'image ou une case inexistante (par exemple une coordonnées de l'image négative)               
-       \param x : (int) l'abscisse du pixel de l'image auquel on veut appliquer le filtre
-       \param y : (int) l'ordonnée du pixel de l'image auquel on veut appliquer le filtre
-       \param i : (int) l'abscisse du coefficient du filtre que l'on applique 
-       \param j : (int) l'ordonnée du coefficient du filtre que l'on applique 
-       \param largeur : (int) la largeur de l'image
-       \param hauteur : (int) la hauteur de l'image
-       \return 1 si l'association est possible, 0 sinon
-               
-       \remarks 
-
-*/
-int associationPossible(int x, int y, int i, int j, int largeur, int hauteur);
 
 /*!
-       \fn int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre)
+       \fn int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre, int taille, int decalage)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief applique le filtre à un pixel de l'image               
@@ -82,12 +102,14 @@ int associationPossible(int x, int y, int i, int j, int largeur, int hauteur);
 int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre, int taille, int decalage);
 
 /*!
-       \fn int** applicationFiltre(Image image, int** filtre)
+       \fn int** applicationFiltre(Image image, int** filtre, int taille)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief applique le filtre à l'image               
        \param image : (image) l'image à laquelle est appliquée la convolution
        \param filtre : (int**) le filtre à appliquer sur l'image
+       \param taille : (int) la taille du filtre
+       \param decalage : (int) le decalage de départ dû à la taille du filre
        \return une matrice de pixels qui représente l'image après l'application du filtre, ie, après l'application de la convolution
                
        \remarks 
@@ -96,12 +118,13 @@ int setNumber(int y, int x, int largeur, int hauteur, int** pixels, int** filtre
 int** applicationFiltre(Image image, int** filtre, int taille);
 
 /*!
-       \fn Image applicationConvolution(Image image, FILE* fichierFiltre)
+       \fn Image applicationConvolution(Image image, FILE* fichierFiltre, int taille)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief permet d'enchainer les fonctions qui permettent d'appliquer la convolution               
        \param image : (image) Image à traiter
        \param filtre : (FILE*) fichier contenant le filtre de convolution
+       \param taille : (int) la taille du filtre
        \return retourne un entier qui indique 0 pour le bon déroulement des fonctions
                
        \remarks 
@@ -117,6 +140,7 @@ Image applicationConvolution(Image image, FILE* fichierFiltre, int taille);
        \date mar. 22 oct. 2013
        \brief Verifie le bon chargement du filtre
        \param filtre : (FILE*) le fichier qui contient le filtre à appliquer a la convolution
+       \param taille : (int) la taille du filtre
        \return 1 si le chargement est correct
                
        \remarks 

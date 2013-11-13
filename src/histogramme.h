@@ -1,3 +1,12 @@
+/*! \file  histogramme.h
+	\author Poussou Elie poussoueli@eisti.eu
+	\date Tue 22 Oct 2013
+	
+	\brief Permet d'avoir l'histogramme d'une image en niveaux de gris                                 
+	
+
+*/
+
 #ifndef __HISTOGRAMME_H__
 #define __HISTOGRAMME_H__
 
