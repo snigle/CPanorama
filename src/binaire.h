@@ -7,8 +7,6 @@
 
 */
 	
-	
-	
  
 #ifndef __BINAIRE_H__
 #define __BINAIRE_H__
@@ -44,7 +42,7 @@ int** remplirMatriceBinaire (Image im_image, int int_seuil);
        \remarks 
 
 */
-Image binaire(char* str_input, char* str_output, char* str_valeurDeBascule, int int_bool_save, int* int_bool_erreur)
+Image binaire(char* str_input, char* str_output, char* str_valeurDeBascule, int int_bool_save, int* int_bool_erreur);
 
 #endif /* __BINAIRE_H__ */
 
