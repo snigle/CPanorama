@@ -19,6 +19,9 @@
 #include "histogramme.h"
 #include "panorama.h"
 #include "binaire.h"
+#include "hough.h"
+#include "harris.h"
+
 
 
  

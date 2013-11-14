@@ -1,27 +1,31 @@
+#ifndef __GESTIONLISTECOORDONNEES_H__
+#define __GESTIONLISTECOORDONNEES_H__
+
+
 #include "header.h"
 
 typedef struct sListe
 {
 	int x;
 	int y;
-	int valeur;
+	float valeur;
 	struct sListe* suivant;
 }ListePoints;
 
 /*!
-       \fn ListePoints nouveauListePoints(int x, int y, int valeur)
+       \fn ListePoints nouveauListePoints(int x, int y, float valeur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
        \brief permet de creer un point avec une abscisse x, une ordonnées y et une valeur
        \param x : (int) l'abscisse du point
        \param y : (int) l'ordonnées du point
-       \param valeur : (int) la valeur de ce point
+       \param valeur : (float) la valeur de ce point
        \return renvoie une structure de point
                
        \remarks 
 
 */
-ListePoints nouveauListePoints (int x, int y, int valeur);
+ListePoints nouveauListePoints (int x, int y, float valeur);
 
 /*!
        \fn ListePoints* creerlisteCoordonnees(int x, int y, int valeur)
@@ -30,13 +34,13 @@ ListePoints nouveauListePoints (int x, int y, int valeur);
        \brief creer un maillon d'une chaine, ce maillon represente une coordonnée               
        \param x : (int) l'abscisse du point
        \param y : (int) l'ordonnées du point
-       \param valeur : (int) la valeur de ce point
+       \param valeur : (float) la valeur de ce point
        \return un pointeur vers NULL qui contient les informations d'un point
                
        \remarks 
 
 */
-ListePoints* creerlisteCoordonnees (int x, int y, int valeur);
+ListePoints* creerlisteCoordonnees (int x, int y, float valeur);
 
 /*!
        \fn ListePoints* dernierListePoints(ListePoints* listeCoordonnees)
@@ -59,13 +63,13 @@ ListePoints* dernierListePoints(ListePoints* listeCoordonnees);
        \param listecoordonnees : (listepoints*) la liste de points
        \param x : (int) l'abscisse du nouveau point
        \param y : (int) l'ordonnées du nouveau point
-       \param valeur : (int) la valeur du nouveau point
+       \param valeur : (float) la valeur du nouveau point
        
                
        \remarks 
 
 */
-void ajoutFin(ListePoints* listeCoordonnees, int x, int y, int valeur);
+void ajoutFin(ListePoints* listeCoordonnees, int x, int y, float valeur);
 
 /*!
        \fn ListePoints* ajoutCoordonnee(ListePoints* listeCoordonnees, int x, int y, int valeur)
@@ -75,13 +79,13 @@ void ajoutFin(ListePoints* listeCoordonnees, int x, int y, int valeur);
        \param listecoordonnees : (listepoints*) la liste de points
        \param x : (int) l'abscisse du nouveau point
        \param y : (int) l'ordonnées du nouveau point
-       \param valeur : (int) la valeur du nouveau point
+       \param valeur : (float) la valeur du nouveau point
        \return une liste de points
                
        \remarks 
 
 */
-ListePoints* ajoutCoordonnee (ListePoints* listeCoordonnees, int x, int y, int valeur);
+ListePoints* ajoutCoordonnee (ListePoints* listeCoordonnees, int x, int y, float valeur);
 
 void afficherCoordonnees(ListePoints* liste);
 
@@ -97,3 +101,7 @@ void afficherCoordonnees(ListePoints* liste);
 
 */
 void libererListe(ListePoints* liste);
+
+	
+
+#endif /* __GESTIONLISTECOORDONNEES_H__ */

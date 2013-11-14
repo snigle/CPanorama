@@ -128,9 +128,17 @@ int** initMatrice(int largeur, int hauteur)
 {
 	int** tab;
 	int i;
+	int j;
 	tab = mallocBis(hauteur * sizeof(int*));
 	for (i = 0; i < hauteur; i += 1)
 		tab[i] = mallocBis(largeur * sizeof(int));
+	for (i = 0; i < hauteur; i += 1)
+	{
+		for (j = 0; j < largeur; j += 1)
+		{
+			tab[i][j]=0;
+		}
+	}
 	return tab;
 }
 

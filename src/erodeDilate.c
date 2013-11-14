@@ -108,7 +108,33 @@ int** genererMatriceDilate(Image imageInput)
 	
 	return matriceDilate;
 }
-
+/*
+int** genererMatriceDilate(Image imageInput)
+{
+	int** matriceDilate;
+	int i;
+	int j;
+	int k;
+	int l;
+	matriceDilate = initMatrice(imageInput.width, imageInput.height);
+	for (i = 1; i < imageInput.height-2; i += 1)
+	{
+		for (j = 1; j < imageInput.width-2; j += 1)
+		{
+			matriceDilate[i][j]=0;
+			for (k = -1; k < 2; k += 1)
+			{
+				for (l = -1; l < 2; l += 1)
+				{
+					matriceDilate[i][j]=matriceDilate[i][j] || imageInput.teinte[i+k][j+l];
+				}
+			}
+		}
+	}
+	
+	return matriceDilate;
+}
+*/
 Image erode (char* input, char* output, int bool_save, int* bool_erreur)
 {
 	Image imageInput;
