@@ -1,60 +1,60 @@
 #include "gestionListeCoordonnees.h"
 
 /*Coordonnées*/
-ListePoints nouveauListePoints (int x, int y, int valeur)
+ListePoints nouveauListePoints (int int_x, int int_y, int int_valeur)
 {
-	ListePoints m;
-	m.x = x;
-	m.y = y;
-	m.valeur = valeur;
-	m.suivant = NULL;
-	return(m);
+	ListePoints list_m;
+	list_m.int_x = int_x;
+	list_m.int_y = int_y;
+	list_m.int_valeur = int_valeur;
+	list_m.suivant = NULL;
+	return(list_m);
 }
 
 
 
 /*GERER LISTE*/
-ListePoints* creerlisteCoordonnees (int x, int y, int valeur)
+ListePoints* creerlisteCoordonnees (int int_x, int int_y, int int_valeur)
 {
-	ListePoints* maillon;
-	maillon = malloc(sizeof(ListePoints));
-	*maillon = nouveauListePoints(x, y, valeur);
-	return (maillon);
+	ListePoints* list_p_maillon;
+	list_p_maillon = malloc(sizeof(ListePoints));
+	*list_p_maillon = nouveauListePoints(int_x, int_y, int_valeur);
+	return (list_p_maillon);
 }
 
 
-ListePoints* dernierListePoints(ListePoints* listeCoordonnees)
+ListePoints* dernierListePoints(ListePoints* list_p_listeCoordonnees)
 {
-	if (listeCoordonnees -> suivant == NULL)
+	if (list_p_listeCoordonnees -> suivant == NULL)
 	{
-		return(listeCoordonnees);
+		return(list_p_listeCoordonnees);
 	}
 	else
 	{
-		return(dernierListePoints(listeCoordonnees -> suivant));
+		return(dernierListePoints(list_p_listeCoordonnees -> suivant));
 	}
 }
 
-void ajoutFin(ListePoints* listeCoordonnees, int x, int y, int valeur) 
+void ajoutFin(ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur) 
 {
-	ListePoints* fin;
-	ListePoints* nouveau;
-	fin = dernierListePoints(listeCoordonnees);
-	nouveau = malloc (sizeof(ListePoints));
-	*nouveau = nouveauListePoints(x, y, valeur);
-	fin->suivant = nouveau;
+	ListePoints* list_p_fin;
+	ListePoints* list_p_nouveau;
+	list_p_fin = dernierListePoints(list_p_listeCoordonnees);
+	list_p_nouveau = malloc (sizeof(ListePoints));
+	*list_p_nouveau = nouveauListePoints(int_x, int_y, int_valeur);
+	list_p_fin->suivant = list_p_nouveau;
 }
 /*Ajout d'une coordonnée*/
-ListePoints* ajoutCoordonnee (ListePoints* listeCoordonnees, int x, int y, int valeur)
+ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur)
 {
-	if (listeCoordonnees == NULL)
+	if (list_p_listeCoordonnees == NULL)
 	{
-		return creerlisteCoordonnees(x, y, valeur);
+		return (creerlisteCoordonnees(int_x, int_y, int_valeur));
 	}
 	else
 	{
-		ajoutFin(listeCoordonnees, x, y, valeur);
-		return listeCoordonnees;		
+		ajoutFin(list_p_listeCoordonnees, int_x, int_y, int_valeur);
+		return (list_p_listeCoordonnees);		
 	}
 }
 
@@ -62,19 +62,19 @@ void afficherCoordonnees(ListePoints* liste)
 {
 	if (liste != NULL)
 	{
-		printf("(x = %d, y = %d, valeur = %d) -> ", liste -> x, liste -> y, liste -> valeur);
+		printf("(x = %d, y = %d, valeur = %d) -> ", liste -> int_x, liste -> int_y, liste -> int_valeur);
 		afficherCoordonnees(liste -> suivant);
 	}
 	else printf("fin de liste\n");
 }
 
-void libererListe(ListePoints* liste)
+void libererListe(ListePoints* list_p_liste)
 {
-	if (liste != NULL){
-		if (liste -> suivant != NULL)
+	if (list_p_liste != NULL){
+		if (list_p_liste -> suivant != NULL)
 		{
-			libererListe(liste->suivant);
+			libererListe(list_p_liste->suivant);
 		}
-		free(liste);
+		free(list_p_liste);
 	}
 }
