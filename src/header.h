@@ -64,18 +64,18 @@ typedef struct Image
 
 
 /*!
-       \fn void erreursImage(int numeroErreur)
+       \fn void erreursImage (int int_numeroErreur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief spécifie l'erreur à l'utilisateur en fonction du numéro de celle ci. Toutes les erreurs sont issues d'un traitement de l'image               
-       \param numeroErreur : (int) un entier qui donne le numéro de l'erreur
+       \param int_numeroErreur : (int) un entier qui donne le numéro de l'erreur
        
                
        \remarks 
 
 */
 
-void erreursImage (int numeroErreur);
+void erreursImage (int int_numeroErreur);
 
 /*!
        \fn void erreurInputOutput(int numeroErreur)
@@ -88,34 +88,34 @@ void erreursImage (int numeroErreur);
        \remarks 
 
 */
-void erreurInputOutput(int numeroErreur);
+void erreurInputOutput(int int_numeroErreur);
 
 /*!
        \fn void erreurParametre(int numeroErreur)
        \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
        \date mer. 16 oct. 2013
        \brief Affiche les erreurs en rapport avec les paramètres               
-       \param numeroerreur : (int) numéro de l'erreur
+       \param int_numeroerreur : (int) numéro de l'erreur
        
                
        \remarks 
 
 */
-void erreurParametre(int numeroErreur);
+void erreurParametre(int int_numeroErreur);
 
 /*!
        \fn void autreErreurs(int numeroErreur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief spécifie l'erreur à l'utilisateur en fonction du numéro de celle ci. Toutes les erreurs correspondent à une erreur autre qu'un traitement de l'image.
-       \param numeroErreur : (int) le num qui renseigne l'erreur au cours du programme
+       \param int_numeroErreur : (int) le num qui renseigne l'erreur au cours du programme
        
                
        \remarks 
 
 */
 
-void autreErreurs(int numeroErreur);
+void autreErreurs(int int_numeroErreur);
 
 /*!
 	\fn erreur
@@ -123,13 +123,13 @@ void autreErreurs(int numeroErreur);
 	\date Tue 24 Sep 2013
 	\brief Coupe le programme et affiche une erreur
 	
-	\param int numeroerreur : entier correspondant à un nombre d'erreur
-	\param int sortir : entier qui precise s'il faut arreter le programme
+	\param int int_numeroerreur : entier correspondant à un nombre d'erreur
+	\param int int_sortir : entier qui precise s'il faut arreter le programme
 		
 		\remarks ras
 
 */
-void erreur(int numeroErreur, int sortir);
+void erreur(int int_numeroErreur, int int_sortir);
 
 
  /*!
@@ -138,62 +138,60 @@ void erreur(int numeroErreur, int sortir);
  	\date Mon 23 Sep 2013
  	\brief Description
  	
- 	\param taille : (size_t) mémoire à allouer
+ 	\param t_taille : (size_t) mémoire à allouer
  	\return 
  		
  		\remarks a tester
  
  */
-void* mallocBis(size_t taille);
+void* mallocBis(size_t t_taille);
 
 /*!
-       \fn int** initMatrice(int largeur, int hauteur)
+       \fn int** initMatrice(int int_largeur, int int_hauteur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief initialise une matrice correspondant à la taille de l'image à traiter               
-       \param largeur : (int) la largeur de l'image
-       \param hauteur : (int) la hauteur de l'image
+       \param int_largeur : (int) la largeur de l'image
+       \param int_hauteur : (int) la hauteur de l'image
        \return une matrice d'entiers à compléter
                
        \remarks 
 
 */
 
-int** initMatrice(int largeur, int hauteur);
+int** initMatrice(int int_largeur, int int_hauteur);
 
 /*!
-       \fn int largeurMatriceImage(Image image)
+       \fn int largeurMatriceImage(Image im_image)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief permet de connaitre la largeur à parcourir en fonction u type de l'image               
-       \param image : (image) l'image utilisée
+       \param im_image : (image) l'image utilisée
        \return un entier correspondant au nombre de chiffres à parcourir par ligne de matrice en fonction du type de l'image
                
        \remarks 
 
 */
 
-int largeurMatriceImage (Image image);
+int largeurMatriceImage (Image im_image);
 
 
 /*!
-       \fn creationImage
+       \fn Image creationImage(char* str_type, int int_largeur, int int_hauteur, int int_teinteMaximale, int** int_int_pixel)
        \author Perales Quentin <peralesque@eisti.eu>
 	\date Tue 24 Sep 2013
 	\brief permet de créer une image pixmap avec toutes les informations en paramètres
-       
-       \param       
-       \param tab : (char*) : le type de l'image
-       \param largeur : (int) : la largeur de l'image
-       \param hauteur : (int) : la hauteur de l'image
-       \param teinteMax : (int) : la teinte maximale (pour le type P2 et P3)
-       \param pixel : (int**) : matrice de pixels
-       \return 
-               retourne un type image
+          
+       \param str_tab : (char*) : le type de l'image
+       \param int_largeur : (int) : la largeur de l'image
+       \param int_hauteur : (int) : la hauteur de l'image
+       \param int_teinteMax : (int) : la teinte maximale (pour le type P2 et P3)
+       \param int_int_pixel : (int**) : matrice de pixels
+       \return retourne un type image
                \remarks 
 
 */
-Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int** pixel);
+Image creationImage(char* str_type, int int_largeur, int int_hauteur, int int_teinteMaximale, int** int_int_pixel);
 
 /*!
 	\fn void libererMatrice(void** mat, int largeur)
@@ -201,54 +199,55 @@ Image creationImage(char* tab, int largeur, int hauteur, int teinteMaximale, int
 	\date Mon 07 Oct 2013
 	\brief Libère une matrice		
 	\param mat : (void**) Matrice à libérer
-	\param largeur : (int) Longueur de la première composante de la matrice
+	\param int_largeur : (int) Longueur de la première composante de la matrice
 	
 		
 	\remarks 
 
 */
-void libererMatrice(void** mat, int largeur);
+void libererMatrice(void** mat, int int_largeur);
 
 /*!
-       \fn void libererImage(Image image)
+       \fn void libererImage(Image im_image)
        \author Poussou Elie <poussoueli@eisti.eu>
        \date Sat 05 Oct 2013
        \brief libère la mémoire utilisée par l'image chargée               
-       \param image : (image) : l'image chargée
+       \param im_image : (image) : l'image chargée
        \return 
                
        \remarks 
 
 */
 
-void libererImage(Image image);
+void libererImage(Image im_image);
 
 
 /*!
-       \fn void verifType(char* type)
+       \fn void verifType(char* str_type)
        \author Poussou Elie <poussoueli@eisti.eu>
        \date Mon 07 Oct 2013
-       \brief Envoie une erreur si le type n'est pas P1 ou P2 ou P3        
+       \brief Envoie une erreur si le type n'est pas P1 ou P2 ou P3  
+       \param str_type : (char*) le type de l image      
        \return 
                
        \remarks 
 
 */
-int verifType(char* type);
+int verifType(char* str_type);
 
 /*!
-       \fn int testType(Image image, char* type)
+       \fn int testType(Image im_image, char* str_type)
        \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
        \date mar. 22 oct. 2013
        \brief Verifie si le type est correct pour appliquer une convolution 
-       \param image : image à tester
-       \param type : type à tester
+       \param im_image : image à tester
+       \param str_type : type à tester
        \return 1 si le type de l'image correspond au paramètre, 0 sinon
                
        \remarks 
 
 */
-int testType(Image image, char* type);
+int testType(Image im_image, char* str_type);
 
 
 #endif /* __HEADER_H__ */

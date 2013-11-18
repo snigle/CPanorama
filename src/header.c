@@ -12,20 +12,21 @@
 #include "header.h"
 
 
-void erreursImage (int numeroErreur){
-	switch(numeroErreur)
+void erreursImage (int int_numeroErreur)
+{
+	switch(int_numeroErreur)
 	{
 		case IMAGE_CORROMPUE:
-			fprintf(stderr,"Le fichier image est corrompu\n");
+			fprintf(stderr,"Le fichier im_image est corrompu\n");
 		break;
 		case IMAGE_NO_EXISTS:
-			fprintf(stderr,"Le fichier image n'existe pas\n");
+			fprintf(stderr,"Le fichier im_image n'existe pas\n");
 		break;
 		case MAUVAIS_FORMAT_GRAYSCALE:
-			fprintf(stderr,"L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
+			fprintf(stderr,"L'im_image n'est pas adaptée. Vous devez utiliser une im_image en .ppm pour réaliser une im_image en échelle de gris\n");
 		break;
 		case ERREUR_TYPE:
-			fprintf(stderr,"Le type de cette image n'est pas géré\n");
+			fprintf(stderr,"Le type de cette im_image n'est pas géré\n");
 		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");
@@ -34,9 +35,9 @@ void erreursImage (int numeroErreur){
 }
 
 
-void erreurParametre(int numeroErreur)
+void erreurParametre(int int_numeroErreur)
 {
-	switch(numeroErreur)
+	switch(int_numeroErreur)
 	{
 		case ERREUR_PARAMETRE:
 			fprintf(stderr,"Les paramètres ne sont pas entrés correctement, entrez panorama -h pour plus d'informations\n");
@@ -54,9 +55,9 @@ void erreurParametre(int numeroErreur)
 }
 
 
-void erreurInputOutput(int numeroErreur)
+void erreurInputOutput(int int_numeroErreur)
 {
-	switch(numeroErreur)
+	switch(int_numeroErreur)
 	{
 		case NO_INPUT_OR_OUTPUT:
 			fprintf(stderr,"Il n'y a aucun fichier en input ou en output\n");
@@ -73,8 +74,9 @@ void erreurInputOutput(int numeroErreur)
 	}
 }
 
-void autreErreurs(int numeroErreur){
-switch(numeroErreur)
+void autreErreurs(int int_numeroErreur)
+{
+switch(int_numeroErreur)
 	{
 		case NO_MEMORY:
 			fprintf(stderr,"Il manque de l'espace mémoire pour faire un malloc\n");
@@ -90,87 +92,87 @@ switch(numeroErreur)
 
 
 
-void erreur(int numeroErreur, int sortir)
+void erreur(int int_numeroErreur, int int_sortir)
 {
-	int result;
-	result = 1;
-	if(numeroErreur)
+	int int_result;
+	int_result = 1;
+	if(int_numeroErreur)
 	{
-		if (numeroErreur <= 10)
-			autreErreurs(numeroErreur);
-		else if (numeroErreur <= 20)
-			erreursImage(numeroErreur);
-		else if (numeroErreur <= 30)
-			erreurInputOutput(numeroErreur);
-		else if (numeroErreur <= 40)
-			erreurParametre(numeroErreur);
+		if (int_numeroErreur <= 10)
+			autreErreurs(int_numeroErreur);
+		else if (int_numeroErreur <= 20)
+			erreursImage(int_numeroErreur);
+		else if (int_numeroErreur <= 30)
+			erreurInputOutput(int_numeroErreur);
+		else if (int_numeroErreur <= 40)
+			erreurParametre(int_numeroErreur);
 			else
 				fprintf(stderr,"Une erreur est survenue\n");
-		if (sortir)
-			exit(result);
+		if (int_sortir)
+			exit(int_result);
 	}
 }
 
 
 
-void* mallocBis(size_t taille)
+void* mallocBis(size_t t_taille)
  {
  	void* result;
  	
-	result = malloc(taille);
+	result = malloc(t_taille);
 	if(result == NULL)
 		erreur(NO_MEMORY, EXIT);
-	return result;
+	return (result);
  }
 
 
-int** initMatrice(int largeur, int hauteur)
+int** initMatrice(int int_largeur, int int_hauteur)
 {
-	int** tab;
+	int** int_int_tab;
 	int i;
 	int j;
-	tab = mallocBis(hauteur * sizeof(int*));
-	for (i = 0; i < hauteur; i += 1)
-		tab[i] = mallocBis(largeur * sizeof(int));
-	for (i = 0; i < hauteur; i += 1)
+	int_int_tab = mallocBis(int_hauteur * sizeof(int*));
+	for (i = 0; i < int_hauteur; i += 1)
+		int_int_tab[i] = mallocBis(int_largeur * sizeof(int));
+	for (i = 0; i < int_hauteur; i += 1)
 	{
-		for (j = 0; j < largeur; j += 1)
+		for (j = 0; j < int_largeur; j += 1)
 		{
-			tab[i][j]=0;
+			int_int_tab[i][j]=0;
 		}
 	}
-	return tab;
+	return (int_int_tab);
 }
 
-int largeurMatriceImage (Image image)
+int largeurMatriceImage (Image im_image)
 {
-	int largeur;
-	if(!strcmp(image.type, "P3"))
-		largeur = 3 * image.width;
+	int int_largeur;
+	if(!strcmp(im_image.type, "P3"))
+		int_largeur = 3 * im_image.width;
 	else
-		largeur = image.width;
-	return largeur;
+		int_largeur = im_image.width;
+	return (int_largeur);
 }
 
 
-Image creationImage(char* type, int largeur, int hauteur, int teinteMaximale, int** pixel)
+Image creationImage(char* str_type, int int_largeur, int int_hauteur, int int_teinteMaximale, int** int_int_pixel)
 {
-	Image newImage;
-	newImage.type = strdup(type);
-	newImage.width = largeur;
-	newImage.height = hauteur;
-	newImage.teinteMax = teinteMaximale;
-	newImage.teinte = pixel;
-	return newImage;
+	Image im_newImage;
+	im_newImage.type = strdup(str_type);
+	im_newImage.width = int_largeur;
+	im_newImage.height = int_hauteur;
+	im_newImage.teinteMax = int_teinteMaximale;
+	im_newImage.teinte = int_int_pixel;
+	return (im_newImage);
 }
 
 
-void libererMatrice(void** mat, int hauteur)
+void libererMatrice(void** mat, int int_hauteur)
 {
 	int i;
-	if(mat!=NULL && hauteur > 0)
+	if(mat!=NULL && int_hauteur > 0)
 	{
-		for(i=0;i<hauteur;i++)
+		for(i=0;i<int_hauteur;i++)
 		{
 			free(mat[i]);	
 		}
@@ -179,28 +181,28 @@ void libererMatrice(void** mat, int hauteur)
 	}
 }
 
-void libererImage(Image image)
+void libererImage(Image im_image)
 {
-	free(image.type);
-	libererMatrice((void**)image.teinte, image.height);
+	free(im_image.type);
+	libererMatrice((void**)im_image.teinte, im_image.height);
 }
 
-int verifType(char* type)
+int verifType(char* str_type)
 {
 	
-	return (strcmp(type, "P1") && strcmp(type, "P2") && strcmp(type, "P3"));
+	return ((strcmp(str_type, "P1") && strcmp(str_type, "P2") && strcmp(str_type, "P3")));
 }
 
-int testType(Image image, char* type)
+int testType(Image im_image, char* str_type)
 {
-	int result;
-	if (strcmp(image.type, type))
+	int int_result;
+	if (strcmp(im_image.type, str_type))
 	{
 		erreur(ERREUR_TYPE, NO_EXIT);
-		result = 0;
+		int_result = 0;
 	}else
-		result = 1;
+		int_result = 1;
 	
-	return(result);
+	return(int_result);
 }
 
