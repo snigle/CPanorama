@@ -1,3 +1,13 @@
+/*! \file gestionListeCoordonnees.h
+ *  \author Perales Quentin <peralesque@eisti.eu>
+ *  \version 0.1
+ *  \date  Wed 13 Nov 2013
+ *
+ *  \brief gère une liste de coordonnées et d'un valeur asociée à chaque couple de coordonnées
+ *
+ *
+ */
+ 
 #ifndef __GESTIONLISTECOORDONNEES_H__
 #define __GESTIONLISTECOORDONNEES_H__
 

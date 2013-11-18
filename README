@@ -7,32 +7,13 @@ Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
 *							 																  *
 ***********************************************************************************************
 
-###############################################################################################
-
-gérer erreur dans chargerImage sans quitter
-{
-appeler save dans l'ordonceur : save(erode()) etc...
-ajouter libererImage dans save, seulement après avoir mis à jour toutes les fonctions
-}
-OU
-créer une sous fonction pour chaque option qui sauvegarde (pour avoir un message personnalisé);
-
-**************TODO**************
-Ajouter/Compléter les cartouches
-
-Vérifier tout les malloc par mallocBis
-Vérifier les fuites de mémoires
-
-******************TO DO AFTER*********************
-Lors d'un exit envoyer une liste de matrice à libérer
-	par exemple : exit(TRUCMUCH,EXIT,listeMAtrice)
 
 ****Liens utiles***
 Jankins (test du code : build)
 Sonar vérifie le build
 
 Cheak
-
+Vérifier les fuites de mémoires
 
 
 
@@ -47,81 +28,4 @@ http://operationpixel.free.fr/pointinteret_fast.php
 	- tester sur une image
 	- les relier (Comment ? RANSAC ?)
 	
-	##############################################################################
-ELIE
-
-// 3. Compute Harris Corner Response Map
-        float[,] map = new float[height, width];
-
-        fixed (float* pdx = diffx, pdy = diffy, pdxy = diffxy, pmap = map)
-        {
-            float* dx = pdx;
-            float* dy = pdy;
-            float* dxy = pdxy;
-            float* H = pmap;
-            float M, A, B, C;
-
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++, dx++, dy++, dxy++, H++)
-                {
-                    A = *dx;
-                    B = *dy;
-                    C = *dxy;
-
-                    if (measure == HarrisCornerMeasure.Harris)
-                    {
-                        // Original Harris corner measure
-                        M = (A * B - C * C) - (k * ((A + B) * (A + B)));
-                    }
-                    else
-                    {
-                        // Harris-Noble corner measure
-                        M = (A * B - C * C) / (A + B + Accord.Math.Special.SingleEpsilon);
-                    }
-
-                    if (M > threshold)
-                    {
-                        *H = M; // insert value in the map
-                    }
-                }
-            }
-        }
-
-
-        // 4. Suppress non-maximum points
-        List<IntPoint> cornersList = new List<IntPoint>();
-
-        // for each row
-        for (int y = r, maxY = height - r; y < maxY; y++)
-        {
-            // for each pixel
-            for (int x = r, maxX = width - r; x < maxX; x++)
-            {
-                float currentValue = map[y, x];
-
-                // for each windows' row
-                for (int i = -r; (currentValue != 0) && (i <= r); i++)
-                {
-                    // for each windows' pixel
-                    for (int j = -r; j <= r; j++)
-                    {
-                        if (map[y + i, x + j] > currentValue)
-                        {
-                            currentValue = 0;
-                            break;
-                        }
-                    }
-                }
-
-                // check if this point is really interesting
-                if (currentValue != 0)
-                {
-                    cornersList.Add(new IntPoint(x, y));
-                }
-            }
-        }
-
-
-        return cornersList;
-    }
+=> commenter les fonctions

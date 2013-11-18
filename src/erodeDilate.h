@@ -1,12 +1,13 @@
-/*! \file erodeDilate.h
- *  \author Lamarche Ludovic <lamarchelu@eisti.eu>
+/*! \file erode.c
+ *  \author Perales Quentin <peralesque@eisti.eu>
  *  \version 0.1
- *  \date  mar. 22 oct. 2013
+ *  \date  Tue 08 Oct 2013
  *
- *  \brief permet d'éroder ou de dilater une image
+ *  \brief permet d'eroder l'image choisit
  *
  *
  */
+
 
 
 #ifndef __ERODEDILATE_H__

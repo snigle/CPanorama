@@ -101,4 +101,3 @@ histogramme:
 enregistrer:
 	@echo "************TEST Enregistrer**********"
 	./bin/panorama -r src/images/
-	

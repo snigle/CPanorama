@@ -6,13 +6,6 @@
 	
 
 */
-
-/*
-Pour chaque intensité, compter le nombre de pixels pour chaque intensité
-
-tests sur si l'image est en images de gris et si 
-l'image n'est pas nulle
-*/
 #include "histogramme.h"
 
 int* remplirTableauHist(Image image, int* bool_erreur)
