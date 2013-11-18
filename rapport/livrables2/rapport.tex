@@ -1,0 +1,157 @@
+%Classe du Document% 
+\documentclass[a4paper,french,12pt]{report}
+
+
+%Packages utilisÃ©s
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+%\usepackage{layout}
+%\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{fixltx2e}
+%\usepackage{soul}
+%\usepackage{ulem}
+%\usepackage{eurosym}
+\usepackage{graphicx}
+%\usepackage{bookman}
+%\usepackage{charter}
+%\usepackage{newcent}
+%\usepackage{lmodern}
+%\usepackage{mathpazo}
+%\usepackage{mathptmx}
+%\usepackage{url}
+%\usepackage{verbatim}
+%\usepackage{moreverb}
+%\usepackage{listings}
+%\usepackage{fancyhdr}
+\usepackage{wrapfig}
+%\usepackage{color}
+%\usepackage{colortbl}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathrsfs}
+%\usepackage{asmthm}
+%\usepackage{makeidx}
+\usepackage{biblatex}
+
+\bibliography{rapport.bib}
+
+\usepackage[nottoc, notlof, notlot]{tocbibind}
+
+
+\usepackage{hyperref}
+\hypersetup{
+	bookmarks=true,
+	colorlinks=true,
+	linkcolor=black, 
+}
+
+\begin{document}
+
+\title{Réalisation d'un panorama}
+
+\author{
+	\bsc{Ludovic Lamarche} \\ 
+	\bsc{Quentin Perales} \\ 
+	\bsc{Elie Poussou} \\ \\ \\ \\
+	E.I.S.T.I\\ 
+	PAU} 
+\date{13 Octobre 2013}
+
+
+\maketitle
+\tableofcontents
+
+%\singlespacing
+\onehalfspacing
+%\doublespacing 
+
+	\chapter*{Introduction}	
+		La seconde partie du projet nous a permis de réaliser les six fonctions demandées puis d'approfondir nos recherches pour automatiser la réalisation d'un panorama.\\
+		Afin d'expliciter notre travail, nous allons expliquer notre code pas à pas dans une première partie. Chaque fonction demandée a requis divers recherches. On pourra alors utiliser certains schémas pour expliquer les algorithmes utilisés dans notre programme.\\
+		Puis nous allons expliquer les différentes méthodes que nous pouvons choisir pour écrire le code qui premettra l'automatisation d'un panorama. On va pouvoir comprendre comment détecter les points d'intérêts, les relier puis enfin comparer les deux images pour les assembler.\newpage
+		
+		
+	\chapter{Les six fonctions demandées dans le livrable}
+		\section{Grayscale}
+		\section{Black and White}
+		\section{Histogramme}
+		\section{Dilate}
+		\section{Erode}
+		\section{Convolution}
+			La convolution permet d'appliquer un filtre de convolution à une image en échelle de gris. Le but est d'affecter pour chaque pixel de l'image des coefficients au pixels autour de celui-ci.
+			
+			La taille du filtre est de taille variable, cependant, elle est toujours paire. Les filtres les plus utilisés sont les filtres de taille 3x3, mais parfois, les filtres de tailles supérieures sont requis.
+			Les filtres sont récupérés en début de fonction, une erreur est générées si le filtre n'est pas correct, c'est a dire si le fichier texte comporte caractères autres que des chiffres ou nombres ou s'il n'y a pas assez de coefficients.
+			
+			Afin d'expliquer l'algorithme qui mène à la convolution, nous allons utiliser un filtre 3x3 sur une image. Prenons le filtre F suivant :\\
+			\begin{tabular}{lll}
+			   0 & 1 & 0 \\
+			   1 & 1 & 1 \\
+			   0 & 1 & 0 \\
+			\end{tabular}
+			\\
+			F est appliqué à un pixel p de coordonnées (x, y). La valeur du pixel après la convolution sera alors \\
+			$
+				nouvelleValeur = 0 * p(x-1, y-1) + 1 * p(x, y-1) + 0 * p(x+1,y-1) \\
+				+ 1 * p(x-1, y) + 1 * p(x, y) + 1 * p(x+1,y) \\ 
+				+ 0 * p(x-1, y+1) + 1 * p(x, y+1) + 0 * p(x+1,y+1)
+			$
+			\\
+			De plus, on crée un décalage pour éviter d'assigner des coefficients à des pixels hors image. Pour un filtre 3x3, le décalage est de 1 ; pour 5x5, il est de 3 ; pour 7x7, il est de 5. On peut donc dire que
+			
+			\begin{equation}
+				decalage = \dfrac{taille - 1}{2} 
+			\end{equation}
+			
+			Voici un exemple de convolution que l'on peut obtenir : \\
+
+	\begin{tabular}{llllllllllllllll}
+	   35 & 40 & 41 & 45 & 50 &   &   &   &   &   &   & 35 & 40 & 41 & 45 & 50 \\
+	   40 & 40 & 42 & 46 & 52 &   & 0 & 1 & 0 &   &   & 35 & 40 & 41 & 45 & 50 \\
+	   42 & 46 & 50 & 55 & 55 & X & 0 & 0 & 0 &   & = & 40 & 40 & 42 & 46 & 52 \\
+	   48 & 52 & 56 & 58 & 60 &   & 0 & 0 & 0 &   &   & 42 & 46 & 50 & 55 & 55 \\
+	   56 & 60 & 65 & 70 & 75 &   &   &   &   &   &   & 56 & 60 & 65 & 70 & 75 \\
+	\end{tabular}
+
+
+
+Le but va être maintenant d'utiliser ces fonctions ainsi que d'autres algorithmes pour automatiser la création d'un panorama. 
+	
+	\chapter{Comment automatiser un panorama ?}
+	
+	Après avoir vu les principales fonctions utiles à notre panorama, nous devons maintenant développer des méthodes pour pouvoir coder des algorithmes capables d'assembler des images les unes aux autres et ainsi retrouver l'image initiale.
+	\\
+	\\
+		\section{La détection des points d'intérêts d'une image}
+		Dans un premier temps, il faut détecter les points d'intérêts de l'image, c'est-à-dire les points particulier de l'image, qui sont notables. Pour cela, nous allons comparer deux techniques : la transformée de Hough et le détecteur de Harris.
+		\\
+			\subsection{La transformée de Hough}
+			
+			Dans cette méthode, on utilise des images en noir et blanc, il faut donc convertir l'image couleur en une image en échelle de gris, puis la convertir en noir et blanc. Afin d'obtenir un nombre de points suffisamment important pour pourvoir les comparer mais pas trop pour éviter d'utiliser des points inutiles, on peut éroder ou dilater l'image. 
+			
+			Le but ici est de comparer les points les uns par rapport aux autres pour délimiter des figures géométriques précises. Le plus simple est de repérer les droites de l'image. On considère qu'une infinité de points passent par un point, la seule chose qui diffère est donc l'inclinaison de la droite qui passe par ce point. On calcule alors la norme algébrique ro du segment entre l'origine et la droite où le segment est perpendiculaire à cette droite ainsi que téta qui est l'angle d'inclinaison de la droite par rapport à la perpendiculaire à l'axe des ascisses passant par le point étudié.
+			
+			On trace ensuite dans l'espace de Hough tous les couples ro (ordonnées) et teta (abscisses) obtenus pour chaque point. Les courbes de l'espace de hough sont concourrantes en plusieurs points qui sont alors les couples (ro, teta) caractéristiques de l'image.
+			
+			Maintenant, il faut retracer les droites de Hough qui correspondent à l'image. Pour cela, il faut, pour chaque pixel, calculer un ro' et un téta', si ce couple est égal à un couple calculé précédement, lors on trace la droite qui correspond à ce couple.
+			
+			On obtien ainsi toutes les droites caractéristiques de l'image.
+			
+			\\
+			\subsection{Le detecteur de Harris}
+			
+			
+			
+		\section{Relier les points d'intérêts : la méthode RANSAC}
+		Lors de l'utilisation
+		
+		
+		\section{Comparer les deux images}
+			\subsection{La comparaison des points un à un}
+			\subsection{La comparaison des trajectoires issues de RANSAC}
+		   
+	\chapter*{Conclusion}
+\printbibliography
+\end{document}
