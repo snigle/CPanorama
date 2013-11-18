@@ -22,7 +22,7 @@ all: $(PROG)
 
 
 $(PROG): $(dirbin) $(OBJ) 
-	$(CC) $(OBJ) -o $(dirbin)$@
+	$(CC) $(OBJ) -o $(dirbin)$@ -lm
 	@echo "Compilation terminée"
 $(dirbin) :
 	@mkdir $(dirbin)

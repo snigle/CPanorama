@@ -10,8 +10,11 @@
  
 #ifndef __PANORAMA_H__
 #define __PANORAMA_H__
+#include <math.h>
 
 #include "header.h"
+#include "harris.h"
+#include "gestionListeCoordonnees.h"
 
 /*!
         \fn int panorama(char** input, int nombreInput, char* output)
@@ -26,7 +29,7 @@
         \remarks ras
 
 */
-int panorama(char** input, int nombreInput, char* output);
+int panorama(char** input, int nombreInput, char* output, int* bool_erreur);
 
 #endif /* __PANORAMA_H__ */
 

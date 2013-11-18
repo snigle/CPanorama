@@ -1,6 +1,7 @@
 #include "gestionListeCoordonnees.h"
 
 /*Coordonnées*/
+
 ListePoints nouveauListePoints (int int_x, int int_y, int int_valeur)
 {
 	ListePoints list_m;
@@ -14,6 +15,7 @@ ListePoints nouveauListePoints (int int_x, int int_y, int int_valeur)
 
 
 /*GERER LISTE*/
+
 ListePoints* creerlisteCoordonnees (int int_x, int int_y, int int_valeur)
 {
 	ListePoints* list_p_maillon;
@@ -35,7 +37,8 @@ ListePoints* dernierListePoints(ListePoints* list_p_listeCoordonnees)
 	}
 }
 
-void ajoutFin(ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur) 
+
+void ajoutFin(ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur)
 {
 	ListePoints* list_p_fin;
 	ListePoints* list_p_nouveau;
@@ -45,6 +48,7 @@ void ajoutFin(ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int in
 	list_p_fin->suivant = list_p_nouveau;
 }
 /*Ajout d'une coordonnée*/
+
 ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur)
 {
 	if (list_p_listeCoordonnees == NULL)

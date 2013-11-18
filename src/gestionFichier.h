@@ -30,7 +30,7 @@
 */
 
 
-char* recupererExtension(char* nom);
+char* recupererExtension(char* char_nom);
 
 /*!
        \fn int recupererNbFichierRepertoire(DIR* rep)
@@ -43,7 +43,7 @@ char* recupererExtension(char* nom);
        \remarks 
 
 */
-int recupererNbFichierRepertoire (DIR* rep);
+int recupererNbFichierRepertoire (DIR* dir_rep);
 
 /*!
        \fn char** listeInputDossier(DIR* rep, int taille, char* nomDossier)
@@ -58,7 +58,7 @@ int recupererNbFichierRepertoire (DIR* rep);
        \remarks 
 
 */
-char** listeInputDossier(DIR* rep, int taille, char* nomDossier);
+char** listeInputDossier(DIR* dir_rep, int int_taille, char* char_nomDossier);
 
 /*!
        \fn char** recupererListeInputDossier(char* dossier, int* taille)
@@ -72,7 +72,7 @@ char** listeInputDossier(DIR* rep, int taille, char* nomDossier);
        \remarks 
 
 */
-char** recupererListeInputDossier(char* dossier, int* taille);
+char** recupererListeInputDossier(char* char_dossier, int* int_taille);
 
 
 /*!
@@ -85,7 +85,7 @@ char** recupererListeInputDossier(char* dossier, int* taille);
       		\remarks ras
 
 */
-void allerAlaLigne (FILE* fichier);
+void allerAlaLigne (FILE* file_fichier);
 
 /*!
        \fn void sauterCommentaire(FILE* fichier)
@@ -97,7 +97,7 @@ void allerAlaLigne (FILE* fichier);
       		\remarks ras
 
 */
-void sauterCommentaire(FILE* fichier);
+void sauterCommentaire(FILE* file_fichier);
 
 /*!
        \fn char* recupType(FILE* image, int* bool_erreur) ;
@@ -109,7 +109,7 @@ void sauterCommentaire(FILE* fichier);
       		\remarks ras
 
 */
-char* recupType(FILE* image, int* bool_erreur) ;
+char* recupType(FILE* file_image, int* int_bool_erreur) ;
 
 /*!
        \fn int parametrage(FILE* image, int* bool_erreur)
@@ -122,7 +122,7 @@ char* recupType(FILE* image, int* bool_erreur) ;
       		\remarks ras
 
 */
-int parametrage(FILE* image, int* bool_erreur);
+int parametrage(FILE* file_image, int* int_bool_erreur);
 
 /*!
        \fn int teinteMax(char* type, FILE* image, int* bool_erreur)
@@ -136,7 +136,7 @@ int parametrage(FILE* image, int* bool_erreur);
       		\remarks ras
 
 */
-int teinteMax(char* type, FILE* image, int* bool_erreur);
+int teinteMax(char* char_type, FILE* file_image, int* int_bool_erreur);
 
 
 /*!
@@ -151,7 +151,7 @@ int teinteMax(char* type, FILE* image, int* bool_erreur);
 
 */
 
-int charToInt(char c);
+int charToInt(char char_c);
 
 
 /*!
@@ -169,7 +169,7 @@ int charToInt(char c);
        \remarks 
 
 */
-void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type, int* bool_erreur);
+void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int int_hauteur, char* char_type, int* int_bool_erreur);
 
 /*!
        \fn int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_erreur)
@@ -186,7 +186,7 @@ void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char
       		\remarks ras
 
 */
-int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_erreur);
+int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* char_type, int* int_bool_erreur);
 
 
 /*!
@@ -205,7 +205,7 @@ int** recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_
        \remarks 
 
 */
-void capterLesParametres(FILE* image, char* type, int* hauteur, int* largeur, int* teinteMaximale, int* bool_erreur);
+void capterLesParametres(FILE* file_image, char* char_type, int* int_hauteur, int* int_largeur, int* int_teinteMaximale, int* int_bool_erreur);
 /*!
        \fn Image chargerImage(char* nomImage)
        \author Perales Quentin <peralesque@eisti.eu>
@@ -218,7 +218,7 @@ void capterLesParametres(FILE* image, char* type, int* hauteur, int* largeur, in
 
 */
 
-Image chargerImage(char* nomImage, int* bool_erreur);
+Image chargerImage(char* char_nomImage, int* int_bool_erreur);
 
 
 
@@ -233,7 +233,7 @@ Image chargerImage(char* nomImage, int* bool_erreur);
        \remarks 
 
 */
-void ecritureFichier(Image image, FILE* fich);
+void ecritureFichier(Image image_image, FILE* file_fich);
 
 
 
@@ -250,7 +250,7 @@ void ecritureFichier(Image image, FILE* fich);
        \remarks 
 
 */
-void setExtention (Image image, char* output);
+void setExtention (Image image_image, char* char_output);
 
 /*!
        \fn int save(Image image, char* ouput)
@@ -267,7 +267,7 @@ void setExtention (Image image, char* output);
 
 
 
-void save(Image image, char* output, int* bool_erreur);
+void save(Image image_image, char* char_output, int* int_bool_erreur);
 
 /*!
        \fn int chargerImage(char* input, char* output)
@@ -281,5 +281,5 @@ void save(Image image, char* output, int* bool_erreur);
        \remarks 
 
 */
-void testChargerImage(char* input, char* output);
+void testChargerImage(char* char_input, char* char_output);
 #endif /* __GESTIONFICHIER_H__ */

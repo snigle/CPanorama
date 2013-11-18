@@ -7,6 +7,10 @@
  *
  *
  */
+ 
+#ifndef __GESTIONLISTECOORDONNEES_H__
+#define __GESTIONLISTECOORDONNEES_H__
+
 
 #include "header.h"
 
@@ -19,6 +23,7 @@ typedef struct sListe
 }ListePoints;
 
 /*!
+
        \fn ListePoints nouveauListePoints (int int_x, int int_y, int int_valeur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
@@ -31,6 +36,7 @@ typedef struct sListe
        \remarks 
 
 */
+
 ListePoints nouveauListePoints (int int_x, int int_y, int int_valeur);
 
 /*!
@@ -46,7 +52,9 @@ ListePoints nouveauListePoints (int int_x, int int_y, int int_valeur);
        \remarks 
 
 */
+
 ListePoints* creerlisteCoordonnees (int int_x, int int_y, int int_valeur);
+
 
 /*!
        \fn ListePoints* dernierListePoints(ListePoints* list_p_listeCoordonnees)
@@ -66,32 +74,40 @@ ListePoints* dernierListePoints(ListePoints* list_p_listeCoordonnees);
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
        \brief ajoute un point a la fin d'une liste de point               
+
        \param list_p_listecoordonnees : (listepoints*) la liste de points
        \param int_x : (int) l'abscisse du nouveau point
        \param int_y : (int) l'ordonnées du nouveau point
        \param int_valeur : (int) la valeur du nouveau point
+
        
                
        \remarks 
 
 */
+
 void ajoutFin(ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur);
+
 
 /*!
        \fn ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
        \brief ajoute un point a une liste de point si cette liste existe, sinon la fonction creer cette liste               
+
        \param list_p_listecoordonnees : (listepoints*) la liste de points
        \param int_x : (int) l'abscisse du nouveau point
        \param int_y : (int) l'ordonnées du nouveau point
        \param int_valeur : (int) la valeur du nouveau point
+
        \return une liste de points
                
        \remarks 
 
 */
+
 ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int int_x, int int_y, int int_valeur);
+
 
 void afficherCoordonnees(ListePoints* liste);
 
@@ -106,4 +122,10 @@ void afficherCoordonnees(ListePoints* liste);
        \remarks 
 
 */
+
 void libererListe(ListePoints* list_p_liste);
+
+
+	
+
+#endif /* __GESTIONLISTECOORDONNEES_H__ */
