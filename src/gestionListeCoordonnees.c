@@ -1,7 +1,7 @@
 #include "gestionListeCoordonnees.h"
 
 /*Coordonnées*/
-ListePoints nouveauListePoints (int x, int y, int valeur)
+ListePoints nouveauListePoints (int x, int y, float valeur)
 {
 	ListePoints m;
 	m.x = x;
@@ -14,7 +14,7 @@ ListePoints nouveauListePoints (int x, int y, int valeur)
 
 
 /*GERER LISTE*/
-ListePoints* creerlisteCoordonnees (int x, int y, int valeur)
+ListePoints* creerlisteCoordonnees (int x, int y, float valeur)
 {
 	ListePoints* maillon;
 	maillon = malloc(sizeof(ListePoints));
@@ -35,7 +35,7 @@ ListePoints* dernierListePoints(ListePoints* listeCoordonnees)
 	}
 }
 
-void ajoutFin(ListePoints* listeCoordonnees, int x, int y, int valeur) 
+void ajoutFin(ListePoints* listeCoordonnees, int x, int y, float valeur) 
 {
 	ListePoints* fin;
 	ListePoints* nouveau;
@@ -45,7 +45,7 @@ void ajoutFin(ListePoints* listeCoordonnees, int x, int y, int valeur)
 	fin->suivant = nouveau;
 }
 /*Ajout d'une coordonnée*/
-ListePoints* ajoutCoordonnee (ListePoints* listeCoordonnees, int x, int y, int valeur)
+ListePoints* ajoutCoordonnee (ListePoints* listeCoordonnees, int x, int y, float valeur)
 {
 	if (listeCoordonnees == NULL)
 	{
@@ -62,8 +62,8 @@ void afficherCoordonnees(ListePoints* liste)
 {
 	if (liste != NULL)
 	{
-		printf("(x = %d, y = %d, valeur = %d) -> ", liste -> x, liste -> y, liste -> valeur);
-		afficherCoordonnees(liste -> suivant);
+		printf("(x = %d, y = %d, valeur = %f)\n ", liste->x, liste->y, liste->valeur);
+		afficherCoordonnees(liste->suivant);
 	}
 	else printf("fin de liste\n");
 }

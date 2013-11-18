@@ -256,10 +256,13 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
 		convolution(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1],1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-p"))
-		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0)), NO_EXIT);
+	{
+		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0),&bool_erreur), NO_EXIT);
+		*idInput=nombreInput;
+	}
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
-}
+	}
 
 void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
