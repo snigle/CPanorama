@@ -7,6 +7,16 @@ Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
 *							 																  *
 ***********************************************************************************************
 
+ajouter les filtres de convolutions pour dilatation et erosion pour les images grayscale et les gerer dans la fonction d'appel.
+finir la mise aux normes
+
+fuites de mémoires(valgrid)
+RAPPORT
+
+
+
+
+
 
 ****Liens utiles***
 Jankins (test du code : build)
@@ -14,18 +24,3 @@ Sonar vérifie le build
 
 Cheak
 Vérifier les fuites de mémoires
-
-
-
- #########################################################################   Quentin   #####################################################################################
-
-Méthodes des coins FAST
-
-http://operationpixel.free.fr/pointinteret_fast.php
-
-	- trouver algo pour tracer un cercle
-	- si 20% blanc - 80% noir -> ceci est un coin
-	- tester sur une image
-	- les relier (Comment ? RANSAC ?)
-	
-=> commenter les fonctions

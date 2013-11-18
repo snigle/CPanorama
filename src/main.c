@@ -13,14 +13,14 @@
  
 
  
- int main (int argc, char** argv)
- {
- 	int num;
- 	num = gererOptions(argc,argv);
- 	if (num)
- 		erreur(num,EXIT);
- 	return 0;
- }
+int main (int int_argc, char** tab_str_argv)
+{
+	int int_num;
+	int_num = gererOptions(int_argc,tab_str_argv);
+	if (int_num)
+		erreur(int_num,EXIT);
+	return (0);
+}
  
  /* Documentation tag for Doxygen
  */
