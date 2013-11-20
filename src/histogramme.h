@@ -15,6 +15,23 @@
 
 
 /*!
+       \fn Image histogrammeBis(char* str_input, char* str_output, int bool_save, int* bool_erreur, int* hist, Image image)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Wed 20 Nov 2013
+       \brief réalise l'histogramme dans un fichier .pbm               
+       \param str_input : (char*) le nom du fichier input
+       \param str_output : (char*) le nom du fichier output
+       \param bool_save : (int) un booleen pour savoir s'il faut sauvegarder
+       \param bool_erreur : (int*) un booleen qui dit s'il y a une erreur
+       \param hist : (int*) le tableau de l histogramme
+       \param image : (image) l'image en input
+       \return 
+               
+       \remarks 
+
+*/
+Image histogrammeBis (char* str_input, char* str_output, int bool_save, int* bool_erreur, int* hist, Image image);
+/*!
        \fn int histogramme(char* input, char* output)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Tue 08 Oct 2013

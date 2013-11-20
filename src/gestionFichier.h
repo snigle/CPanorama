@@ -153,6 +153,21 @@ int teinteMax(char* char_type, FILE* file_image, int* bool_erreur);
 
 int charToInt(char char_c);
 
+/*!
+       \fn void recuperationPixelsBis(FILE* file_fichier, int** int_tab, char* str_type, int* bool_erreur, int int_i, int int_j)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Wed 20 Nov 2013
+       \brief complete une case du tableau définie par ses coordonnées i et j qui correspond a un pixel
+		   \param file_fichier : (FILE) le fichier contenant l'image à charger
+		   \param int_tab : (int**) la matrice a compléter
+		   \param str_type (char*) : une chaine de caractere contenant le type de l'image a charger
+		   \param bool_erreur : pointeur à mettre à 1 si il y a une erreur
+		   \param int_i (int) : abscisse de l image
+		   \param int_j (int) : ordonnées de l image
+       \remarks 
+
+*/
+void recuperationPixelsBis(FILE* file_fichier, int** int_tab, char* str_type, int* bool_erreur, int int_i, int int_j);
 
 /*!
        \fn void recuperationPixels(FILE* fichier, int** tab, int largeur, int hauteur, char* type, int* bool_erreur)
@@ -160,12 +175,12 @@ int charToInt(char char_c);
        \date Mon 07 Oct 2013
        \brief Description Complète un tableau d'entiers qui correspondent aux pixels de l'image
        \return
-               \param fichier : (FILE) e fichier contenant l'image à charger
-               \param tab : (int**) la matrice a compléter
-               \param largeur (int) : la largeur de l'image
-               \param hauteur (int) : la hauteur de l'image
-               \param type (char*) : une chaine de caractere contenant le type de l'image a charger
-               \param bool_erreur : pointeur à mettre à 1 si il y a une erreur
+		   \param file_fichier : (FILE) le fichier contenant l'image à charger
+		   \param int_tab : (int**) la matrice a compléter
+		   \param int_largeur (int) : la largeur de l'image
+		   \param int_hauteur (int) : la hauteur de l'image
+		   \param char_type (char*) : une chaine de caractere contenant le type de l'image a charger
+		   \param bool_erreur : pointeur à mettre à 1 si il y a une erreur
        \remarks 
 
 */

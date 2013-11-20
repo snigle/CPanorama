@@ -8,7 +8,8 @@ Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
 ***********************************************************************************************
 
 ajouter les filtres de convolutions pour dilatation et erosion pour les images grayscale et les gerer dans la fonction d'appel.
-finir la mise aux normes
+mise aux normes histogrammes
+
 
 fuites de mémoires(valgrid)
 RAPPORT
