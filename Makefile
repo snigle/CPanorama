@@ -5,7 +5,7 @@ dirsave = save/
 dirdoc = doc/
 dirrapport = rapport/
 
-CC = gcc -Wall -pedantic -Wmissing-prototypes -Wunused-variable
+CC = gcc -pg -Wall -pedantic -Wmissing-prototypes -Wunused-variable
 RM = rm -rf
 
 SRC = $(wildcard $(dirsrc)*.c)

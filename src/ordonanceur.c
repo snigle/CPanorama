@@ -262,7 +262,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	}
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
-	}
+}
 
 void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
@@ -272,7 +272,10 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 	/*Parcourt de toute les options présente*/
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
-		listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
+		if(argv[i][0] == '-')
+		{
+			listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
+		}
 	}	
 	i = derniereOption(argc,argv);/*Continu de charger les inputs avec la derniere option*/
 	while (idInput < nombreInput)
