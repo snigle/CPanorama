@@ -112,7 +112,7 @@ Image histogramme (char* input, char* output, int bool_save, int* bool_erreur)
 	save(sortie,output,bool_erreur);
 	libererImage(image);
 	free(hist);
-	for(i=1;i<image.teinteMax;i++)
+	for(i=1;i<image.teinteMax+1;i++)
 	{printf("Appel de la fonction histogramme\n,%d-%d, \n", i, sortie.teinte[i]);}
 	return sortie;
 }

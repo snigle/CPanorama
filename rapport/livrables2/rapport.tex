@@ -74,16 +74,41 @@
 		
 		
 	\chapter{Les six fonctions demandées dans le livrable}
-		\section{Grayscale}%elie
-		\section{Black and White}%elie
-		\section{Histogramme}%elie
+		\section{Grayscale}
+			La fonction Grayscale permet de transformer une image  couleurs en teintes de gris.\\
+			Dans une image en couleur, chaque pixel est codé par 3 composantes (Rouge, Vert et Bleu).\\ En grayscale, chaque pixel sera codé par une seule composante.\\
+			La formule utilisée est la suivante : \\
+			$
+				    pixelGrayscale = 0,299 * pixel Rouge+ 0,587*pixel vert + 0,114 pixel bleu
+			$
+			\\
+			On parcourt donc l'image en couleurs, et on applique cette formule à chaque pixel, c'est à dire à ces trois composantes.\\
+			Cette fonction effectue donc une moyenne pondérée des pixels rouges, verts et bleus. \\
+			L'image obtenue sera donc 3 fois plus petite, et en noir et blanc.
+			
+		\section{Binnary}
+			  Chaque pixel d'une image binaire ne peut avoir pour valeurs que 0 ou 1.\\\\
+			  La fonction binary nécessite un seuil et une image en teintes de gris, le seuil étant choisit par l'utilisateur.\\
+			  
+			  On parcourt l'image en teintes de gris, et pour chaque pixel, si son instensité est supérieure au seuil, on lui alloue la valeur 0 qui correspond à la couleur blanche.  Si l'intensité du pixel est supérieure au seuil, on lui alloue la valeur 1 qui correspond à la couleur noire.\\
+			  
+			  
+		\section{Histogramme}
+			  L'histogramme d'une image permet d'illustrer la répartition des teintes d'une image.\\
+			  Le but est de compter pour chaque intensité le nombre de pixels qui sont de cette intensité.\\
+			 
+			 D'abord on crée un tableau de taille égale à la teinte maximale de l'image dont on veut obtenir l'histogramme.\\
+			 Ensuite, on parcourt l'image et pour chaque pixel, on rajoute 1 dans la case du tableau qui correspond à l'instensité de ce pixel.\\
+			 
+			 On peut choisir de tracer cet histogramme mais le tableau suffit.\\
+			 
 		\section{Dilate}
 		\section{Erode}
 		\section{Convolution}
 			La convolution permet d'appliquer un filtre de convolution à une image en échelle de gris. Le but est d'affecter pour chaque pixel de l'image des coefficients au pixels autour de celui-ci.
 			
 			La taille du filtre est de taille variable, cependant, elle est toujours paire. Les filtres les plus utilisés sont les filtres de taille 3x3, mais parfois, les filtres de tailles supérieures sont requis.
-			Les filtres sont récupérés en début de fonction, une erreur est générées si le filtre n'est pas correct, c'est a dire si le fichier texte comporte caractères autres que des chiffres ou nombres ou s'il n'y a pas assez de coefficients.
+			Les filtres sont récupérés en début de fonction, une erreur est générées si le filtre n'est pas correct, c'est à dire si le fichier texte comporte caractères autres que des chiffres ou nombres ou s'il n'y a pas assez de coefficients.
 			
 			Afin d'expliquer l'algorithme qui mène à la convolution, nous allons utiliser un filtre 3x3 sur une image. Prenons le filtre F suivant :\\
 			\begin{tabular}{lll}
