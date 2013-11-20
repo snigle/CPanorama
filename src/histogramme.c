@@ -13,10 +13,10 @@ int* remplirTableauHist(Image image, int* bool_erreur)
 	int* TabHisto;
 	int i;
 	int j;
-	TabHisto = mallocBis(256 * sizeof(int));
+	TabHisto = mallocBis(image.teinteMax * sizeof(int));
 	if(testType(image, "P2"))
 	{
-		for (i=0; i<256;i++)
+		for (i=0; i<image.teinteMax;i++)
 		{
 			TabHisto[i]=0;
 		}
@@ -34,13 +34,13 @@ int* remplirTableauHist(Image image, int* bool_erreur)
 	return TabHisto;
 }
 
-int calculMax(int* tabhist)
+int calculMax(int* tabhist, int teinteMax)
 {
 	int max;
 	int i;
 	max=0;
 	
-	for(i=0 ; i<256 ; i++)
+	for(i=0 ; i<teinteMax ; i++)
 	{
 		if(tabhist[i]>max)
 			max=tabhist[i];
@@ -49,14 +49,14 @@ int calculMax(int* tabhist)
 	return(max);
 }
 
-int* tabPourcent(int* hist, int max, int taille)
+int* tabPourcent(int* hist, int max, int taille, int teinteMax)
 {
 	int* tabPourcent;
 	int i;
 	
 	
-	tabPourcent=mallocBis(256*sizeof(int));
-	for(i=0;i<256;i++)
+	tabPourcent=mallocBis(max*sizeof(int));
+	for(i=0;i<teinteMax;i++)
 	{
 		
 		tabPourcent[i]=taille*hist[i]/max;
@@ -66,23 +66,23 @@ int* tabPourcent(int* hist, int max, int taille)
 }
 
 
-int** Tracer(int* tabhist, int taille)
+int** Tracer(int* tabhist, int taille, int teinteMax)
 {
 	int i;
 	int j;
 	int k;
 	int** trace;
 
-	trace=initMatrice(256,taille);
+	trace=initMatrice(teinteMax,taille);
 	
-	for (i = 0; i < 256; i += 1)
+	for (i = 0; i < teinteMax; i += 1)
 	{
 		for (j = 0; j < taille; j += 1)
 		{
 			trace[j][i]=0;
 		}
 	}
-	for(i=0 ; i<256 ; i++)
+	for(i=0 ; i<teinteMax ; i++)
 	{
 		for (k = taille - tabhist[i] ; k < taille ; k += 1)
 		{
@@ -99,18 +99,20 @@ Image histogramme (char* input, char* output, int bool_save, int* bool_erreur)
 	int** trace;
 	int* percent;
 	int max;
+	int i;
 	
 	image = chargerImage(input, bool_erreur);
 	if(!*bool_erreur) hist=remplirTableauHist(image, bool_erreur);
 	
-	max=calculMax(hist);
-	percent=tabPourcent(hist,max, 500);
-	trace=Tracer(percent, 500);
-	sortie = creationImage("P1",256,500, 0, trace);
+	max=calculMax(hist, image.teinteMax);
+	percent=tabPourcent(hist,max, 500, image.teinteMax);
+	trace=Tracer(percent, 500, image.teinteMax);
+	sortie = creationImage("P1",image.teinteMax,500, 0, trace);
 
 	save(sortie,output,bool_erreur);
 	libererImage(image);
 	free(hist);
-	printf("Appel de la fonction histogramme\n");
+	for(i=1;i<image.teinteMax;i++)
+	{printf("Appel de la fonction histogramme\n,%d-%d, \n", i, sortie.teinte[i]);}
 	return sortie;
 }

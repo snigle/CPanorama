@@ -52,7 +52,7 @@ int* remplirTableauHist(Image image, int* bool_erreur);
        \remarks 
 
 */
-int calculMax(int* tabhist);
+int calculMax(int* tabhist, int teinteMax);
 
 /*!
        \fn int** Tracer(Image image, int taille)
@@ -66,7 +66,7 @@ int calculMax(int* tabhist);
        \remarks 
 
 */
-int** Tracer(int* tabhist, int taille);
+int** Tracer(int* tabhist, int taille, int teinteMax);
 
 /*!
        \fn int* abPourcent(int* hist, int max)
@@ -80,6 +80,6 @@ int** Tracer(int* tabhist, int taille);
        \remarks 
 
 */
-int* tabPourcent(int* hist, int max, int h);
+int* tabPourcent(int* hist, int max, int h, int teinteMax);
 #endif /* __HISTOGRAMME_H__ */
 
