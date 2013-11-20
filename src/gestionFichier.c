@@ -103,23 +103,23 @@ void sauterCommentaire(FILE* file_fichier)
 			 }
 }
 
-char* recupType(FILE* file_image, int* int_bool_erreur) 
+char* recupType(FILE* file_image, int* bool_erreur) 
 {
 	char* char_result;
 	char_result = malloc(3*sizeof(char));
 	sauterCommentaire(file_image);
 	if(!fscanf(file_image, "%c", &char_result[0]))
-		*int_bool_erreur = 1;
+		*bool_erreur = 1;
 	else
 		if(!fscanf(file_image, "%c", &char_result[1]))
-			*int_bool_erreur = 1;
+			*bool_erreur = 1;
 	char_result[2] = '\0';
 	return (char_result);
 }
 
 
 
-int parametrage(FILE* file_image, int* int_bool_erreur)
+int parametrage(FILE* file_image, int* bool_erreur)
 {
 	int int_result;
 	int int_test;
@@ -129,20 +129,20 @@ int parametrage(FILE* file_image, int* int_bool_erreur)
 	if (int_test != 1)
 	{
 		erreur(IMAGE_CORROMPUE,NO_EXIT);
-		*int_bool_erreur = 1;
+		*bool_erreur = 1;
 	}
     
     return (int_result);
 }
 
 
-int teinteMax(char* char_type, FILE* file_image, int* int_bool_erreur)
+int teinteMax(char* char_type, FILE* file_image, int* bool_erreur)
 {
     int int_result;
     int_result = 0;
     if (!strcmp(char_type, "P2") || !strcmp(char_type, "P3"))
 	{
-		int_result = parametrage(file_image,int_bool_erreur);
+		int_result = parametrage(file_image,bool_erreur);
 	}else{
 		int_result = 0;
 	}
@@ -156,7 +156,7 @@ else
 	return (1);
 }
 
-void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int int_hauteur, char* char_type, int* int_bool_erreur)
+void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int int_hauteur, char* char_type, int* bool_erreur)
 {
 	int int_i;
 	int int_j;
@@ -168,9 +168,9 @@ void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int 
 	{
 		for (int_j = 0; int_j < int_largeur; int_j += 1)
 		{
-			if(!*int_bool_erreur){
+			if(!*bool_erreur){
 				sauterCommentaire(file_fichier);
-				if (!strcmp(char_type, "P2") || !strcmp(char_type,"P3"))
+				if (!strcmp(char_type, "P2") || !strcmp(char_type,"P3")) 
 					int_test = fscanf(file_fichier, "%d", &int_pixel);
 				else
 					int_pixel = charToInt(fgetc(file_fichier));
@@ -179,7 +179,7 @@ void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int 
 				else
 				{
 					erreur(IMAGE_CORROMPUE,NO_EXIT);
-					*int_bool_erreur = 1;
+					*bool_erreur = 1;
 				}
 			}
 		}
@@ -187,31 +187,31 @@ void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int 
 }
 
 
-int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* char_type, int* int_bool_erreur)
+int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* char_type, int* bool_erreur)
 {
 	int** int_tab;
 	if(!strcmp(char_type,"P3"))	
 		int_largeur *= 3;
 	int_tab = initMatrice(int_largeur,int_hauteur);	
-	recuperationPixels(file_fichier, int_tab, int_largeur, int_hauteur, char_type, int_bool_erreur);
+	recuperationPixels(file_fichier, int_tab, int_largeur, int_hauteur, char_type, bool_erreur);
 	return (int_tab);
 }
 
 
-void capterLesParametres(FILE* file_image, char* char_type, int* int_hauteur, int* int_largeur, int* int_teinteMaximale, int* int_bool_erreur)
+void capterLesParametres(FILE* file_image, char* char_type, int* int_hauteur, int* int_largeur, int* int_teinteMaximale, int* bool_erreur)
 {
-	if(!*int_bool_erreur) 
-		*int_largeur = parametrage(file_image, int_bool_erreur);
-	if(!*int_bool_erreur) 
-		*int_hauteur = parametrage(file_image, int_bool_erreur);
+	if(!*bool_erreur) 
+		*int_largeur = parametrage(file_image, bool_erreur);
+	if(!*bool_erreur) 
+		*int_hauteur = parametrage(file_image, bool_erreur);
 	if (!strcmp(char_type, "P2") || !strcmp(char_type,"P3"))
 	{
-		if(!*int_bool_erreur) *int_teinteMaximale = teinteMax(char_type, file_image, int_bool_erreur);
+		if(!*bool_erreur) *int_teinteMaximale = teinteMax(char_type, file_image, bool_erreur);
 	}
 }
 
 
-Image chargerImage(char* char_nomImage, int* int_bool_erreur){
+Image chargerImage(char* char_nomImage, int* bool_erreur){
 	Image image_imageCharge;
 	FILE* file_image;
 	char* char_type;
@@ -221,15 +221,15 @@ Image chargerImage(char* char_nomImage, int* int_bool_erreur){
 	int** int_teinte;
 	file_image = fopen(char_nomImage, "r");
 	if (file_image != NULL){
-		char_type = recupType(file_image, int_bool_erreur);
-		capterLesParametres(file_image, char_type, &int_hauteur, &int_largeur, &int_teinteMaximale, int_bool_erreur);
-		if(!*int_bool_erreur) int_teinte = recupPixel(file_image, int_largeur, int_hauteur, char_type, int_bool_erreur);
-		if(!*int_bool_erreur) image_imageCharge = creationImage(char_type, int_largeur, int_hauteur, int_teinteMaximale, int_teinte);
+		char_type = recupType(file_image, bool_erreur);
+		capterLesParametres(file_image, char_type, &int_hauteur, &int_largeur, &int_teinteMaximale, bool_erreur);
+		if(!*bool_erreur) int_teinte = recupPixel(file_image, int_largeur, int_hauteur, char_type, bool_erreur);
+		if(!*bool_erreur) image_imageCharge = creationImage(char_type, int_largeur, int_hauteur, int_teinteMaximale, int_teinte);
 		free(char_type);
 		fclose(file_image);
 	}else{
 		erreur(IMAGE_NO_EXISTS,NO_EXIT);
-		*int_bool_erreur = 1;
+		*bool_erreur = 1;
 	}
 	return (image_imageCharge);	
 }
@@ -266,12 +266,12 @@ void setExtention (Image image_image, char* char_output)
 		sprintf(char_output,"%s%s",char_output, ".ppm");
 }
 
-void save(Image image_image, char* char_output, int* int_bool_erreur)
+void save(Image image_image, char* char_output, int* bool_erreur)
 {
 	FILE* file_fich;
 	char* char_ext;
 	char_ext = "";
-	if(!*int_bool_erreur)
+	if(!*bool_erreur)
 	{
 		char_ext = recupererExtension(char_output);
 		if (!strcmp(char_ext,""))
@@ -284,7 +284,7 @@ void save(Image image_image, char* char_output, int* int_bool_erreur)
 			libererImage(image_image);
 		}
 		else{
-			*int_bool_erreur = 1;
+			*bool_erreur = 1;
 			libererImage(image_image);
 			erreur(ERREUR_OUTPUT,NO_EXIT);
 			}
@@ -297,10 +297,10 @@ void testChargerImage(char* char_input, char* char_output)
 {
 	Image image_image;
 	char* char_type;
-	int int_bool_erreur;
-	int_bool_erreur = 0;
-	image_image = chargerImage(char_input,&int_bool_erreur);
-	if(!int_bool_erreur)
+	int bool_erreur;
+	bool_erreur = 0;
+	image_image = chargerImage(char_input,&bool_erreur);
+	if(!bool_erreur)
 	{
 		char_type = image_image.type;
 		if (!strcmp(recupererExtension(char_output),""))
@@ -312,7 +312,7 @@ void testChargerImage(char* char_input, char* char_output)
 		}
 		else
 		{
-			save(image_image, char_output,&int_bool_erreur);
+			save(image_image, char_output,&bool_erreur);
 			printf("L'image %s a été sauvegardée dans le fichier %s \n", char_input, char_output);
 		}
 	}
