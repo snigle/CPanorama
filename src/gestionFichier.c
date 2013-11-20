@@ -156,32 +156,38 @@ else
 	return (1);
 }
 
-void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int int_hauteur, char* char_type, int* bool_erreur)
+void recuperationPixelsBis(FILE* file_fichier, int** int_tab, char* str_type, int* bool_erreur, int int_i, int int_j)
 {
-	int int_i;
-	int int_j;
 	int int_pixel;
 	int int_test; /* permet de savoir si le scanf ne génère pas d'erreur*/
 	int_pixel = 0;
 	int_test = 1;
+	if(!*bool_erreur)
+	{
+		sauterCommentaire(file_fichier);
+		if (!strcmp(str_type, "P2") || !strcmp(str_type,"P3")) 
+			int_test = fscanf(file_fichier, "%d", &int_pixel);
+		else
+			int_pixel = charToInt(fgetc(file_fichier));
+		if (int_test == 1)
+			int_tab[int_i][int_j] = int_pixel;
+		else
+		{
+			erreur(IMAGE_CORROMPUE,NO_EXIT);
+			*bool_erreur = 1;
+		}
+	}
+}
+
+void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int int_hauteur, char* char_type, int* bool_erreur)
+{
+	int int_i;
+	int int_j;
 	for (int_i = 0 ; int_i < int_hauteur ; int_i++)
 	{
 		for (int_j = 0; int_j < int_largeur; int_j += 1)
 		{
-			if(!*bool_erreur){
-				sauterCommentaire(file_fichier);
-				if (!strcmp(char_type, "P2") || !strcmp(char_type,"P3")) 
-					int_test = fscanf(file_fichier, "%d", &int_pixel);
-				else
-					int_pixel = charToInt(fgetc(file_fichier));
-				if (int_test == 1)
-					int_tab[int_i][int_j] = int_pixel;
-				else
-				{
-					erreur(IMAGE_CORROMPUE,NO_EXIT);
-					*bool_erreur = 1;
-				}
-			}
+			recuperationPixelsBis(file_fichier, int_tab, char_type, bool_erreur, int_i, int_j);
 		}
 	}
 }
@@ -289,7 +295,6 @@ void save(Image image_image, char* char_output, int* bool_erreur)
 			erreur(ERREUR_OUTPUT,NO_EXIT);
 			}
 	}
-
 }
 
 
@@ -305,7 +310,7 @@ void testChargerImage(char* char_input, char* char_output)
 		char_type = image_image.type;
 		if (!strcmp(recupererExtension(char_output),""))
 			sprintf(char_output,"%s.%s",char_output, recupererExtension(char_input));	
-		if(verifType(char_type))
+		if(!verifType(char_type))
 		{
 			erreur(ERREUR_TYPE, NO_EXIT);
 			libererImage(image_image);

@@ -91,7 +91,7 @@ binaire:
 	./bin/panorama -r src/images/ -b 150
 convolution:
 	@echo "************TEST Convolution**********"
-	./bin/panorama -r src/images/ -c filtre.txt
+	./bin/panorama -r src/images/ -c src/filtre.txt
 grayscale:
 	@echo "************TEST Grayscale**********"
 	./bin/panorama -r src/images/ -g
