@@ -17,16 +17,16 @@ void erreursImage (int int_numeroErreur)
 	switch(int_numeroErreur)
 	{
 		case IMAGE_CORROMPUE:
-			fprintf(stderr,"Le fichier im_image est corrompu\n");
+			fprintf(stderr,"Le fichier image est corrompu\n");
 		break;
 		case IMAGE_NO_EXISTS:
-			fprintf(stderr,"Le fichier im_image n'existe pas\n");
+			fprintf(stderr,"Le fichier image n'existe pas\n");
 		break;
 		case MAUVAIS_FORMAT_GRAYSCALE:
-			fprintf(stderr,"L'im_image n'est pas adaptée. Vous devez utiliser une im_image en .ppm pour réaliser une im_image en échelle de gris\n");
+			fprintf(stderr,"L'image n'est pas adaptée. Vous devez utiliser une image en .ppm pour réaliser une image en échelle de gris\n");
 		break;
 		case ERREUR_TYPE:
-			fprintf(stderr,"Le type de cette im_image n'est pas géré\n");
+			fprintf(stderr,"Le type de cette image n'est pas géré\n");
 		break;
 		default :
 			fprintf(stderr,"Erreur non répertoriée\n");

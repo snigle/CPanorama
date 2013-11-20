@@ -109,7 +109,7 @@ void sauterCommentaire(FILE* file_fichier);
       		\remarks ras
 
 */
-char* recupType(FILE* file_image, int* int_bool_erreur) ;
+char* recupType(FILE* file_image, int* bool_erreur) ;
 
 /*!
        \fn int parametrage(FILE* image, int* bool_erreur)
@@ -122,7 +122,7 @@ char* recupType(FILE* file_image, int* int_bool_erreur) ;
       		\remarks ras
 
 */
-int parametrage(FILE* file_image, int* int_bool_erreur);
+int parametrage(FILE* file_image, int* bool_erreur);
 
 /*!
        \fn int teinteMax(char* type, FILE* image, int* bool_erreur)
@@ -136,7 +136,7 @@ int parametrage(FILE* file_image, int* int_bool_erreur);
       		\remarks ras
 
 */
-int teinteMax(char* char_type, FILE* file_image, int* int_bool_erreur);
+int teinteMax(char* char_type, FILE* file_image, int* bool_erreur);
 
 
 /*!
@@ -169,7 +169,7 @@ int charToInt(char char_c);
        \remarks 
 
 */
-void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int int_hauteur, char* char_type, int* int_bool_erreur);
+void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int int_hauteur, char* char_type, int* bool_erreur);
 
 /*!
        \fn int* recupPixel(FILE* fichier, int largeur, int hauteur, char* type, int* bool_erreur)
@@ -186,7 +186,7 @@ void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int 
       		\remarks ras
 
 */
-int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* char_type, int* int_bool_erreur);
+int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* char_type, int* bool_erreur);
 
 
 /*!
@@ -205,7 +205,7 @@ int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* cha
        \remarks 
 
 */
-void capterLesParametres(FILE* file_image, char* char_type, int* int_hauteur, int* int_largeur, int* int_teinteMaximale, int* int_bool_erreur);
+void capterLesParametres(FILE* file_image, char* char_type, int* int_hauteur, int* int_largeur, int* int_teinteMaximale, int* bool_erreur);
 /*!
        \fn Image chargerImage(char* nomImage)
        \author Perales Quentin <peralesque@eisti.eu>
@@ -218,7 +218,7 @@ void capterLesParametres(FILE* file_image, char* char_type, int* int_hauteur, in
 
 */
 
-Image chargerImage(char* char_nomImage, int* int_bool_erreur);
+Image chargerImage(char* char_nomImage, int* bool_erreur);
 
 
 
@@ -267,7 +267,7 @@ void setExtention (Image image_image, char* char_output);
 
 
 
-void save(Image image_image, char* char_output, int* int_bool_erreur);
+void save(Image image_image, char* char_output, int* bool_erreur);
 
 /*!
        \fn int chargerImage(char* input, char* output)
