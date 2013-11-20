@@ -34,8 +34,9 @@
 %\usepackage{asmthm}
 %\usepackage{makeidx}
 \usepackage{biblatex}
+\usepackage{listings}
 
-\bibliography{rapport.bib}
+\bibliography{biblio.bib}
 
 \usepackage[nottoc, notlof, notlot]{tocbibind}
 
@@ -77,8 +78,61 @@
 		\section{Grayscale}%elie
 		\section{Black and White}%elie
 		\section{Histogramme}%elie
+		
 		\section{Dilate}
+		
+		Pour la dilatation nous avons utilisé un algorithme qui utilise des "object pixel" tiré du livre Machine Vision\cite{livre}. Un objet pixel est un groupe de neuf pixels formant un carré de taille 3x3 et qui respecte certaines conditions. Pour simplifier l'algorithme on nomme chaque case de 0 à 8.
+		%Image du tableau de pixel.
+		\begin{table}[ht]
+			\centering
+			\begin{tabular}{|l|l|l|}\hline
+				3 & 2 & 1 \\\hline
+				4 & 8 & 0 \\\hline
+				5 & 6 & 7\\\hline
+				 
+			\end{tabular}
+		\end{table}
+			
+		Si on utilise les conventions de logique combinatoire, c'est à dire que le signe . signifie ET et le signe + signifie OU, les conditions d'un objet pixel se résume comme ceci :
+		\begin{center}
+		$8.[((1+2+3).5+6+7).\overline{4}.\overline{0}]$\\
+		$+ [(1+0+7).(3+4+5).\overline{2}.\overline{6}]$\\
+		$+ [3.(5+6+7+0+1).\overline{2}.\overline{4}]$\\
+		$+ [1.(3+4+5+6+7).\overline{2}.\overline{0}]$\\
+		$+ [7.(1+2+3+4+5).\overline{0}.\overline{6}]$\\
+		$+ [5.(7+°+1+2+3).\overline{4}.\overline{6}]	$
+		
+		\end{center}
+		
+Finallement, il suffit d'appliquer l'algorithme suivant :
+	\begin{lstlisting}
+POUR TOUT les pixels de l'image
+	SI le pixel est un objet pixel ALORS
+		copier le groupe de pixels dans l'image de destination
+	FINSI
+FINPOUR	
+	\end{lstlisting}
+	
+Étant donné que cette méthode enlève beaucoup de pixels, il n'est pas nécessaire de faire une érosion en suivant. Cependant nous avons utilisé un autre algorithme moins restrictif pour l'erosion.
 		\section{Erode}
+		
+Pour l'érosion nous utilisons un masque. Nous testons un groupe de pixel et nous assignons la valeur 1 si tout les pixels dans le masque sont à 1. Sinon on retourne un 0.
+Nous avons pris directement	l'algorithme d'opération pixel\cite{operationpixel} :
+\begin{lstlisting}
+destination : matrice de l'image érodée
+source : matrice de l'image à éroder
+x,y,k1,k2 : variables d'incrémentation
+
+POUR CHAQUE pixel de l'image FAIRE //x et y étant la position
+	POUR k1 allant de -1 à 1 FAIRE
+		POUR k2 allant de -1 à 1 FAIRE
+destination[x][y] = destination[x][y] ET source[x+k1][y+k2]
+		FINPOUR
+	FINPOUR
+FIN POUR
+\end{lstlisting}
+		
+		
 		\section{Convolution}
 			La convolution permet d'appliquer un filtre de convolution à une image en échelle de gris. Le but est d'affecter pour chaque pixel de l'image des coefficients au pixels autour de celui-ci.
 			
@@ -116,7 +170,6 @@
 	\end{tabular}
 
 
-
 Le but va être maintenant d'utiliser ces fonctions ainsi que d'autres algorithmes pour automatiser la création d'un panorama. 
 	
 	\chapter{Comment automatiser un panorama ?}
@@ -142,8 +195,28 @@ Le but va être maintenant d'utiliser ces fonctions ainsi que d'autres algorithme
 			
 			\subsection{Le detecteur de Harris}
 			
-			
-			
+	Nous avons utilisé l'algorithme de Harris trouvé sur operationPixel\cite{operationpixel} et sur le blog de Crsouza\cite{cesar}.
+	
+\begin{lstlisting}
+A, B, C : Trois matrices pour le calcule de Harris
+result : La liste des points de Harris
+image : matrice de l'image source
+threshole : variable qui reste à déterminer
+DEBUT PROGRAMME:
+A = deriveeVerticale(image);
+B = deriveeHorizontale(image);
+C = derivee(image);
+POUR CHAQUE pixel de l'image FAIRE \\ x et y étant les coordonnées
+	M = (A[y][x] * B[y][x] - C[y][x] * C[y][x]) 
+	- (0.04 * ((A[y][x] + B[y][x]) * (A[y][x] + B[y][x])));
+		SI (M>threshole)
+			result = ajoutCoordonnee(result, x, y, M);
+FINPOUR
+
+\end{lstlisting}
+
+Pour utiliser cet algorithme nous devons trouver la variable threshole qui varie selon les images à traiter.
+		
 		\section{Relier les points d'intérêts : la méthode RANSAC}
 		Lors de l'utilisation
 		
