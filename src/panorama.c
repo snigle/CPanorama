@@ -47,10 +47,12 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 		image1 = image1->suivant;
 		
 	}
+
 	result = creationImage("P1",imageInput.width, imageInput.height, 1, mat_result);
 	save(result,output, bool_erreur);
 	}
 	printf("Appel de la fonction Panorama\n");
+	
 	return 0;
 }
 
