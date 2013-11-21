@@ -249,7 +249,12 @@ FINPOUR
 Pour utiliser cet algorithme nous devons trouver la variable threshole qui varie selon les images à traiter.
 		
 		\section{Relier les points d'intérêts : la méthode RANSAC}
-		Lors de l'utilisation
+		
+		La méthode RANdom SAmple Consensus (abrégée RANSAC) est basée sur un modèle mathématique qui utilise les probabilités pour optimiser une trajectoire entre des points. Elle a été crée afin de réduire le temps de calcul pour des méthodes de "vote" classique comme la transformée de Hough. On suppose que les points sont un ensemble d'inlers et d'outliers, les inliers sont les points qui vont correpondre à un modèle et les outliers qui eux ne vont pas correspondre à ce modèle.
+		
+		RANSAC utilise dans un premier temps un ensemble de points choisis de manière aléatoire, puis on estime un modèle à partir de ce tirage. Ensuite, les autres données sont alors testées sur le modèle précédents et sont ajoutées aux inliers s'ils correspondent au modèle. Enfin, on considère qu'un modèle est juste si le nombre d'inliers est assez important. Le modèle est alors recalculé à partir des inliers, on calcule alors l'erreur de ce modèle. Ainsi, on associe une erreur au modèle de départ. Les autres modèles seront alors évalués par rapport au modèle précédent. Celui qui a l'erreur la plus faible est le modèle de référence pour l'image.
+		
+
 		
 		
 		\section{Comparer les deux images}
@@ -257,5 +262,8 @@ Pour utiliser cet algorithme nous devons trouver la variable threshole qui varie
 			\subsection{La comparaison des trajectoires issues de RANSAC}
 		   
 	\chapter*{Conclusion}
+	
+	Pour conclure, il nous reste maintenant la partie la plus compliquée du projet, à savoir automatiser la réalisation d'un panorama. Pour cela, nous allons mettre en oeuvre les fonctions déjà codées pour réaliser les différents algorithmes présentés dans la seconde partie. Tous seront tester pour voir lequel est le plus adapté en fonction des images en paramètre.
+	
 \printbibliography
 \end{document}
