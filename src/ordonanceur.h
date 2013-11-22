@@ -42,48 +42,48 @@ void afficherManuel(void);
 
 
 /*!
-	* \fn char* getOptionInputOutput(int input, int multiple)
+	* \fn char* getOptionInputOutput(int bool_input, int bool_multiple)
 	* \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	* \date Mon 23 Sep 2013
-	* \brief Renvoie l'option correspondante à input et output en fonction de si c'est multiple ou unique
-	* \param input faux si vaut 0, vrai sinon
-	* \param multiple faux si vaut 0, vrai sinon
+	* \brief Renvoie l'option correspondante à bool_input et output en fonction de si c'est bool_multiple ou unique
+	* \param bool_input faux si vaut 0, vrai sinon
+	* \param bool_multiple faux si vaut 0, vrai sinon
 	* \return smth
 	*
 	* \remarks ras
 	*
 */
-char* getOptionInputOutput(int input, int multiple);
+char* getOptionInputOutput(int bool_input, int bool_multiple);
 
 
 /*!
-	\fn int recuperNombreInputOutput(int argc, char** argv, int input)
+	\fn int recuperNombreInputOutput(int argc, char** argv, int bool_input)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	\date Mon 23 Sep 2013
 	\brief Calcul le nombre de fichier après l'option -li
 	\param argc : nombre de paramètres
 	\param argv : tableau de paramètres
-	\param input : si vaut 0, on traite l'output sinon on traite l'input
+	\param bool_input : si vaut 0, on traite l'output sinon on traite l'input
 	\return le nombre d'input dans la liste de paramètres	
 	\remarks ras
 
 */
-int recuperNombreInputOutput(int argc, char** argv, int input);
+int recuperNombreInputOutput(int argc, char** argv, int bool_input);
 
 /*!
-	\fn void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input)
+	\fn void remplirTableauInputOutput(int argc, char** argv, char** char_input, int int_taille, int bool_input)
 	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
 	\date Mon 23 Sep 2013
 	\brief Remplie le tableau d'input ou d'output 
 	\param argc : nombre de paramètres
 	\param argv : tableau de paramètres
-	\param input : tableau a remplir
-	\param taille : taille du tableau a remplir
+	\param char_input : tableau a remplir
+	\param int_taille : taille du tableau a remplir
 	\param input : si vaut 0, on traite l'output sinon on traite l'input	
 	\remarks ras
 
 */
-void remplirTableauInputOutput(int argc, char** argv, char** char_input, int taille, int bool_input);
+void remplirTableauInputOutput(int argc, char** argv, char** char_input, int int_taille, int bool_input);
 
 /*!
 	\fn char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
@@ -104,19 +104,19 @@ char** recupererInputOutput(int argc, char** argv,  int bool_input, int* nombre)
 
 
 /*!
-       \fn char** recuperDossierInput(int argc, char** argv, int* taille)
+       \fn char** recuperDossierInput(int argc, char** argv, int* pt_int_taille)
        \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
        \date mer. 16 oct. 2013
        \brief Récupère un tableau d'inputs contenue dans un dossier               
        \param argc : (int) nombre de paramètres
        \param argv : (char**) tableau de paramètres
-       \param taille : (int*) pointeur sur un int libre pour stocker le nombre d'inputs
+       \param pt_int_taille : (int*) pointeur sur un int libre pour stocker le nombre d'inputs
        \return retourne le tableau d'inputs et le nombre d'inputs trouvés
                
        \remarks ras
 
 */
-char** recupererDossierInput(int argc, char** argv, int* taille);
+char** recupererDossierInput(int argc, char** argv, int* pt_int_taille);
 
 /*!
        \fn char** associerTableauString(char** tab1, char** tab2, int taille1, int taille2)

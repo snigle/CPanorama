@@ -69,5 +69,20 @@ int** derivee(Image image);
 
 */
 ListePoints* harris(char* input, int* bool_erreur);
+
+/*!
+       \fn void enregistrerHarris(char* input, char* output, int* bool_erreur)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date ven. 22 nov. 2013
+       \brief Enregistre une image binaire affichant les points de harris               
+       \param input : (char*) image à traiter
+       \param output : (char*) fichier a sauvegarder
+       \param bool_erreur : (int*) vaut 1 si il y a une erreur 0 sinon
+       
+               
+       \remarks 
+
+*/
+void enregistrerHarris(char* input,char* output, int* bool_erreur);
 #endif /* __HARRIS_H__ */
 
