@@ -16,6 +16,7 @@ void afficherManuel(void)
 	printf("\t\t-d Dilate the input file(s)\n");
 	printf("\t\t-b threshold Render a black-white image using the given threshold\n");
 	printf("\t\t-c file Apply a convolution on the input file(s) using the given file as the convolution matrix\n");
+	printf("\t\t--harris Point of interest from Harris detector\n");
 	printf("\t\t-p Render the panorama from the input file(s)\n");
 	printf("\tWorking on single file\n");
 	printf("\t\t-i file Define the input file\n");
