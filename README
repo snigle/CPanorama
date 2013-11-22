@@ -1,39 +1,8 @@
 *********Documentation**********
-Pour la documentation, veuillez vous référer à la page ./doc/html/index.html
+Pour générer la documentation :
+$make doc
 
-*****************************A l'attention de tout le monde !!!!*******************************
-*			reprendre le code entièrement pour respecter les regles (cf regles.pdf)			  *
-*			faire un rapport consistant														  *
-*							 																  *
-***********************************************************************************************
-
-ajouter les filtres de convolutions pour dilatation et erosion pour les images grayscale et les gerer dans la fonction d'appel.
-mise aux normes histogrammes
-
-
-fuites de mémoires(valgrid)
-RAPPORT
-
-
-###############################################################
-
-#RAPPORT HARRIS
-#TEST HARRIS
-#MANUEL HARRIS
-
-#CARTOUCHE H
-#VERIF DOC
-
-ENLEVER HOUGH ET PANORAMA
-
-
-PREPARER MAKEFILE
-
-
-#FAIRE DES TEST
-
-###########################################################
-
+Elle se trouvera dans le dossier ./doc/
 
 
 ****Liens utiles***

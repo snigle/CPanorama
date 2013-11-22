@@ -93,7 +93,7 @@ int** recupFiltre(FILE* file_filtre, int int_taille)
 
 
 
-int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** int_filtre, int int_taille, int int_decalage)
+int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** mat_filtre, int int_taille, int int_decalage)
 {
 	int int_i;
 	int int_j;
@@ -103,7 +103,7 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
 	{
 		for (int_j = 0; int_j < int_taille; int_j += 1)
 		{
-				int_result += int_filtre[int_i][int_j] * int_pixels[int_x - int_decalage + int_i][int_y - int_decalage + int_i];
+				int_result += mat_filtre[int_i][int_j] * int_pixels[int_x - int_decalage + int_i][int_y - int_decalage + int_i];
 		}
 	}
 	if (int_result < 0)
@@ -116,38 +116,38 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
 
 
 
-int** applicationFiltre(Image im_image, int** int_filtre, int int_taille)
+int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille)
 {
-	int** int_result;
+	int** mat_result;
 	int int_i;
 	int int_j;
 	int int_decalage;
 	int_decalage = (int_taille - 1) / 2;
-	int_result = initMatrice(im_image.width, im_image.height);
+	mat_result = initMatrice(im_image.width, im_image.height);
 	for (int_i = 0; int_i < im_image.height; int_i += 1)
 	{
 		for (int_j = 0; int_j < im_image.width; int_j += 1)
 		{
 			if ((int_i < int_decalage) || (int_j < int_decalage) || (int_i >= (im_image.height - int_decalage)) || (int_j >= (im_image.width - int_decalage)))
-				int_result[int_i][int_j] = im_image.teinte[int_i][int_j];
+				mat_result[int_i][int_j] = im_image.teinte[int_i][int_j];
 			else
-				int_result[int_i][int_j] = setNumber(int_i, int_j, im_image.width, im_image.height, im_image.teinte, int_filtre, int_taille, int_decalage);
+				mat_result[int_i][int_j] = setNumber(int_i, int_j, im_image.width, im_image.height, im_image.teinte, mat_filtre, int_taille, int_decalage);
 		}
 	}
-	return (int_result);
+	return (mat_result);
 }
 
 
 
 Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille)
 {
-	int** int_apresConvolution;
-	int** int_filtre;
+	int** mat_apresConvolution;
+	int** mat_filtre;
 	Image im_imageConvolution;	
-	int_filtre = recupFiltre(file_fichierFiltre, int_taille);
+	mat_filtre = recupFiltre(file_fichierFiltre, int_taille);
 
-	int_apresConvolution = applicationFiltre(im_image, int_filtre, int_taille);
-	im_imageConvolution = creationImage("P2", im_image.width, im_image.height, 255, int_apresConvolution);
+	mat_apresConvolution = applicationFiltre(im_image, mat_filtre, int_taille);
+	im_imageConvolution = creationImage("P2", im_image.width, im_image.height, 255, mat_apresConvolution);
 	
 	return (im_imageConvolution);
 
