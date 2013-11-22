@@ -109,7 +109,7 @@ void erreur(int int_numeroErreur, int int_sortir)
 			else
 				fprintf(stderr,"Une erreur est survenue\n");
 		if (int_sortir)
-			exit(int_result);
+			exit(-int_result);
 	}
 }
 
