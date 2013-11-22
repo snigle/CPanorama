@@ -84,7 +84,7 @@ int** recupFiltre(FILE* file_filtre, int int_taille);
 
 
 /*!
-       \fn int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** int_filtre, int int_taille, int int_decalage)
+       \fn int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** mat_filtre, int int_taille, int int_decalage)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief applique le filtre à un pixel de l'image               
@@ -93,7 +93,7 @@ int** recupFiltre(FILE* file_filtre, int int_taille);
        \param int_largeur : (int) la largeur de l'image
        \param int_hauteur : (int) la hauteur de l'image
        \param int_pixels : (int**) le tableau de pixels de l'image
-       \param int_filtre : (int**) le filtre de convolution a appliquer sur l'image
+       \param mat_filtre : (int**) le filtre de convolution a appliquer sur l'image
        \param int_taille : (int) la taille du filtre
        \param int_decalage : (int) le decalage
        \return retourne la valeur du pixel après l'application du filtre
@@ -101,7 +101,7 @@ int** recupFiltre(FILE* file_filtre, int int_taille);
        \remarks 
 
 */
-int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** int_filtre, int int_taille, int int_decalage);
+int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** mat_filtre, int int_taille, int int_decalage);
 
 /*!
        \fn int** applicationFiltre(Image im_image, int** int_filtre, int int_taille)
@@ -117,7 +117,7 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
        \remarks 
 
 */
-int** applicationFiltre(Image im_image, int** int_filtre, int int_taille);
+int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille);
 
 /*!
        \fn Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille)
@@ -125,7 +125,7 @@ int** applicationFiltre(Image im_image, int** int_filtre, int int_taille);
        \date Sat 19 Oct 2013
        \brief permet d'enchainer les fonctions qui permettent d'appliquer la convolution               
        \param im_image : (image) Image à traiter
-       \param int_filtre : (FILE*) fichier contenant le filtre de convolution
+       \param mat_filtre : (FILE*) fichier contenant le filtre de convolution
        \param int_taille : (int) la taille du filtre
        \return retourne un entier qui indique 0 pour le bon déroulement des fonctions
                

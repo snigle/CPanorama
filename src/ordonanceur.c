@@ -238,13 +238,7 @@ int derniereOption(int argc, char** argv)
 	return argc;
 }
 
-/*
-un input un output un idInput commande
 
-afficher la commande appellée
-erreur
-incremeter idInput
-*/
 void mauvaisParametre (char* input, char* output, char* commande, int* idInput)
 {
 	printf("** %s -%s %s **", input, commande, output);
