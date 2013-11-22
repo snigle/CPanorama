@@ -57,12 +57,11 @@ give: $(dirsrc)
 	@rm -rf $(AUTEUR)
 	@mkdir $(AUTEUR)
 	@mkdir $(AUTEUR)/$(dirsrc)
-	@mkdir $(AUTEUR)/$(dirdoc)
 	@mkdir $(AUTEUR)/$(dirbin)
 	@mkdir $(AUTEUR)/$(dirrapport)
 	@cp Makefile $(AUTEUR)/Makefile
+	@cp Doxyfile $(AUTEUR)/Doxyfile
 	@cp -r $(dirsrc)* $(AUTEUR)/$(dirsrc)
-	@cp -r $(dirdoc)* $(AUTEUR)/$(dirdoc)
 	@cp -r $(dirrapport)rapport.pdf $(AUTEUR)/$(dirrapport)
 	tar cvzf $(AUTEUR)-$(PROG).tar.gz $(AUTEUR)/
 	@rm -rf $(AUTEUR)
