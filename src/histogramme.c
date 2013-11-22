@@ -108,14 +108,7 @@ Image histogrammeBis(char* str_input, char* str_output, int bool_save, int* bool
 	return (sortie);
 }
 
-<<<<<<< HEAD
-	save(sortie,output,bool_erreur);
-	libererImage(image);
-	free(hist);
-	for(i=1;i<image.teinteMax+1;i++)
-	{printf("Appel de la fonction histogramme\n,%d-%d, \n", i, sortie.teinte[i]);}
-	return sortie;
-=======
+
 Image histogramme (char* str_input, char* str_output, int bool_save, int* bool_erreur)
 {
 	Image image;
@@ -134,5 +127,5 @@ Image histogramme (char* str_input, char* str_output, int bool_save, int* bool_e
 		}
 	}
 	return (sortie);
->>>>>>> ba6df2a5b4ce4e9760271d1e3b6cb9ffc649f87a
+
 }
