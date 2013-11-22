@@ -1,7 +1,6 @@
 #include "convolution.h"
 
 
-
 int testFinFichierFiltre(FILE* file_filtre)
 {
 	int int_k;

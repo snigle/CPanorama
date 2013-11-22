@@ -1,12 +1,4 @@
-/*! \file ordonanceur.c
- *  \author Lamarche Ludovic <lamarchelu@eisti.eu>
- *  \version 0.1
- *  \date Mon 23 Sep 2013
- *
- *  \brief Gère les options du programme en ligne de commande
- *
- *
- */
+
 
 #include "ordonanceur.h"
 

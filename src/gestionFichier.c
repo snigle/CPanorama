@@ -1,7 +1,5 @@
 #include "gestionFichier.h"
 
-
-
 char* recupererExtension(char* char_nom)
 {
 	int int_i;

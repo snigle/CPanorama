@@ -1,14 +1,3 @@
-/*! \file  binaire.c
-	\author Poussou Elie poussoueli@eisti.eu
-	\date Wed 20 Nov 2013
-	
-	\brief génère un fichier en binaire à partir d'un pbm                                   
-	
-
-*/
-	
-	
-	
 #include "binaire.h"
 
 int** remplirMatriceBinaire (Image im_image, int int_seuil)

@@ -29,7 +29,7 @@
        \remarks voir http://homepages.inf.ed.ac.uk/rbf/BOOKS/VERNON/Chap004.pdf p.66 pour l'explication de l'objet pixel
 
 */
-int estUnObjet(int i, int j, Image image);
+int estUnObjet(int i, int j, Image im_image);
 
 /*!
        \fn void ajouterObjet(int hauteur, int largeur, int** matrice, Image image)
@@ -45,7 +45,7 @@ int estUnObjet(int i, int j, Image image);
        \remarks 
 
 */
-void ajouterObjet(int hauteur, int largeur, int** matrice, Image image);
+void ajouterObjet(int int_hauteur, int int_largeur, int** matInt_matrice, Image im_image);
 
 /*!
        \fn int estDansLaMatrice(int i, int j, Image image)
@@ -60,7 +60,7 @@ void ajouterObjet(int hauteur, int largeur, int** matrice, Image image);
        \remarks 
 
 */
-int estDansLaMatrice(int i, int j, Image image);
+int estDansLaMatrice(int i, int j, Image im_image);
 
 /*!
        \fn int** genererMatriceErode(Image imageInput)
@@ -73,7 +73,7 @@ int estDansLaMatrice(int i, int j, Image image);
        \remarks 
 
 */
-int** genererMatriceErode(Image imageInput);
+int** genererMatriceErode(Image im_imageInput);
 
 /*!
        \fn int** genererMatriceDilate(Image imageInput)
@@ -86,7 +86,7 @@ int** genererMatriceErode(Image imageInput);
        \remarks 
 
 */
-int** genererMatriceDilate(Image imageInput);
+int** genererMatriceDilate(Image im_imageInput);
 
 
 /*!
@@ -103,7 +103,7 @@ int** genererMatriceDilate(Image imageInput);
        \remarks 
 
 */
-Image erode (char* input, char* output, int bool_save, int* bool_erreur);
+Image erode (char* str_input, char* str_output, int bool_save, int* bool_erreur);
 
 /*!
        \fn int dilate(char* input, char* output)
@@ -119,7 +119,7 @@ Image erode (char* input, char* output, int bool_save, int* bool_erreur);
        \remarks 
 
 */
-Image dilate (char* input, char* output, int bool_save, int* bool_erreur);
+Image dilate (char* str_input, char* str_output, int bool_save, int* bool_erreur);
 
 #endif /* __ERODEDILATE_H__ */
 
