@@ -238,6 +238,20 @@ int derniereOption(int argc, char** argv)
 	return argc;
 }
 
+/*
+un input un output un idInput commande
+
+afficher la commande appellée
+erreur
+incremeter idInput
+*/
+void mauvaisParametre (char* input, char* output, char* commande, int* idInput)
+{
+	printf("** %s -%s %s **", input, commande, output);
+	erreur(ERREUR_PARAMETRE, NO_EXIT);
+	*idInput = *idInput + 1;
+}
+
 
 void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
 {
@@ -263,6 +277,8 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
 }
+
+
 
 void appelerFonction(int argc, char** argv, char** input, int nombreInput, char** output, int nombreOutput)
 {
