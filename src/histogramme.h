@@ -30,7 +30,7 @@
        \remarks 
 
 */
-Image histogrammeBis (char* str_input, char* str_output, int bool_save, int* bool_erreur, int* hist, Image image);
+Image histogrammeBis (char* char_str_input, char* char_str_output, int int_bool_save, int* int_bool_erreur, int* int_hist, Image im_image);
 /*!
        \fn int histogramme(char* input, char* output)
        \author PERALES Quentin <peralesque@eisti.eu>
@@ -43,7 +43,7 @@ Image histogrammeBis (char* str_input, char* str_output, int bool_save, int* boo
        \remarks 
 
 */
-Image histogramme (char* input, char* output, int bool_save, int* bool_erreur);
+Image histogramme (char* char_input, char* char_output, int int_bool_save, int* int_bool_erreur);
 
 /*!
        \fn int* remplirTableauHist(Image image)
@@ -56,7 +56,7 @@ Image histogramme (char* input, char* output, int bool_save, int* bool_erreur);
        \remarks 
 
 */
-int* remplirTableauHist(Image image, int* bool_erreur);
+int* remplirTableauHist(Image im_image, int* int_bool_erreur);
 
 /*!
        \fn int calculMax(int* tabhist)
@@ -69,7 +69,7 @@ int* remplirTableauHist(Image image, int* bool_erreur);
        \remarks 
 
 */
-int calculMax(int* tabhist, int teinteMax);
+int calculMax(int* int_tabhist, int int_teinteMax);
 
 /*!
        \fn int** Tracer(Image image, int taille)
@@ -83,7 +83,7 @@ int calculMax(int* tabhist, int teinteMax);
        \remarks 
 
 */
-int** Tracer(int* tabhist, int taille, int teinteMax);
+int** Tracer(int* int_tabhist, int int_taille, int int_teinteMax);
 
 /*!
        \fn int* abPourcent(int* hist, int max)
@@ -97,6 +97,6 @@ int** Tracer(int* tabhist, int taille, int teinteMax);
        \remarks 
 
 */
-int* tabPourcent(int* hist, int max, int h, int teinteMax);
+int* tabPourcent(int* int_hist, int int_max, int int_h, int int_teinteMax);
 #endif /* __HISTOGRAMME_H__ */
 
