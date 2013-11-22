@@ -8,124 +8,124 @@
 */
 #include "histogramme.h"
 
-int* remplirTableauHist(Image image, int* bool_erreur)
+int* remplirTableauHist(Image im_image, int* int_bool_erreur)
 {
-	int* TabHisto;
-	int i;
-	int j;
-	TabHisto = mallocBis((image.teinteMax+1) * sizeof(int));
-	if(testType(image, "P2"))
+	int* int_TabHisto;
+	int int_i;
+	int int_j;
+	int_TabHisto = mallocBis((im_image.teinteMax+1) * sizeof(int));
+	if(testType(im_image, "P2"))
 	{
-		for (i=0; i <( image.teinteMax+1);i++)
+		for (int_i=0; int_i <( im_image.teinteMax+1);int_i++)
 		{
-			TabHisto[i]=0;
+			int_TabHisto[int_i]=0;
 		}
 		
-		for(i = 0 ; i < image.height ; i++)
+		for(int_i = 0 ; int_i < im_image.height ; int_i++)
 		{
-			for (j = 0; j < image.width; j++)
+			for (int_j = 0; int_j < im_image.width; int_j++)
 			{
-				TabHisto[image.teinte[i][j]]++;
+				int_TabHisto[im_image.teinte[int_i][int_j]]++;
 			}
 		}	
 	}
 	else
-		*bool_erreur = 1;
-	return (TabHisto);
+		*int_bool_erreur = 1;
+	return (int_TabHisto);
 }
 
-int calculMax(int* tabhist, int teinteMax)
+int calculMax(int* int_tabhist, int int_teinteMax)
 {
-	int max;
-	int i;
-	max=0;
+	int int_max;
+	int int_i;
+	int_max=0;
 	
-	for(i=0 ; i<teinteMax+1 ; i++)
+	for(int_i=0 ; int_i<int_teinteMax+1 ; int_i++)
 	{
-		if(tabhist[i]>max)
-			max=tabhist[i];
+		if(int_tabhist[int_i]>int_max)
+			int_max=int_tabhist[int_i];
 	}
 	
-	return(max);
+	return(int_max);
 }
 
-int* tabPourcent(int* hist, int max, int taille, int teinteMax)
+int* tabPourcent(int* int_hist, int int_max, int int_taille, int int_teinteMax)
 {
-	int* tabPourcent;
-	int i;
+	int* int_tabPourcent;
+	int int_i;
 	
-	tabPourcent=mallocBis((teinteMax+1)*sizeof(int));
+	int_tabPourcent=mallocBis((int_teinteMax+1)*sizeof(int));
 	
-	for(i=0;i<(teinteMax+1);i++)
+	for(int_i=0;int_i<(int_teinteMax+1);int_i++)
 	{
-		tabPourcent[i]= max==0? 0 : taille*hist[i]/max;
+		int_tabPourcent[int_i]= int_max==0? 0 : int_taille*int_hist[int_i]/int_max;
 	}
 	
-	return(tabPourcent);
+	return(int_tabPourcent);
 }
 
 
-int** Tracer(int* tabhist, int taille, int teinteMax)
+int** Tracer(int* int_tabhist, int int_taille, int int_teinteMax)
 {
-	int i;
-	int j;
-	int k;
-	int** trace;
+	int int_i;
+	int int_j;
+	int int_k;
+	int** int_trace;
 
-	trace=initMatrice(teinteMax+1,taille);
+	int_trace=initMatrice(int_teinteMax+1,int_taille);
 	
-	for (i = 0; i < teinteMax+1; i += 1)
+	for (int_i = 0; int_i < int_teinteMax+1; int_i += 1)
 	{
-		for (j = 0; j < taille; j += 1)
+		for (int_j = 0; int_j < int_taille; int_j += 1)
 		{
-			trace[j][i]=0;
+			int_trace[int_j][int_i]=0;
 		}
 	}
-	for(i=0 ; i < teinteMax+1 ; i++)
+	for(int_i=0 ; int_i < int_teinteMax+1 ; int_i++)
 	{
-		for (k = (taille - tabhist[i]) ; k < taille ; k += 1)
+		for (int_k = (int_taille - int_tabhist[int_i]) ; int_k < int_taille ; int_k += 1)
 		{
-			trace[k][i]=1;
+			int_trace[int_k][int_i]=1;
 		}	
 	}
-	return(trace);
+	return(int_trace);
 }
 
-Image histogrammeBis(char* str_input, char* str_output, int bool_save, int* bool_erreur, int* hist, Image image)
+Image histogrammeBis(char* char_str_input, char* char_str_output, int int_bool_save, int* int_bool_erreur, int* int_hist, Image im_image)
 {
-	int** trace;
-	int* percent;
-	int max;
-	Image sortie;
-	max = 0;
-	max = calculMax(hist, image.teinteMax);
-	percent = tabPourcent(hist, max, 500, image.teinteMax);
-	trace = Tracer(percent, 500, image.teinteMax);
-	sortie = creationImage("P1", image.teinteMax, 500, 0, trace);
-	if (bool_save)
-		save(sortie, str_output, bool_erreur);
-	printf("\t L'histogramme de l'image %s a été effectuée avec succés. Il est tracé dans le fichier %s \n", str_input, str_output);
-	return (sortie);
+	int** int_trace;
+	int* int_percent;
+	int int_max;
+	Image im_sortie;
+	int_max = 0;
+	int_max = calculMax(int_hist, im_image.teinteMax);
+	int_percent = tabPourcent(int_hist, int_max, 500, im_image.teinteMax);
+	int_trace = Tracer(int_percent, 500, im_image.teinteMax);
+	im_sortie = creationImage("P1", im_image.teinteMax, 500, 0, int_trace);
+	if (int_bool_save)
+		save(im_sortie, char_str_output, int_bool_erreur);
+	printf("\t L'histogramme de l'image %s a été effectuée avec succés. Il est tracé dans le fichier %s \n", char_str_input, char_str_output);
+	return (im_sortie);
 }
 
 
-Image histogramme (char* str_input, char* str_output, int bool_save, int* bool_erreur)
+Image histogramme (char* char_str_input, char* char_str_output, int int_bool_save, int* int_bool_erreur)
 {
-	Image image;
-	Image sortie;
-	int* hist;
-	printf("**%s -h %s**\n", str_input, str_output);
-	image = chargerImage(str_input, bool_erreur);
-	if(!*bool_erreur)
+	Image im_image;
+	Image im_sortie;
+	int* int_hist;
+	printf("**%s -h %s**\n", char_str_input, char_str_output);
+	im_image = chargerImage(char_str_input, int_bool_erreur);
+	if(!*int_bool_erreur)
 	{
-		hist = remplirTableauHist(image, bool_erreur);
-		if (!*bool_erreur)
+		int_hist = remplirTableauHist(im_image, int_bool_erreur);
+		if (!*int_bool_erreur)
 		{
-			sortie = histogrammeBis(str_input, str_output, bool_save, bool_erreur, hist, image);
-			libererImage(image);
-			free(hist);
+			im_sortie = histogrammeBis(char_str_input, char_str_output, int_bool_save, int_bool_erreur, int_hist, im_image);
+			libererImage(im_image);
+			free(int_hist);
 		}
 	}
-	return (sortie);
+	return (im_sortie);
 
 }

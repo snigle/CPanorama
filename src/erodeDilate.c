@@ -99,6 +99,9 @@ int** genererMatriceDilate(Image imageInput)
 	return matriceDilate;
 }
 /*
+
+DEUXIEME METHODE
+
 int** genererMatriceDilate(Image imageInput)
 {
 	int** matriceDilate;
@@ -174,4 +177,3 @@ Image dilate (char* input, char* output, int bool_save, int* bool_erreur){
 	
 	return imageDilate;
 }
-
