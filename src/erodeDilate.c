@@ -2,34 +2,34 @@
 
 
 
-int estUnObjet(int i, int j, Image image){
-	int zero;
-	int un;
-	int deux;
-	int trois;
-	int quatre;
-	int cinq;
-	int six;
-	int sept;
-	zero = image.teinte[i][j+1];
-	un = image.teinte[i-1][j+1];
-	deux = image.teinte[i-1][j];
-	trois =  image.teinte[i-1][j-1];
-	quatre = image.teinte[i][j-1];
-	cinq = image.teinte[i+1][j-1];
-	six = image.teinte[i+1][j];
-	sept = image.teinte[i+1][j+1];
-	return ((un||deux||trois)&&(cinq||six||sept)&&!quatre&&!zero) ||
-	((un||zero||sept)&&(trois||quatre||cinq)&&!deux&&!six) ||
-	(trois&&(cinq||six||sept||zero||un)&&!deux&&!quatre) ||
-	(un&&(trois||quatre||cinq||six||sept)&&!deux&&!zero) ||
-	(sept&&(un||deux||trois||quatre||cinq)&&!zero&&!six) ||
-	(cinq&&(sept||zero||un||deux||trois)&&!quatre&&!six);
+int estUnObjet(int i, int j, Image im_image){
+	int int_zero;
+	int int_un;
+	int int_deux;
+	int int_trois;
+	int int_quatre;
+	int int_cinq;
+	int int_six;
+	int int_sept;
+	int_zero = im_image.teinte[i][j+1];
+	int_un = im_image.teinte[i-1][j+1];
+	int_deux = im_image.teinte[i-1][j];
+	int_trois =  im_image.teinte[i-1][j-1];
+	int_quatre = im_image.teinte[i][j-1];
+	int_cinq = im_image.teinte[i+1][j-1];
+	int_six = im_image.teinte[i+1][j];
+	int_sept = im_image.teinte[i+1][j+1];
+	return ((int_un||int_deux||int_trois)&&(int_cinq||int_six||int_sept)&&!int_quatre&&!int_zero) ||
+	((int_un||int_zero||int_sept)&&(int_trois||int_quatre||int_cinq)&&!int_deux&&!int_six) ||
+	(int_trois&&(int_cinq||int_six||int_sept||int_zero||int_un)&&!int_deux&&!int_quatre) ||
+	(int_un&&(int_trois||int_quatre||int_cinq||int_six||int_sept)&&!int_deux&&!int_zero) ||
+	(int_sept&&(int_un||int_deux||int_trois||int_quatre||int_cinq)&&!int_zero&&!int_six) ||
+	(int_cinq&&(int_sept||int_zero||int_un||int_deux||int_trois)&&!int_quatre&&!int_six);
 }
 
 
 
-void ajouterObjet(int hauteur, int largeur, int** matrice, Image image)
+void ajouterObjet(int int_hauteur, int int_largeur, int** matInt_matrice, Image im_image)
 {
 	int i;
 	int j;
@@ -37,36 +37,36 @@ void ajouterObjet(int hauteur, int largeur, int** matrice, Image image)
 	{
 		for (j = -1; j < 2; j += 1)
 		{
-			matrice[hauteur + i][largeur + j] = image.teinte[hauteur + i][largeur + j];
+			matInt_matrice[int_hauteur + i][int_largeur + j] = im_image.teinte[int_hauteur + i][int_largeur + j];
 		}
 	}
 }
 
 
-int estDansLaMatrice(int i, int j, Image image)
+int estDansLaMatrice(int i, int j, Image im_image)
 {
-	return i>0 && j>0 && i<image.height && j < image.width;
+	return i>0 && j>0 && i<im_image.height && j < im_image.width;
 }
 
 
-int** genererMatriceErode(Image imageInput)
+int** genererMatriceErode(Image im_imageInput)
 {
 	int** matriceErode;
 	int i;
 	int j;
 	int k;
 	int l;
-	matriceErode = initMatrice(imageInput.width, imageInput.height);
-	for (i = 1; i < imageInput.height-2; i += 1)
+	matriceErode = initMatrice(im_imageInput.width, im_imageInput.height);
+	for (i = 1; i < im_imageInput.height-2; i += 1)
 	{
-		for (j = 1; j < imageInput.width-2; j += 1)
+		for (j = 1; j < im_imageInput.width-2; j += 1)
 		{
 			matriceErode[i][j]=1;
 			for (k = -1; k < 2; k += 1)
 			{
 				for (l = -1; l < 2; l += 1)
 				{
-					matriceErode[i][j]=matriceErode[i][j] && imageInput.teinte[i+k][j+l];
+					matriceErode[i][j]=matriceErode[i][j] && im_imageInput.teinte[i+k][j+l];
 				}
 			}
 		}
@@ -75,20 +75,20 @@ int** genererMatriceErode(Image imageInput)
 	return matriceErode;
 }
 
-int** genererMatriceDilate(Image imageInput)
+int** genererMatriceDilate(Image im_imageInput)
 {
 	int** matriceDilate;
 	int i;
 	int j;
 
-	matriceDilate = initMatrice(imageInput.width, imageInput.height);
-	for (i = 1; i < imageInput.height-1; i += 1)
+	matriceDilate = initMatrice(im_imageInput.width, im_imageInput.height);
+	for (i = 1; i < im_imageInput.height-1; i += 1)
 	{
-		for (j = 1; j < imageInput.width-1; j += 1)
+		for (j = 1; j < im_imageInput.width-1; j += 1)
 		{
-			if(estUnObjet(i,j,imageInput))
+			if(estUnObjet(i,j,im_imageInput))
 			{	
-				ajouterObjet(i,j,matriceDilate,imageInput);
+				ajouterObjet(i,j,matriceDilate,im_imageInput);
 				
 			}
 			else
@@ -99,24 +99,24 @@ int** genererMatriceDilate(Image imageInput)
 	return matriceDilate;
 }
 /*
-int** genererMatriceDilate(Image imageInput)
+int** genererMatriceDilate(Image im_imageInput)
 {
 	int** matriceDilate;
 	int i;
 	int j;
 	int k;
 	int l;
-	matriceDilate = initMatrice(imageInput.width, imageInput.height);
-	for (i = 1; i < imageInput.height-2; i += 1)
+	matriceDilate = initMatrice(im_imageInput.width, im_imageInput.height);
+	for (i = 1; i < im_imageInput.height-2; i += 1)
 	{
-		for (j = 1; j < imageInput.width-2; j += 1)
+		for (j = 1; j < im_imageInput.width-2; j += 1)
 		{
 			matriceDilate[i][j]=0;
 			for (k = -1; k < 2; k += 1)
 			{
 				for (l = -1; l < 2; l += 1)
 				{
-					matriceDilate[i][j]=matriceDilate[i][j] || imageInput.teinte[i+k][j+l];
+					matriceDilate[i][j]=matriceDilate[i][j] || im_imageInput.teinte[i+k][j+l];
 				}
 			}
 		}
@@ -125,51 +125,51 @@ int** genererMatriceDilate(Image imageInput)
 	return matriceDilate;
 }
 */
-Image erode (char* input, char* output, int bool_save, int* bool_erreur)
+Image erode (char* str_input, char* str_output, int bool_save, int* bool_erreur)
 {
-	Image imageInput;
+	Image im_imageInput;
 	Image imageErode;
 	int** matriceErode;
-	printf("**%s -e %s**\n",input,output);
-	imageInput = chargerImage(input,bool_erreur);
+	printf("**%s -e %s**\n",str_input,str_output);
+	im_imageInput = chargerImage(str_input,bool_erreur);
 	if(!*bool_erreur){
-		if(testType(imageInput,"P1"))
+		if(testType(im_imageInput,"P1"))
 		{
-			matriceErode = genererMatriceErode(imageInput);
-			imageErode = creationImage(imageInput.type,imageInput.width,imageInput.height,imageInput.teinteMax,matriceErode);
+			matriceErode = genererMatriceErode(im_imageInput);
+			imageErode = creationImage(im_imageInput.type,im_imageInput.width,im_imageInput.height,im_imageInput.teinteMax,matriceErode);
 			if(bool_save)
 			{	
-				save(imageErode, output, bool_erreur);
-				if(!*bool_erreur) printf("\tL'image %s a été érodé dans le fichier %s\n",input,output);
+				save(imageErode, str_output, bool_erreur);
+				if(!*bool_erreur) printf("\tL'image %s a été érodé dans le fichier %s\n",str_input,str_output);
 			}
 		}
 		else
 			*bool_erreur = 1;
-		libererImage(imageInput);
+		libererImage(im_imageInput);
 	}
 	return imageErode;
 }
 
-Image dilate (char* input, char* output, int bool_save, int* bool_erreur){
-	Image imageInput;
+Image dilate (char* str_input, char* str_output, int bool_save, int* bool_erreur){
+	Image im_imageInput;
 	Image imageDilate;
 	int** matriceDilate;
-	printf("**%s -d %s**\n",input,output);
-	imageInput = chargerImage(input,bool_erreur);
+	printf("**%s -d %s**\n",str_input,str_output);
+	im_imageInput = chargerImage(str_input,bool_erreur);
 		
 	if(!*bool_erreur){
-		if(testType(imageInput,"P1")){
-			matriceDilate = genererMatriceDilate(imageInput);
-			imageDilate = creationImage(imageInput.type,imageInput.width,imageInput.height,imageInput.teinteMax,matriceDilate);
+		if(testType(im_imageInput,"P1")){
+			matriceDilate = genererMatriceDilate(im_imageInput);
+			imageDilate = creationImage(im_imageInput.type,im_imageInput.width,im_imageInput.height,im_imageInput.teinteMax,matriceDilate);
 			if(bool_save)
 			{
-				save(imageDilate, output, bool_erreur);
-				if(!*bool_erreur) printf("\tL'image %s a été dilaté dans le fichier %s\n",input,output);
+				save(imageDilate, str_output, bool_erreur);
+				if(!*bool_erreur) printf("\tL'image %s a été dilaté dans le fichier %s\n",str_input,str_output);
 			}
 			
 		}else
 			*bool_erreur = 1;
-		libererImage(imageInput);
+		libererImage(im_imageInput);
 	}
 	
 	return imageDilate;

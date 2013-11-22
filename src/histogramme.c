@@ -1,11 +1,4 @@
-/*! \file  histogramme.c
-	\author Poussou Elie poussoueli@eisti.eu
-	\date Tue 22 Oct 2013
-	
-	\brief Permet d'avoir l'histogramme d'une image en niveaux de gris                                 
-	
 
-*/
 #include "histogramme.h"
 
 int* remplirTableauHist(Image im_image, int* int_bool_erreur)
