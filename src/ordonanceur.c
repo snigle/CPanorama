@@ -245,11 +245,10 @@ afficher la commande appellée
 erreur
 incremeter idInput
 */
-void mauvaisParametre (char* input, char* output, char* commande, int* idInput)
+void mauvaisParametre (char* input, char* output, char* commande)
 {
-	printf("** %s -%s %s **", input, commande, output);
+	printf("** %s %s %s **\n", input, commande, output);
 	erreur(ERREUR_PARAMETRE, NO_EXIT);
-	*idInput = *idInput + 1;
 }
 
 
@@ -279,10 +278,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
 	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo")))
-	{
-		*idInput = *idInput+1;
-		erreur(ERREUR_PARAMETRE,NO_EXIT);
-	}
+		mauvaisParametre(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i]);
 }
 
 

@@ -83,6 +83,22 @@ int recuperNombreInputOutput(int argc, char** argv, int bool_input);
 	\remarks ras
 
 */
+
+/*!
+       \fn void mauvaisParametre(char* input, char* output, char* commande)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date ven. 22 nov. 2013
+       \brief Renvoie une erreur si le paramètre n'existe pas               
+       \param input : (char*) input en question
+       \param output : (char*) output en question
+       \param commande : (char*) commande appelée
+
+               
+       \remarks 
+
+*/
+void mauvaisParametre (char* input, char* output, char* commande);
+
 void remplirTableauInputOutput(int argc, char** argv, char** char_input, int int_taille, int bool_input);
 
 /*!
