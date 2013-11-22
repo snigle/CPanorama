@@ -74,3 +74,34 @@ ListePoints* harris(char* input, int* bool_erreur){
 	}
 	return result;
 }
+
+void enregistrerHarris(char* input,char* output, int* bool_erreur)
+{
+	ListePoints* tmp;
+	Image image;
+	Image imageResult;
+	int** mat_result;
+	printf("**%s --harris %s**\n",input,output);
+	image = chargerImage(input,bool_erreur);
+	if(!*bool_erreur && testType(image,"P2"))
+	{
+		mat_result = initMatrice(image.width,image.height);
+		tmp = harris(input,bool_erreur);
+		if(!*bool_erreur)
+		{	
+			while(tmp->suivant != NULL)
+			{
+				mat_result[tmp->y][tmp->x] = 1;
+				tmp = tmp->suivant;
+			}
+			imageResult = creationImage("P1",image.width,image.height,1,mat_result);
+			save(imageResult, output, bool_erreur);
+			if(!*bool_erreur) printf("\tLe traitement de harris a été effectué\n");
+		}
+		
+	}
+	else
+		*bool_erreur = 1;
+	
+	
+}
