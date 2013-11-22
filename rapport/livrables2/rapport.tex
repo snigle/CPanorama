@@ -124,15 +124,17 @@
 			  
 			  On parcourt l'image en teintes de gris, et pour chaque pixel, si son instensité est supérieure au seuil, on lui alloue la valeur 0 qui correspond à la couleur blanche.  Si l'intensité du pixel est supérieure au seuil, on lui alloue la valeur 1 qui correspond à la couleur noire.\\
 			  Voici l'algorithme utilisé : \\
-			  \begin{lstlisting}
-POUR TOUT les pixels de l'image
-	SI le pixel est un objet pixel ALORS
-		copier le groupe de pixels dans l'image de destination
-	FINSI
-FINPOUR	
-	                 \end{lstlisting}
+
+
+			  	\begin{lstlisting}
+				   POUR TOUT les pixels de l'image
+				      SI le pixel >seuil
+				      pixel=1
+				    FINSI
+				  FINPOUR	
+			      \end{lstlisting}
 			  
-		  \section{Histogramme}
+		\section{Histogramme}
 			  L'histogramme d'une image permet d'illustrer la répartition des teintes d'une image.\\
 			  Le but est de compter pour chaque intensité le nombre de pixels qui sont de cette intensité.\\
 			 
@@ -207,7 +209,7 @@ FIN POUR
 \end{lstlisting}
 		
 		
-		\section{Convolution}
+		\section{Convolution \cite{wikiConvo} } 
 			La convolution permet d'appliquer un filtre de convolution à une image en échelle de gris. Le but est d'affecter pour chaque pixel de l'image des coefficients au pixels autour de celui-ci.
 			
 			La taille du filtre est de taille variable, cependant, elle est toujours paire. Les filtres les plus utilisés sont les filtres de taille 3x3, mais parfois, les filtres de tailles supérieures sont requis.
@@ -254,7 +256,7 @@ Le but va être maintenant d'utiliser ces fonctions ainsi que d'autres algorithme
 		\section{La détection des points d'intérêts d'une image}
 		Dans un premier temps, il faut détecter les points d'intérêts de l'image, c'est-à-dire les points particulier de l'image, qui sont notables. Pour cela, nous allons comparer deux techniques : la transformée de Hough et le détecteur de Harris.
 		\\
-			\subsection{La transformée de Hough}
+			\subsection{La transformée de Hough \cite{operationpixel} \cite{developper} } 
 			
 			Dans cette méthode, on utilise des images en noir et blanc, il faut donc convertir l'image couleur en une image en échelle de gris, puis la convertir en noir et blanc. Afin d'obtenir un nombre de points suffisamment important pour pourvoir les comparer mais pas trop pour éviter d'utiliser des points inutiles, on peut éroder ou dilater l'image. 
 			
@@ -291,7 +293,7 @@ FINPOUR
 
 Pour utiliser cet algorithme nous devons trouver la variable threshole qui varie selon les images à traiter.
 		
-		\section{Relier les points d'intérêts : la méthode RANSAC}
+		\section{Relier les points d'intérêts : la méthode RANSAC \cite{ransacpdf} \cite{ransacwiki} } 
 		
 		La méthode RANdom SAmple Consensus (abrégée RANSAC) est basée sur un modèle mathématique qui utilise les probabilités pour optimiser une trajectoire entre des points. Elle a été crée afin de réduire le temps de calcul pour des méthodes de "vote" classique comme la transformée de Hough. On suppose que les points sont un ensemble d'inlers et d'outliers, les inliers sont les points qui vont correpondre à un modèle et les outliers qui eux ne vont pas correspondre à ce modèle.
 		
