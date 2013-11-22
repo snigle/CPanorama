@@ -1,14 +1,3 @@
-/*! \file header.c
- *  \author Lamarche Ludovic <lamarchelu@eisti.eu>
- *  \version 0.1
- *  \date Mon 23 Sep 2013
- *
- *  \brief Fonctions utiles à l'ensemble du programme
- *
- *
- */
-
-
 #include "header.h"
 
 

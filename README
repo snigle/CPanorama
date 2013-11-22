@@ -17,12 +17,12 @@ RAPPORT
 
 ###############################################################
 
-RAPPORT HARRIS
-TEST HARRIS
-MANUEL HARRIS
+#RAPPORT HARRIS
+#TEST HARRIS
+#MANUEL HARRIS
 
-CARTOUCHE H
-VERIF DOC
+#CARTOUCHE H
+#VERIF DOC
 
 ENLEVER HOUGH ET PANORAMA
 
@@ -30,7 +30,7 @@ ENLEVER HOUGH ET PANORAMA
 PREPARER MAKEFILE
 
 
-FAIRE DES TEST
+#FAIRE DES TEST
 
 ###########################################################
 

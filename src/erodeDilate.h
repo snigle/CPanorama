@@ -1,12 +1,13 @@
-/*! \file erode.c
- *  \author Perales Quentin <peralesque@eisti.eu>
- *  \version 0.1
- *  \date  Tue 08 Oct 2013
- *
- *  \brief permet d'eroder l'image choisit
- *
- *
+/*!\file erodeDilate.h
+ 	\author Perales Quentin <peralesque@eisti.eu>
+ 	\version 0.1
+ 	\date  Tue 08 Oct 2013
+ 
+ 	\brief permet d'eroder l'image choisit
+ 
+ 
  */
+
 
 
 

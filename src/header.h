@@ -1,9 +1,9 @@
-/*! \file header.h
- *  \author Perales Quentin <peralesque@eisti.eu>
- *  \version 0.1
- *  \date  Mon 23 Sep 2013
+/*!	\file header.h
+ *	\author Perales Quentin <peralesque@eisti.eu>
+ *	\version 0.1
+ *	\date  Mon 23 Sep 2013
  *
- *  \brief structure et librairie utile pour l'ensemble du programme
+ *	\brief structure et librairie utile pour l'ensemble du programme
  *
  *
  */
