@@ -95,34 +95,34 @@
 			  
 			  On parcourt l'image en teintes de gris, et pour chaque pixel, si son instensité est supérieure au seuil, on lui alloue la valeur 0 qui correspond à la couleur blanche.  Si l'intensité du pixel est supérieure au seuil, on lui alloue la valeur 1 qui correspond à la couleur noire.\\
 			  Voici l'algorithme utilisé : \\
+			  \begin{lstlisting}
+POUR TOUT les pixels de l'image
+	SI le pixel est un objet pixel ALORS
+		copier le groupe de pixels dans l'image de destination
+	FINSI
+FINPOUR	
+	                 \end{lstlisting}
 			  
-			  	\begin{lstlisting}
-				    POUR TOUT les pixels de l'image
-				      SI le pixel >seuil
-				      pixel=1
-				    FINSI
-				  FINPOUR	
-			      \end{lstlisting}
-			  
-		\section{Histogramme}
+		  \section{Histogramme}
 			  L'histogramme d'une image permet d'illustrer la répartition des teintes d'une image.\\
 			  Le but est de compter pour chaque intensité le nombre de pixels qui sont de cette intensité.\\
 			 
 			 D'abord on crée un tableau de taille égale à la teinte maximale de l'image dont on veut obtenir l'histogramme.\\
-			 Ensuite, on parcourt l'image et pour chaque pixel, on rajoute 1 dans la case du tableau qui correspond à l'instensité de ce pixel.\\
+			 Ensuite, on parcourt l'image et pour chaque pixel, on rajoute 1 dans la case du tableau qui correspond à l'instensité de ce pixel.\\\\\\
 			 
-			 On peut choisir de tracer cet histogramme mais le tableau suffit.\\
+
 			 
-			 On peut résumer tout ceci grâce à l'algorithme suivant
+			 On peut résumer tout ceci grâce à l'algorithme suivant :
 			 
-			 	\begin{lstlisting}
-			      tab est un tableau d'entiers de taille égale à la teinte maximale de l'image
+                 \begin{lstlisting}
+ tab : tableau d'entiers de taille égale à la teinte maximale de l'image
 			      
-			      POUR chaque pixel de l'image
-				    tab[teinte_pixel]++
-			      FINPOUR	
-				\end{lstlisting}
-		
+POUR chaque pixel de l'image
+tab[teinte_pixel]++
+FINPOUR	
+                    \end{lstlisting}
+
+		 On peut choisir de tracer cet histogramme mais le tableau suffit.\\
 
 		\section{Dilate}
 		
