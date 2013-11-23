@@ -99,21 +99,21 @@
 
 	\chapter*{Introduction}	
 		La seconde partie du projet nous a permis de réaliser les six fonctions demandées puis d'approfondir nos recherches pour automatiser la réalisation d'un panorama.\\
-		Afin d'expliciter notre travail, nous allons expliquer notre code pas à pas dans une première partie. Chaque fonction demandée a requis divers recherches. On pourra alors utiliser certains schémas pour expliquer les algorithmes utilisés dans notre programme.\\
-		Puis nous allons expliquer les différentes méthodes que nous pouvons choisir pour écrire le code qui premettra l'automatisation d'un panorama. On va pouvoir comprendre comment détecter les points d'intérêts, les relier puis enfin comparer les deux images pour les assembler.\newpage
+		Afin d'expliciter notre travail, nous allons expliquer notre code pas à pas dans une première partie. Chaque fonction demandée a requis diverses recherches. On pourra alors utiliser certains schémas pour expliquer les algorithmes utilisés dans notre programme.\\
+		Puis nous allons expliquer les différentes méthodes que nous pouvons choisir pour écrire le code qui permettra l'automatisation d'un panorama. On va pouvoir comprendre comment détecter les points d'intérêts, les relier puis enfin comparer les deux images pour les assembler.\newpage
 		
 		
 	\chapter{Les six fonctions demandées dans le livrable}
 
 		\section{Grayscale}
-			La fonction Grayscale permet de transformer une image  couleurs en teintes de gris.\\
+			La fonction Grayscale permet de transformer une image  couleur en teintes de gris.\\
 			Dans une image en couleur, chaque pixel est codé par 3 composantes (Rouge, Vert et Bleu).\\ En grayscale, chaque pixel sera codé par une seule composante.\\
 			La formule utilisée est la suivante : \\
 			$
 				    pixelGrayscale = 0,299 * pixel Rouge+ 0,587*pixel vert + 0,114 pixel bleu
 			$
 			\\
-			On parcourt donc l'image en couleurs, et on applique cette formule à chaque pixel, c'est à dire à ces trois composantes.\\
+			On parcourt donc l'image couleur, et on applique cette formule à chaque pixel, c'est à dire à ces trois composantes.\\
 			Cette fonction effectue donc une moyenne pondérée des pixels rouges, verts et bleus. \\
 			L'image obtenue sera donc 3 fois plus petite, et en noir et blanc.\\
 
@@ -157,7 +157,7 @@ FINPOUR
 
 		\section{Dilate}
 		
-		Pour la dilatation nous avons utilisé un algorithme qui utilise des "object pixel" tiré du livre Machine Vision\cite{livre}. Un objet pixel est un groupe de neuf pixels formant un carré de taille 3x3 et qui respecte certaines conditions. Pour simplifier l'algorithme on nomme chaque case de 0 à 8.
+		Pour la dilatation nous avons utilisé un algorithme qui utilise des "objects pixel" tiré du livre Machine Vision\cite{livre}. Un objet pixel est un groupe de neuf pixels formant un carré de taille 3x3 et qui respecte certaines conditions. Pour simplifier l'algorithme on nomme chaque case de 0 à 8.
 		%Image du tableau de pixel.
 		\begin{table}[ht]
 			\centering
@@ -210,10 +210,10 @@ FIN POUR
 		
 		
 		\section{Convolution \cite{wikiConvo} } 
-			La convolution permet d'appliquer un filtre de convolution à une image en échelle de gris. Le but est d'affecter pour chaque pixel de l'image des coefficients au pixels autour de celui-ci.
+			La convolution permet d'appliquer un filtre de convolution à une image en échelle de gris. Le but est d'affecter pour chaque pixel de l'image des coefficients aux pixels autour de celui-ci.
 			
-			La taille du filtre est de taille variable, cependant, elle est toujours paire. Les filtres les plus utilisés sont les filtres de taille 3x3, mais parfois, les filtres de tailles supérieures sont requis.
-			Les filtres sont récupérés en début de fonction, une erreur est générées si le filtre n'est pas correct, c'est à dire si le fichier texte comporte caractères autres que des chiffres ou nombres ou s'il n'y a pas assez de coefficients.
+			La taille du filtre est variable, cependant, elle est toujours paire. Les filtres les plus utilisés sont les filtres de taille 3x3, mais parfois, les filtres de tailles supérieures sont requis.
+			Les filtres sont récupérés en début de fonction, une erreur est générée si le filtre n'est pas correct, c'est à dire si le fichier texte comporte des caractères autres que des chiffres ou nombres ou s'il n'y a pas assez de coefficients.
 			
 			Afin d'expliquer l'algorithme qui mène à la convolution, nous allons utiliser un filtre 3x3 sur une image. Prenons le filtre F suivant :\\
 			\begin{tabular}{lll}
@@ -254,13 +254,13 @@ Le but va être maintenant d'utiliser ces fonctions ainsi que d'autres algorithme
 	\\
 	\\
 		\section{La détection des points d'intérêts d'une image}
-		Dans un premier temps, il faut détecter les points d'intérêts de l'image, c'est-à-dire les points particulier de l'image, qui sont notables. Pour cela, nous allons comparer deux techniques : la transformée de Hough et le détecteur de Harris.
+		Dans un premier temps, il faut détecter les points d'intérêts de l'image, c'est-à-dire les points particuliers de l'image, qui sont notables. Pour cela, nous allons comparer deux techniques : la transformée de Hough et le détecteur de Harris.
 		\\
 			\subsection{La transformée de Hough \cite{operationpixel} \cite{developper} } 
 			
 			Dans cette méthode, on utilise des images en noir et blanc, il faut donc convertir l'image couleur en une image en échelle de gris, puis la convertir en noir et blanc. Afin d'obtenir un nombre de points suffisamment important pour pourvoir les comparer mais pas trop pour éviter d'utiliser des points inutiles, on peut éroder ou dilater l'image. 
 			
-			Le but ici est de comparer les points les uns par rapport aux autres pour délimiter des figures géométriques précises. Le plus simple est de repérer les droites de l'image. On considère qu'une infinité de points passent par un point, la seule chose qui diffère est donc l'inclinaison de la droite qui passe par ce point. On calcule alors la norme algébrique ro du segment entre l'origine et la droite où le segment est perpendiculaire à cette droite ainsi que téta qui est l'angle d'inclinaison de la droite par rapport à la perpendiculaire à l'axe des ascisses passant par le point étudié.
+			Le but ici est de comparer les points les uns par rapport aux autres pour délimiter des figures géométriques précises. Le plus simple est de repérer les droites de l'image. On considère qu'une infinité de points passent par une droite, la seule chose qui diffère est donc l'inclinaison de la droite qui passe par ce point. On calcule alors la norme algébrique ro du segment entre l'origine et la droite où le segment est perpendiculaire à cette droite ainsi que téta qui est l'angle d'inclinaison de la droite par rapport à la perpendiculaire à l'axe des ascisses passant par le point étudié.
 			
 			On trace ensuite dans l'espace de Hough tous les couples ro (ordonnées) et teta (abscisses) obtenus pour chaque point. Les courbes de l'espace de hough sont concourrantes en plusieurs points qui sont alors les couples (ro, teta) caractéristiques de l'image.
 			
@@ -297,7 +297,7 @@ Pour utiliser cet algorithme nous devons trouver la variable threshole qui varie
 		
 		La méthode RANdom SAmple Consensus (abrégée RANSAC) est basée sur un modèle mathématique qui utilise les probabilités pour optimiser une trajectoire entre des points. Elle a été crée afin de réduire le temps de calcul pour des méthodes de "vote" classique comme la transformée de Hough. On suppose que les points sont un ensemble d'inlers et d'outliers, les inliers sont les points qui vont correpondre à un modèle et les outliers qui eux ne vont pas correspondre à ce modèle.
 		
-		RANSAC utilise dans un premier temps un ensemble de points choisis de manière aléatoire, puis on estime un modèle à partir de ce tirage. Ensuite, les autres données sont alors testées sur le modèle précédents et sont ajoutées aux inliers s'ils correspondent au modèle. Enfin, on considère qu'un modèle est juste si le nombre d'inliers est assez important. Le modèle est alors recalculé à partir des inliers, on calcule alors l'erreur de ce modèle. Ainsi, on associe une erreur au modèle de départ. Les autres modèles seront alors évalués par rapport au modèle précédent. Celui qui a l'erreur la plus faible est le modèle de référence pour l'image.
+		RANSAC utilise dans un premier temps un ensemble de points choisis de manière aléatoire, puis on estime un modèle à partir de ce tirage. Ensuite, les autres données sont alors testées sur le modèle précédent et sont ajoutées aux inliers s'ils correspondent au modèle. Enfin, on considère qu'un modèle est juste si le nombre d'inliers est assez important. Le modèle est alors recalculé à partir des inliers, on calcule alors l'erreur de ce modèle. Ainsi, on associe une erreur au modèle de départ. Les autres modèles seront alors évalués par rapport au modèle précédent. Celui qui a l'erreur la plus faible est le modèle de référence pour l'image.
 		
 
 		
@@ -305,7 +305,7 @@ Pour utiliser cet algorithme nous devons trouver la variable threshole qui varie
 		\section{Comparer les deux images}
 			
 			\subsection{La comparaison des distances deux à deux}
-	Nous avons essayé dans un cas parfait où l'image à été découpé par informatique de trouver les points en commun sur une image par rapport à une autre. Les distances et les couleurs sont donc exactement les mêmes. Nous avons utiliser l'algorithme de Harris pour selectionner les points clés sur chaque image et nous les avons comparé suivant cet algorithme :
+	Nous avons essayé dans un cas parfait où l'image à été découpée par informatique de trouver les points en commun sur une image par rapport à une autre. Les distances et les couleurs sont donc exactement les mêmes. Nous avons utilisé l'algorithme de Harris pour sélectionner les points clés sur chaque image et nous les avons comparé suivant cet algorithme :
 \begin{lstlisting}
 Pour chaque points clé de l'image1
 	Pour chaque points clé suivant de l'image1
@@ -325,7 +325,7 @@ FinPour
 		   
 	\chapter*{Conclusion}
 	
-	Pour conclure, il nous reste maintenant la partie la plus compliquée du projet, à savoir automatiser la réalisation d'un panorama. Pour cela, nous allons mettre en oeuvre les fonctions déjà codées pour réaliser les différents algorithmes présentés dans la seconde partie. Tous seront tester pour voir lequel est le plus adapté en fonction des images en paramètre.
+	Pour conclure, il nous reste maintenant la partie la plus compliquée du projet, à savoir automatiser la réalisation d'un panorama. Pour cela, nous allons mettre en oeuvre les fonctions déjà codées pour réaliser les différents algorithmes présentés dans la seconde partie. Tous seront testés pour voir lequel est le plus adapté en fonction des images en paramètre.
 	
 \printbibliography
 \end{document}
