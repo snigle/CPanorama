@@ -16,6 +16,7 @@ void afficherManuel(void)
 	printf("\t\t-d Dilate the input file(s)\n");
 	printf("\t\t-b threshold Render a black-white image using the given threshold\n");
 	printf("\t\t-c file Apply a convolution on the input file(s) using the given file as the convolution matrix\n");
+	printf("\t\t--harris Point of interest from Harris detector\n");
 	printf("\t\t-p Render the panorama from the input file(s)\n");
 	printf("\tWorking on single file\n");
 	printf("\t\t-i file Define the input file\n");
@@ -230,13 +231,8 @@ int derniereOption(int argc, char** argv)
 	return argc;
 }
 
-/*
-un input un output un idInput commande
 
-afficher la commande appellée
-erreur
-incremeter idInput
-*/
+
 void mauvaisParametre (char* input, char* output, char* commande)
 {
 	printf("** %s %s %s **\n", input, commande, output);
@@ -269,7 +265,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	}
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
-	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo")))
+	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
 		mauvaisParametre(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i]);
 }
 

@@ -70,19 +70,7 @@ char* getOptionInputOutput(int bool_input, int bool_multiple);
 */
 int recuperNombreInputOutput(int argc, char** argv, int bool_input);
 
-/*!
-	\fn void remplirTableauInputOutput(int argc, char** argv, char** char_input, int int_taille, int bool_input)
-	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
-	\date Mon 23 Sep 2013
-	\brief Remplie le tableau d'input ou d'output 
-	\param argc : nombre de paramètres
-	\param argv : tableau de paramètres
-	\param char_input : tableau a remplir
-	\param int_taille : taille du tableau a remplir
-	\param input : si vaut 0, on traite l'output sinon on traite l'input	
-	\remarks ras
 
-*/
 
 /*!
        \fn void mauvaisParametre(char* input, char* output, char* commande)
@@ -99,6 +87,19 @@ int recuperNombreInputOutput(int argc, char** argv, int bool_input);
 */
 void mauvaisParametre (char* input, char* output, char* commande);
 
+/*!
+	\fn void remplirTableauInputOutput(int argc, char** argv, char** char_input, int int_taille, int bool_input)
+	\author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+	\date Mon 23 Sep 2013
+	\brief Remplie le tableau d'input ou d'output 
+	\param argc : nombre de paramètres
+	\param argv : tableau de paramètres
+	\param char_input : tableau a remplir
+	\param int_taille : taille du tableau a remplir
+	\param input : si vaut 0, on traite l'output sinon on traite l'input	
+	\remarks ras
+
+*/
 void remplirTableauInputOutput(int argc, char** argv, char** char_input, int int_taille, int bool_input);
 
 /*!

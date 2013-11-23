@@ -1,11 +1,11 @@
-/*! \file rgbToGreyscale.h
- *  \author Perales Quentin <peralesque@eisti.eu>
- *  \version 0.1
- *  \date  Thu 26 Sep 2013
- *
- *  \brief permet de passer d'une image en couleur pixmap type P3 à une image pixmap type P2
- *
- *
+/*! \file rgbToGrayscale.h
+   \author Perales Quentin <peralesque@eisti.eu>
+   \version 0.1
+   \date  Thu 26 Sep 2013
+ 
+   \brief permet de passer d'une image en couleur pixmap type P3 à une image pixmap type P2
+ 
+ 
  */
  
 #ifndef __RGBTOGRAYSCALE_H__
