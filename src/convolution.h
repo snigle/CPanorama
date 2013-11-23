@@ -65,7 +65,7 @@ int calculTailleFiltre(FILE* file_filtre);
        \remarks 
 
 */
-void remplirFiltre(FILE* file_filtre, int** int_matrice, int int_taille);
+void remplirFiltre(FILE* file_filtre, int** int_matrice, int int_taille, int* bool_erreur);
 
 
 /*!
@@ -80,7 +80,7 @@ void remplirFiltre(FILE* file_filtre, int** int_matrice, int int_taille);
        \remarks 
 
 */
-int** recupFiltre(FILE* file_filtre, int int_taille);
+int** recupFiltre(FILE* file_filtre, int int_taille, int* bool_erreur);
 
 
 /*!
@@ -132,7 +132,7 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille);
        \remarks 
 
 */
-Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille);
+Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille, int* bool_erreur);
 
 
 

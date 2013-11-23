@@ -53,7 +53,7 @@ int calculTailleFiltre(FILE* file_filtre)
 	return (retournerLaTaille(int_taille));
 }
 
-void remplirFiltre(FILE* file_filtre, int** int_matrice, int int_taille)
+void remplirFiltre(FILE* file_filtre, int** int_matrice, int int_taille, int* bool_erreur)
 {
 	int int_i;
 	int int_j;
@@ -66,13 +66,15 @@ void remplirFiltre(FILE* file_filtre, int** int_matrice, int int_taille)
 			int_test = fscanf(file_filtre, "%d", &int_coef);
 			if(int_test == 1)
 				int_matrice[int_i][int_j] = int_coef;
-			else
-				erreur(ERREUR_FILTRE, 1);
+			else{
+				erreur(ERREUR_FILTRE, NO_EXIT);
+				*bool_erreur = 1;
+			}
 		}
 	}
 }
 
-int** recupFiltre(FILE* file_filtre, int int_taille)
+int** recupFiltre(FILE* file_filtre, int int_taille, int* bool_erreur)
 {
 
 	int** int_matrice;
@@ -81,12 +83,16 @@ int** recupFiltre(FILE* file_filtre, int int_taille)
 	{
 		rewind(file_filtre);
 		int_matrice = initMatrice(int_taille,int_taille);
-		remplirFiltre(file_filtre, int_matrice, int_taille);
+		remplirFiltre(file_filtre, int_matrice, int_taille, bool_erreur);
 		int_testFichier = testFinFichierFiltre(file_filtre);
 		if (int_testFichier != 0)
-			erreur(ERREUR_FILTRE, 1);
+		{
+			erreur(ERREUR_FILTRE, NO_EXIT);
+			*bool_erreur = 1;
+		}
 	}else{
-		erreur(ERREUR_FILTRE, 1);
+		erreur(ERREUR_FILTRE, NO_EXIT);
+		*bool_erreur = 1;
 	}
 	return (int_matrice);
 }
@@ -139,16 +145,17 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille)
 
 
 
-Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille)
+Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille, int* bool_erreur)
 {
 	int** mat_apresConvolution;
 	int** mat_filtre;
 	Image im_imageConvolution;	
-	mat_filtre = recupFiltre(file_fichierFiltre, int_taille);
-
-	mat_apresConvolution = applicationFiltre(im_image, mat_filtre, int_taille);
-	im_imageConvolution = creationImage("P2", im_image.width, im_image.height, 255, mat_apresConvolution);
-	
+	mat_filtre = recupFiltre(file_fichierFiltre, int_taille, bool_erreur);
+	if (!*bool_erreur)
+	{
+		mat_apresConvolution = applicationFiltre(im_image, mat_filtre, int_taille);
+		im_imageConvolution = creationImage("P2", im_image.width, im_image.height, 255, mat_apresConvolution);
+	}
 	return (im_imageConvolution);
 
 }
@@ -167,28 +174,28 @@ int testFiltre(FILE* file_filtre)
 	return(int_result);
 }
 
-Image convolution (char* str_input, char* str_output, char* str_nomFichier, int int_bool_save, int* int_bool_erreur){
+Image convolution (char* str_input, char* str_output, char* str_nomFichier, int int_bool_save, int* bool_erreur){
 	FILE* file_fichierFiltre;
 	Image im_image;
 	Image im_result;
 	int int_taille;
 	printf("**%s -c %s, filtre : %s**\n",str_input,str_output,str_nomFichier);
 	file_fichierFiltre = fopen(str_nomFichier, "r");
-	im_image = chargerImage(str_input, int_bool_erreur);
-	if(!*int_bool_erreur){
+	im_image = chargerImage(str_input, bool_erreur);
+	if(!*bool_erreur){
 		if(testFiltre(file_fichierFiltre) && testType(im_image, "P2"))
 		{
 			int_taille = calculTailleFiltre(file_fichierFiltre);
-			im_result = applicationConvolution(im_image, file_fichierFiltre, int_taille);
-			if(int_bool_save)
-			{
-				save(im_result, str_output, int_bool_erreur);
-				if(!*int_bool_erreur) printf("\tLa convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", str_input, str_output);
-			}
+			im_result = applicationConvolution(im_image, file_fichierFiltre, int_taille, bool_erreur);
+				if(int_bool_save)
+				{
+					save(im_result, str_output, bool_erreur);
+					if(!*bool_erreur) printf("\tLa convolution sur le fichier %s a été effectuée avec succés. Le fichier de sortie est : %s \n", str_input, str_output);
+				}
 			fclose(file_fichierFiltre);
 		}
 		else
-			*int_bool_erreur = 1;
+			*bool_erreur = 1;
 		libererImage(im_image);
 	}
 	return (im_result);
