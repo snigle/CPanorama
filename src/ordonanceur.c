@@ -240,6 +240,22 @@ void mauvaisParametre (char* input, char* output, char* commande)
 }
 
 
+void listeTestOption2(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
+{
+	int bool_erreur;
+	bool_erreur = 0;
+	if(!strcmp(argv[*i],"-p"))
+	{
+		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0),&bool_erreur), NO_EXIT);
+		*idInput=nombreInput;
+	}
+	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
+		afficherManuel();
+	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
+		mauvaisParametre(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i]);
+}
+
+
 void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
 {
 	int bool_erreur;
@@ -258,15 +274,8 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 		binaire(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1],1,&bool_erreur);
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
 		convolution(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1],1,&bool_erreur);
-	else if(!strcmp(argv[*i],"-p"))
-	{
-		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0),&bool_erreur), NO_EXIT);
-		*idInput=nombreInput;
-	}
-	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
-		afficherManuel();
-	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
-		mauvaisParametre(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i]);
+	else 
+		listeTestOption2(argc,argv,i,input,idInput,nombreInput,output,idOutput,nombreOutput);
 }
 
 

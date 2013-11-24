@@ -19,7 +19,6 @@
 #include "histogramme.h"
 #include "panorama.h"
 #include "binaire.h"
-#include "hough.h"
 #include "harris.h"
 
 
@@ -150,6 +149,29 @@ char** recupererDossierInput(int argc, char** argv, int* pt_int_taille);
 
 */
 char** associerTableauString(char** tab1, char** tab2, int taille1, int taille2);
+
+
+/*!
+       \fn void listeTestOption2(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date mer. 16 oct. 2013
+       \brief Effectue tout les test sur une option donnée               
+       \param argc : (int) nombre de paramètres
+       \param argv : (char**) tableau de paramètres
+       \param i : (int*) position dans le tableau argv
+       \param input : (char**) tableau d'inputs
+       \param idinput : (int*) position dans le tableau d'inputs
+       \param nombreinput : (int) taille du tableau d'inputs
+       \param output : (char**) tableau d'output
+       \param idoutput : (int*) position dans le tableau d'output
+       \param nombreoutput : (int) taille du tableau d'output
+       
+               
+       \remarks 
+
+*/
+
+void listeTestOption2(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput);
 
 /*!
        \fn void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
