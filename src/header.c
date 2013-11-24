@@ -172,7 +172,6 @@ void libererMatrice(void** mat, int int_hauteur)
 
 void libererImage(Image im_image)
 {
-	free(im_image.type);
 	libererMatrice((void**)im_image.teinte, im_image.height);
 }
 
