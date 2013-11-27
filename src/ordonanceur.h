@@ -20,7 +20,7 @@
 #include "panorama.h"
 #include "binaire.h"
 #include "harris.h"
-
+#include "egalisationImage.h"
 
 
  

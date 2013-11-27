@@ -249,6 +249,8 @@ void listeTestOption2(int argc, char** argv, int* i, char** input, int* idInput,
 		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0),&bool_erreur), NO_EXIT);
 		*idInput=nombreInput;
 	}
+	else if(!strcmp(argv[*i],"-eq"))
+		egaliserHistogramme(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
 	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
