@@ -12,19 +12,39 @@
  */
 #include "comparaison.h"
  
- 
+int distance(ListePoints* pointA, ListePoints* pointB)
+{
+	return sqrt(pow((float) (pointB->x - pointA->x),2) + pow((float) (pointB->y - pointA->y),2));
+}
+
 ListePoints** pointsRandom(ListePoints* liste)
  {
  	int i;
+ 	int ok;
  	ListePoints** tab;
+ 	ListePoints* tmp;
  	
- 	tab=mallocBis(3*sizeof(ListePoints*));
+ 	tab=mallocBis(4*sizeof(ListePoints*));
  	/*Verifier random pas deux fois pareil*/
- 	for(i=0;i<3;i++)
+ 	printf("****RECHERCHE POINTS***\n");
+ 	tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
+ 	for(i=0;i<4;i++)
  	{
- 		tab[i]=positionListe(liste,(rand()%(tailleListe(liste,0))));	
+ 		ok = 0;
+ 		while(!ok && i)
+ 		{
+ 			tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
+ 			printf("Distance : %d\n",distance(tmp,tab[i-1]));
+ 			ok = distance(tmp,tab[i-1]) < 100;
+ 		}
+ 		tab[i]=tmp;	
  	}
-	
+ 	printf("****************Affichage points**********\n");
+	for (i = 0; i < 4; i += 1)
+	{
+		printf("Point %d : x %d y %d\n",i,tab[i]->x,tab[i]->y);
+	}
+	printf("Distance %d\n",distance(tab[2],tab[1]));
 	return (tab);
  }
  
@@ -65,7 +85,7 @@ ListePoints* chercherAutour(ListePoints* liste, ListePoints* pointA, ListePoints
 {
 	ListePoints* result;
 	int decalage;
-	decalage=4;
+	decalage=1;
 	result = NULL;
 	while(liste !=NULL)
 	{
@@ -92,6 +112,7 @@ ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 	ListePoints** ptsImage1;
 	k=0;
 	trouvePas = 1;
+	printf("**********TMP***********\n");
 	while(trouvePas && k < 10000)
 	{
 		ptsImage1=points(liste1);
@@ -100,25 +121,27 @@ ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 		{
 			i=0;
 			tmp = parcoutListe2;
-			/**Parcourt de la liste tant qu'on trouve une egalite*/
-			while (i<2 && !trouvePas)
+			/**Parcourt de la liste tant qu'on trouve une egalite*/		trouvePas = 0;
+			printf("Tmp %d : x %d y %d\n",i,tmp->x,tmp->y);
+			while (i<3 && !trouvePas)
 			{
 				vect = vecteur( ptsImage1[i],ptsImage1[i+1]);
 				tmp = chercherAutour(liste2,tmp,vect);
 				trouvePas = (tmp ==NULL);
+				if(!trouvePas)
+					printf("Tmp %d : x %d y %d\n",i+1,tmp->x,tmp->y);
 				i++;
 			}
-		
 			parcoutListe2=parcoutListe2->suivant;
 		}
-		if(!trouvePas)
+		if(trouvePas)
 			free(ptsImage1);
 		k++;
 	}
 	if(trouvePas)
 		erreur(ERREUR_FILTRE,1);
 	else
-		calculerDecalage(&result,ptsImage1[2]->x,ptsImage1[2]->y,tmp->x,tmp->y,0);
+		calculerDecalage(&result,ptsImage1[3]->x,ptsImage1[3]->y,tmp->x,tmp->y,0);
 	
 	return result;
 	

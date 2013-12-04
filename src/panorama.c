@@ -32,8 +32,8 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	image1 = harris(input[0],bool_erreur);
 	image2 = harris(input[1],bool_erreur);
 	decalage = comparaison(image1, image2, bool_erreur);
-	printf("Decalage : x-> %d y-> %d zncc-> %f",decalage.x,decalage.y,decalage.valeur);
-	mat_result = initMatrice(imageInput.width,imageInput.height);/*
+	printf("Decalage : x-> %d y-> %d zncc-> %f",decalage.x,decalage.y,decalage.valeur);/**/
+	/*mat_result = initMatrice(imageInput.width,imageInput.height);
 	while(image1->suivant !=NULL)
 	{
 		image11 = image1->suivant;
