@@ -18,42 +18,50 @@ typedef struct sListe
 {
 	int x;
 	int y;
-	int valeur;
+	double valeur;
 	struct sListe* suivant;
 }ListePoints;
 
+
+
+
+ListePoints* positionListe (ListePoints* list, int position);
+int tailleListe (ListePoints* list, int position);
+
+
+
 /*!
 
-       \fn ListePoints nouveauListePoints (int x, int y, int valeur)
+       \fn ListePoints nouveauListePoints (int x, int y, double valeur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
        \brief permet de creer un point avec une abscisse x, une ordonnées y et une valeur
        \param x : (int) l'abscisse du point
        \param y : (int) l'ordonnées du point
-       \param valeur : (int) la valeur de ce point
+       \param valeur : (double) la valeur de ce point
        \return renvoie une structure de point
                
        \remarks 
 
 */
 
-ListePoints nouveauListePoints (int x, int y, int valeur);
+ListePoints nouveauListePoints (int x, int y, double valeur);
 
 /*!
-       \fn ListePoints* creerlisteCoordonnees (int x, int y, int valeur)
+       \fn ListePoints* creerlisteCoordonnees (int x, int y, double valeur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
        \brief creer un maillon d'une chaine, ce maillon represente une coordonnée               
        \param x : (int) l'abscisse du point
        \param y : (int) l'ordonnées du point
-       \param valeur : (int) la valeur de ce point
+       \param valeur : (double) la valeur de ce point
        \return un pointeur vers NULL qui contient les informations d'un point
                
        \remarks 
 
 */
 
-ListePoints* creerlisteCoordonnees (int x, int y, int valeur);
+ListePoints* creerlisteCoordonnees (int x, int y, double valeur);
 
 
 /*!
@@ -70,7 +78,7 @@ ListePoints* creerlisteCoordonnees (int x, int y, int valeur);
 ListePoints* dernierListePoints(ListePoints* list_p_listeCoordonnees);
 
 /*!
-       \fn void ajoutFin(ListePoints* list_p_listeCoordonnees, int x, int y, int valeur) 
+       \fn void ajoutFin(ListePoints* list_p_listeCoordonnees, int x, int y, double valeur) 
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
        \brief ajoute un point a la fin d'une liste de point               
@@ -78,7 +86,7 @@ ListePoints* dernierListePoints(ListePoints* list_p_listeCoordonnees);
        \param list_p_listecoordonnees : (listepoints*) la liste de points
        \param x : (int) l'abscisse du nouveau point
        \param y : (int) l'ordonnées du nouveau point
-       \param valeur : (int) la valeur du nouveau point
+       \param valeur : (double) la valeur du nouveau point
 
        
                
@@ -86,11 +94,11 @@ ListePoints* dernierListePoints(ListePoints* list_p_listeCoordonnees);
 
 */
 
-void ajoutFin(ListePoints* list_p_listeCoordonnees, int x, int y, int valeur);
+void ajoutFin(ListePoints* list_p_listeCoordonnees, int x, int y, double valeur);
 
 
 /*!
-       \fn ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int x, int y, int valeur)
+       \fn ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int x, int y, double valeur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Thu 07 Nov 2013
        \brief ajoute un point a une liste de point si cette liste existe, sinon la fonction creer cette liste               
@@ -98,7 +106,7 @@ void ajoutFin(ListePoints* list_p_listeCoordonnees, int x, int y, int valeur);
        \param list_p_listecoordonnees : (listepoints*) la liste de points
        \param x : (int) l'abscisse du nouveau point
        \param y : (int) l'ordonnées du nouveau point
-       \param valeur : (int) la valeur du nouveau point
+       \param valeur : (double) la valeur du nouveau point
 
        \return une liste de points
                
@@ -106,7 +114,7 @@ void ajoutFin(ListePoints* list_p_listeCoordonnees, int x, int y, int valeur);
 
 */
 
-ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int x, int y, int valeur);
+ListePoints* ajoutCoordonnee (ListePoints* list_p_listeCoordonnees, int x, int y, double valeur);
 
 
 void afficherCoordonnees(ListePoints* liste);

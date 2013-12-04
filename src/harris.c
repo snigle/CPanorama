@@ -68,7 +68,7 @@ ListePoints* harris(char* input, int* bool_erreur){
 		for (x = 0; x < image.width; x += 1)
 		{
 			M = (mat_A[y][x] * mat_B[y][x] - mat_C[y][x] * mat_C[y][x]) - (0.04 * ((mat_A[y][x] + mat_B[y][x]) * (mat_A[y][x] + mat_B[y][x])));
-			if(M>50)
+			if(M>0)
 				result = ajoutCoordonnee(result, x, y, M);
 		}
 	}

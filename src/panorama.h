@@ -15,6 +15,8 @@
 #include "header.h"
 #include "harris.h"
 #include "gestionListeCoordonnees.h"
+#include "zncc.h"
+#include "comparaison.h"
 
 /*!
         \fn int panorama(char** input, int nombreInput, char* output)
