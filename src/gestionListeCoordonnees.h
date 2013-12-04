@@ -133,31 +133,7 @@ void afficherCoordonnees(ListePoints* liste);
 
 void libererListe(ListePoints* list_p_liste);
 
-/*!
-       \fn int tailleListe(Listepoints* liste)
-       \author Poussou Elie <poussoueli@eisti.eu>
-       \date Mon 25 Nov 2013
-       \brief retourne la taille d'une liste               
-       \param liste : (listepoints*) : liste dont on veut connaitre la taille
-       \return 
-               
-       \remarks 
 
-*/
-int tailleListe(ListePoints* liste);
-
-/*!
-       \fn ListePoints PositionListe(ListePoints* liste, int position)
-       \author Poussou Elie <poussoueli@eisti.eu>
-       \date Mon 25 Nov 2013
-       \brief Retourne l'élément de la liste à la ième position               
-       \param liste : (liste) : 
-       \param position : (position) 
-       \return 
-               
-       \remarks 
-
-*/
-ListePoints* positionListe(ListePoints* liste, int position);
+	
 
 #endif /* __GESTIONLISTECOORDONNEES_H__ */
