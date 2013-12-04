@@ -99,7 +99,7 @@ int** recupFiltre(FILE* file_filtre, int int_taille, int* bool_erreur)
 
 
 
-int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** mat_filtre, int int_taille, int int_decalage)
+int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** mat_filtre, int int_taille, int int_decalage, int bool_normalisation)
 {
 	int int_i;
 	int int_j;
@@ -112,17 +112,22 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
 				int_result += mat_filtre[int_i][int_j] * int_pixels[int_x - int_decalage + int_i][int_y - int_decalage + int_i];
 		}
 	}
+	if (!bool_normalisation)
+	{
 	if (int_result < 0)
 		return (0);
 	else if (int_result > 255)
 		return (255);
 	else
 		return (int_result);
+	}
+	else
+		return (int_result);
 }
 
 
 
-int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille)
+int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille, int bool_normalisation)
 {
 	int** mat_result;
 	int int_i;
@@ -137,7 +142,7 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille)
 			if ((int_i < int_decalage) || (int_j < int_decalage) || (int_i >= (im_image.height - int_decalage)) || (int_j >= (im_image.width - int_decalage)))
 				mat_result[int_i][int_j] = im_image.teinte[int_i][int_j];
 			else
-				mat_result[int_i][int_j] = setNumber(int_i, int_j, im_image.width, im_image.height, im_image.teinte, mat_filtre, int_taille, int_decalage);
+				mat_result[int_i][int_j] = setNumber(int_i, int_j, im_image.width, im_image.height, im_image.teinte, mat_filtre, int_taille, int_decalage, bool_normalisation);
 		}
 	}
 	return (mat_result);
@@ -153,7 +158,7 @@ Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_t
 	mat_filtre = recupFiltre(file_fichierFiltre, int_taille, bool_erreur);
 	if (!*bool_erreur)
 	{
-		mat_apresConvolution = applicationFiltre(im_image, mat_filtre, int_taille);
+		mat_apresConvolution = applicationFiltre(im_image, mat_filtre, int_taille, 0);
 		im_imageConvolution = creationImage("P2", im_image.width, im_image.height, 255, mat_apresConvolution);
 	}
 	return (im_imageConvolution);
