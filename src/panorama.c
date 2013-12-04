@@ -1,7 +1,6 @@
 #include "panorama.h"
 
 
-
 ListePoints* recuperationPixelsBlanc(Image image)
 {
 	ListePoints* liste_resultat;
@@ -19,14 +18,17 @@ ListePoints* recuperationPixelsBlanc(Image image)
 	return(liste_resultat);
 }
 
+
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
 	Image result;
+	ListePoints* image1;
 	Image imageInput;
 	Image imageInput2;
+
 	int** mat_result;
 	int fin;
-	/*Liste point des deux premières images*/
+	
 	ListePoints* image1;
 	ListePoints* image2;
 /*	ListePoints* image11;*/
@@ -76,8 +78,19 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 
 	result = creationImage("P1",imageInput.width, imageInput.height, 1, mat_result);
 	save(result,output, bool_erreur);
+<<<<<<< HEAD
 	*/
+=======
+<<<<<<< HEAD
+	}*/
+	imageInput = chargerImage(input[0],bool_erreur);
+	image1 = harris(input[0],bool_erreur);
+	points(image1);
+
+	/**/
+>>>>>>> 442dbc143d0739091b5894ae035e34d1f9f8568a
 	}
+
 	printf("Appel de la fonction Panorama\n");
 	
 	return 0;

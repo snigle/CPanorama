@@ -21,7 +21,7 @@
 #include "binaire.h"
 #include "harris.h"
 #include "egalisationImage.h"
-#include "sift.h"
+
 
 
  
@@ -172,7 +172,7 @@ char** associerTableauString(char** tab1, char** tab2, int taille1, int taille2)
 
 */
 
-void listeTestOption2(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput);
+void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* currentOutput);
 
 /*!
        \fn void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
