@@ -13,7 +13,7 @@
 #include "comparaison.h"
  
  
-ListePoints* pointsRandom(ListePoints* liste)
+ListePoints** pointsRandom(ListePoints* liste)
  {
  	int i;
  	ListePoints** tab;
@@ -22,18 +22,16 @@ ListePoints* pointsRandom(ListePoints* liste)
  	/*Verifier random pas deux fois pareil*/
  	for(i=0;i<3;i++)
  	{
- 		tab[i]=positionListe(liste,(rand()%(tailleListe(liste))));	
+ 		tab[i]=positionListe(liste,(rand()%(tailleListe(liste,0))));	
  	}
 	
-	return(tab);
+	return (tab);
  }
  
  
 ListePoints** points(ListePoints* Harris)
 {	
 	ListePoints** tab;
-	ListePoints** Points;
-	Points=mallocBis(3*sizeof(ListePoints*));
 	tab=pointsRandom(Harris);
 	
 	return(tab);
@@ -59,7 +57,7 @@ ListePoints* vecteur(ListePoints* pointA,ListePoints* pointB )
 {
 	ListePoints* result;
 	result = NULL;
-	result = ajoutCoordonnee(result,pointB->x-pointA->x,pointB->y-pointA->y);
+	result = ajoutCoordonnee(result,pointB->x-pointA->x,pointB->y-pointA->y,0);
 	return result;
 }
 
@@ -67,14 +65,13 @@ ListePoints* chercherAutour(ListePoints* liste, ListePoints* pointA, ListePoints
 {
 	ListePoints* result;
 	int decalage;
-	int i;
 	decalage=4;
 	result = NULL;
 	while(liste !=NULL)
 	{
 		if(liste->x < pointA->x+vect->x+decalage && liste->x > pointA->x+vect->x-decalage && liste->y < pointA->y+vect->y+decalage && liste->y > pointA->y+vect->y-decalage)
 		{
-			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) < pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y)
+			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) < pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y))
 			result = liste;
 		}
 		liste=liste->suivant;
@@ -83,7 +80,7 @@ ListePoints* chercherAutour(ListePoints* liste, ListePoints* pointA, ListePoints
 	return result;
 }
 
-ListePoints Comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erreur)	
+ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erreur)	
 {	
 	int k;
 	int i;
@@ -91,13 +88,15 @@ ListePoints Comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 	ListePoints result;
 	ListePoints* parcoutListe2;
 	ListePoints* tmp;
+	ListePoints* vect;
 	ListePoints** ptsImage1;
 	k=0;
-	while(trouvePas AND k < 10000)
+	trouvePas = 1;
+	while(trouvePas && k < 10000)
 	{
 		ptsImage1=points(liste1);
 		parcoutListe2 = liste2;
-		while(parcoutListe2!=NULL AND trouvePas)
+		while(parcoutListe2!=NULL && trouvePas)
 		{
 			i=0;
 			tmp = parcoutListe2;
@@ -112,14 +111,16 @@ ListePoints Comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 		
 			parcoutListe2=parcoutListe2->suivant;
 		}
-		free(ptsImage1);
+		if(!trouvePas)
+			free(ptsImage1);
 		k++;
 	}
 	if(trouvePas)
-		exit("pas de points");
+		erreur(ERREUR_FILTRE,1);
 	else
-		decalage(&result,tab[2]->x,tab[2]->y,tmp->x,tmp->y);
-	return result;	
+		calculerDecalage(&result,ptsImage1[2]->x,ptsImage1[2]->y,tmp->x,tmp->y,0);
+	
+	return result;
 	
 }	
 

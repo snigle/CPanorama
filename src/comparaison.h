@@ -12,20 +12,10 @@
 #include "gestionFichier.h"
 #include "gestionListeCoordonnees.h"
 #include "harris.h"
+#include "zncc.h"
 
-/*!
-       \fn ListePoints PointsRandom(ListePoints* Harris)
-       \author Poussou Elie <poussoueli@eisti.eu>
-       \date Mon 25 Nov 2013
-       \brief Renvoie un tableau de 3 random        
-       \param harris : (listepoints*) 
-       \param image : (image) 
-       \return 
-               
-       \remarks 
 
-*/
- ListePoints* pointsRandom(ListePoints* Harris);
+ListePoints** pointsRandom(ListePoints* liste);
  
  /*!
         \fn ListePoints** Points(ListePoints* Harris)
@@ -38,7 +28,14 @@
         \remarks 
  
  */
- ListePoints** points(ListePoints* Harris);
+ListePoints** points(ListePoints* Harris);
+
+int vecteurX(ListePoints* liste);
+int vecteurY(ListePoints* liste);
+ListePoints* vecteur(ListePoints* pointA,ListePoints* pointB );
+ListePoints* chercherAutour(ListePoints* liste, ListePoints* pointA, ListePoints* vect);
+ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erreur);
+
  
  	
 

@@ -1,11 +1,21 @@
 #include "panorama.h"
 
+
+
+ListePoints* recuperationPixelsBlanc
+
+
+
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
 	Image result;
 	ListePoints* image1;
 	Image imageInput;
+
 	/*
+=======
+	Image imageInput2;
+>>>>>>> 45640d7123667323d74a0c3fac492e301507134c
 	int** mat_result;
 	int fin;
 	
@@ -14,12 +24,16 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	ListePoints* image11;
 	ListePoints* image21;
 	ListePoints* image22;
+	ListePoints decalage;
 	if(nombreInput==2)
 	{
 	imageInput = chargerImage(input[0],bool_erreur);
+	imageInput2 = chargerImage(input[1],bool_erreur);
 	image1 = harris(input[0],bool_erreur);
 	image2 = harris(input[1],bool_erreur);
-	mat_result = initMatrice(imageInput.width,imageInput.height);
+	decalage = comparaison(image1, image2, bool_erreur);
+	printf("Decalage : x-> %d y-> %d zncc-> %f",decalage.x,decalage.y,decalage.valeur);
+	mat_result = initMatrice(imageInput.width,imageInput.height);/*
 	while(image1->suivant !=NULL)
 	{
 		image11 = image1->suivant;
@@ -52,10 +66,15 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 
 	result = creationImage("P1",imageInput.width, imageInput.height, 1, mat_result);
 	save(result,output, bool_erreur);
+<<<<<<< HEAD
 	}*/
 	imageInput = chargerImage(input[0],bool_erreur);
 	image1 = harris(input[0],bool_erreur);
 	points(image1);
+
+	/**/
+	}
+
 	printf("Appel de la fonction Panorama\n");
 	
 	return 0;

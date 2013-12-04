@@ -16,6 +16,11 @@
 #include "harris.h"
 #include "gestionListeCoordonnees.h"
 #include "comparaison.h"
+=======
+#include "zncc.h"
+#include "comparaison.h"
+
+
 /*!
         \fn int panorama(char** input, int nombreInput, char* output)
         \author LAMARCHE Ludovic <lamarchelu@eisti.eu>

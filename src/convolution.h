@@ -101,7 +101,7 @@ int** recupFiltre(FILE* file_filtre, int int_taille, int* bool_erreur);
        \remarks 
 
 */
-int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** mat_filtre, int int_taille, int int_decalage);
+int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_pixels, int** mat_filtre, int int_taille, int int_decalage, int bool_normalisation);
 
 /*!
        \fn int** applicationFiltre(Image im_image, int** int_filtre, int int_taille)
@@ -112,12 +112,13 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
        \param file_filtre : (int**) le filtre à appliquer sur l'image
        \param int_taille : (int) la taille du filtre
        \param int_decalage : (int) le decalage de départ dû à la taille du filre
+       \param bool_normalisation : permet de savoir s'il faut normaliser la matrice ou pas
        \return une matrice de pixels qui représente l'image après l'application du filtre, ie, après l'application de la convolution
                
        \remarks 
 
 */
-int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille);
+int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille, int bool_normalisation);
 
 /*!
        \fn Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille)
@@ -132,6 +133,7 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille);
        \remarks 
 
 */
+
 Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille, int* bool_erreur);
 
 
