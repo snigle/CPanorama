@@ -82,3 +82,33 @@ void libererListe(ListePoints* list_p_liste)
 		free(list_p_liste);
 	}
 }
+
+int tailleListe(ListePoints* liste)
+{
+	int i;
+	i=0;
+	while(liste!=NULL)
+	{	
+		i++;
+		liste=liste->suivant;
+	}
+	
+	return(i);
+}
+
+ListePoints* positionListe(ListePoints* liste, int position)
+{
+	int i;
+	i=1;
+	
+	while(liste!=NULL && i==position)
+	{	
+		liste=liste->suivant;
+		i++;
+	}
+	
+	return(liste);
+}
+
+	
+	

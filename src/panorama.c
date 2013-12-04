@@ -3,10 +3,12 @@
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
 	Image result;
+	ListePoints* image1;
 	Image imageInput;
+	/*
 	int** mat_result;
 	int fin;
-	/*Liste point des deux premières images*/
+	
 	ListePoints* image1;
 	ListePoints* image2;
 	ListePoints* image11;
@@ -50,7 +52,10 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 
 	result = creationImage("P1",imageInput.width, imageInput.height, 1, mat_result);
 	save(result,output, bool_erreur);
-	}
+	}*/
+	imageInput = chargerImage(input[0],bool_erreur);
+	image1 = harris(input[0],bool_erreur);
+	points(image1);
 	printf("Appel de la fonction Panorama\n");
 	
 	return 0;
