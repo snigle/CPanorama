@@ -2,17 +2,17 @@
 
 
 
-ListePoints* recuperationPixelsBlanc(int** teinte, int longueur, int hauteur)
+ListePoints* recuperationPixelsBlanc(Image image)
 {
 	ListePoints* liste_resultat;
 	liste_resultat = NULL;
 	int i;
 	int j;
-	for (i = 0; i < hauteur; i += 1)
+	for (i = 0; i < image.height; i += 1)
 	{
-		for (j = 0; j < longueur; j += 1)
+		for (j = 0; j < image.width; j += 1)
 		{
-			if (!teinte[i][j])
+			if (!image.teinte[i][j])
 				liste_resultat = ajoutCoordonnee(liste_resultat, j, i, 0.);
 		}
 	}
@@ -29,17 +29,18 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	/*Liste point des deux premières images*/
 	ListePoints* image1;
 	ListePoints* image2;
-	ListePoints* image11;
-	ListePoints* image21;
-	ListePoints* image22;
+/*	ListePoints* image11;*/
+/*	ListePoints* image21;*/
+/*	ListePoints* image22;*/
 	ListePoints decalage;
 	if(nombreInput==2)
 	{
-	imageInput = chargerImage(input[0],bool_erreur);
-	imageInput2 = chargerImage(input[1],bool_erreur);
-	image1 = harris(input[0],bool_erreur);
-	image2 = harris(input[1],bool_erreur);
-	
+	imageInput = binaire(input[0],"","50",0,bool_erreur);
+	imageInput2 = binaire(input[1],"","50",0,bool_erreur);
+/*	image1 = harris(input[0],bool_erreur);*/
+/*	image2 = harris(input[1],bool_erreur);*/
+	image1 = recuperationPixelsBlanc(imageInput);
+	image2 = recuperationPixelsBlanc(imageInput);
 	decalage = comparaison(image1, image2, bool_erreur);
 	printf("Decalage : x-> %d y-> %d zncc-> %f",decalage.x,decalage.y,decalage.valeur);/**/
 	/*mat_result = initMatrice(imageInput.width,imageInput.height);
