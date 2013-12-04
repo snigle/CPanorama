@@ -240,10 +240,11 @@ void mauvaisParametre (char* input, char* output, char* commande)
 }
 
 
-void listeTestOption2(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
+void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* currentOutput)
 {
 	int bool_erreur;
 	bool_erreur = 0;
+
 	if(!strcmp(argv[*i],"-p"))
 	{
 		erreur(panorama(input,nombreInput,incrementerInputOutput(output,idOutput,nombreOutput,0),&bool_erreur), NO_EXIT);
@@ -259,32 +260,47 @@ void listeTestOption2(int argc, char** argv, int* i, char** input, int* idInput,
 		floutage(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
 
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
+
+	if(!strcmp(argv[*i],"-eq"))
+		egaliserHistogramme(currentInput,currentOutput,1,&bool_erreur);
+	else if(!strcmp(argv[*i],"-h"))
+		histogramme(currentInput,currentOutput,1,&bool_erreur);
+	else if(!strcmp(argv[*i],"-e"))
+		erode(currentInput,currentOutput,1,&bool_erreur);
+	else if(!strcmp(argv[*i],"-d"))
+		dilate(currentInput,currentOutput,1,&bool_erreur);
+		else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
+
 		afficherManuel();
 	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
-		mauvaisParametre(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i]);
+		mauvaisParametre(currentInput,currentOutput,argv[*i]);
 }
 
 
 void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, int nombreInput, char** output, int* idOutput, int nombreOutput)
 {
 	int bool_erreur;
+	char* currentInput;
+	char* currentOutput;
+	if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))	{
+		currentInput = incrementerInputOutput (input,idInput,nombreInput,1);
+		currentOutput = incrementerInputOutput (output,idOutput,nombreOutput,0);
+	}
 	bool_erreur = 0;
-	if(!strcmp(argv[*i],"-g"))
-		grayScale(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
+	if(!strcmp(argv[*i],"-p"))	{
+		erreur(panorama(input,nombreInput,currentOutput,&bool_erreur), NO_EXIT);
+		*idInput=nombreInput;
+	}
+	else if(!strcmp(argv[*i],"-g"))
+		grayScale(currentInput,currentOutput,1,&bool_erreur);
 	else if(!strcmp(argv[*i],"--harris"))
-		enregistrerHarris(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),&bool_erreur);
-	else if(!strcmp(argv[*i],"-h"))
-		histogramme(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
-	else if(!strcmp(argv[*i],"-e"))
-		erode(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
-	else if(!strcmp(argv[*i],"-d"))
-		dilate(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),1,&bool_erreur);
+		enregistrerHarris(currentInput,currentOutput,&bool_erreur);
 	else if(testOptionAvecParametre("-b",*i,argc,argv))
-		binaire(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1],1,&bool_erreur);
+		binaire(currentInput,currentOutput,argv[*i+1],1,&bool_erreur);
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
-		convolution(incrementerInputOutput(input,idInput,nombreInput,1),incrementerInputOutput(output,idOutput,nombreOutput,0),argv[*i+1],1,&bool_erreur);
+		convolution(currentInput,currentOutput,argv[*i+1],1,&bool_erreur);
 	else 
-		listeTestOption2(argc,argv,i,input,idInput,nombreInput,output,idOutput,nombreOutput);
+		listeTestOption2(argc,argv,i,currentInput,currentOutput);	
 }
 
 
