@@ -2,9 +2,22 @@
 
 
 
-ListePoints* recuperationPixelsBlanc
-
-
+ListePoints* recuperationPixelsBlanc(int** teinte, int longueur, int hauteur)
+{
+	ListePoints* liste_resultat;
+	liste_resultat = NULL;
+	int i;
+	int j;
+	for (i = 0; i < hauteur; i += 1)
+	{
+		for (j = 0; j < longueur; j += 1)
+		{
+			if (!teinte[i][j])
+				liste_resultat = ajoutCoordonnee(liste_resultat, j, i, 0.);
+		}
+	}
+	return(liste_resultat);
+}
 
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
@@ -26,6 +39,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	imageInput2 = chargerImage(input[1],bool_erreur);
 	image1 = harris(input[0],bool_erreur);
 	image2 = harris(input[1],bool_erreur);
+	
 	decalage = comparaison(image1, image2, bool_erreur);
 	printf("Decalage : x-> %d y-> %d zncc-> %f",decalage.x,decalage.y,decalage.valeur);
 	mat_result = initMatrice(imageInput.width,imageInput.height);/*
@@ -61,7 +75,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 
 	result = creationImage("P1",imageInput.width, imageInput.height, 1, mat_result);
 	save(result,output, bool_erreur);
-	/**/
+	*/
 	}
 	printf("Appel de la fonction Panorama\n");
 	
