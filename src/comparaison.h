@@ -14,7 +14,7 @@
 #include "harris.h"
 #include "zncc.h"
 
-
+int distance(ListePoints* pointA, ListePoints* pointB);
 ListePoints** pointsRandom(ListePoints* liste);
  
  /*!

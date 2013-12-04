@@ -8,6 +8,7 @@
 int main (int int_argc, char** tab_str_argv)
 {
 	int int_num;
+	srand(time(NULL));
 	int_num = gererOptions(int_argc,tab_str_argv);
 	if (int_num)
 		erreur(int_num,EXIT);
