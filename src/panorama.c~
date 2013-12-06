@@ -36,8 +36,8 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	ListePoints decalage;
 	if(nombreInput==2)
 	{
-	imageInput = chargerImage(input[0], bool_erreur);
-	imageInput2 = chargerImage(input[1], bool_erreur);
+	imageInput = binaire(input[0],"","50",0,bool_erreur);
+	imageInput2 = binaire(input[1],"","50",0,bool_erreur);
 /*	image1 = harris(input[0],bool_erreur);*/
 	printf("coucou");
 /*	image2 = harris(input[1],bool_erreur);*/
