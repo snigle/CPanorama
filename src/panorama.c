@@ -13,9 +13,9 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	Image imageInput;
 
 	/*
-=======
+
 	Image imageInput2;
->>>>>>> 45640d7123667323d74a0c3fac492e301507134c
+
 	int** mat_result;
 	int fin;
 	
@@ -66,7 +66,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 
 	result = creationImage("P1",imageInput.width, imageInput.height, 1, mat_result);
 	save(result,output, bool_erreur);
-<<<<<<< HEAD
+
 	}*/
 	imageInput = chargerImage(input[0],bool_erreur);
 	image1 = harris(input[0],bool_erreur);
