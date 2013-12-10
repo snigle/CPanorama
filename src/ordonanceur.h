@@ -21,6 +21,7 @@
 #include "binaire.h"
 #include "harris.h"
 #include "egalisationImage.h"
+#include "rotate.h"
 
 
 

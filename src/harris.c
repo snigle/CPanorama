@@ -102,6 +102,4 @@ void enregistrerHarris(char* input,char* output, int* bool_erreur)
 	}
 	else
 		*bool_erreur = 1;
-	
-	
 }

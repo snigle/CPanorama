@@ -112,7 +112,7 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
 				int_result += mat_filtre[int_i][int_j] * int_pixels[int_x - int_decalage + int_i][int_y - int_decalage + int_i];
 		}
 	}
-	if (!bool_normalisation)
+	if (bool_normalisation == 0)
 	{
 	if (int_result < 0)
 		return (0);
@@ -150,17 +150,16 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille, int bo
 
 
 
-Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille, int* bool_erreur)
+Image applicationConvolution(Image im_image, int** mat_filtre, int int_taille, int* bool_erreur)
 {
 	int** mat_apresConvolution;
-	int** mat_filtre;
 	Image im_imageConvolution;	
-	mat_filtre = recupFiltre(file_fichierFiltre, int_taille, bool_erreur);
 	if (!*bool_erreur)
 	{
 		mat_apresConvolution = applicationFiltre(im_image, mat_filtre, int_taille, 0);
 		im_imageConvolution = creationImage("P2", im_image.width, im_image.height, 255, mat_apresConvolution);
 	}
+	libererMatrice((void**)mat_filtre, 3);
 	return (im_imageConvolution);
 
 }
@@ -191,7 +190,7 @@ Image convolution (char* str_input, char* str_output, char* str_nomFichier, int 
 		if(testFiltre(file_fichierFiltre) && testType(im_image, "P2"))
 		{
 			int_taille = calculTailleFiltre(file_fichierFiltre);
-			im_result = applicationConvolution(im_image, file_fichierFiltre, int_taille, bool_erreur);
+			im_result = applicationConvolution(im_image, recupFiltre(file_fichierFiltre, int_taille, bool_erreur), int_taille, bool_erreur);
 				if(int_bool_save)
 				{
 					save(im_result, str_output, bool_erreur);

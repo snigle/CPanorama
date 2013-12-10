@@ -17,7 +17,7 @@
 #include <string.h>
 
 
-
+#define PI (3.141592653589793)
 
 #define IMAGE_CORROMPUE 11
 #define IMAGE_NO_EXISTS 12
