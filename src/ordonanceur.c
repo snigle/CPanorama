@@ -256,6 +256,8 @@ void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* c
 		erode(currentInput,currentOutput,1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-d"))
 		dilate(currentInput,currentOutput,1,&bool_erreur);
+	else if(!strcmp(argv[*i],"-rot"))
+		rotate(currentInput,currentOutput,1,&bool_erreur);
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
 	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))

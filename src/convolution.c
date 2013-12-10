@@ -112,7 +112,7 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
 				int_result += mat_filtre[int_i][int_j] * int_pixels[int_x - int_decalage + int_i][int_y - int_decalage + int_i];
 		}
 	}
-	if (!bool_normalisation)
+	if (bool_normalisation == 0)
 	{
 	if (int_result < 0)
 		return (0);
