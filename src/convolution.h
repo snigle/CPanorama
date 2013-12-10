@@ -121,12 +121,12 @@ int setNumber(int int_x, int int_y, int int_largeur, int int_hauteur, int** int_
 int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille, int bool_normalisation);
 
 /*!
-       \fn Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille)
+       \fn Image applicationConvolution(Image im_image, int** mat_filtre, int int_taille)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Sat 19 Oct 2013
        \brief permet d'enchainer les fonctions qui permettent d'appliquer la convolution               
        \param im_image : (image) Image à traiter
-       \param mat_filtre : (FILE*) fichier contenant le filtre de convolution
+       \param mat_filtre : (int**) Le filtre
        \param int_taille : (int) la taille du filtre
        \return retourne un entier qui indique 0 pour le bon déroulement des fonctions
                
@@ -134,7 +134,7 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille, int bo
 
 */
 
-Image applicationConvolution(Image im_image, FILE* file_fichierFiltre, int int_taille, int* bool_erreur);
+Image applicationConvolution(Image im_image, int** mat_filtre, int int_taille, int* bool_erreur);
 
 
 

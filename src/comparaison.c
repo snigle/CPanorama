@@ -35,7 +35,7 @@ ListePoints** pointsRandom(ListePoints* liste)
  		{
  			tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
  			printf("Distance : %d\n",distance(tmp,tab[i-1]));
- 			ok = distance(tmp,tab[i-1]) < 100;
+ 			ok = distance(tmp,tab[i-1]) < 50;
  		}
  		tab[i]=tmp;	
  	}
@@ -89,10 +89,17 @@ ListePoints* chercherAutour(ListePoints* liste, ListePoints* pointA, ListePoints
 	result = NULL;
 	while(liste !=NULL)
 	{
-		if(liste->x < pointA->x+vect->x+decalage && liste->x > pointA->x+vect->x-decalage && liste->y < pointA->y+vect->y+decalage && liste->y > pointA->y+vect->y-decalage)
+/*		if(liste->x < pointA->x+vect->x+decalage && liste->x > pointA->x+vect->x-decalage && liste->y < pointA->y+vect->y+decalage && liste->y > pointA->y+vect->y-decalage)*/
+/*		{*/
+/*			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) < pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y))*/
+/*			result = liste;*/
+/*		}*/
+		if(liste->x == pointA->x+vect->x && liste->y == pointA->y+vect->y)
 		{
-			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) < pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y))
-			result = liste;
+			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) == pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y))
+			{
+				result = liste;
+			}
 		}
 		liste=liste->suivant;
 	}

@@ -18,6 +18,9 @@
 #include "comparaison.h"
 #include "zncc.h"
 #include "comparaison.h"
+#include "binaire.h"
+
+
 
 
 /*!
