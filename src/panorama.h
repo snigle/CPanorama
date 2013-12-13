@@ -39,4 +39,3 @@
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur);
 
 #endif /* __PANORAMA_H__ */
-

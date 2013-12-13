@@ -79,9 +79,10 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 
 	result = creationImage("P1",imageInput.width, imageInput.height, 1, mat_result);
 	save(result,output, bool_erreur);
-<<<<<<< HEAD
+
 
 	}*/
+
 
 
 	}
@@ -90,4 +91,3 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	
 	return 0;
 }
-
