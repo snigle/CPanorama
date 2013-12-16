@@ -24,28 +24,44 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	Image result;
 	Image imageInput;
 	Image imageInput2;
+	Image imageCollee;
 	int** mat_result;
 	int fin;
+	int* size;
 	
 	ListePoints* image1;
 	ListePoints* image2;
 /*	ListePoints* image11;*/
 /*	ListePoints* image21;*/
 /*	ListePoints* image22;*/
-	ListePoints decalage;
+	ListePoints* decalage;
 	if(nombreInput==2)
 	{
 	imageInput = chargerImage(input[0], bool_erreur);
 	imageInput2 = chargerImage(input[1], bool_erreur);
 /*	image1 = harris(input[0],bool_erreur);*/
 /*	image2 = harris(input[1],bool_erreur);*/
-	printf("coucou");
+	printf("coucou \n");
 /*	image2 = harris(input[1],bool_erreur);*/
 	image1 = recuperationPixelsBlanc(imageInput);
 	image2 = recuperationPixelsBlanc(imageInput2);
-	printf("coucou");
-	decalage = comparaison(image1, image2, bool_erreur);
-	printf("Decalage : x-> %d y-> %d zncc-> %f",decalage.x,decalage.y,decalage.valeur);
+	printf("coucou\n");
+	
+	/*decalage = comparaison(image1, image2, bool_erreur);
+	printf("Decalage : x-> %d y-> %d zncc-> %f \n" ,decalage.x,decalage.y,decalage.valeur);*/
+	decalage=NULL;
+	decalage=ajoutCoordonnee(decalage, 10, 450, 0);
+	
+	size=taille(decalage,imageInput.height,imageInput2.height,imageInput.width, imageInput2.width);
+	
+	printf("Largeur: %d hauteur : %d\n ",size[0], size[1]);
+	printf("decalage en x : %d , decalage en y : %d \n", decalage->x, decalage->y);
+	
+	imageCollee=imageFinale(imageInput,imageInput2,decalage);
+	
+	save(imageCollee,output, bool_erreur);
+	printf("Image enregistrée dans %s \n",output);
+
 	/*mat_result = initMatrice(imageInput.width,imageInput.height);
 	while(image1->suivant !=NULL)
 	{
