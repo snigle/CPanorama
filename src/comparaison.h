@@ -15,25 +15,18 @@
 #include "zncc.h"
 
 int distance(ListePoints* pointA, ListePoints* pointB);
-ListePoints** pointsRandom(ListePoints* liste);
- 
- /*!
-        \fn ListePoints** Points(ListePoints* Harris)
-        \author Poussou Elie <poussoueli@eisti.eu>
-        \date Mon 25 Nov 2013
-        \brief 	renvoie un tableau avec les coordonnées des points random                
-        \param harris : (listepoints*) 
-        \return 
-                
-        \remarks 
- 
- */
-ListePoints** points(ListePoints* Harris);
+ListePoints** pointsRandom(ListePoints* liste, int n);
+int pasDansTableau(ListePoints** tab, int taille, ListePoints* point);
 
-int vecteurX(ListePoints* liste);
-int vecteurY(ListePoints* liste);
+
 ListePoints* vecteur(ListePoints* pointA,ListePoints* pointB );
 ListePoints* chercherAutour(ListePoints* liste, ListePoints* pointA, ListePoints* vect);
+
+
+
+ListePoints* chercheMotif(int* trouvePas, ListePoints* parcourtListe, ListePoints* liste2, ListePoints** ptsImage1, int n);
+ListePoints* parcourtListe2(int* trouvePas, ListePoints* liste, ListePoints** tableauPoints, int n);
+
 ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erreur);
 
  
