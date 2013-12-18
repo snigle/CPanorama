@@ -140,7 +140,7 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille, int bo
 		for (int_j = 0; int_j < im_image.width; int_j += 1)
 		{
 			if ((int_i < int_decalage) || (int_j < int_decalage) || (int_i >= (im_image.height - int_decalage)) || (int_j >= (im_image.width - int_decalage)))
-				mat_result[int_i][int_j] = im_image.teinte[int_i][int_j];
+				mat_result[int_i][int_j] = 0;
 			else
 				mat_result[int_i][int_j] = setNumber(int_i, int_j, im_image.width, im_image.height, im_image.teinte, mat_filtre, int_taille, int_decalage, bool_normalisation);
 		}
