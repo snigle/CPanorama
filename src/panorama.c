@@ -93,6 +93,7 @@ int** creationFiltre(void)
 	filtre[0][1] = 1;
 	filtre[0][2] = 1;
 	
+
 	filtre[1][0] = 0;
 	filtre[1][1] = 0;
 	filtre[1][2] = 0;
@@ -124,6 +125,7 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 /*	newTeinte = genererMatriceDilate(image);*/
 /*	tmp = creationImage("P1", image.width, image.height, image.teinteMax, newTeinte);*/
 /*	libererImage(image);*/
+
 	
 	image=copieImage(tmp);
 	libererImage(tmp);
