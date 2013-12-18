@@ -50,7 +50,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	/*decalage = comparaison(image1, image2, bool_erreur);
 	printf("Decalage : x-> %d y-> %d zncc-> %f \n" ,decalage.x,decalage.y,decalage.valeur);*/
 	decalage=NULL;
-	decalage=ajoutCoordonnee(decalage, 100, 400, 0);
+	decalage=ajoutCoordonnee(decalage, -100, -100, 0);
 	
 	size=taille(decalage,imageInput.height,imageInput2.height,imageInput.width, imageInput2.width);
 	
