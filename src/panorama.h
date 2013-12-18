@@ -19,6 +19,7 @@
 #include "zncc.h"
 #include "comparaison.h"
 #include "binaire.h"
+#include "collerImages.h"
 
 
 

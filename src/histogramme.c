@@ -120,3 +120,5 @@ Image histogramme (char* char_str_input, char* char_str_output, int int_bool_sav
 	}
 	return (im_sortie);
 }
+
+
