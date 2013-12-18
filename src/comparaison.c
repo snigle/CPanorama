@@ -56,7 +56,7 @@ ListePoints** pointsRandom(ListePoints* liste, int n)
  			tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
  			i=0;
  			k=0;
- 			/*Créer une liste contenant seulement les points autour du premier point pour éviter de tourner en rond a cause du random*/
+ 			/*Créer une liste contenant seulement les points autour du premier point pour éviter de tourner en rond a cause du random, vérifier que la taille de la liste est supérieur à n, de plus il faut arreter la boucle à un moment si il trouve rien*/
  		}
  		tab[i]=tmp;	
  	}
@@ -102,6 +102,8 @@ ListePoints* chercheMotif(int* trouvePas, ListePoints* parcourtListe, ListePoint
 	*trouvePas = 0;
 	while (i<n-1 && !*trouvePas)
 	{
+		/* Au lieu de prendre le vecteur pour la première itération, il faut tester tout les points et calculer la matrice de transformation puis le nouveaux vecteur en fonction de cette matrice
+		*/
 		vect = vecteur( ptsImage1[i],ptsImage1[i+1]);
 		tmp = chercherAutour(liste2,tmp,vect);
 		*trouvePas = (tmp ==NULL);
