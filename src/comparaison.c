@@ -12,11 +12,6 @@
  */
 #include "comparaison.h"
  
-int distance(ListePoints* pointA, ListePoints* pointB)
-{
-	return sqrt(pow((float) (pointB->x - pointA->x),2) + pow((float) (pointB->y - pointA->y),2));
-}
-
 
 int pasDansTableau(ListePoints** tab, int taille, ListePoints* point)
 {
@@ -32,35 +27,65 @@ int pasDansTableau(ListePoints** tab, int taille, ListePoints* point)
 	return result;
 }
 
-ListePoints** pointsRandom(ListePoints* liste, int n)
+void creerListePointsProche(ListePoints* tete, ListePoints* liste, int n)
+{
+	if(liste!=NULL)
+	{
+		if(pow(liste->x-tete->x,2)+pow(liste->y-tete->y,2) < pow(n,2))
+			ajoutFin(tete,liste->x,liste->y,liste->valeur);
+		creerListePointsProche(tete,liste->suivant,n);
+	}
+}
+
+
+ListePoints* reduireListe(ListePoints* liste, int n, int distance, int* bool_erreur)
+{
+	ListePoints* tmp;
+	int k;
+	int nombreMaxDeTest;
+	nombreMaxDeTest = tailleListe(liste,0);
+	k=0;
+	tmp = NULL;
+	while(tailleListe(tmp,0)<n && k< nombreMaxDeTest)
+	{
+		tmp = copieListe(positionListe(liste,(rand()%(tailleListe(liste,0)))));
+		creerListePointsProche(tmp,liste,n*distance);
+		k++;
+	}
+	if(k==nombreMaxDeTest)
+	{
+		*bool_erreur=1;
+		erreur(NO_POINT_CLE,0);
+	}
+	return tmp;
+ 			/*Créer une liste contenant seulement les points autour du premier point pour éviter de tourner en rond a cause du random, vérifier que la taille de la liste est supérieur à n, de plus il faut arreter la boucle à un moment si il trouve rien*/
+}
+
+ListePoints** pointsRandom(ListePoints* liste, int n, int* bool_erreur)
  {
  	int i;
  	int ok;
- 	int k;
+ 	int distanceMax;
  	ListePoints** tab;
  	ListePoints* tmp;
- 	
+ 	ListePoints* listeReduite;
+ 	distanceMax = 8;
  	tab=mallocBis(n*sizeof(ListePoints*));
- 	tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
- 	for(i=0;i<n;i++)
+ 	tmp = reduireListe(liste,n,distanceMax, bool_erreur);
+ 	if(!*bool_erreur)
  	{
- 		ok = 0;
-
- 		while(!ok && i && k<10000)
- 		{
- 			tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
- 			ok = pasDansTableau(tab,i,tmp) && (distance(tmp,tab[i-1]) < 8 );
- 			k++;
- 		}
- 		if(k>=10000){
- 			tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
- 			i=0;
- 			k=0;
- 			/*Créer une liste contenant seulement les points autour du premier point pour éviter de tourner en rond a cause du random, vérifier que la taille de la liste est supérieur à n, de plus il faut arreter la boucle à un moment si il trouve rien*/
- 		}
- 		tab[i]=tmp;	
- 	}
-
+	 	listeReduite = tmp;	
+	 	for(i=0;i<n;i++)
+	 	{
+	 		ok = 0;
+	 		while(!ok && i)
+	 		{
+	 			tmp = positionListe(listeReduite,(rand()%(tailleListe(listeReduite,0))));
+	 			ok = pasDansTableau(tab,i,tmp);
+	 		}
+	 		tab[i]=tmp;	
+	 	}
+	 }
 	return (tab);
  }
  
@@ -136,22 +161,23 @@ ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 	ListePoints* dernierPointValide;
 	ListePoints** ptsImage1;
 	k=0;
-	n=30;
+	n=10;
 	trouvePas = 1;
 	printf("Comparaison des points : ");
-	while(trouvePas && k < 20)
+	while(trouvePas && k < 20 && !*bool_erreur)
 	{	
-		printf(" . ");
-		ptsImage1=pointsRandom(liste1,n);
+		fprintf(stdout," . ");
+		ptsImage1=pointsRandom(liste1,n,bool_erreur);
 		dernierPointValide = parcourtListe2(&trouvePas,liste2, ptsImage1,n);
-/*		fprintf(stderr,"Le dernier point : x %d, y %d\n",dernierPointValide->x,dernierPointValide->y);*/
 		if(!trouvePas)
 			calculerDecalage(&result,ptsImage1[n-1]->x,ptsImage1[n-1]->y,dernierPointValide->x,dernierPointValide->y,0);
 		free(ptsImage1);
 		k++;
 	}
-	if(trouvePas)
-		erreur(ERREUR_FILTRE,1);
+	if(trouvePas){
+		erreur(NO_CORRESPONDANCE,0);
+		*bool_erreur=1;
+	}
 	printf("\n");
 	return result;
 }	
