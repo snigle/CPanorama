@@ -33,7 +33,7 @@ int getMax (int** tab, int int_longueur, int int_largeur);
        \return un entier
                
        \remarks 
-
+1770 1945
 */
 int getMin (int** tab, int int_longueur, int int_largeur);
 
@@ -50,9 +50,10 @@ int getMin (int** tab, int int_longueur, int int_largeur);
        \remarks 
 
 */
-int** egalisation (int** teinte, int int_longueur, int int_largeur);
+/*int** egalisation (int** teinte, int int_longueur, int int_largeur);*/
 
-
+/*void decalerImages (Image im_image1, Image im_image2, int** newTeinte1, int** newTeinte2, int decalage);
+void egalisation(Image im_image1,Image im_image2, int** newTeinte1, int** newTeinte2, int* int_bool_erreur);*/
 /*!
        \fn Image egaliserHistogramme(char* char_str_input, char* char_str_output, int int_bool_save, int* int_bool_erreur)
        \author PERALES Quentin <peralesque@eisti.eu>
@@ -67,6 +68,7 @@ int** egalisation (int** teinte, int int_longueur, int int_largeur);
        \remarks 
 
 */
+/*
 Image egaliserHistogramme (char* char_str_input, char* char_str_output, int int_bool_save, int* int_bool_erreur);
-
+*/
 #endif

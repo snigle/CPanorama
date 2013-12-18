@@ -244,9 +244,9 @@ void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* c
 {
 	int bool_erreur;
 	bool_erreur = 0;
-	if(!strcmp(argv[*i],"-eq"))
+	/*if(!strcmp(argv[*i],"-eq"))
 		egaliserHistogramme(currentInput,currentOutput,1,&bool_erreur);
-	else if(!strcmp(argv[*i],"-h"))
+	else */if(!strcmp(argv[*i],"-h"))
 		histogramme(currentInput,currentOutput,1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-e"))
 		erode(currentInput,currentOutput,1,&bool_erreur);

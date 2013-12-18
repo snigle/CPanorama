@@ -68,7 +68,7 @@ int** derivee(Image image);
        \remarks 
 
 */
-ListePoints* harris(char* input, int* bool_erreur);
+ListePoints* harris(Image image, int* bool_erreur);
 
 /*!
        \fn void enregistrerHarris(char* input, char* output, int* bool_erreur)

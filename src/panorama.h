@@ -13,7 +13,10 @@
 #include <math.h>
 
 #include "header.h"
+#include "histogramme.h"
 #include "harris.h"
+#include "gestionFichier.h"
+
 #include "gestionListeCoordonnees.h"
 #include "comparaison.h"
 
@@ -21,6 +24,8 @@
 #include "comparaison.h"
 #include "binaire.h"
 
+
+ListePoints* recuperationPixelsBlanc(Image image);
 
 
 
