@@ -244,9 +244,11 @@ void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* c
 {
 	int bool_erreur;
 	bool_erreur = 0;
-	/*if(!strcmp(argv[*i],"-eq"))
-		egaliserHistogramme(currentInput,currentOutput,1,&bool_erreur);
-	else */if(!strcmp(argv[*i],"-h"))
+	if(!strcmp(argv[*i],"-g"))
+		grayScale(currentInput,currentOutput,1,&bool_erreur);
+	else if(!strcmp(argv[*i],"--harris"))
+		enregistrerHarris(currentInput,currentOutput,&bool_erreur);
+	else if(!strcmp(argv[*i],"-h"))
 		histogramme(currentInput,currentOutput,1,&bool_erreur);
 	else if(!strcmp(argv[*i],"-e"))
 		erode(currentInput,currentOutput,1,&bool_erreur);
@@ -258,6 +260,8 @@ void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* c
 		afficherManuel();
 	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
 		mauvaisParametre(currentInput,currentOutput,argv[*i]);
+
+
 }
 
 
@@ -275,16 +279,13 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 		erreur(panorama(input,nombreInput,currentOutput,&bool_erreur), NO_EXIT);
 		*idInput=nombreInput;
 	}
-	else if(!strcmp(argv[*i],"-g"))
-		grayScale(currentInput,currentOutput,1,&bool_erreur);
-	else if(!strcmp(argv[*i],"--harris"))
-		enregistrerHarris(currentInput,currentOutput,&bool_erreur);
 	else if(testOptionAvecParametre("-b",*i,argc,argv))
 		binaire(currentInput,currentOutput,argv[*i+1],1,&bool_erreur);
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
 		convolution(currentInput,currentOutput,argv[*i+1],1,&bool_erreur);
 	else 
 		listeTestOption2(argc,argv,i,currentInput,currentOutput);	
+	
 }
 
 

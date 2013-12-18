@@ -24,27 +24,27 @@ ListePoints** pointsRandom(ListePoints* liste)
  	ListePoints** tab;
  	ListePoints* tmp;
  	
- 	tab=mallocBis(4*sizeof(ListePoints*));
+ 	tab=mallocBis(5*sizeof(ListePoints*));
  	/*Verifier random pas deux fois pareil*/
- 	printf("****RECHERCHE POINTS***\n");
+/* 	printf("****RECHERCHE POINTS***\n");*/
  	tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
- 	for(i=0;i<4;i++)
+ 	for(i=0;i<5;i++)
  	{
  		ok = 0;
  		while(!ok && i)
  		{
  			tmp = positionListe(liste,(rand()%(tailleListe(liste,0))));
- 			printf("Distance : %d\n",distance(tmp,tab[i-1]));
- 			ok = distance(tmp,tab[i-1]) < 100;
+/* 			printf("Distance : %d\n",distance(tmp,tab[i-1]));*/
+ 			ok = distance(tmp,tab[i-1]) < 80;
  		}
  		tab[i]=tmp;	
  	}
- 	printf("****************Affichage points**********\n");
-	for (i = 0; i < 4; i += 1)
-	{
-		printf("Point %d : x %d y %d\n",i,tab[i]->x,tab[i]->y);
-	}
-	printf("Distance %d\n",distance(tab[2],tab[1]));
+/* 	printf("****************Affichage points**********\n");*/
+/*	for (i = 0; i < 4; i += 1)*/
+/*	{*/
+/*		printf("Point %d : x %d y %d\n",i,tab[i]->x,tab[i]->y);*/
+/*	}*/
+/*	printf("Distance %d\n",distance(tab[2],tab[1]));*/
 	return (tab);
  }
  
@@ -89,10 +89,17 @@ ListePoints* chercherAutour(ListePoints* liste, ListePoints* pointA, ListePoints
 	result = NULL;
 	while(liste !=NULL)
 	{
-		if(liste->x < pointA->x+vect->x+decalage && liste->x > pointA->x+vect->x-decalage && liste->y < pointA->y+vect->y+decalage && liste->y > pointA->y+vect->y-decalage)
+/*		if(liste->x < pointA->x+vect->x+decalage && liste->x > pointA->x+vect->x-decalage && liste->y < pointA->y+vect->y+decalage && liste->y > pointA->y+vect->y-decalage)*/
+/*		{*/
+/*			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) < pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y))*/
+/*			result = liste;*/
+/*		}*/
+		if(liste->x == pointA->x+vect->x && liste->y == pointA->y+vect->y)
 		{
-			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) < pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y))
-			result = liste;
+			if(result == NULL || pow(result->x - (pointA->x+vect->x),2) + pow(result->y -(pointA->y+vect->y),2) == pow(liste->x,2) - (pointA->x+vect->x) + liste->y -(pointA->y+vect->y))
+			{
+				result = liste;
+			}
 		}
 		liste=liste->suivant;
 	}
@@ -112,7 +119,7 @@ ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 	ListePoints** ptsImage1;
 	k=0;
 	trouvePas = 1;
-	printf("**********TMP***********\n");
+/*	printf("**********TMP***********\n");*/
 	while(trouvePas && k < 10000)
 	{
 		ptsImage1=points(liste1);
@@ -122,14 +129,14 @@ ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 			i=0;
 			tmp = parcoutListe2;
 			/**Parcourt de la liste tant qu'on trouve une egalite*/		trouvePas = 0;
-			printf("Tmp %d : x %d y %d\n",i,tmp->x,tmp->y);
-			while (i<3 && !trouvePas)
+/*			printf("Tmp %d : x %d y %d\n",i,tmp->x,tmp->y);*/
+			while (i<4 && !trouvePas)
 			{
 				vect = vecteur( ptsImage1[i],ptsImage1[i+1]);
 				tmp = chercherAutour(liste2,tmp,vect);
 				trouvePas = (tmp ==NULL);
-				if(!trouvePas)
-					printf("Tmp %d : x %d y %d\n",i+1,tmp->x,tmp->y);
+/*				if(!trouvePas)*/
+/*					printf("Tmp %d : x %d y %d\n",i+1,tmp->x,tmp->y);*/
 				i++;
 			}
 			parcoutListe2=parcoutListe2->suivant;

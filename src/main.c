@@ -1,4 +1,3 @@
-
 #include "ordonanceur.h"
 #include "header.h"
 
