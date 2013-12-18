@@ -75,38 +75,31 @@ int** genererMatriceErode(Image im_imageInput)
 	return matriceErode;
 }
 
+/*int** genererMatriceDilate(Image im_imageInput)*/
+/*{*/
+/*	int** matriceDilate;*/
+/*	int i;*/
+/*	int j;*/
+
+/*	matriceDilate = initMatrice(im_imageInput.width, im_imageInput.height);*/
+/*	for (i = 1; i < im_imageInput.height-1; i += 1)*/
+/*	{*/
+/*		for (j = 1; j < im_imageInput.width-1; j += 1)*/
+/*		{*/
+/*			if(estUnObjet(i,j,im_imageInput))*/
+/*			{	*/
+/*				ajouterObjet(i,j,matriceDilate,im_imageInput);*/
+/*				*/
+/*			}*/
+/*			else*/
+/*				matriceDilate[i][j] = 1;	*/
+/*		}*/
+/*	}*/
+/*	*/
+/*	return matriceDilate;*/
+/*}*/
+
 int** genererMatriceDilate(Image im_imageInput)
-{
-	int** matriceDilate;
-	int i;
-	int j;
-
-	matriceDilate = initMatrice(im_imageInput.width, im_imageInput.height);
-	for (i = 1; i < im_imageInput.height-1; i += 1)
-	{
-		for (j = 1; j < im_imageInput.width-1; j += 1)
-		{
-			if(estUnObjet(i,j,im_imageInput))
-			{	
-				ajouterObjet(i,j,matriceDilate,im_imageInput);
-				
-			}
-			else
-				matriceDilate[i][j] = 1;	
-		}
-	}
-	
-	return matriceDilate;
-}
-/*
-<<<<<<< HEAD
-int** genererMatriceDilate(Image im_imageInput)
-=======
-
-DEUXIEME METHODE
-
-int** genererMatriceDilate(Image imageInput)
->>>>>>> 77d63976301804e000e09a691747adbfc15febb1
 {
 	int** matriceDilate;
 	int i;
@@ -119,9 +112,9 @@ int** genererMatriceDilate(Image imageInput)
 		for (j = 1; j < im_imageInput.width-2; j += 1)
 		{
 			matriceDilate[i][j]=0;
-			for (k = -1; k < 2; k += 1)
+			for (k = 0; k < 2; k += 1)
 			{
-				for (l = -1; l < 2; l += 1)
+				for (l = 0; l < 2; l += 1)
 				{
 					matriceDilate[i][j]=matriceDilate[i][j] || im_imageInput.teinte[i+k][j+l];
 				}
@@ -131,7 +124,7 @@ int** genererMatriceDilate(Image imageInput)
 	
 	return matriceDilate;
 }
-*/
+
 Image erode (char* str_input, char* str_output, int bool_save, int* bool_erreur)
 {
 	Image im_imageInput;
