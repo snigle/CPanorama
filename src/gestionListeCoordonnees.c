@@ -16,6 +16,14 @@ ListePoints nouveauListePoints (int x, int y, double valeur)
 
 /*GERER LISTE*/
 
+ListePoints* copieListe(ListePoints* liste)
+{
+	ListePoints* result;
+	result = NULL;
+	result = ajoutCoordonnee(result,liste->x,liste->y,liste->valeur);
+	return result;
+}
+
 ListePoints* creerlisteCoordonnees (int x, int y, double valeur)
 {
 	ListePoints* list_p_maillon;

@@ -24,7 +24,7 @@ typedef struct sListe
 
 
 
-
+ListePoints* copieListe(ListePoints* liste);
 ListePoints* positionListe (ListePoints* list, int position);
 int tailleListe (ListePoints* list, int position);
 
