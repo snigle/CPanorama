@@ -64,7 +64,7 @@ int** Tracer(int* int_tabhist, int int_taille, int int_teinteMax)
 	int int_k;
 	int** int_trace;
 
-	int_trace=initMatrice(int_teinteMax+1,int_taille);
+	int_trace=initMatrice(0,int_teinteMax+1,int_taille);
 	
 	for (int_i = 0; int_i < int_teinteMax+1; int_i += 1)
 	{

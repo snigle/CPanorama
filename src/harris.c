@@ -6,7 +6,7 @@ int** deriveeVerticale(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(image.width,image.height);
+	result = initMatrice(0,image.width,image.height);
 	for (i = 0; i < image.height -1; i += 1)
 	{
 		for (j = 0; j < image.width -1; j += 1)
@@ -22,7 +22,7 @@ int** deriveeHorizontale(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(image.width,image.height);
+	result = initMatrice(0,image.width,image.height);
 	for (i = 0; i < image.height -1; i += 1)
 	{
 		for (j = 0; j < image.width -1; j += 1)
@@ -38,7 +38,7 @@ int** derivee(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(image.width,image.height);
+	result = initMatrice(0,image.width,image.height);
 	for (i = 0; i < image.height -1; i += 1)
 	{
 		for (j = 0; j < image.width -1; j += 1)
@@ -84,7 +84,7 @@ void enregistrerHarris(char* input,char* output, int* bool_erreur)
 	image = chargerImage(input,bool_erreur);
 	if(!*bool_erreur && testType(image,"P2"))
 	{
-		mat_result = initMatrice(image.width,image.height);
+		mat_result = initMatrice(0,image.width,image.height);
 		tmp = harris(image,bool_erreur);
 		if(!*bool_erreur)
 		{	

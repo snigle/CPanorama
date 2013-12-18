@@ -48,7 +48,7 @@ int getMin (int** tab, int int_longueur, int int_largeur)
 /*	int j;*/
 /*	int_max = getMax (teinte, int_longueur, int_largeur);*/
 /*	int_min = getMin (teinte, int_longueur, int_largeur);*/
-/*	newTeinte = initMatrice(int_longueur, int_largeur);*/
+/*	newTeinte = initMatrice(0,int_longueur, int_largeur);*/
 /*	if (int_max > int_min)*/
 /*	{*/
 /*		for (i = 0; i < int_largeur; i += 1)*/
@@ -142,8 +142,8 @@ int getMin (int** tab, int int_longueur, int int_largeur)
 	im_image1 = chargerImage(char_str_input[0], int_bool_erreur);
 	im_image2 = chargerImage(char_str_input[1], int_bool_erreur);
 	
-	newTeinte1 = initMatrice(im_image1.width, im_image1.height);
-	newTeinte2 = initMatrice(im_image2.width, im_image2.height);
+	newTeinte1 = initMatrice(0,im_image1.width, im_image1.height);
+	newTeinte2 = initMatrice(0,im_image2.width, im_image2.height);
 	
 	if(!*int_bool_erreur)
 	{

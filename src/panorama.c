@@ -41,7 +41,7 @@ int** transformationCylidrique(Image image)
 	int j;
 	int xp;
 	int yp;
-	newTeinte = initMatrice(image.width, image.height);
+	newTeinte = initMatrice(0,image.width, image.height);
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)
@@ -74,7 +74,7 @@ Image copieImage(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(image.width, image.height);
+	result = initMatrice(0,image.width, image.height);
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)
@@ -88,7 +88,7 @@ Image copieImage(Image image)
 int** creationFiltre(void)
 {
 	int** filtre;
-	filtre = initMatrice(3,3);
+	filtre = initMatrice(0,3,3);
 	filtre[0][0] = 1;
 	filtre[0][1] = 1;
 	filtre[0][2] = 1;
@@ -105,42 +105,51 @@ int** creationFiltre(void)
 	return (filtre);
 }
 
-Image couleurVersDilatation(Image image, int* bool_erreur)
+Image applicationBinaire(Image image, int toDo)
 {
 	int** newTeinte;
-	Image temporaire;
 	Image tmp;
+	switch(toDo)
+	{
+		case 1:
+			newTeinte = remplirMatriceBinaire(image, 100);
+		break;
+		case 2:
+			newTeinte = genererMatriceDilate(image);
+		break;
+		default:
+			newTeinte = genererMatriceErode(image);
+		break;
+	}
+	tmp = creationImage("P1", image.width, image.height, image.teinteMax, newTeinte);
+	libererImage(image);
+	return (tmp);
+	
+}
 
+Image couleurVersDilatation(Image image, int* bool_erreur)
+{
+	int i;
+	Image tmp;
+	int** newTeinte;
 	tmp = applicationConvolution(image, creationFiltre(), 3, bool_erreur);
 	libererImage(image);
 	image = creationImage(tmp.type, tmp.width, tmp.height, tmp.teinteMax, tmp.teinte);
-
-	newTeinte = remplirMatriceBinaire(image, 100);
-
-	tmp = creationImage("P1", image.width, image.height, image.teinteMax, newTeinte);
-	libererImage(image);
-/*	image=copieImage(tmp);*/
-/*	libererImage(tmp);*/
-/*	*/
-/*	newTeinte = genererMatriceDilate(image);*/
-/*	tmp = creationImage("P1", image.width, image.height, image.teinteMax, newTeinte);*/
-/*	libererImage(image);*/
-
 	
-	image=copieImage(tmp);
-	libererImage(tmp);
-	
-	newTeinte = genererMatriceErode(image);
-	tmp = creationImage("P1", image.width, image.height, image.teinteMax, newTeinte);
-	
-	
-	save(tmp, "out1", bool_erreur);
-	printf("Ecriture de tempo");
 /*	newTeinte = transformationCylidrique(image);*/
 /*	recopieDesPoints(image, newTeinte);*/
-/*	newTeinte = transformationCylidrique(temporaire);*/
-/*	recopieDesPoints(temporaire, newTeinte);	*/
-	return (tmp);
+
+	image = applicationBinaire(image,1);
+	
+	for (i = 0; i < 1; i += 1)
+	{
+		image = applicationBinaire(image,2);
+		image = applicationBinaire(image,19);
+	}
+		image = applicationBinaire(image,2);
+/*		image = applicationBinaire(image,2);*/
+	
+	return (image);
 }
 
 void egalisationImages (Image image1, Image image2, int* bool_erreur)
@@ -157,6 +166,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
 
 /*	Image result;*/
+	int** newTeinte;
 	ListePoints* ptsImage1;
 	ListePoints* ptsImage2;
 	ListePoints decalage;
@@ -164,13 +174,18 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	Image origine2;/*La nouvelle image à coller à chaque tour de boucle */
 	Image temporaire1;/*l'image origine1 modifiée successivement par les opérations*/
 	Image temporaire2;/*l'image origine modifiée successivement par les opérations*/
-	Image collageOrigine;/*Les images d'origines collées après calculs*/
+	Image tmp;/*Les images d'origines collées après calculs*/
 	Image collageTemporaire;/*collage des images traitées (après convolution et dilatation)*/
 	int i;
 	i = 1;
 
 
 	origine1 = chargerImage(input[0], bool_erreur);
+	
+
+	
+
+	
 	while (i < nombreInput)
 	{
 		origine2 = chargerImage(input[i], bool_erreur);
@@ -184,18 +199,41 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			temporaire1 =  copieImage(origine1);
 			temporaire2 =  copieImage(origine2);
 		}
-
 		temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
 		temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);
-		
-/*		tompo2 = traitement*/
-/*		liste1 = recuperationPixelsBlanc*/
-/*		liste2 = recuperationPixelsBlanc*/
+
+		ptsImage1 = recuperationPixelsBlanc(temporaire1);
+		ptsImage2 = recuperationPixelsBlanc(temporaire2);
+/*		afficherCoordonnees(ptsImage1);*/
+/*		*/
+		decalage = comparaison(ptsImage1, ptsImage2, bool_erreur);
 /*		decalage = comparer*/
-/*		o1 = coller(o1,o2,dec)*/
-/*		t1 = coller(t1,t2,dec)*/
+		printf(" x -> %d, y -> %d \n", decalage.x, decalage.y);
+		decalage.y=1;
+/*		*bool_erreur=0;*/
+/*		save(temporaire1,"huhu1",bool_erreur);*/
+/*		save(temporaire2,"huhu2",bool_erreur);*/
+		
+		printf("Bool err : %d",*bool_erreur);
+		
+		
+		newTeinte = transformationCylidrique(origine2);
+		recopieDesPoints(origine2, newTeinte);
+		
+		newTeinte = transformationCylidrique(origine1);
+		recopieDesPoints(origine1, newTeinte);	
+		
+		tmp = imageCollee(origine1,origine2,&decalage);
+		
+		libererImage(origine1);
+		libererImage(origine2);
+		
+		printf("%d \n", tmp.teinte[10][10]);
+		
+		save(tmp, "out1", bool_erreur);
 		i++;
 	}
+	
 	/*	decalage = comparaison(harris(im_image1,bool_erreur), harris(im_image2,bool_erreur), bool_erreur);
 		printf(" x -> %d, y -> %d", decalage.x, decalage.y);
 		

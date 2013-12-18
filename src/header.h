@@ -150,10 +150,11 @@ void erreur(int int_numeroErreur, int int_sortir);
 void* mallocBis(size_t t_taille);
 
 /*!
-       \fn int** initMatrice(int int_largeur, int int_hauteur)
+       \fn int** initMatrice(int value, int int_largeur, int int_hauteur)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Mon 07 Oct 2013
        \brief initialise une matrice correspondant à la taille de l'image à traiter               
+       \param value : (int) Valeur initiale de la matrice
        \param int_largeur : (int) la largeur de l'image
        \param int_hauteur : (int) la hauteur de l'image
        \return une matrice d'entiers à compléter
@@ -162,7 +163,7 @@ void* mallocBis(size_t t_taille);
 
 */
 
-int** initMatrice(int int_largeur, int int_hauteur);
+int** initMatrice(int value, int int_largeur, int int_hauteur);
 
 /*!
        \fn int largeurMatriceImage(Image im_image)

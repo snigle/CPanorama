@@ -28,6 +28,7 @@
 
 
 
+Image applicationBinaire(Image image, int toDo);
 
 ListePoints* recuperationPixelsBlanc(Image image);
 

@@ -196,7 +196,7 @@ int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* cha
 	int** int_tab;
 	if(!strcmp(char_type,"P3"))	
 		int_largeur *= 3;
-	int_tab = initMatrice(int_largeur,int_hauteur);	
+	int_tab = initMatrice(0,int_largeur,int_hauteur);	
 	recuperationPixels(file_fichier, int_tab, int_largeur, int_hauteur, char_type, bool_erreur);
 	return (int_tab);
 }
