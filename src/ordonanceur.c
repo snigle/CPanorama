@@ -244,9 +244,7 @@ void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* c
 {
 	int bool_erreur;
 	bool_erreur = 0;
-	if(!strcmp(argv[*i],"-eq"))
-		egaliserHistogramme(currentInput,currentOutput,1,&bool_erreur);
-	else if(!strcmp(argv[*i],"-g"))
+	if(!strcmp(argv[*i],"-g"))
 		grayScale(currentInput,currentOutput,1,&bool_erreur);
 	else if(!strcmp(argv[*i],"--harris"))
 		enregistrerHarris(currentInput,currentOutput,&bool_erreur);

@@ -20,7 +20,7 @@ Image creerGrayScale (Image pixRGB)
 {
 	Image imagePGM;
 	int** tabGrey;
-	tabGrey = initMatrice(pixRGB.width,pixRGB.height);
+	tabGrey = initMatrice(0,pixRGB.width,pixRGB.height);
 	creationTabGrayScale(tabGrey, pixRGB);
 	imagePGM = creationImage("P2", pixRGB.width, pixRGB.height, pixRGB.teinteMax, tabGrey);
 	return imagePGM;

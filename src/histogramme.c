@@ -64,7 +64,7 @@ int** Tracer(int* int_tabhist, int int_taille, int int_teinteMax)
 	int int_k;
 	int** int_trace;
 
-	int_trace=initMatrice(int_teinteMax+1,int_taille);
+	int_trace=initMatrice(0,int_teinteMax+1,int_taille);
 	
 	for (int_i = 0; int_i < int_teinteMax+1; int_i += 1)
 	{
@@ -82,6 +82,60 @@ int** Tracer(int* int_tabhist, int int_taille, int int_teinteMax)
 	}
 	return(int_trace);
 }
+
+
+
+void remplirNouvellesTeintes (Image image, int decalage)
+{
+	int i;
+	int j;
+	for (i = 0; i < image.height; i += 1)
+	{
+		for (j = 0; j < image.width; j += 1)
+		{
+			image.teinte[i][j] = image.teinte[i][j] - decalage;
+			if ( image.teinte[i][j] < 0)
+				 image.teinte[i][j] = 0;
+			else if ( image.teinte[i][j]>255)
+				 image.teinte[i][j] = 255;
+		}
+	}
+}
+
+int calculMediane(int iterationMediane,int* histogramme)
+{
+	int i;
+	i = 0;
+	while (iterationMediane > 0)
+	{
+		iterationMediane -= histogramme[i];
+		i++;
+	}
+	return(i);
+}
+
+int calculDecalage(Image im_image1, Image im_image2, int* m1supm2, int* int_bool_erreur)
+{
+	int i;
+	int j;
+	i = calculMediane(im_image1.width * im_image1.height / 2, remplirTableauHist(im_image1, int_bool_erreur));
+	j = calculMediane(im_image2.width * im_image2.height / 2, remplirTableauHist(im_image2, int_bool_erreur));
+	if (i>j)
+		*m1supm2 = 1;
+	else
+		*m1supm2 = -1;
+	if (!i)
+	{
+		if (!j)
+			return (0);
+		else
+			return ((j - 1)/2);
+	}else if (!j)
+			return ((i - 1)/2);
+		else
+			return ((j + i - 2)/2 - (i<=j?i:j));
+}
+
 
 Image histogrammeBis(char* char_str_input, char* char_str_output, int int_bool_save, int* int_bool_erreur, int* int_hist, Image im_image)
 {

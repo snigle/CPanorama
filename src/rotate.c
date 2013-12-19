@@ -18,7 +18,7 @@ int** transformation(Image image)
 /*	D = cos(PI/6.0)*image.height + sin(PI/6.0)*image.width;*/
 	d=image.width;
 	D=image.height;
-	newTeinte = initMatrice(d, D);
+	newTeinte = initMatrice(0,d, D);
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)

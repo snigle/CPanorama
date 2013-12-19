@@ -115,7 +115,7 @@ void* mallocBis(size_t t_taille)
  }
 
 
-int** initMatrice(int int_largeur, int int_hauteur)
+int** initMatrice(int value, int int_largeur, int int_hauteur)
 {
 	int** int_int_tab;
 	int i;
@@ -127,7 +127,7 @@ int** initMatrice(int int_largeur, int int_hauteur)
 	{
 		for (j = 0; j < int_largeur; j += 1)
 		{
-			int_int_tab[i][j]=0;
+			int_int_tab[i][j]=value;
 		}
 	}
 	return (int_int_tab);

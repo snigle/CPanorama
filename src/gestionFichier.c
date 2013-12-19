@@ -196,7 +196,7 @@ int** recupPixel(FILE* file_fichier, int int_largeur, int int_hauteur, char* cha
 	int** int_tab;
 	if(!strcmp(char_type,"P3"))	
 		int_largeur *= 3;
-	int_tab = initMatrice(int_largeur,int_hauteur);	
+	int_tab = initMatrice(0,int_largeur,int_hauteur);	
 	recuperationPixels(file_fichier, int_tab, int_largeur, int_hauteur, char_type, bool_erreur);
 	return (int_tab);
 }
@@ -260,14 +260,19 @@ void ecritureFichier(Image image_image, FILE* file_fich){
 }
 
 
-void setExtention (Image image_image, char* char_output)
+char* setExtention (Image image_image, char* char_output)
 {
+	char* result;
+	result = mallocBis(sizeof(char_output)+sizeof(char)*4);
 	if(!strcmp(image_image.type, "P1"))
-		sprintf(char_output,"%s%s",char_output, ".pbm");
+		sprintf(result,"%s%s",char_output, ".pbm");
 	else if(!strcmp(image_image.type, "P2"))
-		sprintf(char_output,"%s%s",char_output, ".pgm");
+		sprintf(result,"%s%s",char_output, ".pgm");
 	else
-		sprintf(char_output,"%s%s",char_output, ".ppm");
+		sprintf(result,"%s%s",char_output, ".ppm");
+	
+/*	free(char_output);*/
+	return result;
 }
 
 void save(Image image_image, char* char_output, int* bool_erreur)
@@ -275,11 +280,13 @@ void save(Image image_image, char* char_output, int* bool_erreur)
 	FILE* file_fich;
 	char* char_ext;
 	char_ext = "";
+
 	if(!*bool_erreur)
 	{
 		char_ext = recupererExtension(char_output);
 		if (!strcmp(char_ext,""))
-			setExtention(image_image, char_output);
+			char_output = setExtention(image_image, char_output);
+
 		file_fich=fopen(char_output, "w");
 		if(file_fich != NULL)
 		{

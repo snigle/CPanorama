@@ -36,7 +36,7 @@ int** fusionCas1(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 	int f;
 	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;
 	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;
-	matImageFinale=initMatrice(largeur*k, hauteur);
+	matImageFinale=initMatrice(0,largeur*k, hauteur);
 	for(i=0;i<image1.width*k;i+=k){
 		for(j=0;j<image1.height;j++){
 			for (f = 0; f < k; f += 1){
@@ -63,7 +63,7 @@ int** fusionCas2(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 	int f;
 	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;
 	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;
-	matImageFinale=initMatrice(largeur*k, hauteur);
+	matImageFinale=initMatrice(0,largeur*k, hauteur);
 	for(i=0;i<image1.width*k;i+=k){
 		for (j = -decalage->y; j < image1.height - decalage->y; j += 1){
 			for (f = 0; f < k; f += 1){
@@ -90,7 +90,7 @@ int** fusionCas3(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 	int f;
 	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;
 	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;
-	matImageFinale=initMatrice(largeur*k, hauteur);
+	matImageFinale=initMatrice(0,largeur*k, hauteur);
 	for (i = -decalage->x*k; i < image1.width*k-decalage->x*k; i += k){
 		for (j = 0; j < image1.height; j += 1){
 			for (f = 0; f < k; f += 1){
@@ -117,7 +117,7 @@ int** fusionCas4(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 	int f;
 	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;
 	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;
-	matImageFinale=initMatrice(largeur*k, hauteur);
+	matImageFinale=initMatrice(0,largeur*k, hauteur);
 	for (i = -decalage->x*k; i < image1.width*k - decalage->x*k; i += k){
 		for (j = -decalage->y; j < image1.height - decalage->y; j += 1){
 			for (f = 0; f < k; f += 1){	
@@ -158,7 +158,6 @@ int** fusion(ListePoints* decalage, int largeur, int hauteur, Image image1, Imag
 
 Image imageCollee (Image image1, Image image2, ListePoints* decalage)
 {
-	
 	Image imageFinale;
 	int teinteMax;
 	int* size;

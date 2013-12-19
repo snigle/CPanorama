@@ -164,7 +164,7 @@ ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 	n=10;
 	trouvePas = 1;
 	printf("Comparaison des points : ");
-	while(trouvePas && k < 20 && !*bool_erreur)
+	while(trouvePas && k < 100 && !*bool_erreur)
 	{	
 		fprintf(stdout," . ");
 		ptsImage1=pointsRandom(liste1,n,bool_erreur);

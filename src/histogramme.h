@@ -85,6 +85,12 @@ int calculMax(int* int_tabhist, int int_teinteMax);
 */
 int** Tracer(int* int_tabhist, int int_taille, int int_teinteMax);
 
+void remplirNouvellesTeintes (Image image, int decalage);
+
+int calculMediane(int iterationMediane,int* histogramme);
+
+int calculDecalage(Image im_image1, Image im_image2, int* m1supm2, int* int_bool_erreur);
+
 /*!
        \fn int* abPourcent(int* hist, int max)
        \author Poussou Elie <poussoueli@eisti.eu>

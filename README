@@ -13,3 +13,7 @@ Cheak
 Vérifier les fuites de mémoires
 
 egaliser un histogramme, liberer argv ?
+
+******************************************************************************************************************************************************************************
+quand 0 pts, seg fault sur harris
+

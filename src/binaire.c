@@ -5,7 +5,7 @@ int** remplirMatriceBinaire (Image im_image, int int_seuil)
 	int** int_teinteBinaire;
 	int int_i;
 	int int_j;
-	int_teinteBinaire=initMatrice(im_image.width, im_image.height);
+	int_teinteBinaire=initMatrice(0,im_image.width, im_image.height);
 	
 		for(int_i = 0 ; int_i < im_image.height ; int_i++)
 		{

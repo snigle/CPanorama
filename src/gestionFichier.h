@@ -255,18 +255,18 @@ void ecritureFichier(Image image_image, FILE* file_fich);
 
 
 /*!
-       \fn void setExtention(Image image, char* output)
+       \fn char* setExtention(Image image, char* output)
        \author PERALES Quentin <peralesque@eisti.eu>
        \date Wed 16 Oct 2013
        \brief permet d'ajouter l'extention au fichier de sortie si elle n'est pas précisée, en fonction du type de l'image               
        \param image : (image) l'image en question
        \param output : (char*) le nom du fichier de sortie
-       
+       \return retourne la nouvelle chaine avec l'extension
                
        \remarks 
 
 */
-void setExtention (Image image_image, char* char_output);
+char* setExtention (Image image_image, char* char_output);
 
 /*!
        \fn int save(Image image, char* ouput)

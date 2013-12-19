@@ -6,7 +6,7 @@ int** deriveeVerticale(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(image.width,image.height);
+	result = initMatrice(0,image.width,image.height);
 	for (i = 0; i < image.height -1; i += 1)
 	{
 		for (j = 0; j < image.width -1; j += 1)
@@ -22,7 +22,7 @@ int** deriveeHorizontale(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(image.width,image.height);
+	result = initMatrice(0,image.width,image.height);
 	for (i = 0; i < image.height -1; i += 1)
 	{
 		for (j = 0; j < image.width -1; j += 1)
@@ -38,7 +38,7 @@ int** derivee(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(image.width,image.height);
+	result = initMatrice(0,image.width,image.height);
 	for (i = 0; i < image.height -1; i += 1)
 	{
 		for (j = 0; j < image.width -1; j += 1)
@@ -49,17 +49,16 @@ int** derivee(Image image)
 	return result;
 }
 
-ListePoints* harris(char* input, int* bool_erreur){
+ListePoints* harris(Image image, int* bool_erreur){
 	int** mat_A;
 	int** mat_B;
 	int** mat_C;
 	float M;
 	int y;
 	int x;
-	ListePoints* result;	
-	Image image;
+	ListePoints* result;
 	result=NULL;
-	image = chargerImage(input,bool_erreur);
+
 	mat_A = deriveeVerticale(image);
 	mat_B = deriveeHorizontale(image);
 	mat_C = derivee(image);
@@ -85,8 +84,8 @@ void enregistrerHarris(char* input,char* output, int* bool_erreur)
 	image = chargerImage(input,bool_erreur);
 	if(!*bool_erreur && testType(image,"P2"))
 	{
-		mat_result = initMatrice(image.width,image.height);
-		tmp = harris(input,bool_erreur);
+		mat_result = initMatrice(0,image.width,image.height);
+		tmp = harris(image,bool_erreur);
 		if(!*bool_erreur)
 		{	
 			while(tmp->suivant != NULL)

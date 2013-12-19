@@ -82,7 +82,7 @@ int** recupFiltre(FILE* file_filtre, int int_taille, int* bool_erreur)
 	if (int_taille != 1)
 	{
 		rewind(file_filtre);
-		int_matrice = initMatrice(int_taille,int_taille);
+		int_matrice = initMatrice(0,int_taille,int_taille);
 		remplirFiltre(file_filtre, int_matrice, int_taille, bool_erreur);
 		int_testFichier = testFinFichierFiltre(file_filtre);
 		if (int_testFichier != 0)
@@ -134,13 +134,13 @@ int** applicationFiltre(Image im_image, int** mat_filtre, int int_taille, int bo
 	int int_j;
 	int int_decalage;
 	int_decalage = (int_taille - 1) / 2;
-	mat_result = initMatrice(im_image.width, im_image.height);
+	mat_result = initMatrice(0,im_image.width, im_image.height);
 	for (int_i = 0; int_i < im_image.height; int_i += 1)
 	{
 		for (int_j = 0; int_j < im_image.width; int_j += 1)
 		{
 			if ((int_i < int_decalage) || (int_j < int_decalage) || (int_i >= (im_image.height - int_decalage)) || (int_j >= (im_image.width - int_decalage)))
-				mat_result[int_i][int_j] = im_image.teinte[int_i][int_j];
+				mat_result[int_i][int_j] = 0;
 			else
 				mat_result[int_i][int_j] = setNumber(int_i, int_j, im_image.width, im_image.height, im_image.teinte, mat_filtre, int_taille, int_decalage, bool_normalisation);
 		}

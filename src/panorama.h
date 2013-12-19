@@ -13,16 +13,40 @@
 #include <math.h>
 
 #include "header.h"
+#include "histogramme.h"
 #include "harris.h"
+#include "gestionFichier.h"
+#include "rgbToGrayscale.h"
+
 #include "gestionListeCoordonnees.h"
 #include "comparaison.h"
 #include "zncc.h"
-#include "comparaison.h"
+#include "convolution.h"
 #include "binaire.h"
 #include "collerImages.h"
+#include "erodeDilate.h"
 
 
 
+Image applicationBinaire(Image image, int toDo);
+
+ListePoints* recuperationPixelsBlanc(Image image);
+
+void transformationCoordonnee(int* x, int* y, Image image, int i, int j);
+
+int** transformationCylidrique(Image image);
+
+void recopieDesPoints(Image image, int** newTeinte);
+
+ListePoints* recuperationPointsCle (Image image1, Image image2, int* bool_erreur);
+
+Image couleurVersDilatation(Image image, int* bool_erreur);
+
+Image copieImage(Image image);
+
+int** creationFiltre(void);
+
+void egalisationImages (Image image1, Image image2, int* bool_erreur);
 
 /*!
         \fn int panorama(char** input, int nombreInput, char* output)
