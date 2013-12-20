@@ -164,9 +164,10 @@ ListePoints comparaison(ListePoints* liste1, ListePoints* liste2, int* bool_erre
 	n=10;
 	trouvePas = 1;
 	printf("Comparaison des points : ");
-	while(trouvePas && k < 100 && !*bool_erreur)
+	while(trouvePas && k < 500 && !*bool_erreur)
 	{	
 		fprintf(stdout," . ");
+		fflush(stdout);
 		ptsImage1=pointsRandom(liste1,n,bool_erreur);
 		dernierPointValide = parcourtListe2(&trouvePas,liste2, ptsImage1,n);
 		if(!trouvePas)
