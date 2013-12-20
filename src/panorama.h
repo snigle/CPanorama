@@ -27,8 +27,9 @@
 #include "erodeDilate.h"
 
 
+void enleverPointMilieuImage(Image image);
 
-Image applicationBinaire(Image image, int toDo);
+Image applicationBinaire(Image image, int toDo, int* bool_erreur);
 
 ListePoints* recuperationPixelsBlanc(Image image);
 

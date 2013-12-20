@@ -129,14 +129,29 @@ int** creationFiltre(void)
 	return (filtre);
 }
 
-Image applicationBinaire(Image image, int toDo)
+void enleverPointMilieuImage(Image image)
+{
+	int quart;
+	int i;
+	int j;
+	quart = image.width / 4;
+	for (i = 0; i < image.height; i += 1)
+	{
+		for (j = quart; j < image.width-quart; j += 1)
+		{
+				image.teinte[i][j] = 1;
+		}
+	}	
+}
+
+Image applicationBinaire(Image image, int toDo, int* bool_erreur)
 {
 	int** newTeinte;
 	Image tmp;
 	switch(toDo)
 	{
 		case 1:
-			newTeinte = remplirMatriceBinaire(image, calculMediane(image.width * image.height / 2, remplirTableauHist(image, bool_erreur)) + 10 );
+			newTeinte = remplirMatriceBinaire(image, 50);
 		break;
 		case 2:
 			newTeinte = genererMatriceDilate(image);
@@ -163,18 +178,19 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 	newTeinte = transformationCylidrique(image);
 	recopieDesPoints(image, newTeinte);
 
-	image = applicationBinaire(image,1);
+	image = applicationBinaire(image,1, bool_erreur);
 	
-	for (i = 0; i < 5; i += 1)
+	for (i = 0; i < 2; i += 1)
 	{
-		image = applicationBinaire(image,19);
-		image = applicationBinaire(image,2);
+		image = applicationBinaire(image,19, bool_erreur);
+		image = applicationBinaire(image,2, bool_erreur);
 		
 	}
-		image = applicationBinaire(image,2);
+		image = applicationBinaire(image,2, bool_erreur);
+		enleverPointMilieuImage(image);
 /*		image = applicationBinaire(image,2);*/
 /*		image = applicationBinaire(image,10);*/
-	
+/*		save(image, "huhu", bool_erreur);*/
 	return (image);
 }
 
