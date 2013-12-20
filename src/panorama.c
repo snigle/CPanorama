@@ -25,6 +25,7 @@ void transformationCoordonnee(int* x, int* y, Image image, int i, int j)
 	double p2x;
 	double p2y;
 	double r;
+	double k;
 	px = (2.0*j - image.width) / image.width;
 	py = (2.0*i - image.height) / image.height;
 	r = pow(px,2.0) + pow(py,2.0);
@@ -41,14 +42,23 @@ int** transformationCylidrique(Image image)
 	int j;
 	int xp;
 	int yp;
-	newTeinte = initMatrice(0,image.width, image.height);
+	int k;
+	int f;
+	k = !strcmp(image.type,"P3")? 3 : 1;
+
+	newTeinte = initMatrice(0,image.width*k, image.height);
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
 			transformationCoordonnee(&xp, &yp,image,i,j);
-			if(yp>0 && xp>0 && yp<image.height && xp<image.width)
-				newTeinte[yp][xp] = image.teinte[i][j];
+			for (f = 0; f < k; f += 1)
+			{
+				if(yp==0 && k==3)
+					printf("xp %d\n",xp);
+/*				if(yp>0 && xp>0 && yp<image.height && xp<image.width)*/
+				newTeinte[yp][xp*k+f] = image.teinte[i][j*k+f];
+			}
 
 		}
 	}
@@ -59,11 +69,18 @@ void recopieDesPoints(Image image, int** newTeinte)
 {
 	int i;
 	int j;
+	int k;
+	int f;
+	k = !strcmp(image.type,"P3")? 3 : 1;
 	for (i = 0; i < image.width; i += 1)
 	{
 		for (j = 0; j < image.height; j += 1)
 		{
-			image.teinte[j][i] = newTeinte[j][i];
+			for (f = 0; f < k; f += 1)
+			{
+					image.teinte[j][i*k+f] = newTeinte[j][i*k+f];
+			}
+
 		}
 	}
 	libererMatrice((void**)newTeinte, image.height);
@@ -74,12 +91,19 @@ Image copieImage(Image image)
 	int** result;
 	int i;
 	int j;
-	result = initMatrice(0,image.width, image.height);
+	int f;
+	int k;
+	k = !strcmp(image.type,"P3")? 3 : 1;
+	result = initMatrice(0,image.width*k, image.height);
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
-			result[i][j] = image.teinte[i][j];
+			for (f = 0; f < k; f += 1)
+			{
+							result[i][j*k+f] = image.teinte[i][j*k+f];
+			}
+
 		}
 	}
 	return (creationImage(image.type,image.width,image.height,image.teinteMax, result));
@@ -136,18 +160,20 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 	libererImage(image);
 	image = creationImage(tmp.type, tmp.width, tmp.height, tmp.teinteMax, tmp.teinte);
 	
-/*	newTeinte = transformationCylidrique(image);*/
-/*	recopieDesPoints(image, newTeinte);*/
+	newTeinte = transformationCylidrique(image);
+	recopieDesPoints(image, newTeinte);
 
 	image = applicationBinaire(image,1);
 	
-	for (i = 0; i < 1; i += 1)
+	for (i = 0; i < 5; i += 1)
 	{
-		image = applicationBinaire(image,2);
 		image = applicationBinaire(image,19);
+		image = applicationBinaire(image,2);
+		
 	}
 		image = applicationBinaire(image,2);
 /*		image = applicationBinaire(image,2);*/
+/*		image = applicationBinaire(image,10);*/
 	
 	return (image);
 }
@@ -199,8 +225,11 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			temporaire1 =  copieImage(origine1);
 			temporaire2 =  copieImage(origine2);
 		}
+		if(!strcmp(temporaire1.type,"P2")&&!strcmp(temporaire2.type,"P2"))
+		{
+		egalisationImages (temporaire1, temporaire2, bool_erreur);
 		temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
-		temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);
+		temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);}
 
 		ptsImage1 = recuperationPixelsBlanc(temporaire1);
 		ptsImage2 = recuperationPixelsBlanc(temporaire2);
@@ -208,13 +237,15 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 /*		*/
 		decalage = comparaison(ptsImage1, ptsImage2, bool_erreur);
 /*		decalage = comparer*/
-		printf(" x -> %d, y -> %d \n", decalage.x, decalage.y);
-		decalage.y=1;
+if(!*bool_erreur)
+{
+/*		printf(" x -> %d, y -> %d \n", decalage.x, decalage.y);*/
+/*		decalage.y=1;*/
 /*		*bool_erreur=0;*/
 /*		save(temporaire1,"huhu1",bool_erreur);*/
 /*		save(temporaire2,"huhu2",bool_erreur);*/
 		
-		printf("Bool err : %d",*bool_erreur);
+/*		printf("Bool err : %d",*bool_erreur);*/
 		
 		
 		newTeinte = transformationCylidrique(origine2);
@@ -224,13 +255,14 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 		recopieDesPoints(origine1, newTeinte);	
 		
 		tmp = imageCollee(origine1,origine2,&decalage);
-		
+		save(tmp, "out1", bool_erreur);
+	}
 		libererImage(origine1);
 		libererImage(origine2);
 		
-		printf("%d \n", tmp.teinte[10][10]);
-		
-		save(tmp, "out1", bool_erreur);
+/*		printf("%d \n", tmp.teinte[10][10]);*/
+/*		*/
+
 		i++;
 	}
 	
