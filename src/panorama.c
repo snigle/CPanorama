@@ -112,7 +112,7 @@ Image applicationBinaire(Image image, int toDo)
 	switch(toDo)
 	{
 		case 1:
-			newTeinte = remplirMatriceBinaire(image, 100);
+			newTeinte = remplirMatriceBinaire(image, calculMediane(image.width * image.height / 2, remplirTableauHist(image, bool_erreur)) + 10 );
 		break;
 		case 2:
 			newTeinte = genererMatriceDilate(image);
