@@ -25,7 +25,6 @@ void transformationCoordonnee(int* x, int* y, Image image, int i, int j)
 	double p2x;
 	double p2y;
 	double r;
-	double k;
 	px = (2.0*j - image.width) / image.width;
 	py = (2.0*i - image.height) / image.height;
 	r = pow(px,2.0) + pow(py,2.0);
@@ -129,7 +128,7 @@ int** creationFiltre(void)
 	return (filtre);
 }
 
-void enleverPointMilieuImage(Image image)
+void enleverPointImage(Image image, int droite)
 {
 	int quart;
 	int i;
@@ -137,10 +136,10 @@ void enleverPointMilieuImage(Image image)
 	quart = image.width / 4;
 	for (i = 0; i < image.height; i += 1)
 	{
-		for (j = quart; j < image.width-quart; j += 1)
-		{
-				image.teinte[i][j] = 1;
-		}
+			for (j = droite * quart; j < image.width- (quart * (1 - droite)); j += 1)
+			{
+					image.teinte[i][j] = 1;
+			}
 	}	
 }
 
@@ -187,8 +186,7 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 		
 	}
 		image = applicationBinaire(image,2, bool_erreur);
-		enleverPointMilieuImage(image);
-/*		image = applicationBinaire(image,2);*/
+		image = applicationBinaire(image,2, bool_erreur);
 /*		image = applicationBinaire(image,10);*/
 /*		save(image, "huhu", bool_erreur);*/
 	return (image);
@@ -243,42 +241,34 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 		}
 		if(!strcmp(temporaire1.type,"P2")&&!strcmp(temporaire2.type,"P2"))
 		{
-		egalisationImages (temporaire1, temporaire2, bool_erreur);
-		temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
-		temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);}
+			egalisationImages (temporaire1, temporaire2, bool_erreur);
+			temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
+			temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);
 
-		ptsImage1 = recuperationPixelsBlanc(temporaire1);
-		ptsImage2 = recuperationPixelsBlanc(temporaire2);
-/*		afficherCoordonnees(ptsImage1);*/
+/*			ptsImage1 = recuperationPixelsBlanc(temporaire1);*/
+/*			ptsImage2 = recuperationPixelsBlanc(temporaire2);*/
+/*			afficherCoordonnees(ptsImage1);*/
+
+/*			decalage = comparaison(ptsImage1, ptsImage2, bool_erreur);*/
+/*			if(!*bool_erreur)*/
+/*			{*/
+
+/*				newTeinte = transformationCylidrique(origine2);*/
+/*				recopieDesPoints(origine2, newTeinte);*/
 /*		*/
-		decalage = comparaison(ptsImage1, ptsImage2, bool_erreur);
-/*		decalage = comparer*/
-if(!*bool_erreur)
-{
-/*		printf(" x -> %d, y -> %d \n", decalage.x, decalage.y);*/
-/*		decalage.y=1;*/
-/*		*bool_erreur=0;*/
-/*		save(temporaire1,"huhu1",bool_erreur);*/
-/*		save(temporaire2,"huhu2",bool_erreur);*/
-		
-/*		printf("Bool err : %d",*bool_erreur);*/
-		
-		
-		newTeinte = transformationCylidrique(origine2);
-		recopieDesPoints(origine2, newTeinte);
-		
-		newTeinte = transformationCylidrique(origine1);
-		recopieDesPoints(origine1, newTeinte);	
-		
-		tmp = imageCollee(origine1,origine2,&decalage);
-		save(tmp, "out1", bool_erreur);
-	}
+/*				newTeinte = transformationCylidrique(origine1);*/
+/*				recopieDesPoints(origine1, newTeinte);	*/
+/*		*/
+/*				tmp = imageCollee(origine1,origine2,&decalage);*/
+/*				save(tmp, "out1", bool_erreur);*/
+/*			}*/
+		enleverPointImage(temporaire1, 0);
+		enleverPointImage(temporaire2, 1);
+		save(temporaire1, "gauche", bool_erreur);
+		save(temporaire2, "droite", bool_erreur);
+		}
 		libererImage(origine1);
 		libererImage(origine2);
-		
-/*		printf("%d \n", tmp.teinte[10][10]);*/
-/*		*/
-
 		i++;
 	}
 	

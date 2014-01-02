@@ -27,7 +27,7 @@
 #include "erodeDilate.h"
 
 
-void enleverPointMilieuImage(Image image);
+void enleverPointImage(Image image, int droite);
 
 Image applicationBinaire(Image image, int toDo, int* bool_erreur);
 
