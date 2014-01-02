@@ -26,6 +26,7 @@
 #include "collerImages.h"
 #include "erodeDilate.h"
 
+int compterVoisins(int x, int y, Image image);
 
 void enleverPointImage(Image image, int droite);
 

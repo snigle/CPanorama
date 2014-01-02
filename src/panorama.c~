@@ -264,29 +264,29 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			egalisationImages (temporaire1, temporaire2, bool_erreur);
 			save(temporaire1, "tmp1", bool_erreur);
 			save(temporaire2, "tmp2", bool_erreur);
-			temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
-			temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);
-			
-			enleverPointImage(temporaire1, 0);
-			enleverPointImage(temporaire2, 1);
-			
-			ptsImage1 = recuperationPixelsBlanc(temporaire1);
-			ptsImage2 = recuperationPixelsBlanc(temporaire2);
-			
-			afficherCoordonnees(ptsImage1);
-			decalage = comparer(ptsImage1, ptsImage2, bool_erreur);
-			if(!*bool_erreur)
-			{
+/*			temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);*/
+/*			temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);*/
+/*			*/
+/*			enleverPointImage(temporaire1, 0);*/
+/*			enleverPointImage(temporaire2, 1);*/
+/*			*/
+/*			ptsImage1 = recuperationPixelsBlanc(temporaire1);*/
+/*			ptsImage2 = recuperationPixelsBlanc(temporaire2);*/
+/*			*/
+/*			afficherCoordonnees(ptsImage1);*/
+/*			decalage = comparer(ptsImage1, ptsImage2, bool_erreur);*/
+/*			if(!*bool_erreur)*/
+/*			{*/
 
-				newTeinte = transformationCylidrique(origine2);
-				recopieDesPoints(origine2, newTeinte);
-		
-				newTeinte = transformationCylidrique(origine1);
-				recopieDesPoints(origine1, newTeinte);	
-		
-				tmp = imageCollee(origine1,origine2,&decalage);
-				save(tmp, "out1", bool_erreur);
-			}
+/*				newTeinte = transformationCylidrique(origine2);*/
+/*				recopieDesPoints(origine2, newTeinte);*/
+/*		*/
+/*				newTeinte = transformationCylidrique(origine1);*/
+/*				recopieDesPoints(origine1, newTeinte);	*/
+/*		*/
+/*				tmp = imageCollee(origine1,origine2,&decalage);*/
+/*				save(tmp, "out1", bool_erreur);*/
+/*			}*/
 		}
 		libererImage(origine1);
 		libererImage(origine2);
