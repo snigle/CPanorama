@@ -16,8 +16,17 @@ egaliser un histogramme, liberer argv ?
 
 ******************************************************************************************************************************************************************************
 
-prendre le quart de l image pour la comparaison
+Quand on simplifie l'image ( après dilatation)
+Il faut 
 
-optimiser le seuil (mediane ?)
+---------
+|		|
 
-savoir combien il faut faire d'erosion et de dilatation => nombre de points blanc sur l image
+
+
+
+
+
+correspondance en trop pour gauche milieu
+pas de bonne correspondance entre milieu droite
+

@@ -138,7 +138,7 @@ int compterVoisins(int x, int y, Image image)
 	{
 		for (j = y-15; j < y+15; j += 1)
 		{
-			if (i > 0 && i < image.height && j > 0 && j < image.width)
+			if (i > 0 && i < image.height && j > 0 && j < image.width && ((pow((i-j),2)+pow(y-j,2)) < pow(15,2)))
 				k = k+(1-image.teinte[i][j]);
 		}	
 	}
@@ -162,7 +162,7 @@ void enleverPointImage(Image image, int droite)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
-			if (compterVoisins(i, j, image) < 11)
+			if (compterVoisins(i, j, image) < 14)
 				image.teinte[i][j] = 1;
 		}
 	}	
@@ -212,7 +212,7 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 		
 	}
 		image = applicationBinaire(image,2, bool_erreur);																																							 
-		image = applicationBinaire(image,2, bool_erreur);
+/*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,10);*/
 /*		save(image, "huhu", bool_erreur);*/

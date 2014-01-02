@@ -80,7 +80,7 @@ ListePoints** tableauPointsAutour(ListePoints* point1, ListePoints* liste1, int 
 	result=mallocBis(sizeof(ListePoints*)*n);
 	result[0] = ajoutCoordonnee(NULL,point1->x,point1->y,point1->valeur);
 	point1 = ajoutCoordonnee(NULL,point1->x,point1->y,point1->valeur);
-	creerListePointsProche(point1,liste1,20);
+	creerListePointsProche(point1,liste1,15);
 	liste1 = point1;
 	for (i = 1; i < n; i += 1)
 	{
