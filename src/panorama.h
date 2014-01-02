@@ -19,7 +19,7 @@
 #include "rgbToGrayscale.h"
 
 #include "gestionListeCoordonnees.h"
-#include "comparaison.h"
+#include "comparaison2.h"
 #include "zncc.h"
 #include "convolution.h"
 #include "binaire.h"

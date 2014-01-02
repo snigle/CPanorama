@@ -134,9 +134,9 @@ int compterVoisins(int x, int y, Image image)
 	int j;
 	int k;
 	k = 0;
-	for (i = x-5; i < x+5; i += 1)
+	for (i = x-15; i < x+15; i += 1)
 	{
-		for (j = y-5; j < y+5; j += 1)
+		for (j = y-15; j < y+15; j += 1)
 		{
 			if (i > 0 && i < image.height && j > 0 && j < image.width)
 				k = k+(1-image.teinte[i][j]);
@@ -162,7 +162,7 @@ void enleverPointImage(Image image, int droite)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
-			if (compterVoisins(i, j, image) < 5)
+			if (compterVoisins(i, j, image) < 11)
 				image.teinte[i][j] = 1;
 		}
 	}	
@@ -176,7 +176,7 @@ Image applicationBinaire(Image image, int toDo, int* bool_erreur)
 	switch(toDo)
 	{
 		case 1:
-			newTeinte = remplirMatriceBinaire(image, 50);
+			newTeinte = remplirMatriceBinaire(image, 100);
 		break;
 		case 2:
 			newTeinte = genererMatriceDilate(image);
@@ -211,8 +211,8 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 		image = applicationBinaire(image,2, bool_erreur);
 		
 	}
+		image = applicationBinaire(image,2, bool_erreur);																																							 
 		image = applicationBinaire(image,2, bool_erreur);
-/*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,10);*/
 /*		save(image, "huhu", bool_erreur);*/
@@ -262,8 +262,6 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 		if(!strcmp(temporaire1.type,"P2")&&!strcmp(temporaire2.type,"P2"))
 		{
 			egalisationImages (temporaire1, temporaire2, bool_erreur);
-			save(temporaire1, "tmp1", bool_erreur);
-			save(temporaire2, "tmp2", bool_erreur);
 			temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
 			temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);
 			
@@ -273,8 +271,10 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			ptsImage1 = recuperationPixelsBlanc(temporaire1);
 			ptsImage2 = recuperationPixelsBlanc(temporaire2);
 			
-			afficherCoordonnees(ptsImage1);
-			decalage = comparer(ptsImage1, ptsImage2, bool_erreur);
+/*			ptsImage1 = ajoutCoordonnee(NULL,1,1,1);*/
+/*			afficherCoordonnees(ptsImage1);*/
+	fprintf(stdout,"Avant comparer, taille : %d",tailleListe(ptsImage1,0));
+			decalage = comparer( ptsImage1, ptsImage2, temporaire2, bool_erreur);
 			if(!*bool_erreur)
 			{
 
