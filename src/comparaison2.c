@@ -19,7 +19,7 @@ void creerListePointsProche(ListePoints* tete, ListePoints* liste, int n)
 {
 	if(liste!=NULL)
 	{
-		if(pow(liste->x-tete->x,2)+pow(liste->y-tete->y,2) < pow(n,2))
+		if(abs(liste->x-tete->x)< n && abs(liste->y-tete->y) < n)
 			ajoutFin(tete,liste->x,liste->y,liste->valeur);
 		creerListePointsProche(tete,liste->suivant,n);
 	}
@@ -80,16 +80,23 @@ ListePoints** tableauPointsAutour(ListePoints* point1, ListePoints* liste1, int 
 	result=mallocBis(sizeof(ListePoints*)*n);
 	result[0] = ajoutCoordonnee(NULL,point1->x,point1->y,point1->valeur);
 	point1 = ajoutCoordonnee(NULL,point1->x,point1->y,point1->valeur);
-	creerListePointsProche(point1,liste1,20);
+	creerListePointsProche(point1,liste1,15);
 	liste1 = point1;
-	for (i = 1; i < n; i += 1)
+	if(tailleListe(liste1,0)>n)
 	{
-		do
+		for (i = 1; i < n; i += 1)
 		{
-			tmp = positionListe(liste1,(rand()%(tailleListe(liste1,0))));
-		}while(!pasDansTableau(result,i,tmp));
-		result[i] = ajoutCoordonnee(NULL,tmp->x,tmp->y,tmp->valeur);
+			do
+			{
+/*				printf("t");*/
+/*				fflush(stdout);*/
+				tmp = positionListe(liste1,(rand()%(tailleListe(liste1,0))));
+			}while(!pasDansTableau(result,i,tmp));
+			result[i] = ajoutCoordonnee(NULL,tmp->x,tmp->y,tmp->valeur);
+		}
 	}
+	else
+		*bool_erreur = 1;
 	libererListe(liste1);
 	return result;
 }
@@ -110,22 +117,28 @@ ListePoints comparer(ListePoints* liste1, ListePoints* liste2, Image image2, int
 	parcourtListe1=liste1;
 	dernierPointValide=NULL;
 	k=0;
-	while(parcourtListe1!=NULL && dernierPointValide==NULL)
+	while(parcourtListe1!=NULL)
 	{
+		*bool_erreur=0;
 		fprintf(stdout," . ");
 		fflush(stdout);
 /*		parcourtListe1 = positionListe(liste1,(rand()%(tailleListe(liste1,0))));*/
 
-		tabRandom = tableauPointsAutour(parcourtListe1, liste1, 10, bool_erreur);
+		tabRandom = tableauPointsAutour(parcourtListe1, liste1, 20, bool_erreur);
+		if(!*bool_erreur)
+		{
+			dernierPointValide = comparerVecteurs(tabRandom,20,liste2,image2);
 
-		dernierPointValide = comparerVecteurs(tabRandom,10,liste2,image2);
-
-/*		for (i = 0; i < 10; i += 1)*/
-/*		{*/
-/*			printf("Tab %d : %dx%d - ",i,tabRandom[i]->x,tabRandom[i]->y);*/
-/*		}*/
-		if(dernierPointValide==NULL)
-		free(tabRandom);
+	/*		for (i = 0; i < 10; i += 1)*/
+	/*		{*/
+	/*			printf("Tab %d : %dx%d - ",i,tabRandom[i]->x,tabRandom[i]->y);*/
+	/*		}*/
+			if(dernierPointValide!=NULL)
+			{	calculerDecalage(&result,tabRandom[0]->x,tabRandom[0]->y,dernierPointValide->x,dernierPointValide->y,0);
+				printf("%d,%d\n",result.x, result.y);
+			}
+			free(tabRandom);
+		}
 		parcourtListe1=parcourtListe1->suivant;
 		k++;
 	}

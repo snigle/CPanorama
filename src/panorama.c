@@ -134,9 +134,9 @@ int compterVoisins(int x, int y, Image image)
 	int j;
 	int k;
 	k = 0;
-	for (i = x-15; i < x+15; i += 1)
+	for (i = x-15; i <= x+15; i += 1)
 	{
-		for (j = y-15; j < y+15; j += 1)
+		for (j = y-15; j <= y+15; j += 1)
 		{
 			if (i > 0 && i < image.height && j > 0 && j < image.width)
 				k = k+(1-image.teinte[i][j]);
@@ -162,7 +162,7 @@ void enleverPointImage(Image image, int droite)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
-			if (compterVoisins(i, j, image) < 11)
+			if (compterVoisins(i, j, image) < 21)
 				image.teinte[i][j] = 1;
 		}
 	}	
@@ -191,6 +191,23 @@ Image applicationBinaire(Image image, int toDo, int* bool_erreur)
 	
 }
 
+int compterPointsBlanc(Image image)
+{
+	int result;
+	int i;
+	int j;
+	result = 0;
+	for (i = 0; i < image.height; i += 1)
+	{
+		for (j = 0; j < image.width; j += 1)
+		{
+			if(image.teinte[i][j]==0)
+				result ++;
+		}
+	}
+	return result;
+}
+
 Image couleurVersDilatation(Image image, int* bool_erreur)
 {
 	int i;
@@ -205,14 +222,15 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 
 	image = applicationBinaire(image,1, bool_erreur);
 	
-	for (i = 0; i < 2; i += 1)
+	for (i = 0; i < 4; i += 1)
 	{
 		image = applicationBinaire(image,19, bool_erreur);
 		image = applicationBinaire(image,2, bool_erreur);
 		
 	}
-		image = applicationBinaire(image,2, bool_erreur);																																							 
-		image = applicationBinaire(image,2, bool_erreur);
+	
+/*	printf("Les points blanc : %d\n",compterPointsBlanc(image));																																					 */
+/*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,10);*/
 /*		save(image, "huhu", bool_erreur);*/
@@ -267,17 +285,25 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			
 			enleverPointImage(temporaire1, 0);
 			enleverPointImage(temporaire2, 1);
+			while(compterPointsBlanc(temporaire1)>5000)
+				temporaire1 = applicationBinaire(temporaire1,2, bool_erreur);
+			while(compterPointsBlanc(temporaire2)>5000)
+				temporaire2 = applicationBinaire(temporaire2,2, bool_erreur);	
+/*			save(temporaire1,"tmp1",bool_erreur);*/
+/*			save(temporaire2,"tmp2",bool_erreur);*/
 			
 			ptsImage1 = recuperationPixelsBlanc(temporaire1);
 			ptsImage2 = recuperationPixelsBlanc(temporaire2);
 			
-/*			ptsImage1 = ajoutCoordonnee(NULL,1,1,1);*/
-/*			afficherCoordonnees(ptsImage1);*/
+
 	fprintf(stdout,"Avant comparer, taille : %d",tailleListe(ptsImage1,0));
 			decalage = comparer( ptsImage1, ptsImage2, temporaire2, bool_erreur);
+/*			decalage.x=1061;*/
+/*			decalage.y=-62;*/
 			if(!*bool_erreur)
 			{
-
+printf("test");
+fflush(stdout);
 				newTeinte = transformationCylidrique(origine2);
 				recopieDesPoints(origine2, newTeinte);
 		
@@ -285,6 +311,8 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 				recopieDesPoints(origine1, newTeinte);	
 		
 				tmp = imageCollee(origine1,origine2,&decalage);
+				printf("test");
+fflush(stdout);
 				save(tmp, "out1", bool_erreur);
 			}
 		}

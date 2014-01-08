@@ -32,6 +32,8 @@ void enleverPointImage(Image image, int droite);
 
 Image applicationBinaire(Image image, int toDo, int* bool_erreur);
 
+int compterPointsBlanc(Image image);
+
 ListePoints* recuperationPixelsBlanc(Image image);
 
 void transformationCoordonnee(int* x, int* y, Image image, int i, int j);
