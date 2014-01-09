@@ -23,7 +23,7 @@ typedef struct sListe
 }ListePoints;
 
 
-
+ListePoints* maxListe(ListePoints* liste, ListePoints* max);
 ListePoints* copieListe(ListePoints* liste);
 ListePoints* positionListe (ListePoints* list, int position);
 int tailleListe (ListePoints* list, int position);

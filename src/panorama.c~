@@ -138,7 +138,7 @@ int compterVoisins(int x, int y, Image image)
 	{
 		for (j = y-15; j <= y+15; j += 1)
 		{
-			if (i > 0 && i < image.height && j > 0 && j < image.width)
+			if (i > 0 && i < image.height && j > 0 && j < image.width )
 				k = k+(1-image.teinte[i][j]);
 		}	
 	}
@@ -151,13 +151,13 @@ void enleverPointImage(Image image, int droite)
 	int i;
 	int j;
 	tier = image.width / 3;
-	for (i = 0; i < image.height; i += 1)
-	{
-			for (j = droite * tier; j < image.width- (tier * (1 - droite)); j += 1)
-			{
-					image.teinte[i][j] = 1;
-			}
-	}
+/*	for (i = 0; i < image.height; i += 1)*/
+/*	{*/
+/*			for (j = droite * tier; j < image.width- (tier * (1 - droite)); j += 1)*/
+/*			{*/
+/*					image.teinte[i][j] = 1;*/
+/*			}*/
+/*	}*/
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)
@@ -217,12 +217,12 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 	libererImage(image);
 	image = creationImage(tmp.type, tmp.width, tmp.height, tmp.teinteMax, tmp.teinte);
 	
-/*	newTeinte = transformationCylidrique(image);*/
-/*	recopieDesPoints(image, newTeinte);*/
+	newTeinte = transformationCylidrique(image);
+	recopieDesPoints(image, newTeinte);
 
 	image = applicationBinaire(image,1, bool_erreur);
 	
-	for (i = 0; i < 4; i += 1)
+	for (i = 0; i < 5; i += 1)
 	{
 		image = applicationBinaire(image,19, bool_erreur);
 		image = applicationBinaire(image,2, bool_erreur);
@@ -230,6 +230,7 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 	}
 	
 /*	printf("Les points blanc : %d\n",compterPointsBlanc(image));																																					 */
+
 /*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,2, bool_erreur);*/
 /*		image = applicationBinaire(image,10);*/
@@ -254,7 +255,8 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	int** newTeinte;
 	ListePoints* ptsImage1;
 	ListePoints* ptsImage2;
-	ListePoints decalage;
+	ListePoints* listeDecalage;
+	ListePoints* decalage;
 	Image origine1;/*la premiere image d'origine puis le collage de deux images d'origine*/
 	Image origine2;/*La nouvelle image à coller à chaque tour de boucle */
 	Image temporaire1;/*l'image origine1 modifiée successivement par les opérations*/
@@ -285,9 +287,10 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			
 			enleverPointImage(temporaire1, 0);
 			enleverPointImage(temporaire2, 1);
-			while(compterPointsBlanc(temporaire1)>5000)
+			/*5000 et 10000*/
+			while(compterPointsBlanc(temporaire1)>20000)
 				temporaire1 = applicationBinaire(temporaire1,2, bool_erreur);
-			while(compterPointsBlanc(temporaire2)>5000)
+			while(compterPointsBlanc(temporaire2)>20000)
 				temporaire2 = applicationBinaire(temporaire2,2, bool_erreur);	
 /*			save(temporaire1,"tmp1",bool_erreur);*/
 /*			save(temporaire2,"tmp2",bool_erreur);*/
@@ -297,11 +300,13 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			
 
 	fprintf(stdout,"Avant comparer, taille : %d",tailleListe(ptsImage1,0));
-			decalage = comparer( ptsImage1, ptsImage2, temporaire2, bool_erreur);
-/*			decalage.x=1061;*/
-/*			decalage.y=-62;*/
+			listeDecalage = comparer( ptsImage1, ptsImage2, temporaire2, bool_erreur);
+
+
 			if(!*bool_erreur)
 			{
+				decalage = maxListe(listeDecalage->suivant, listeDecalage);
+				afficherCoordonnees(decalage);
 printf("test");
 fflush(stdout);
 				newTeinte = transformationCylidrique(origine2);
@@ -310,7 +315,7 @@ fflush(stdout);
 				newTeinte = transformationCylidrique(origine1);
 				recopieDesPoints(origine1, newTeinte);	
 		
-				tmp = imageCollee(origine1,origine2,&decalage);
+				tmp = imageCollee(origine1,origine2,decalage);
 				printf("test");
 fflush(stdout);
 				save(tmp, "out1", bool_erreur);

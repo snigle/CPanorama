@@ -101,7 +101,34 @@ ListePoints** tableauPointsAutour(ListePoints* point1, ListePoints* liste1, int 
 	return result;
 }
 
-ListePoints comparer(ListePoints* liste1, ListePoints* liste2, Image image2, int* bool_erreur)
+ListePoints calculerDecalage(int xA, int yA, int xB, int yB, double valeur)
+{
+	ListePoints result;
+	result.x = xA - xB;
+	result.y = yA - yB;
+	result.valeur = valeur;
+	return result;
+} 
+
+ListePoints* ajouterDecalage(ListePoints* tete, ListePoints* liste, ListePoints decalage)
+{
+	if(tete==NULL)
+		return ajoutCoordonnee(NULL,decalage.x, decalage.y, 1);
+	else if(decalage.x == liste->x && decalage.y == liste->y)
+	{
+		liste->valeur++;
+		return tete;
+	}
+	else if(liste->suivant == NULL)
+	{
+		ajoutFin(liste,decalage.x,decalage.y,1);
+		return tete;
+	}
+	else
+		return ajouterDecalage(tete,liste->suivant, decalage);
+}
+
+ListePoints* comparer(ListePoints* liste1, ListePoints* liste2, Image image2, int* bool_erreur)
 {
 	/*
 	Parcourt de la liste 1 tant que TrouvePas								2000
@@ -109,7 +136,7 @@ ListePoints comparer(ListePoints* liste1, ListePoints* liste2, Image image2, int
 		bool comparerVecteurs()
 	Calculer décalage
 	*/
-	ListePoints result;
+	ListePoints* result;
 	int k;
 	ListePoints* parcourtListe1;
 	ListePoints* dernierPointValide;
@@ -117,11 +144,12 @@ ListePoints comparer(ListePoints* liste1, ListePoints* liste2, Image image2, int
 	parcourtListe1=liste1;
 	dernierPointValide=NULL;
 	k=0;
+	result = NULL;
 	while(parcourtListe1!=NULL)
 	{
 		*bool_erreur=0;
-		fprintf(stdout," . ");
-		fflush(stdout);
+/*		fprintf(stdout," . ");*/
+/*		fflush(stdout);*/
 /*		parcourtListe1 = positionListe(liste1,(rand()%(tailleListe(liste1,0))));*/
 
 		tabRandom = tableauPointsAutour(parcourtListe1, liste1, 20, bool_erreur);
@@ -134,21 +162,21 @@ ListePoints comparer(ListePoints* liste1, ListePoints* liste2, Image image2, int
 	/*			printf("Tab %d : %dx%d - ",i,tabRandom[i]->x,tabRandom[i]->y);*/
 	/*		}*/
 			if(dernierPointValide!=NULL)
-			{	calculerDecalage(&result,tabRandom[0]->x,tabRandom[0]->y,dernierPointValide->x,dernierPointValide->y,0);
-				printf("%d,%d\n",result.x, result.y);
+			{	
+				result = ajouterDecalage(result, result, calculerDecalage(tabRandom[0]->x,tabRandom[0]->y,dernierPointValide->x,dernierPointValide->y,0));
 			}
 			free(tabRandom);
 		}
 		parcourtListe1=parcourtListe1->suivant;
 		k++;
 	}
-	if(parcourtListe1!=NULL)
-		calculerDecalage(&result,tabRandom[0]->x,tabRandom[0]->y,dernierPointValide->x,dernierPointValide->y,0);
-	else
+	if(result == NULL)
 	{
 		erreur(ERREUR_PARAMETRE,1);
 		*bool_erreur=1;
 	}
+	else
+		*bool_erreur=0;
 	
 	return result;
 }

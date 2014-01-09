@@ -16,6 +16,17 @@ ListePoints nouveauListePoints (int x, int y, double valeur)
 
 /*GERER LISTE*/
 
+ListePoints* maxListe(ListePoints* liste, ListePoints* max)
+{
+	if(liste==NULL)
+		return max;
+	else if( liste->valeur > max->valeur)
+		return maxListe(liste->suivant, liste);
+	else
+		return maxListe(liste->suivant, max);
+		
+}
+
 ListePoints* copieListe(ListePoints* liste)
 {
 	ListePoints* result;

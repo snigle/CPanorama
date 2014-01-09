@@ -20,7 +20,7 @@
 
 #include "gestionListeCoordonnees.h"
 #include "comparaison2.h"
-#include "zncc.h"
+
 #include "convolution.h"
 #include "binaire.h"
 #include "collerImages.h"
