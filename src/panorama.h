@@ -49,6 +49,10 @@ typedef struct Decalage
 	int cylindre;
 } Decalage;
 
+void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab, Decalage* result);
+
+Decalage* calculerTousLesDecalage(Image*** tab, int nombreImage);
+
 Image coupeHorizontale(Image image, int direction);
 
 Image coupeVerticale(Image image, int direction);
@@ -57,7 +61,7 @@ Image coupe(Image image, int direction);
 
 int compterVoisins(int x, int y, Image image);
 
-void enleverPointImage(Image image, int droite);
+void enleverPointImage(Image image);
 
 Image applicationBinaire(Image image, int toDo, int* bool_erreur);
 

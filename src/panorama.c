@@ -201,7 +201,7 @@ Image coupe(Image image, int direction)
 	return result;
 }
 
-void enleverPointImage(Image image, int droite)
+void enleverPointImage(Image image)
 {
 	int i;
 	int j;
@@ -214,6 +214,60 @@ void enleverPointImage(Image image, int droite)
 				image.teinte[i][j] = 1;
 		}
 	}	
+}
+
+void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab, Decalage* result)
+{
+	ListePoints* ptsImage1;
+	ListePoints* ptsImage2;
+	ListePoints* listeDecalage;
+	ListePoints* decalage;
+	int bool_erreur;
+	
+	ptsImage1 = recuperationPixelsBlanc(tab[image1][cylindre][direction]);
+	ptsImage2 = recuperationPixelsBlanc(tab[image1][cylindre][direction]);
+			
+	listeDecalage = comparer( ptsImage1, ptsImage2, tab[image1][cylindre][direction], &bool_erreur);
+
+	if(!bool_erreur)
+	{
+		decalage = maxListe(listeDecalage->suivant, listeDecalage);
+		if(decalage->valeur>result->valeur.valeur)
+		{
+			result->valeur=nouveauListePoints(decalage->x,decalage->y,decalage->valeur);
+			result->cylindre = cylindre;
+			result->direction=direction;
+			result->positionImage=image2;
+		}
+	}
+}
+
+Decalage* calculerTousLesDecalage(Image*** tab, int nombreImage)
+{
+	int i;
+	int j;
+	int k;
+	int l;
+	Decalage* result;
+	result = (Decalage*) mallocBis(nombreImage * sizeof(Decalage));
+	for (l = 0; l < nombreImage; l += 1)
+	{
+		result[i].valeur.valeur = 0;
+		for (i = 0; i <= 1; i += 1)
+		{
+			for (j = 0; j <= 3; j += 1)
+			{
+				for (k = 0; k < nombreImage; k += 1)
+				{
+					if(k!=l)
+					{
+						calculerTousLesDecalageBis(l,i,j,k,tab, &result[l]);
+					}
+				}
+			}
+		}
+	}
+	return result;
 }
 
 Image applicationBinaire(Image image, int toDo, int* bool_erreur)
@@ -333,8 +387,8 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 			temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
 			temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);
 			
-			enleverPointImage(temporaire1, 0);
-			enleverPointImage(temporaire2, 1);
+			enleverPointImage(temporaire1);
+			enleverPointImage(temporaire2);
 			
 			while(compterPointsBlanc(temporaire1)>5000)
 				temporaire1 = applicationBinaire(temporaire1,2, bool_erreur);
