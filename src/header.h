@@ -253,5 +253,7 @@ int verifType(char* str_type);
 */
 int testType(Image im_image, char* str_type);
 
+Image*** calculCollage(int nbImages);
+
 
 #endif /* __HEADER_H__ */
