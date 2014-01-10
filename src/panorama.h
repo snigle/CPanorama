@@ -52,6 +52,12 @@ int** creationFiltre(void);
 
 void egalisationImages (Image image1, Image image2, int* bool_erreur);
 
+Image creerTemporaire(Image origine, int* bool_erreur);
+
+Image* creationTableauImageCouleur(char** imageOrigine, int nombreImageOrigine, int* bool_erreur);
+
+Image* creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigine, int* bool_erreur);
+
 /*!
         \fn int panorama(char** input, int nombreInput, char* output)
         \author LAMARCHE Ludovic <lamarchelu@eisti.eu>

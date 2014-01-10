@@ -1,6 +1,5 @@
 #include "panorama.h"
 
-
 ListePoints* recuperationPixelsBlanc(Image image)
 {
 	int i;
@@ -228,13 +227,6 @@ Image couleurVersDilatation(Image image, int* bool_erreur)
 		image = applicationBinaire(image,2, bool_erreur);
 		
 	}
-	
-/*	printf("Les points blanc : %d\n",compterPointsBlanc(image));																																					 */
-
-/*		image = applicationBinaire(image,2, bool_erreur);*/
-/*		image = applicationBinaire(image,2, bool_erreur);*/
-/*		image = applicationBinaire(image,10);*/
-/*		save(image, "huhu", bool_erreur);*/
 	return (image);
 }
 
@@ -247,6 +239,51 @@ void egalisationImages (Image image1, Image image2, int* bool_erreur)
 	remplirNouvellesTeintes (image1, *m1supm2 * decalageIm1Im2);
 	remplirNouvellesTeintes (image2, - *m1supm2 * decalageIm1Im2);
 }
+
+Image creerTemporaire(Image origine, int* bool_erreur)
+{
+	Image temporaire;
+	
+	if(!strcmp(origine.type,"P3"))
+		temporaire =  creerGrayScale(origine);
+	else
+		temporaire =  copieImage(origine);
+
+	temporaire = couleurVersDilatation(temporaire, bool_erreur);
+/*	coupeTemporaire();*/
+	while(compterPointsBlanc(temporaire)>7000)
+		temporaire = applicationBinaire(temporaire,2, bool_erreur);	
+
+	return (temporaire);
+}
+
+Image* creationTableauImageCouleur(char** imageOrigine, int nombreImageOrigine, int* bool_erreur)
+{
+	Image* tableauImageCouleur;
+	int i;
+	tableauImageCouleur = mallocBis(nombreImageOrigine * sizeof(Image));
+	for (i = 0; i < nombreImageOrigine; i += 1)
+	{
+		tableauImageCouleur[i] = chargerImage(imageOrigine[i], bool_erreur);
+	}
+	return (tableauImageCouleur);	
+}
+
+
+Image* creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigine, int* bool_erreur)
+{
+	Image* tableauImageTemporaire;
+	int i;
+	tableauImageTemporaire = mallocBis(nombreImageOrigine * sizeof(Image));
+	for (i = 0; i < nombreImageOrigine; i += 1)
+	{
+		tableauImageTemporaire[i] = creerTemporaire(imageOrigine[i], bool_erreur);
+	}
+	return (tableauImageTemporaire);	
+}
+
+
+
 
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
@@ -262,7 +299,6 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	Image temporaire1;/*l'image origine1 modifiée successivement par les opérations*/
 	Image temporaire2;/*l'image origine modifiée successivement par les opérations*/
 	Image tmp;/*Les images d'origines collées après calculs*/
-	Image collageTemporaire;/*collage des images traitées (après convolution et dilatation)*/
 	int i;
 	i = 1;
 	origine1 = chargerImage(input[0], bool_erreur);
@@ -281,26 +317,24 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 		}
 		if(!strcmp(temporaire1.type,"P2")&&!strcmp(temporaire2.type,"P2"))
 		{
-			egalisationImages (temporaire1, temporaire2, bool_erreur);
+/*			egalisationImages (temporaire1, temporaire2, bool_erreur);*/
 			temporaire1 = couleurVersDilatation(temporaire1, bool_erreur);
 			temporaire2 = couleurVersDilatation(temporaire2, bool_erreur);
 			
 			enleverPointImage(temporaire1, 0);
 			enleverPointImage(temporaire2, 1);
 			
-			while(compterPointsBlanc(temporaire1)>5000)
+			while(compterPointsBlanc(temporaire1)>7000)
 				temporaire1 = applicationBinaire(temporaire1,2, bool_erreur);
-			while(compterPointsBlanc(temporaire2)>10000)
+			while(compterPointsBlanc(temporaire2)>7000)
 				temporaire2 = applicationBinaire(temporaire2,2, bool_erreur);	
-/*			save(temporaire1,"tmp1",bool_erreur);*/
-/*			save(temporaire2,"tmp2",bool_erreur);*/
 			
 			ptsImage1 = recuperationPixelsBlanc(temporaire1);
 			ptsImage2 = recuperationPixelsBlanc(temporaire2);
 			
 
 	fprintf(stdout,"Avant comparer, taille : %d",tailleListe(ptsImage1,0));
-			listeDecalage = comparer( ptsImage1, ptsImage2, temporaire2, bool_erreur);
+			listeDecalage = comparer(ptsImage1, ptsImage2, temporaire2, bool_erreur);
 
 
 			if(!*bool_erreur)
@@ -325,91 +359,6 @@ fflush(stdout);
 		libererImage(origine2);
 		i++;
 	}
-	
-	/*	decalage = comparaison(harris(im_image1,bool_erreur), harris(im_image2,bool_erreur), bool_erreur);
-		printf(" x -> %d, y -> %d", decalage.x, decalage.y);
-		
-		imageFin=imageCollee(imageInput,imageInput2,decalage);
-		save(imageFin,output, bool_erreur);
-		printf("Image enregistrée dans %s \n",output);*/		
-		/*
-		
-		
-Vars : 
-	Origine1
-	Origine2
-	Tempo1
-	Tempo2
-	
-	Sphérique
-	Si PPM
-		Grayscale
-	Si PGM
-		Convolution
-		-b médiane ou un peu plus
-	Si PBM
-		Dilate
-		Erode
-		(Dilate tant que le nombre de points est supérieur à N)
-	SINON
-		boom
-		
-		
-	recup pixel blanc
-
-	
-	decalage
-	
-	Collage Origine1 et Origine2
-	Collage Tempo1 et Tempo2
-	*/
-
-
-/*decalage = comparaison(image1, image2, bool_erreur);
-	printf("Decalage : x-> %d y-> %d zncc-> %f \n" ,decalage.x,decalage.y,decalage.valeur);*/
-
-
-/*	decalage=NULL;*/
-/*	decalage=ajoutCoordonnee(decalage, 100, 400, 0);*/
-/*	*/
-/*	size=taille(decalage,imageInput.height,imageInput2.height,imageInput.width, imageInput2.width);*/
-/*	*/
-/*	printf("Largeur: %d hauteur : %d\n ",size[0], size[1]);*/
-/*	printf("decalage en x : %d , decalage en y : %d \n", decalage->x, decalage->y);*/
-/*	*/
-/*	imageFin=imageCollee(imageInput,imageInput2,decalage);*/
-/*	save(imageFin,output, bool_erreur);*/
-
-
 	printf("Appel de la fonction Panorama\n");
-	
 	return 0;
 }
-
-
-
-/*
-prendre un tableau d'image
-charger les deux premieres
-
-VERIFIER LES TYPES
-
-égaliser leurs histogrammes
-***2 SOLUTIONS***
-	1- Utiliser Harris pour les points d'interets
-	
-	2- Convolution +  dilatation
-
-*****************
-algo de recherche des points avec homothétie, rotation etc... Bombage de l'image
-
-OU
-
-Trouver un algorithme de comparaison efficace
-
-
-*/
-
-
-
-
