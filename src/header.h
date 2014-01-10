@@ -52,27 +52,7 @@
 
 
 
-/*! \struct Decalage  
-	\author Perales Quentin <peralesque@eisti.eu>
- *  \version 0.1
- *  \date  Mon 23 Sep 2013
- *
- *  \brief décalage d'une image par rapport à une autre.
- 	
- 	ListePoint valeur : Les coordonnées du décalage
-	int positionImage : numéro de l'image relative
-	int direction : position de l'image relative (HAUT BAS GAUCHE DROITE)
-	int cylindre : si vaut 1, l'image relative est cylindrique et 0 sinon
- *
- *
- */
-typedef struct Decalage
-{
-	ListePoint valeur;
-	int positionImage;
-	int direction;
-	int cylindre;
-}
+
 
 
 /*! \struct Image  
@@ -96,6 +76,10 @@ typedef struct Image
 	int teinteMax;/*!<indique le teinte maximale*/
 	int** teinte;/*!< 	teinte un tableau d'entier définissant les teintes de pixels*/
 }Image;
+
+
+
+
 
 
 /*!
