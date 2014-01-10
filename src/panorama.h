@@ -26,6 +26,35 @@
 #include "collerImages.h"
 #include "erodeDilate.h"
 
+
+/*! \struct Decalage  
+	\author Perales Quentin <peralesque@eisti.eu>
+ *  \version 0.1
+ *  \date  Mon 23 Sep 2013
+ *
+ *  \brief décalage d'une image par rapport à une autre.
+ 	
+ 	ListePoint valeur : Les coordonnées du décalage
+	int positionImage : numéro de l'image relative
+	int direction : position de l'image relative (HAUT BAS GAUCHE DROITE)
+	int cylindre : si vaut 1, l'image relative est cylindrique et 0 sinon
+ *
+ *
+ */
+typedef struct Decalage
+{
+	ListePoints valeur;
+	int positionImage;
+	int direction;
+	int cylindre;
+} Decalage;
+
+Image coupeHorizontale(Image image, int direction);
+
+Image coupeVerticale(Image image, int direction);
+
+Image coupe(Image image, int direction);
+
 int compterVoisins(int x, int y, Image image);
 
 void enleverPointImage(Image image, int droite);

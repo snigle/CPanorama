@@ -19,6 +19,13 @@
 
 #define PI (3.141592653589793)
 
+#define BAS 0
+#define GAUCHE 1
+#define HAUT 2
+#define DROITE 3
+
+
+
 #define NO_CORRESPONDANCE 41
 #define NO_POINT_CLE 42
 
@@ -43,6 +50,11 @@
 #define EXIT 1
 #define NO_EXIT 0
 
+
+
+
+
+
 /*! \struct Image  
 	\author Perales Quentin <peralesque@eisti.eu>
  *  \version 0.1
@@ -64,6 +76,10 @@ typedef struct Image
 	int teinteMax;/*!<indique le teinte maximale*/
 	int** teinte;/*!< 	teinte un tableau d'entier définissant les teintes de pixels*/
 }Image;
+
+
+
+
 
 
 /*!
@@ -252,6 +268,8 @@ int verifType(char* str_type);
 
 */
 int testType(Image im_image, char* str_type);
+
+Image*** calculCollage(int nbImages);
 
 
 #endif /* __HEADER_H__ */
