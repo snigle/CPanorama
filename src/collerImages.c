@@ -41,7 +41,6 @@ int estNoir(int** teinte, int y, int x, int k)
 
 int** fusionCas1(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)
 {
-	
 	int** matImageFinale;
 	int i;
 	int j;
@@ -56,7 +55,7 @@ int** fusionCas1(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 			}	
 		}
 	}		
-		for(i=decalage->x*k;i<(image2.width*k+decalage->x*k);i+=k){
+		for(i=(decalage->x+image1.width)/2*k;i<(image2.width*k+decalage->x*k);i+=k){
 			for(j=decalage->y;j<image2.height+decalage->y;j++){
 				for (f = 0; f < k; f += 1){
 					if(image2.teinte[j-(decalage->y)][i-decalage->x*k+f])
@@ -84,12 +83,10 @@ int** fusionCas2(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 			}	
 		}
 	}
-	for (i = decalage->x*k; i < image2.width*k + decalage->x*k; i += k){
+	for (i = (decalage->x*k+ image1.width)/2; i < image2.width*k + decalage->x*k; i += k){
 		for (j = 0; j < image2.height; j += 1){
 			for (f = 0; f < k; f += 1){
-				if(matImageFinale[j][i+f])
-				matImageFinale[j][i+f] = (matImageFinale[j][i+f] + image2.teinte[j][i-decalage->x*k+f])/2;else
-				matImageFinale[j][i+f]=image2.teinte[j][i-decalage->x*k+f];
+				matImageFinale[j][i+f] = image2.teinte[j][i-decalage->x*k+f];
 			}	
 		}	
 	}

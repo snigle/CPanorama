@@ -194,7 +194,7 @@ int testType(Image im_image, char* str_type)
 	return(int_result);
 }
 
-Image*** calculCollage(int nbImages)
+Image*** initArbre(int nbImages)
 {
 	Image*** tab;
 	int i;
