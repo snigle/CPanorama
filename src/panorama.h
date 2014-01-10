@@ -69,6 +69,8 @@ void transformationCoordonnee(int* x, int* y, Image image, int i, int j);
 
 int** transformationCylidrique(Image image);
 
+void transformationCylidriqueBis(Image image);
+
 void recopieDesPoints(Image image, int** newTeinte);
 
 ListePoints* recuperationPointsCle (Image image1, Image image2, int* bool_erreur);
@@ -84,6 +86,10 @@ void egalisationImages (Image image1, Image image2, int* bool_erreur);
 Image creerTemporaire(Image origine, int* bool_erreur);
 
 Image* creationTableauImageCouleur(char** imageOrigine, int nombreImageOrigine, int* bool_erreur);
+
+Image*** creerTableauCoupe(Image* imageTemporaires, int nombreImage, int* bool_erreur);
+
+void libererTableauImages(Image* tabImage, int nbImage);
 
 Image* creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigine, int* bool_erreur);
 

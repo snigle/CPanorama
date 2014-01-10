@@ -199,25 +199,21 @@ Image*** initArbre(int nbImages)
 	Image*** tab;
 	int i;
 	int j;
-	int k;
 	tab=(Image***) mallocBis(nbImages*sizeof(Image**));
 	
 	for(i=0;i<nbImages;i++)
 	{
 		tab[i]=(Image**) mallocBis(2*sizeof(Image*));
-		for(j=0;j<1;j++)
+		for(j=0;j<2;j++)
 		{
 			tab[i][j]=(Image*) mallocBis(4*sizeof(Image));
-			tab[i][j][3].teinteMax=20;
+/*			tab[i][j][3].teinteMax=20;*/
 			
 /*			for(k=0;k<3;k++)*/
 /*			{*/
 /*				tab[i][j][k]= (Image*) malloc(sizeof(Image));*/
 /*			}*/
-		free(tab[i][j]);
 		}
-		
-		free(tab);
 	}
 	
 return(tab);
