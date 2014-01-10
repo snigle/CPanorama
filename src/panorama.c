@@ -145,19 +145,67 @@ int compterVoisins(int x, int y, Image image)
 	return (k);
 }
 
-void enleverPointImage(Image image, int droite)
+
+Image coupeVerticale(Image image, int direction)
 {
-	int tier;
 	int i;
 	int j;
+	int tier;
+	Image result;
+	result = copieImage(image);
 	tier = image.width / 3;
+	
+	direction = direction == 3 ? 1 : direction;
+	for (i = direction * tier; i < image.height - (tier * (1-direction)); i += 1)
+	{
+		for (j = direction ; j < image.width ; j += 1)
+		{
+				result.teinte[i][j] = 1;
+		}
+	}
+	
+	return result;
+}
+
+Image coupeHorizontale(Image image, int direction)
+{
+	int i;
+	int j;
+	int tier;
+	Image result;
+	result = copieImage(image);
+	tier = image.width / 3;
+	
+	direction = direction == 3 ? 0 : direction;
 	for (i = 0; i < image.height; i += 1)
 	{
-			for (j = droite * tier; j < image.width- (tier * (1 - droite)); j += 1)
+			for (j = direction  * tier; j < image.width- (tier * (1 - direction)); j += 1)
 			{
-					image.teinte[i][j] = 1;
+					result.teinte[i][j] = 1;
 			}
 	}
+	
+	return result;
+	
+}
+
+Image coupe(Image image, int direction)
+{
+	Image result;
+	
+	if(direction == GAUCHE || direction == DROITE)
+		result = coupeHorizontale(image,direction);
+	else
+		result = coupeVerticale(image, direction);
+	
+	return result;
+}
+
+void enleverPointImage(Image image, int droite)
+{
+	int i;
+	int j;
+
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)

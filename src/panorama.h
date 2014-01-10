@@ -26,6 +26,13 @@
 #include "collerImages.h"
 #include "erodeDilate.h"
 
+
+Image coupeHorizontale(Image image, int direction);
+
+Image coupeVerticale(Image image, int direction);
+
+Image coupe(Image image, int direction);
+
 int compterVoisins(int x, int y, Image image);
 
 void enleverPointImage(Image image, int droite);

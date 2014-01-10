@@ -19,6 +19,13 @@
 
 #define PI (3.141592653589793)
 
+#define BAS 0
+#define GAUCHE 1
+#define HAUT 2
+#define DROITE 3
+
+
+
 #define NO_CORRESPONDANCE 41
 #define NO_POINT_CLE 42
 
@@ -42,6 +49,31 @@
 
 #define EXIT 1
 #define NO_EXIT 0
+
+
+
+/*! \struct Decalage  
+	\author Perales Quentin <peralesque@eisti.eu>
+ *  \version 0.1
+ *  \date  Mon 23 Sep 2013
+ *
+ *  \brief décalage d'une image par rapport à une autre.
+ 	
+ 	ListePoint valeur : Les coordonnées du décalage
+	int positionImage : numéro de l'image relative
+	int direction : position de l'image relative (HAUT BAS GAUCHE DROITE)
+	int cylindre : si vaut 1, l'image relative est cylindrique et 0 sinon
+ *
+ *
+ */
+typedef struct Decalage
+{
+	ListePoint valeur;
+	int positionImage;
+	int direction;
+	int cylindre;
+}
+
 
 /*! \struct Image  
 	\author Perales Quentin <peralesque@eisti.eu>
