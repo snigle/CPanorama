@@ -307,19 +307,11 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 	}	
 	
 	i = derniereOption(argc,argv);/*Continu de charger les inputs avec la derniere option*/
-	printf("test2%d",i);
-		fflush(stdout);
 	while (idInput < nombreInput)
 	{	
-		printf("test%d",i);
-		fflush(stdout);
-/*		if(!i)Si il n'y a pas d'option*/
-/*			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));*/
-/*		else*/
 			listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);	
-	printf("test2");
-		fflush(stdout);
 	}
+	if(!idInput) afficherManuel();
 } 
 
 

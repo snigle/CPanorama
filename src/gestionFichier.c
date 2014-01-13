@@ -79,10 +79,11 @@ char** recupererListeInputDossier(char* char_dossier, int* int_taille)
 
 void allerAlaLigne (FILE* file_fichier){
 	char char_carac;
+	int erreur;
     do 
     {
-    	fscanf(file_fichier, "%c", &char_carac);
-    } while (char_carac != '\n');
+    	erreur = fscanf(file_fichier, "%c", &char_carac);
+    } while (char_carac != '\n' && !erreur);
 }
 
 void sauterCommentaire(FILE* file_fichier)
@@ -96,6 +97,7 @@ void sauterCommentaire(FILE* file_fichier)
 		{
 			allerAlaLigne(file_fichier);
 			sauterCommentaire(file_fichier);
+
 		}else{
 	   		fseek(file_fichier, -1, SEEK_CUR);
 			 }
@@ -181,11 +183,13 @@ void recuperationPixels(FILE* file_fichier, int** int_tab, int int_largeur, int 
 {
 	int int_i;
 	int int_j;
+												
 	for (int_i = 0 ; int_i < int_hauteur ; int_i++)
 	{
 		for (int_j = 0; int_j < int_largeur; int_j += 1)
 		{
 			recuperationPixelsBis(file_fichier, int_tab, char_type, bool_erreur, int_i, int_j);
+
 		}
 	}
 }
@@ -231,6 +235,7 @@ Image chargerImage(char* char_nomImage, int* bool_erreur){
 		if(!*bool_erreur) image_imageCharge = creationImage(char_type, int_largeur, int_hauteur, int_teinteMaximale, int_teinte);
 		free(char_type);
 		fclose(file_image);
+
 	}else{
 		erreur(IMAGE_NO_EXISTS,NO_EXIT);
 		*bool_erreur = 1;
@@ -309,11 +314,9 @@ void testChargerImage(char* char_input, char* char_output)
 	char* char_type;
 	int bool_erreur;
 	bool_erreur = 0;
-					printf("tute%s",char_input);fflush(stdout);
 	image_image = chargerImage(char_input,&bool_erreur);
 	if(!bool_erreur)
 	{
-						printf("tute");fflush(stdout);
 		char_type = image_image.type;
 		if (!strcmp(recupererExtension(char_output),""))
 			sprintf(char_output,"%s.%s",char_output, recupererExtension(char_input));	
