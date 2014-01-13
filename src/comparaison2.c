@@ -172,7 +172,7 @@ ListePoints* comparer(ListePoints* liste1, ListePoints* liste2, Image image2, in
 	}
 	if(result == NULL)
 	{
-		erreur(ERREUR_PARAMETRE,1);
+/*		erreur(ERREUR_PARAMETRE,1);*/
 		*bool_erreur=1;
 	}
 	else

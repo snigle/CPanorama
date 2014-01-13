@@ -309,9 +309,11 @@ void testChargerImage(char* char_input, char* char_output)
 	char* char_type;
 	int bool_erreur;
 	bool_erreur = 0;
+					printf("tute%s",char_input);fflush(stdout);
 	image_image = chargerImage(char_input,&bool_erreur);
 	if(!bool_erreur)
 	{
+						printf("tute");fflush(stdout);
 		char_type = image_image.type;
 		if (!strcmp(recupererExtension(char_output),""))
 			sprintf(char_output,"%s.%s",char_output, recupererExtension(char_input));	

@@ -49,6 +49,8 @@ typedef struct Decalage
 	int cylindre;
 } Decalage;
 
+void afficherDecalage(Decalage decalage);
+
 void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab, Decalage* result);
 
 Decalage* calculerTousLesDecalage(Image*** tab, int nombreImage);
@@ -73,17 +75,29 @@ void transformationCoordonnee(int* x, int* y, Image image, int i, int j);
 
 int** transformationCylidrique(Image image);
 
+void transformationCylidriqueBis(Image image);
+
 void recopieDesPoints(Image image, int** newTeinte);
 
 ListePoints* recuperationPointsCle (Image image1, Image image2, int* bool_erreur);
 
-Image couleurVersDilatation(Image image, int* bool_erreur);
+Image couleurVersDilatation(Image image, int cylindre, int* bool_erreur);
 
 Image copieImage(Image image);
 
 int** creationFiltre(void);
 
 void egalisationImages (Image image1, Image image2, int* bool_erreur);
+
+Image creerTemporaire(Image origine, int cylindre, int* bool_erreur);
+
+Image* creationTableauImageCouleur(char** imageOrigine, int nombreImageOrigine, int* bool_erreur);
+
+Image*** creerTableauCoupe(Image** imageTemporaires, int nombreImage, int* bool_erreur);
+
+void libererTableauImages(Image* tabImage, int nbImage);
+
+Image** creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigine, int* bool_erreur);
 
 /*!
         \fn int panorama(char** input, int nombreInput, char* output)

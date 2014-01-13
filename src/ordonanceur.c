@@ -258,7 +258,7 @@ void listeTestOption2(int argc, char** argv, int* i, char* currentInput, char* c
 		rotate(currentInput,currentOutput,1,&bool_erreur);
 	else if((*i==1 && (!strcmp(argv[*i],"-?") || !strcmp(argv[*i],"--help"))) || argc == 1)
 		afficherManuel();
-	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
+	else if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))
 		mauvaisParametre(currentInput,currentOutput,argv[*i]);
 
 
@@ -270,19 +270,21 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	int bool_erreur;
 	char* currentInput;
 	char* currentOutput;
-	if(argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r")))	{
+	if((argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r") || !strcmp(argv[*i],"--help") || !strcmp(argv[*i],"-?")) && argc > 1 ) || *i==0)	{
 		currentInput = incrementerInputOutput (input,idInput,nombreInput,1);
 		currentOutput = incrementerInputOutput (output,idOutput,nombreOutput,0);
 	}
 	bool_erreur = 0;
 	if(!strcmp(argv[*i],"-p"))	{
-		erreur(panorama(input,nombreInput,currentOutput,&bool_erreur), NO_EXIT);
+		panorama(input,nombreInput,currentOutput,&bool_erreur);
 		*idInput=nombreInput;
 	}
 	else if(testOptionAvecParametre("-b",*i,argc,argv))
 		binaire(currentInput,currentOutput,argv[*i+1],1,&bool_erreur);
 	else if(testOptionAvecParametre("-c",*i,argc,argv))
 		convolution(currentInput,currentOutput,argv[*i+1],1,&bool_erreur);
+	else if(*i==0 || !strcmp(argv[*i],"-s"))
+		testChargerImage(currentInput,currentOutput);
 	else 
 		listeTestOption2(argc,argv,i,currentInput,currentOutput);	
 	
@@ -298,18 +300,25 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 	/*Parcourt de toute les options présente*/
 	for (i = 0, idInput = 0, idOutput = 0; i < argc; i += 1)
 	{
-		if(argv[i][0] == '-')
+		if(argv[i][0]=='-' || argc==1)
 		{
 			listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);
 		}
 	}	
+	
 	i = derniereOption(argc,argv);/*Continu de charger les inputs avec la derniere option*/
+	printf("test2%d",i);
+		fflush(stdout);
 	while (idInput < nombreInput)
 	{	
-		if(!i)/*Si il n'y a pas d'option*/
-			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));
-		else
+		printf("test%d",i);
+		fflush(stdout);
+/*		if(!i)Si il n'y a pas d'option*/
+/*			testChargerImage(incrementerInputOutput(input,&idInput,nombreInput,1),incrementerInputOutput(output,&idOutput,nombreOutput,0));*/
+/*		else*/
 			listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);	
+	printf("test2");
+		fflush(stdout);
 	}
 } 
 

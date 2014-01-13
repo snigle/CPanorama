@@ -39,9 +39,21 @@ int estNoir(int** teinte, int y, int x, int k)
 	return result;
 }
 
+int pixelNoir(Image image, int x, int y, int ppm)
+{
+	int result;
+	int i;
+	result = 1;
+	for (i = 0; i < ppm; i += 1)
+	{
+		result = result && !image.teinte[x][y+ppm*i];
+	}
+	
+	return(result);
+}
+
 int** fusionCas1(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)
 {
-	
 	int** matImageFinale;
 	int i;
 	int j;
@@ -56,11 +68,12 @@ int** fusionCas1(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 			}	
 		}
 	}		
-		for(i=decalage->x*k;i<(image2.width*k+decalage->x*k);i+=k){
+		for(i=(decalage->x+image1.width)/2*k;i<(image2.width*k+decalage->x*k);i+=k){
 			for(j=decalage->y;j<image2.height+decalage->y;j++){
-				for (f = 0; f < k; f += 1){
-					if(image2.teinte[j-(decalage->y)][i-decalage->x*k+f])
-				matImageFinale[j][i+f] = (matImageFinale[j][i+f] + image2.teinte[j-(decalage->y)][i-decalage->x*k+f])/2;
+				if(!pixelNoir(image2,j-(decalage->y),i-decalage->x*k+f,k))
+				{
+					for (f = 0; f < k; f += 1)
+					matImageFinale[j][i+f] = image2.teinte[j-(decalage->y)][i-decalage->x*k+f];
 				}
 			}
 		}
@@ -84,75 +97,75 @@ int** fusionCas2(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 			}	
 		}
 	}
-	for (i = decalage->x*k; i < image2.width*k + decalage->x*k; i += k){
+	for (i = (decalage->x*k+ image1.width)/2; i < image2.width*k + decalage->x*k; i += k){
 		for (j = 0; j < image2.height; j += 1){
-			for (f = 0; f < k; f += 1){
-				if(matImageFinale[j][i+f])
-				matImageFinale[j][i+f] = (matImageFinale[j][i+f] + image2.teinte[j][i-decalage->x*k+f])/2;else
-				matImageFinale[j][i+f]=image2.teinte[j][i-decalage->x*k+f];
+			if(!pixelNoir(image2,j,i-decalage->x*k+f,k))
+			{
+				for (f = 0; f < k; f += 1){
+					matImageFinale[j][i+f] = image2.teinte[j][i-decalage->x*k+f];
+				}
 			}	
 		}	
 	}
 	return(matImageFinale);	
 }
 
-int** fusionCas3(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)
-{
-	int** matImageFinale;
-	int i;
-	int j;
-	int k;
-	int f;
-	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;
-	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;
-	matImageFinale=initMatrice(0,largeur*k, hauteur);
-	for (i = -decalage->x*k; i < image1.width*k-decalage->x*k; i += k){
-		for (j = 0; j < image1.height; j += 1){
-			for (f = 0; f < k; f += 1){
-				matImageFinale[j][i+f]=image1.teinte[j][i+decalage->x*k+f];
-			}	
-		}
-	}
-	for (i = 0; i < image2.width*k; i += k){
-		for (j = decalage->y; j < image2.height + decalage->y; j += 1){
-			for (f = 0; f < k; f += 1){
-				if(matImageFinale[j][i+f])
-				matImageFinale[j][i+f] = (matImageFinale[j][i+f] + image2.teinte[j-decalage->y][i+f])/2;else
-				matImageFinale[j][i+f]=image2.teinte[j-decalage->y][i+f];	
-			}	
-		}
-	}
-	return(matImageFinale);
-}
+/*int** fusionCas3(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)*/
+/*{*/
+/*	int** matImageFinale;*/
+/*	int i;*/
+/*	int j;*/
+/*	int k;*/
+/*	int f;*/
+/*	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;*/
+/*	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;*/
+/*	matImageFinale=initMatrice(0,largeur*k, hauteur);*/
+/*	for (i = -decalage->x*k; i < image1.width*k-decalage->x*k; i += k){*/
+/*		for (j = 0; j < image1.height; j += 1){*/
+/*			for (f = 0; f < k; f += 1){*/
+/*				matImageFinale[j][i+f]=image1.teinte[j][i+decalage->x*k+f];*/
+/*			}	*/
+/*		}*/
+/*	}*/
+/*	for (i = 0; i < image2.width*k; i += k){*/
+/*		for (j = decalage->y; j < image2.height + decalage->y; j += 1){*/
+/*			for (f = 0; f < k; f += 1){*/
+/*				if(matImageFinale[j][i+f	])*/
+/*				matImageFinale[j][i+f] = (matImageFinale[j][i+f] + image2.teinte[j-decalage->y][i+f])/2;else*/
+/*				matImageFinale[j][i+f]=image2.teinte[j-decalage->y][i+f];	*/
+/*			}	*/
+/*		}*/
+/*	}*/
+/*	return(matImageFinale);*/
+/*}*/
 
-int** fusionCas4(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)
-{
-	int** matImageFinale;
-	int i;
-	int j;
-	int k;
-	int f;
-	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;
-	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;
-	matImageFinale=initMatrice(0,largeur*k, hauteur);
-	for (i = -decalage->x*k; i < image1.width*k - decalage->x*k; i += k){
-		for (j = -decalage->y; j < image1.height - decalage->y; j += 1){
-			for (f = 0; f < k; f += 1){	
-				matImageFinale[j][i+f]=image1.teinte[j+decalage->y][i+decalage->x*k+f];
-			}
-		}
-	}
-	for (i = 0; i < image2.width*k; i += k){
-		for (j = 0; j < image2.height; j += 1){
-			for (f = 0; f < k; f += 1){
-				if(matImageFinale[j][i+f])
-				matImageFinale[j][i+f] = (matImageFinale[j][i+f] + image2.teinte[j][i+f])/2;else
-				matImageFinale[j][i+f]=image2.teinte[j][i+f];
-			}
-		}
-	}	
-	return(matImageFinale);
-}
+/*int** fusionCas4(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)*/
+/*{*/
+/*	int** matImageFinale;*/
+/*	int i;*/
+/*	int j;*/
+/*	int k;*/
+/*	int f;*/
+/*	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;*/
+/*	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;*/
+/*	matImageFinale=initMatrice(0,largeur*k, hauteur);*/
+/*	for (i = (-decalage->x-image1.width)/2*k; i < image1.width*k - decalage->x*k; i += k){*/
+/*		for (j = -decalage->y; j < image1.height - decalage->y; j += 1){*/
+/*			for (f = 0; f < k; f += 1){	*/
+/*				matImageFinale[j][i+f]=image1.teinte[j+decalage->y][i+decalage->x*k+f];*/
+/*			}*/
+/*		}*/
+/*	}*/
+/*	for (i = 0; i < image2.width*k; i += k){*/
+/*		for (j = 0; j < image2.height; j += 1){*/
+/*			for (f = 0; f < k; f += 1){*/
+/*				if(matImageFinale[j][i+f])*/
+/*				matImageFinale[j][i+f] = (matImageFinale[j][i+f] + image2.teinte[j][i+f];*/
+/*			}*/
+/*		}*/
+/*	}	*/
+/*	return(matImageFinale);*/
+/*}*/
 
 int** fusion(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)
 {
@@ -165,10 +178,14 @@ int** fusion(ListePoints* decalage, int largeur, int hauteur, Image image1, Imag
 		matImageFinale=fusionCas2(decalage, largeur, hauteur, image1, image2);
 	}
 	if (decalage->x<0 && decalage->y>0){
-		matImageFinale=fusionCas3(decalage, largeur, hauteur, image1, image2);
+		decalage->x = -decalage->x;
+		decalage->y = -decalage->y;
+		matImageFinale = fusionCas2(decalage, largeur, hauteur, image2, image1);
 	}
 	if(decalage->x<0 && decalage->y<0){
-		matImageFinale=fusionCas4(decalage, largeur, hauteur, image1, image2);
+		decalage->x = -decalage->x;
+		decalage->y = -decalage->y;
+		matImageFinale=fusionCas1(decalage, largeur, hauteur, image2, image1);
 	} 
 	return(matImageFinale);
 }	
