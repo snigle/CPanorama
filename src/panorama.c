@@ -494,13 +494,10 @@ int** genererTableauDecalageAPasCalculer(int nombreImage)
 	return result;
 }
 
-void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int nombreImage)
+ListePoints* initialisationTableauOrigine(Image* tableauImageCouleur, int nombreImage)
 {
-	int i;
-	int bool_erreur;
 	ListePoints* origine;
-	bool_erreur=0;
-	Image tmp;
+	int i;
 	origine = mallocBis(sizeof(ListePoints)*nombreImage);
 	for (i = 0; i < nombreImage; i += 1)
 	{
@@ -508,21 +505,39 @@ void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int 
 		origine[i].x=0;
 		origine[i].y=0;
 	}
+	return (origine);
+}
+
+void nouvellesOrigines(Decalage* decalages, ListePoints* origine, int i)
+{
+	if(decalages[i].valeur.x<0)
+		origine[i].x-=decalages[i].valeur.x;
+	else
+		origine[decalages[i].positionImage].x+=decalages[i].valeur.x;
+	if(decalages[i].valeur.y<0)
+		origine[i].y-=decalages[i].valeur.y;
+	else
+		origine[decalages[i].positionImage].y+=decalages[i].valeur.y;
+}
+
+void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int nombreImage)
+{
+	int i;
+	int bool_erreur;
+	ListePoints* origine;
+	Image tmp;
+	bool_erreur=0;
+
+	origine = initialisationTableauOrigine(tableauImageCouleur, nombreImage);
 	for (i = 0; i < nombreImage-1; i += 1)
 	{
 		decalages[i].valeur.x+=origine[i].x;
 		decalages[i].valeur.y+=origine[i].y;
 		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], &decalages[i].valeur);
+/*		liberer tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage]*/
 		tableauImageCouleur[i] = tmp;
 		tableauImageCouleur[decalages[i].positionImage]=tmp;
-		if(decalages[i].valeur.x<0)
-			origine[i].x-=decalages[i].valeur.x;
-		else
-			origine[decalages[i].positionImage].x+=decalages[i].valeur.x;
-		if(decalages[i].valeur.y<0)
-			origine[i].y-=decalages[i].valeur.y;
-		else
-			origine[decalages[i].positionImage].y+=decalages[i].valeur.y;
+		nouvellesOrigines(decalages, tableauImageCouleur,i);
 	}
 	save(tableauImageCouleur[nombreImage-2],"test",&bool_erreur);
 }
