@@ -107,6 +107,8 @@ ListePoints* initialisationTableauOrigine(Image* tableauImageCouleur, int nombre
 
 void nouvellesOrigines(Decalage* decalages, ListePoints* origine, int i);
 
+int recupererImagePlusGrande(Image* tableauImageCouleur, int nombreImage);
+
 Image** creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigine, int* bool_erreur);
 
 /*!

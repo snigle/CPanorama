@@ -330,7 +330,6 @@ Image couleurVersDilatation(Image image, int cylindre,  int* bool_erreur)
 {
 	int i;
 	Image tmp;
-
 	tmp = applicationConvolution(image, creationFiltre(), 3, bool_erreur);
 	libererImage(image);
 	image = creationImage(tmp.type, tmp.width, tmp.height, tmp.teinteMax, tmp.teinte);
@@ -520,6 +519,24 @@ void nouvellesOrigines(Decalage* decalages, ListePoints* origine, int i)
 		origine[decalages[i].positionImage].y+=decalages[i].valeur.y;
 }
 
+int recupererImagePlusGrande(Image* tableauImageCouleur, int nombreImage)
+{
+	int i;
+	int result;
+	int dimension;
+	result = 1;
+	dimension = tableauImageCouleur[0].width * tableauImageCouleur[0].height;
+	for (i = 0; i < nombreImage; i += 1)
+	{
+		if (dimension < tableauImageCouleur[0].width * tableauImageCouleur[0].height)
+		{
+			result = i;
+			dimension = tableauImageCouleur[0].width * tableauImageCouleur[0].height; 
+		}
+	}
+	return (result);
+}
+
 void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int nombreImage)
 {
 	int i;
@@ -534,12 +551,13 @@ void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int 
 		decalages[i].valeur.x+=origine[i].x;
 		decalages[i].valeur.y+=origine[i].y;
 		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], &decalages[i].valeur);
-/*		liberer tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage]*/
+		libererImage(tableauImageCouleur[i]);
+		libererImage(tableauImageCouleur[decalages[i].positionImage]);
 		tableauImageCouleur[i] = tmp;
 		tableauImageCouleur[decalages[i].positionImage]=tmp;
 		nouvellesOrigines(decalages, origine, i);
 	}
-	save(tableauImageCouleur[nombreImage-2],"test",&bool_erreur);
+	save(tableauImageCouleur[recupererImagePlusGrande(tableauImageCouleur, nombreImage)],"test",&bool_erreur);
 }
 
 
@@ -566,15 +584,9 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
 
 		
-	collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
-/*	for (i = 0; i < nombreInput; i += 1)*/
-/*	{*/
-/*		printf("\n****Decalage %d*****\n",i);*/
-/*		afficherDecalage(decalages[i]);*/
-/*	}*/
-	
-/*	libererTableauImages(tableauImagesCouleur, nombreInput);*/
-/*	libererTableauImages2(tableauImagesTemporaire, nombreInput);*/
+	collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);	
+	free(tableauImagesCouleur);
+	libererTableauImages2(tableauImagesTemporaire, nombreInput);
 
 	
 
@@ -662,6 +674,6 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 /*		libererImage(origine2);*/
 /*		i++;*/
 /*	}*/
-	printf("Appel de la fonction Panorama\n");
+	printf("\nAppel de la fonction Panorama\n");
 	return 0;
 }
