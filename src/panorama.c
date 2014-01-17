@@ -429,7 +429,7 @@ Image** creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigi
 void libererTableauImages(Image* tabImage, int nbImage)
 {
 	int i;
-	for (i = 0; i < nbImage; i += 1)
+	for (i = 1; i < nbImage; i += 1)
 	{
 		libererImage(tabImage[i]);
 	}
@@ -616,7 +616,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	tableauImagesTemporaire = creationTableauImageTemporaire(tableauImagesCouleur, nombreInput, bool_erreur);
 	printf("chargement Temporaire effectué\n");
 	fflush(stdout);
-/*suImagesTemporaire[2],"out3",bool_erreur);*/
+
 	tabCoupes = creerTableauCoupe(tableauImagesTemporaire, nombreInput, bool_erreur);
 	printf("chargement coupe \n");
 	fflush(stdout);
@@ -627,7 +627,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 		
 
 	collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);	
-
+/*	libererTableauImages(tableauImagesCouleur, nombreInput);*/
 	libererTableauImages2(tableauImagesTemporaire, nombreInput);
 
 
