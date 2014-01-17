@@ -109,12 +109,24 @@ ListePoints calculerDecalage(int xA, int yA, int xB, int yB, double valeur)
 	result.valeur = valeur;
 	return result;
 } 
+/*
+x = x'
+y = y'
 
+x = x'
+y < y'+k
+
+x = x'
+y > y'-k
+
+*/
 ListePoints* ajouterDecalage(ListePoints* tete, ListePoints* liste, ListePoints decalage)
 {
+	int err;
+	err=10;
 	if(tete==NULL)
 		return ajoutCoordonnee(NULL,decalage.x, decalage.y, 1);
-	else if(decalage.x == liste->x && decalage.y == liste->y)
+	else if( decalage.x >= liste->x - err && decalage.x <= liste->x + err && decalage.y <= liste->y+err && decalage.y >= liste->y-err)
 	{
 		liste->valeur++;
 		return tete;
@@ -152,10 +164,10 @@ ListePoints* comparer(ListePoints* liste1, ListePoints* liste2, Image image2, in
 /*		fflush(stdout);*/
 /*		parcourtListe1 = positionListe(liste1,(rand()%(tailleListe(liste1,0))));*/
 
-		tabRandom = tableauPointsAutour(parcourtListe1, liste1, 20, bool_erreur);
+		tabRandom = tableauPointsAutour(parcourtListe1, liste1, 8, bool_erreur);
 		if(!*bool_erreur)
 		{
-			dernierPointValide = comparerVecteurs(tabRandom,20,liste2,image2);
+			dernierPointValide = comparerVecteurs(tabRandom,8,liste2,image2);
 
 	/*		for (i = 0; i < 10; i += 1)*/
 	/*		{*/

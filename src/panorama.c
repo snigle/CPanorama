@@ -216,7 +216,7 @@ void enleverPointImage(Image image)
 	{
 		for (j = 0; j < image.width; j += 1)
 		{
-			if (compterVoisins(i, j, image) < 21)
+			if (compterVoisins(i, j, image) < 22)
 				image.teinte[i][j] = 1;
 		}
 	}	
@@ -248,12 +248,12 @@ void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int ima
 			result->positionImage=image2;
 			
 		}
-		printf("\n**Decalage %dx%d valeur %f",decalage->x,decalage->y,decalage->valeur);
+		printf("\n**Image : %d , Cylindre : %d , d1 : %d, d2 : %d Decalage %dx%d valeur %f",image1,cylindre,direction,(direction+2)%4,decalage->x,decalage->y,decalage->valeur);
 		fflush(stdout);
 	}
 }
 
-Decalage* calculerTousLesDecalage(Image*** tab, int nombreImage)
+Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int nombreImage)
 {
 	int i;
 	int j;
@@ -261,23 +261,27 @@ Decalage* calculerTousLesDecalage(Image*** tab, int nombreImage)
 	int l;
 	Decalage* result;
 	result = (Decalage*) mallocBis(nombreImage * sizeof(Decalage));
-	for (l = 0; l < nombreImage-1; l += 1)
+	for (l = 0; l < nombreImage; l += 1)
 	{
 		result[l].valeur.valeur = 0;
-		for (i = 0; i <= 1; i += 1)
+		for (i = 0; i < 2; i += 1)
 		{
-			for (j = 0; j <= 3; j += 1)
+			for (j = 0; j < 4; j += 1)
 			{
-				for (k = 0; k < nombreImage; k += 1)
-				{
-					if(k!=l)
+				if(!decalageAPasCalculer[l][j])
+				{	for (k = 0; k < nombreImage; k += 1)
 					{
-						printf(" . ");
-						calculerTousLesDecalageBis(l,i,j,k,tab, &result[l]);
+						if(k!=l)
+						{
+							printf(" . ");
+							calculerTousLesDecalageBis(l,i,j,k,tab, &result[l]);
+						}
 					}
 				}
 			}
 		}
+		if(result[l].valeur.valeur!=0)
+			decalageAPasCalculer[result[l].positionImage][(result[l].direction+2)%4]=1;
 	}
 	return result;
 }
@@ -471,12 +475,66 @@ void afficherDecalage(Decalage decalage)
 }
 
 
+
+int** genererTableauDecalageAPasCalculer(int nombreImage)
+{
+	int i;
+	int k;
+	int** result;
+	result = mallocBis(sizeof(int*)*nombreImage);
+	for (i = 0; i < nombreImage; i += 1)
+	{
+		result[i]= mallocBis(sizeof(int)*4);
+		for (k = 0; k < 4; k += 1)
+		{
+			result[i][k]=0;
+		}
+
+	}
+	return result;
+}
+
+void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int nombreImage)
+{
+	int i;
+	int bool_erreur;
+	ListePoints* origine;
+	bool_erreur=0;
+	Image tmp;
+	origine = mallocBis(sizeof(ListePoints)*nombreImage);
+	for (i = 0; i < nombreImage; i += 1)
+	{
+		transformationCylidriqueBis(tableauImageCouleur[i]);
+		origine[i].x=0;
+		origine[i].y=0;
+	}
+	for (i = 0; i < nombreImage-1; i += 1)
+	{
+		decalages[i].valeur.x+=origine[i].x;
+		decalages[i].valeur.y+=origine[i].y;
+		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], &decalages[i].valeur);
+		tableauImageCouleur[i] = tmp;
+		tableauImageCouleur[decalages[i].positionImage]=tmp;
+		if(decalages[i].valeur.x<0)
+			origine[i].x-=decalages[i].valeur.x;
+		else
+			origine[decalages[i].positionImage].x+=decalages[i].valeur.x;
+		if(decalages[i].valeur.y<0)
+			origine[i].y-=decalages[i].valeur.y;
+		else
+			origine[decalages[i].positionImage].y+=decalages[i].valeur.y;
+	}
+	save(tableauImageCouleur[nombreImage-2],"test",&bool_erreur);
+}
+
+
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
 	Image* tableauImagesCouleur;
 	Image** tableauImagesTemporaire;
 	Image*** tabCoupes;
 	Decalage* decalages;
+	int** decalageAPasCalculer;
 	int i;
 	int j;
 	int k;
@@ -491,18 +549,21 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	tabCoupes = creerTableauCoupe(tableauImagesTemporaire, nombreInput, bool_erreur);
 	printf("chargement coupe \n");
 	fflush(stdout);
-	decalages = calculerTousLesDecalage(tabCoupes, nombreInput);
+	
+	decalageAPasCalculer = genererTableauDecalageAPasCalculer(nombreInput);
+	decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
 /*	libererTableauImages(tableauImagesCouleur, nombreInput);*/
 /*	libererTableauImages2(tableauImagesTemporaire, nombreInput);*/
-	
-	for (i = 0; i < nombreInput-1; i += 1)
+		
+	collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
+	for (i = 0; i < nombreInput; i += 1)
 	{
 		printf("\n****Decalage %d*****\n",i);
 		afficherDecalage(decalages[i]);
 	}
 	
-	save(tabCoupes[0][1][3],"tmp1",bool_erreur);
-	save(tabCoupes[1][1][1],"tmp2",bool_erreur);
+	save(tabCoupes[0][1][1],"tmp1",bool_erreur);
+	save(tabCoupes[1][1][3],"tmp2",bool_erreur);
 
 	
 

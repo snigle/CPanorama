@@ -79,11 +79,10 @@ char** recupererListeInputDossier(char* char_dossier, int* int_taille)
 
 void allerAlaLigne (FILE* file_fichier){
 	char char_carac;
-	int erreur;
     do 
     {
-    	erreur = fscanf(file_fichier, "%c", &char_carac);
-    } while (char_carac != '\n' && !erreur);
+    	fscanf(file_fichier, "%c", &char_carac);
+    } while (char_carac!= '\n' && char_carac!= EOF);
 }
 
 void sauterCommentaire(FILE* file_fichier)

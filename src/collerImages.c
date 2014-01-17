@@ -97,7 +97,7 @@ int** fusionCas2(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 			}	
 		}
 	}
-	for (i = (decalage->x*k+ image1.width)/2; i < image2.width*k + decalage->x*k; i += k){
+	for (i = (decalage->x+ image1.width)*k/2; i < image2.width*k + decalage->x*k; i += k){
 		for (j = 0; j < image2.height; j += 1){
 			if(!pixelNoir(image2,j,i-decalage->x*k+f,k))
 			{

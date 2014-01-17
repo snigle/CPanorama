@@ -51,9 +51,9 @@ typedef struct Decalage
 
 void afficherDecalage(Decalage decalage);
 
-void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab, Decalage* result);
+void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab,  Decalage* result);
 
-Decalage* calculerTousLesDecalage(Image*** tab, int nombreImage);
+Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int nombreImage);
 
 Image coupeHorizontale(Image image, int direction);
 
