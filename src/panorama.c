@@ -493,14 +493,16 @@ int** genererTableauDecalageAPasCalculer(int nombreImage)
 	return result;
 }
 
-ListePoints* initialisationTableauOrigine(Image* tableauImageCouleur, int nombreImage)
+ListePoints* initialisationTableauOrigine(Image* tableauImageCouleur, Decalage* decalages, int nombreImage)
 {
 	ListePoints* origine;
 	int i;
 	origine = mallocBis(sizeof(ListePoints)*nombreImage);
 	for (i = 0; i < nombreImage; i += 1)
 	{
-		transformationCylidriqueBis(tableauImageCouleur[i]);
+		if(decalages[0].cylindre)
+			transformationCylidriqueBis(tableauImageCouleur[i]);
+		printf("Image %d cylindrique : %d\n",i,decalages[i].cylindre);
 		origine[i].x=0;
 		origine[i].y=0;
 	}
@@ -518,6 +520,7 @@ void nouvellesOrigines(Decalage* decalages, ListePoints* origine, int i)
 	else
 		origine[decalages[i].positionImage].y+=decalages[i].valeur.y;
 }
+
 
 int recupererImagePlusGrande(Image* tableauImageCouleur, int nombreImage)
 {
@@ -537,17 +540,43 @@ int recupererImagePlusGrande(Image* tableauImageCouleur, int nombreImage)
 	return (result);
 }
 
+
+int imageAvecMeilleurDecalage(Decalage* decalages, int nombreImage)
+{
+	Decalage decalageMax;
+	int result;
+	int i;
+	
+	decalageMax = decalages[0];
+	result = 0;
+	for (i = 1; i < nombreImage; i += 1)
+	{
+		printf("Valeur : %f\n",decalages[i].valeur.valeur);
+		if(decalageMax.valeur.valeur < decalages[i].valeur.valeur)
+		{
+			result = i;
+			decalageMax = decalages[i];
+		}
+	}
+	decalages[result].valeur.valeur = 0;
+	return result;
+}
+
+
 void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int nombreImage)
 {
 	int i;
+	int j;
 	int bool_erreur;
 	ListePoints* origine;
 	Image tmp;
 	bool_erreur=0;
 
-	origine = initialisationTableauOrigine(tableauImageCouleur, nombreImage);
-	for (i = 0; i < nombreImage-1; i += 1)
+	origine = initialisationTableauOrigine(tableauImageCouleur, decalages, nombreImage);
+	for (j = 0; j < nombreImage-1; j += 1)
 	{
+		i = imageAvecMeilleurDecalage(decalages, nombreImage);
+		printf("Collage image %d avec Decalage %f \n",i,decalages[i].valeur.valeur);
 		decalages[i].valeur.x+=origine[i].x;
 		decalages[i].valeur.y+=origine[i].y;
 		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], &decalages[i].valeur);
@@ -568,6 +597,7 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	Image*** tabCoupes;
 	Decalage* decalages;
 	int** decalageAPasCalculer;
+	int i;
 	tableauImagesCouleur = creationTableauImageCouleur(input, nombreInput, bool_erreur);
 	
 	printf("chargement Image effectué \n");
@@ -584,9 +614,11 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
 
 		
+
 	collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);	
-	free(tableauImagesCouleur);
+
 	libererTableauImages2(tableauImagesTemporaire, nombreInput);
+
 
 	
 

@@ -103,7 +103,7 @@ Image*** creerTableauCoupe(Image** imageTemporaires, int nombreImage, int* bool_
 
 void libererTableauImages(Image* tabImage, int nbImage);
 
-ListePoints* initialisationTableauOrigine(Image* tableauImageCouleur, int nombreImage);
+ListePoints* initialisationTableauOrigine(Image* tableauImageCouleur, Decalage* decalages, int nombreImage);
 
 void nouvellesOrigines(Decalage* decalages, ListePoints* origine, int i);
 
