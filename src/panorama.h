@@ -153,11 +153,23 @@ void egalisationImages (Image image1, Image image2, int* bool_erreur);
 
 Image creerTemporaire(Image origine, int cylindre, int* bool_erreur);
 
+void libererTableauImages2(Image** tabImage, int nbImage);
+
+int** genererTableauDecalageAPasCalculer(int nombreImage);
+
+void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int nombreImage);
+
 Image* creationTableauImageCouleur(char** imageOrigine, int nombreImageOrigine, int* bool_erreur);
 
 Image*** creerTableauCoupe(Image** imageTemporaires, int nombreImage, int* bool_erreur);
 
 void libererTableauImages(Image* tabImage, int nbImage);
+
+ListePoints* initialisationTableauOrigine(Image* tableauImageCouleur, Decalage* decalages, int nombreImage);
+
+void nouvellesOrigines(Decalage* decalages, ListePoints* origine, int i);
+
+int recupererImagePlusGrande(Image* tableauImageCouleur, int nombreImage);
 
 Image** creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigine, int* bool_erreur);
 

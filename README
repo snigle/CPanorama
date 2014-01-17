@@ -4,29 +4,10 @@ $make doc
 
 Elle se trouvera dans le dossier ./doc/
 
-
-****Liens utiles***
-Jankins (test du code : build)
-Sonar vérifie le build
-
-Cheak
-Vérifier les fuites de mémoires
-
-egaliser un histogramme, liberer argv ?
-
-******************************************************************************************************************************************************************************
-
-Quand on simplifie l'image ( après dilatation)
-Il faut 
-
----------
-|		|
-
-
-
-
-
-
-correspondance en trop pour gauche milieu
-pas de bonne correspondance entre milieu droite
-
+gerer les erreur =>
+	absence d une image
+	image inconnu/existe pas
+	gestion des types
+	image corrompu
+	25 lignes max
+	cartouches
