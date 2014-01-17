@@ -49,14 +49,76 @@ typedef struct Decalage
 	int cylindre;
 } Decalage;
 
-void afficherDecalage(Decalage decalage);
+/*!
+       \fn void afficherDecalage(Decalage decalage)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Fri 17 Jan 2014
+       \brief permet d'afficher un décalage               
+       \param decalage : (decalage) : le décalage 
+               
+       \remarks 
 
+*/
+void afficherDecalage(Decalage decalage);
+/*!
+       \fn void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab, Decalage* result)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Fri 17 Jan 2014
+       \brief SOus partie de la fonction calculerTousLesDecalage               
+       \param image1 : (int) 
+       \param cylindre : (int) : =1 si l'image est cylindrique, 0 sinon
+       \param direction : (int) :  la direction dans laquelle on compare
+       \param image2 : (int) : 
+       \param tab : (image***) : 
+       \param result : (decalage*) : Liste des décalages 
+       
+               
+       \remarks 
+
+*/
 void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab,  Decalage* result);
 
+/*!
+       \fn Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int nombreImage)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Fri 17 Jan 2014
+       \brief permet de calculer les décalages entre les points  clefs correspondants de plusieurs images            
+       \param tab : (image***) : tableau de tableaux d'images
+       \param decalageapascalculer : (int**) : 
+       \param nombreimage : (int) : nombre d'images où on veut calculer des décalages
+       \return 
+               
+       \remarks 
+
+*/
 Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int nombreImage);
 
+/*!
+       \fn Image coupeHorizontale(Image image, int direction)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Fri 17 Jan 2014
+       \brief coupe l'image de manière horyzontale               
+       \param image : (image) 
+       \param direction : (int) : Permet de choisir si on garde l'image de droite ou de gauche 
+       \return L'image de droite ou de gauche
+               
+       \remarks 
+
+*/
 Image coupeHorizontale(Image image, int direction);
 
+/*!
+       \fn Image coupeVerticale(Image image, int direction)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Fri 17 Jan 2014
+       \brief coupe l'image en deux parties                
+       \param image : (image) : image à couper 
+       \param direction : (int) : Permet de choisir si on garde l'image du haut ou du bas
+       \return l'image gardée 
+               
+       \remarks 
+
+*/
 Image coupeVerticale(Image image, int direction);
 
 Image coupe(Image image, int direction);
