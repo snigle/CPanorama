@@ -45,7 +45,7 @@ int** transformationCylidrique(Image image)
 	int teinteInit;
 	k = !strcmp(image.type,"P3")? 3 : 1;
 	teinteInit = !strcmp(image.type,"P1")? 1 : 0;
-	newTeinte = initMatrice(0,image.width*k, image.height);
+	newTeinte = initMatrice(teinteInit,image.width*k, image.height);
 	for (i = 0; i < image.height; i += 1)
 	{
 		for (j = 0; j < image.width; j += 1)
@@ -330,15 +330,15 @@ Image couleurVersDilatation(Image image, int cylindre,  int* bool_erreur)
 {
 	int i;
 	Image tmp;
-	int** newTeinte;
+
 	tmp = applicationConvolution(image, creationFiltre(), 3, bool_erreur);
 	libererImage(image);
 	image = creationImage(tmp.type, tmp.width, tmp.height, tmp.teinteMax, tmp.teinte);
 	
-	if(cylindre){
-	newTeinte = transformationCylidrique(image);
-	recopieDesPoints(image, newTeinte);
-}
+/*	if(cylindre){*/
+/*	newTeinte = transformationCylidrique(image);*/
+/*	recopieDesPoints(image, newTeinte);*/
+/*	}	*/
 	image = applicationBinaire(image,1, bool_erreur);
 	
 /*	if(cylindre)*/
@@ -375,8 +375,6 @@ Image creerTemporaire(Image origine, int cylindre, int* bool_erreur)
 		temporaire =  copieImage(origine);
 
 	temporaire = couleurVersDilatation(temporaire,cylindre, bool_erreur);
-	
-
 	enleverPointImage(temporaire);
 
 	return (temporaire);
@@ -399,22 +397,23 @@ Image** creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigi
 {
 	Image** tableauImageTemporaire;
 	int i;
-	int j;
+	int ** newTeinte;
 	tableauImageTemporaire= mallocBis(nombreImageOrigine * sizeof(Image*));
 	
 	for (i = 0; i < nombreImageOrigine; i += 1)
 	{
 		tableauImageTemporaire[i] = mallocBis(2*sizeof(Image));
 	}
-	
-	for (j = 0; j < 2; j += 1)
+
+	for (i = 0; i < nombreImageOrigine; i += 1)
 	{
-		for (i = 0; i < nombreImageOrigine; i += 1)
-		{
-			printf(" . ");
-			fflush(stdout);
-			tableauImageTemporaire[i][j] = creerTemporaire(imageOrigine[i],j, bool_erreur);
-		}
+		printf(" . ");
+		fflush(stdout);
+		tableauImageTemporaire[i][0] = creerTemporaire(imageOrigine[i],0, bool_erreur);
+		newTeinte = transformationCylidrique(tableauImageTemporaire[i][0]);
+		tableauImageTemporaire[i][1] = creationImage("P1",imageOrigine[i].width,imageOrigine[i].height ,1,newTeinte );
+		
+
 	}
 	return (tableauImageTemporaire);	
 }
@@ -427,6 +426,7 @@ void libererTableauImages(Image* tabImage, int nbImage)
 		libererImage(tabImage[i]);
 	}
 }
+
 void libererTableauImages2(Image** tabImage, int nbImage)
 {
 	int i;
@@ -537,7 +537,7 @@ void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int 
 /*		liberer tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage]*/
 		tableauImageCouleur[i] = tmp;
 		tableauImageCouleur[decalages[i].positionImage]=tmp;
-		nouvellesOrigines(decalages, tableauImageCouleur,i);
+		nouvellesOrigines(decalages, origine, i);
 	}
 	save(tableauImageCouleur[nombreImage-2],"test",&bool_erreur);
 }
@@ -550,9 +550,6 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	Image*** tabCoupes;
 	Decalage* decalages;
 	int** decalageAPasCalculer;
-	int i;
-	int j;
-	int k;
 	tableauImagesCouleur = creationTableauImageCouleur(input, nombreInput, bool_erreur);
 	
 	printf("chargement Image effectué \n");
@@ -567,18 +564,17 @@ int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 	
 	decalageAPasCalculer = genererTableauDecalageAPasCalculer(nombreInput);
 	decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
-/*	libererTableauImages(tableauImagesCouleur, nombreInput);*/
-/*	libererTableauImages2(tableauImagesTemporaire, nombreInput);*/
+
 		
 	collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
-	for (i = 0; i < nombreInput; i += 1)
-	{
-		printf("\n****Decalage %d*****\n",i);
-		afficherDecalage(decalages[i]);
-	}
+/*	for (i = 0; i < nombreInput; i += 1)*/
+/*	{*/
+/*		printf("\n****Decalage %d*****\n",i);*/
+/*		afficherDecalage(decalages[i]);*/
+/*	}*/
 	
-	save(tabCoupes[0][1][1],"tmp1",bool_erreur);
-	save(tabCoupes[1][1][3],"tmp2",bool_erreur);
+/*	libererTableauImages(tableauImagesCouleur, nombreInput);*/
+/*	libererTableauImages2(tableauImagesTemporaire, nombreInput);*/
 
 	
 
