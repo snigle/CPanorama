@@ -259,15 +259,22 @@ Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int 
 	int j;
 	int k;
 	int l;
+	int tropDePoins;
+	int bool_erreur;
 	Decalage* result;
+	tropDePoins = 0;
 	result = (Decalage*) mallocBis(nombreImage * sizeof(Decalage));
 	for (l = 0; l < nombreImage; l += 1)
 	{
 		result[l].valeur.valeur = 0;
+		
 		for (i = 0; i < 2; i += 1)
 		{
 			for (j = 0; j < 4; j += 1)
 			{
+				if(tropDePoins){
+				while(compterPointsBlanc(tab[l][i][j])>2000)
+					tab[l][i][j] = applicationBinaire(tab[l][i][j],2, &bool_erreur);}
 				if(!decalageAPasCalculer[l][j])
 				{	for (k = 0; k < nombreImage; k += 1)
 					{
@@ -275,6 +282,8 @@ Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int 
 						{
 							printf(" . ");
 							calculerTousLesDecalageBis(l,i,j,k,tab, &result[l]);
+							 if(result[l].valeur.valeur > 1000)
+								tropDePoins = 1;
 						}
 					}
 				}
@@ -526,15 +535,17 @@ int recupererImagePlusGrande(Image* tableauImageCouleur, int nombreImage)
 {
 	int i;
 	int result;
-	int dimension;
+	ListePoints dimension;
 	result = 1;
-	dimension = tableauImageCouleur[0].width * tableauImageCouleur[0].height;
+	dimension.x = tableauImageCouleur[0].width;
+	dimension.y = tableauImageCouleur[0].height;
 	for (i = 0; i < nombreImage; i += 1)
 	{
-		if (dimension < tableauImageCouleur[0].width * tableauImageCouleur[0].height)
+		if (dimension.x < tableauImageCouleur[i].width || dimension.y < tableauImageCouleur[i].height)
 		{
 			result = i;
-			dimension = tableauImageCouleur[0].width * tableauImageCouleur[0].height; 
+			dimension.x = tableauImageCouleur[i].width;
+			dimension.y = tableauImageCouleur[i].height; 
 		}
 	}
 	return (result);
@@ -580,13 +591,13 @@ void collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int 
 		decalages[i].valeur.x+=origine[i].x;
 		decalages[i].valeur.y+=origine[i].y;
 		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], &decalages[i].valeur);
-		libererImage(tableauImageCouleur[i]);
-		libererImage(tableauImageCouleur[decalages[i].positionImage]);
+/*		libererImage(tableauImageCouleur[i]);*/
+/*		libererImage(tableauImageCouleur[decalages[i].positionImage]);*/
 		tableauImageCouleur[i] = tmp;
 		tableauImageCouleur[decalages[i].positionImage]=tmp;
 		nouvellesOrigines(decalages, origine, i);
 	}
-	save(tableauImageCouleur[recupererImagePlusGrande(tableauImageCouleur, nombreImage)],"test",&bool_erreur);
+	save(tableauImageCouleur[0],"test",&bool_erreur);
 }
 
 
