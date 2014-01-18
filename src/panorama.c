@@ -339,7 +339,7 @@ int compterPointsBlanc(Image image)
 	return result;
 }
 
-Image couleurVersDilatation(Image image, int cylindre,  int* bool_erreur)
+Image couleurVersDilatation(Image image, int* bool_erreur)
 {
 	int i;
 	Image tmp;
@@ -358,17 +358,17 @@ Image couleurVersDilatation(Image image, int cylindre,  int* bool_erreur)
 	return (image);
 }
 
-void egalisationImages (Image image1, Image image2, int* bool_erreur)
-{
-	int decalageIm1Im2;
-	int* m1supm2;
-	m1supm2 = malloc(sizeof(int));	
-	decalageIm1Im2 = calculDecalage(image1, image2, m1supm2, bool_erreur);
-	remplirNouvellesTeintes (image1, *m1supm2 * decalageIm1Im2);
-	remplirNouvellesTeintes (image2, - *m1supm2 * decalageIm1Im2);
-}
+/*void egalisationImages (Image image1, Image image2, int* bool_erreur)*/
+/*{*/
+/*	int decalageIm1Im2;*/
+/*	int* m1supm2;*/
+/*	m1supm2 = malloc(sizeof(int));	*/
+/*	decalageIm1Im2 = calculDecalage(image1, image2, m1supm2, bool_erreur);*/
+/*	remplirNouvellesTeintes (image1, *m1supm2 * decalageIm1Im2);*/
+/*	remplirNouvellesTeintes (image2, - *m1supm2 * decalageIm1Im2);*/
+/*}*/
 
-Image creerTemporaire(Image origine, int cylindre, int* bool_erreur)
+Image creerTemporaire(Image origine, int* bool_erreur)
 {
 	Image temporaire;
 	
@@ -377,7 +377,7 @@ Image creerTemporaire(Image origine, int cylindre, int* bool_erreur)
 	else
 		temporaire =  copieImage(origine);
 
-	temporaire = couleurVersDilatation(temporaire,cylindre, bool_erreur);
+	temporaire = couleurVersDilatation(temporaire, bool_erreur);
 	enleverPointImage(temporaire);
 
 	return (temporaire);
@@ -426,7 +426,7 @@ Image** creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigi
 	{
 		printf(".");
 		fflush(stdout);
-		tableauImageTemporaire[i][0] = creerTemporaire(imageOrigine[i],0, bool_erreur);
+		tableauImageTemporaire[i][0] = creerTemporaire(imageOrigine[i], bool_erreur);
 		newTeinte = transformationCylidrique(tableauImageTemporaire[i][0]);
 		tableauImageTemporaire[i][1] = creationImage("P1",imageOrigine[i].width,imageOrigine[i].height ,1,newTeinte );
 		
@@ -597,8 +597,6 @@ Image collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int
 		decalages[i].valeur.x+=origine[i].x;
 		decalages[i].valeur.y+=origine[i].y;
 		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], &decalages[i].valeur);
-/*		libererImage(tableauImageCouleur[i]);*/
-/*		libererImage(tableauImageCouleur[decalages[i].positionImage]);*/
 		tableauImageCouleur[i] = tmp;
 		tableauImageCouleur[decalages[i].positionImage]=tmp;
 		nouvellesOrigines(decalages, origine, i);
