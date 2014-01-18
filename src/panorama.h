@@ -88,7 +88,7 @@ void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int ima
        \param tab : (image***) : tableau de tableaux d'images
        \param decalageapascalculer : (int**) : 
        \param nombreimage : (int) : nombre d'images où on veut calculer des décalages
-       \return 
+       \return un tableau de décalages
                
        \remarks 
 
@@ -122,28 +122,152 @@ Image coupeHorizontale(Image image, int direction);
 
 */
 Image coupeVerticale(Image image, int direction);
+/*!
+       \fn void calculerTousLesDecalageBisBis(Image*** tab, int** decalageAPasCalculer, int nombreImage, int* tropDePoins, int l, int i, int j, Decalage* result, int* bool_erreur)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief SOUs-fonction de la fonction calculerTousLesDecalage         
+       \param tab : (image***) : tableau de tableaux d'images
+       \param decalageapascalculer : (int**) :
+       \param nombreimage : (int) : nombre d'images
+       \param tropdepoins : (int*) : dépassement du nombre de points
+       \param l : (int) : positions dans le tableau tab
+       \param i : (int) : position dans le tableau tab
+       \param j : (int) : position dans le tableau tab
+       \param result : (decalage*) : 
+       \param bool_erreur : (int*) 
+       
+               
+       \remarks 
 
+*/
 
 void calculerTousLesDecalageBisBis(Image*** tab, int** decalageAPasCalculer, int nombreImage, int* tropDePoins, int l, int i, int j, Decalage* result, int* bool_erreur);
 
+/*!
+       \fn Image coupe(Image image, int direction)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief Permet de découper un image en 2               
+       \param image : (image) : image à couper
+       \param direction : (int) : partie de l'image à garder
+       \return l'image coupée
+               
+       \remarks 
+
+*/
 
 Image coupe(Image image, int direction);
+/*!
+       \fn int compterVoisins(int x, int y, Image image)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief Compte les points clefs qui sont autour d'un point donné               
+       \param x : (int) : coordonnée en x du point central
+       \param y : (int) : coordonnée en y du point central
+       \param image : (image) : image traitée
+       \return le  nombre de points voisins
+               
+       \remarks 
+
+*/
 
 int compterVoisins(int x, int y, Image image);
+/*!
+       \fn void enleverPointImage(Image image)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief ENlève des points dans une image               
+       \param image : (image) : image traitée
+               
+       \remarks 
 
+*/
 void enleverPointImage(Image image);
 
+/*!
+       \fn Image applicationBinaire(Image image, int toDo, int* bool_erreur)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief Applique une binarisation, une dilatation ou une érosion à l'image               
+       \param image : (image) : image traitée
+       \param todo : (int) : si toDo =1 on applique une Binarisation , si toDo dilatation, si toDO =3 érosion
+       \param bool_erreur : (int*) 
+       \return l'image traitée
+               
+       \remarks 
+
+*/
 Image applicationBinaire(Image image, int toDo, int* bool_erreur);
 
+/*!
+       \fn int compterPointsBlanc(Image image)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief Compte le nombre de points blancs dans une image               
+       \param image : (image) : image traitée 
+       \return le nombre de points blancs               
+       \remarks 
+
+*/
 int compterPointsBlanc(Image image);
 
+/*!
+       \fn ListePoints* recuperationPixelsBlanc(Image image)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief crée une liste de points blancs               
+       \param image : (image): image traitée
+       \return La liste des points blancs
+               
+       \remarks 
+
+*/
 ListePoints* recuperationPixelsBlanc(Image image);
 
+/*!
+       \fn void tranformationCoordonnee(int* x, int* y, Image image, int i, int j)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief Permet de transformer des coordonnées d'un point             
+       \param x : (int*) : abscisse du point à transformer
+       \param y : (int*) : ordonnée du point à transformer
+       \param image : (image) : image dans laquelle se situe le point
+       \param i : (int) : facteur de transformation de l'abscisse
+       \param j : (int) : facteur de transformation de l'ordonnée
+       
+               
+       \remarks 
+
+*/
 void transformationCoordonnee(int* x, int* y, Image image, int i, int j);
 
-int** transformationCylidrique(Image image);
+/*!
+       \fn int** transformationCylidrique(Image image)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief Permet de transformer une image plane en une image cylindique               
+       \param image : (image) : image traitée 
+       \return une matrice avec les nouvelles teintes 
+               
+       \remarks 
 
+*/
+int** transformationCylidrique(Image image);
+/*!
+       \fn void transformationCylidriqueBis(Image image)
+       \author Poussou Elie <poussoueli@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief Permet de transformer une image plane en une image cylindique               
+       \param image : (image) : image traitée
+       
+               
+       \remarks 
+
+*/
 void transformationCylidriqueBis(Image image);
+
+
 
 void recopieDesPoints(Image image, int** newTeinte);
 
