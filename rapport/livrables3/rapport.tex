@@ -97,13 +97,16 @@
 \onehalfspacing
 %\doublespacing 
 
-	\chapter*{Introduction}	
+\chapter*{Introduction}	
+		Le projet se conclue par ce dernier livrable en fin de semestre. L'objectif est donc de créer un programme qui assemble des images ou des photos pour réaliser un panorama.	Pour cela, il a fallu mettre en oeuvre toutes nos connaissances accumulées au cours des deux premiers mois, ainsi que nos recherches pour remplir l'objectif fixé par ce projet.
+		
+		Dans un premier temps, nous allons présenter les fonctions réalisées pour le second librable car elles ont été très utiles pour la réalisation de notre algorithme codé durant cette dernière partie.
+		
+		Dans un second temps, nous allons présenter les étapes ainsi que les fonctions principales de notre algorithme qui relie les images entre elles. Puis, nous expliquerons les améliorations que nous aurions pu apporter au programme.
 		
 		
 		
-		
-		
-	\chapter{Les six fonctions du livrable2}
+\chapter{Les six fonctions du deuxième livrable}
 
 		\section{Grayscale}
 			La fonction Grayscale permet de transformer une image  couleur en teintes de gris.\\
@@ -248,29 +251,24 @@ FIN POUR
 
 
 	\vspace{2cm}
-	Le but va être maintenant d'utiliser ces fonctions ainsi que d'autres algorithmes pour automatiser la création d'un panorama. 
+		Après avoir vu certaines fonctions très utiles dans le traitement d'image, nous allons maintenant voir comment les enchaîner pour les rendre utiles lors de la création du panorama.
 
 
-	\chapter{Notre algorithme d'automatisation d'un panorama}
-	
-	Après avoir vu les principales fonctions utiles à notre panorama, nous devons maintenant développer des méthodes pour pouvoir coder des algorithmes capables d'assembler des images les unes aux autres et ainsi retrouver l'image initiale.
-
-		\section{La détection des points d'intérêts d'une image}
-
-
-		%	Dire ce qu'on a essayé (Hough, Harris, Sift)			
-		\subsection{Récupération des points clé}
-		\subsection{Algorithme de comparaison des points clé}
-		\subsection{fonction de collage des images}%Elie
-		\subsection{Notre algorithme principal}
-		\subsection{Comment améliorer cet algorithme ?}
-	
-	\chapter{Bilan Personnel}
-		\subsection{Elie}
-		\subsection{Quentin}
-		\subsection{Ludovic}
+\chapter{Notre algorithme d'automatisation d'un panorama}
+		Dans cette partie, nous allons expliquer plusieurs fonctions principales dans notre algorithme. 
 		
-	\chapter*{Conclusion}%Elie ou Quentin
+		Tout d'abord, la récupération des points clés. Ensuite, la comparaison de ces points clés entre les images. Puis, la fonction de collage qui permet d'assembler deux images connaissant le décalage. Enfin, expliquer l'enchaînement de ces fonctions pour aboutir a notre programme.
+		
+		Pour finir cette partie, nous expliquerons les améliorations que nous pourrions apporter a notre code.
+		
+		%	Dire ce qu'on a essayé (Hough, Harris, Sift)			
+		\section{Récupération des points clé}
+		\section{Algorithme de comparaison des points clé} %Ludo
+		\section{Fonction de collage des images}%Elie
+		\section{Notre algorithme principal}
+		\section{Comment améliorer cet algorithme ?}%Ludo
+		
+\chapter*{Conclusion}%Elie ou Quentin
 	
 	
 \printbibliography

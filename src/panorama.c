@@ -482,14 +482,6 @@ Image*** creerTableauCoupe(Image** imageTemporaires, int nombreImage, int* bool_
 	return (tableauCoupe);
 }
 
-
-void afficherDecalage(Decalage decalage)
-{
-	printf("Decalage : %dx%d valeur %f\nImage %d \nCylindre %d\n Direction %d\n",decalage.valeur.x, decalage.valeur.y, decalage.valeur.valeur, decalage.positionImage, decalage.cylindre, decalage.direction);
-}
-
-
-
 int** genererTableauDecalageAPasCalculer(int nombreImage)
 {
 	int i;

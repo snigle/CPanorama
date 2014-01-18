@@ -268,7 +268,18 @@ int** transformationCylidrique(Image image);
 void transformationCylidriqueBis(Image image);
 
 
+/*!
+       \fn void recopieDesPoints(Image image, int** newTeinte)
+       \author PERALES Quentin <peralesque@eisti.eu>
+       \date Sat 18 Jan 2014
+       \brief recopie les teintes de l image dans newTeinte               
+       \param image : (image) l image de base
+       \param newteinte : (int**) le tableau d'entier qui recupere les teintes de l image
+       
+               
+       \remarks 
 
+*/
 void recopieDesPoints(Image image, int** newTeinte);
 
 
