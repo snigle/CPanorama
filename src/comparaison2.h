@@ -10,7 +10,6 @@
 #include "header.h"
 #include "gestionFichier.h"
 #include "gestionListeCoordonnees.h"
-#include "harris.h"
 
 /*!
        \fn ListePoints* ajouterDecalage(ListePoints* tete, ListePoints liste, ListePoints decalage)

@@ -4,13 +4,12 @@ $make doc
 
 Elle se trouvera dans le dossier ./doc/
 
-gerer les erreur =>
-	absence d une image
-	image inconnu/existe pas
-	gestion des types
-	image corrompu
-	25 lignes max
-	cartouches
-	
-	
-	CYLINDRE ! !  ! !! ! !! !
+collerImages : ludo
+
+ 
+panorama.h : quentin
+
+
+gestop,ListeCoordonne : ludo
+header : ludo
+histogramme : ludo

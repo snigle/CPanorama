@@ -14,7 +14,7 @@
 
 #include "header.h"
 #include "histogramme.h"
-#include "harris.h"
+
 #include "gestionFichier.h"
 #include "rgbToGrayscale.h"
 
@@ -48,6 +48,8 @@ typedef struct Decalage
 	int direction;
 	int cylindre;
 } Decalage;
+
+
 
 /*!
        \fn void afficherDecalage(Decalage decalage)
@@ -120,6 +122,10 @@ Image coupeHorizontale(Image image, int direction);
 
 */
 Image coupeVerticale(Image image, int direction);
+
+
+void calculerTousLesDecalageBisBis(Image*** tab, int** decalageAPasCalculer, int nombreImage, int* tropDePoins, int l, int i, int j, Decalage* result, int* bool_erreur);
+
 
 Image coupe(Image image, int direction);
 
