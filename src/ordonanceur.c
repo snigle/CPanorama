@@ -330,8 +330,9 @@ int gererOptions(int argc, char** argv)
 
 	appelerFonction(argc,argv,input,nombreInput,output,nombreOutput);
 
-	libererMatrice((void**)input,nombreInput);
-	libererMatrice((void**)output,nombreOutput);
+/*	free(input);*/
+/*	free(output);*/
+
 	return int_result;
 } 
 

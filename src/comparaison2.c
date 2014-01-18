@@ -88,8 +88,6 @@ ListePoints** tableauPointsAutour(ListePoints* point1, ListePoints* liste1, int 
 		{
 			do
 			{
-/*				printf("t");*/
-/*				fflush(stdout);*/
 				tmp = positionListe(liste1,(rand()%(tailleListe(liste1,0))));
 			}while(!pasDansTableau(result,i,tmp));
 			result[i] = ajoutCoordonnee(NULL,tmp->x,tmp->y,tmp->valeur);
@@ -142,58 +140,26 @@ ListePoints* ajouterDecalage(ListePoints* tete, ListePoints* liste, ListePoints 
 
 ListePoints* comparer(ListePoints* liste1, ListePoints* liste2, Image image2, int* bool_erreur)
 {
-	/*
-	Parcourt de la liste 1 tant que TrouvePas								2000
-		|On prend un tableau de N points autour à M pixel près		4000
-		bool comparerVecteurs()
-	Calculer décalage
-	*/
 	ListePoints* result;
-	int k;
 	ListePoints* parcourtListe1;
 	ListePoints* dernierPointValide;
 	ListePoints** tabRandom;
 	parcourtListe1=liste1;
 	dernierPointValide=NULL;
-	k=0;
 	result = NULL;
 	while(parcourtListe1!=NULL)
 	{
 		*bool_erreur=0;
-/*		fprintf(stdout," . ");*/
-/*		fflush(stdout);*/
-/*		parcourtListe1 = positionListe(liste1,(rand()%(tailleListe(liste1,0))));*/
-
 		tabRandom = tableauPointsAutour(parcourtListe1, liste1, 8, bool_erreur);
 		if(!*bool_erreur)
 		{
 			dernierPointValide = comparerVecteurs(tabRandom,8,liste2,image2);
-
-	/*		for (i = 0; i < 10; i += 1)*/
-	/*		{*/
-	/*			printf("Tab %d : %dx%d - ",i,tabRandom[i]->x,tabRandom[i]->y);*/
-	/*		}*/
 			if(dernierPointValide!=NULL)
-			{	
 				result = ajouterDecalage(result, result, calculerDecalage(tabRandom[0]->x,tabRandom[0]->y,dernierPointValide->x,dernierPointValide->y,0));
-			}
 			free(tabRandom);
 		}
 		parcourtListe1=parcourtListe1->suivant;
-		k++;
 	}
-	if(result == NULL)
-	{
-/*		erreur(ERREUR_PARAMETRE,1);*/
-		*bool_erreur=1;
-	}
-	else
-		*bool_erreur=0;
-	
+	*bool_erreur = (result == NULL);
 	return result;
 }
-
-/*
-	2000*4000 + 2000*2000*10= 8 000 000 000 => 14s * 10 = 2mn
-	
-*/
