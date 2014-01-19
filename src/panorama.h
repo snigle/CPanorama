@@ -99,7 +99,7 @@ Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int 
        \fn Image coupeHorizontale(Image image, int direction)
        \author Poussou Elie <poussoueli@eisti.eu>
        \date Fri 17 Jan 2014
-       \brief coupe l'image de manière horyzontale               
+       \brief coupe l'image de manière horizontale               
        \param image : (image) 
        \param direction : (int) : Permet de choisir si on garde l'image de droite ou de gauche 
        \return L'image de droite ou de gauche

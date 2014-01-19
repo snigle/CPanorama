@@ -616,7 +616,7 @@ Image traitementPanorama(Image* tableauImagesCouleur, int nombreInput, int* bool
 			fflush(stdout);
 			decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
 			libererTableauImages2(tableauImagesTemporaire, nombreInput);
-			imageFin = collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);	
+			imageFin = collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
 		}
 	}
 	return(imageFin);
