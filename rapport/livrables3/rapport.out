@@ -1,0 +1,15 @@
+\BOOKMARK [0][-]{chapter.1}{Les six fonctions du deuxi\350me livrable}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Grayscale}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Binnary}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Histogramme}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{Dilate}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{Erode}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.6}{Convolution wikiConvo }{chapter.1}% 7
+\BOOKMARK [0][-]{chapter.2}{Notre algorithme d'automatisation d'un panorama}{}% 8
+\BOOKMARK [1][-]{section.2.1}{R\351cup\351ration des points cl\351}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.2}{Algorithme de comparaison des points cl\351s}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.1}{Sch\351matisation de notre algorithme}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.2}{Algorithme}{section.2.2}% 12
+\BOOKMARK [1][-]{section.2.3}{Fonction de collage des images}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.4}{Notre algorithme principal}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.5}{Comment am\351liorer cet algorithme ?}{chapter.2}% 15

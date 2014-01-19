@@ -273,8 +273,18 @@ FIN POUR
 			
 			Ensuite, nous avons commencé a coder la méthode SIFT, une méthode très efficace, mais très longue.
 			
-			Entre temps, nous avons trouvé un autre moyen pour trouver des points clé, qui utilisait les fonctions expliquées précédemment. 
-			Pour cela, à partir d'une image en couleur, il faut la passer en greyscalepuis effectuer une convolution avec un filtre de Prewitt. Cela permet de détecter les contours tout en limitant l'effet du bruit sur la photo.
+			Entre temps, nous avons trouvé un autre moyen pour trouver des points clé, qui utilisait les fonctions expliquées dans la partie précédente. 
+			
+			Raisonnons à partir de cette image : 
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{imageBase.png}
+		\end{figure}
+			
+		\newpage	
+			Pour cela, à partir d'une image en couleur, il faut la passer en greyscale puis effectuer une convolution avec un filtre de Prewitt.
+			
+			Cela permet de détecter les contours tout en limitant l'effet du bruit sur la photo.
 			\newline
 			filtre de Prewitt : 
 				\begin{tabular}{lll}
@@ -282,13 +292,40 @@ FIN POUR
 				   0 & 0 & 0 \\
 				   -1 & -1 & -1 \\
 				\end{tabular}
-		\vspace{1,5cm}	
+
 			
-			Ensuite, on converti cette image en binaire avec un seuil de 100. Enfin, on opère à une dilatation puis une érosion cinq fois de suite pour enlever les points esseulés. 
-			
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{convo.png}
+		\end{figure}
+\newpage
+		Ensuite, on converti cette image en binaire avec un seuil de 100. 
+		
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{binaire.png}
+		\end{figure}
+		
+\newpage		
+		Enfin, on opère à une dilatation puis une érosion cinq fois de suite pour enlever les points esseulés.
+		
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{erosionDilatation.png}
+		\end{figure}
+\newpage
 			Pour finir cette détection, on parcourt l'image pour voir si un point blanc possède quinze voisins dans un carré de 15x15 pixels autour de lui. Cela peut s'apparenter à une forme de dilatation. Cette dernière opération est très utile lors de l'algorithme de comparaison des points clés expliqé ci-dessous.
+	
+		
+
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{enleverNonVoisin.png}
+		\end{figure}
 			
-		\section{Algorithme de comparaison des points clés} %Ludo
+			
+\newpage
+\section{Algorithme de comparaison des points clés} %Ludo
 		Pour trouver les points clés, nous avons d'abord fait beaucoup de recherches sur internet. Une des méthodes citées était le ZNCC, un algorithme qui donne une note entre deux points. Il suffisait donc avec cette méthode de comparer cette note. Cependant nous l'avons testé et il y avait trop de similitude entre les points. La deuxième méthode trouvée était de comparer les valeurs de Harris. Or harris ne nous satisfaisait pas pour la recherche des points clés donc nous avons abandonné. Finallement nous avons arrêté nos recherches sur internet pour se mettre à réfléchir de nous même et à concevoir un algorithme simple pour comparer nos points clés.
 		
 		\subsection{Schématisation de notre algorithme}
@@ -299,15 +336,41 @@ FIN POUR
 		
 		%Figure du collage
 		
-		De loin, le résultat n'est pas trop mal mais lorsqu'on se rapproche, on distingue clairement que si on aligne une partie de l'image, l'autre partie est complètement décallée. Ce phénomène est dû à la distortion de l'appareil photo. Nous avons donc recherché un moyen de corriger cette distortion. Pour cela nous avons utilisé la correction de Lens.
+			\begin{center}
+			\includegraphics[scale=0.35]{decalage.png}
+			\end{center}
+				
+	
+		
+		De loin, le résultat n'est pas trop mal mais lorsqu'on se rapproche, on distingue clairement que si on aligne une partie de l'image, l'autre partie est complètement décallée. Ce phénomène est dû à la distortion de l'appareil photo. Nous avons donc recherché un moyen de corriger cette distortion. Pour cela nous avons utilisé la correction de Lens\cite{lens}.
 		%http://www.paulbourke.net/miscellaneous/lenscorrection/%.ous 
 	%screenshot%
+	\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=.8]{lensAvant.jpg} \includegraphics[scale=.8]{lensApres.jpg}
+				\caption{Correction de Lens\cite{lens}} 
+		\end{figure}
+\\
+	Algorithme de Lens:
 	
-	%Algorithme de Lens%
-	
+\begin{lstlisting}
+Pre-conditions : coordonnées x et y, largeur et hauteur de l'image
+Post-condition : retourne les nouvelles coordonnées
+Fonction LensCorrection
+	px = (2.0*x - largeur) / largeur;
+	py = (2.0*y - hauteur) / hauteur;
+	r = px^2 + py^2;
+	p2x = px * (1.0 - 0.02 * r);
+	p2y = py * (1.0 - 0.08 * r);
+	x = (p2x + 1)*largeur/2;
+	y = (p2y+1)*hauteur/2;
+
+FinFonction
+\end{lstlisting}
+
+
 	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distortion. Pour vérifier cela nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
 		
-		\subsubsection{Comparaison des vecteurs}
 		
 		
 		\paragraph{Sélection des vecteurs\\}
@@ -319,8 +382,21 @@ FIN POUR
 		Pour parcourir les points clés, nous avons choisit d'utiliser des listes pour réduire la complexité du parcourt. Cependant pour vérifier que les coordonnées d'un vecteur tombe sur un point clé, nous avons utilisé une matrice pour accéder directement aux coordonnées données plutôt que de parcourir la liste jusqu'à trouver les coordonnées.
 		
 		%Figure des vecteurs%
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=0.3]{model.png}
+		\end{center}
+		\caption{Exemple de model de vecteurs}
+	\end{figure}
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=0.3]{fail.png}\includegraphics[scale=0.3]{success.png}
+		\caption{Schéma de la recherche des correspondances}
+		\end{center}
 		
-		
+	\end{figure}	
+	
+\newpage
 		\subsection{Algorithme}
 
 		
@@ -346,30 +422,57 @@ FONCTION comparer
 	On retourne le décalage le plus présent
 FinFonction		
 \end{lstlisting}
-		
-		
-		
 		\section{Fonction de collage des images}%Elie
 		\section{Notre algorithme principal}
-		Le but de notre programme était de prendre en paramètre un certains nombre de photo et de les assembler en fonction de leurs correspondances. Nous devions trouver un moyen de savoir la position de chaque image entre elle. La méthode utilisée est de calculer tout les décalages possibles entre chaque image avec notre algorithme de comparaison et de prendre celui qui apparait le plus de fois. Pour chaque image nous avons donc son meilleur décalage associé à une image dans une certaine direction.
-\\\\
+			L'assemblage d'image se déroule suivant plusieurs étapes bien distinctes.
+			
+			Dans un premier temps, on charge les images en paramètre dans un tableau d'images.
 \begin{lstlisting}
-Fonction panorama
-	charger les images en mémoires
-	charger les matrices des points clés
-	sélectionner des bandes pour chaque MatricePointClé
-	calculer tout les décalages possibles pour chaque image
-	coller les images en fonction des décalages
-	sauvegarder le résultat
+tableauImagesCouleur = creationTableauImageCouleur(input, nombreInput, bool_erreur);
 \end{lstlisting}
-		
+
+			Ensuite, on transforme ces images couleur en noir et blanc puis on les découpe en quatre. On laisse apparaitre les points clés dans le tier gauche de l'image, le tier droit, le tier haut et le tier bas. Le but est de limiter la comparaison du haut de l'image 1 et du bas de l'image 2 ou de la droite de l'image 1 et de la droite de l'image 2 et inversement pour limiter le temps du programme tout en conservant l'efficacité de l'algorithme de comparaison.
+\begin{lstlisting}
+tableauImagesTemporaire = creationTableauImageTemporaire(tableauImagesCouleur, nombreInput, bool_erreur);
+tabCoupes = creerTableauCoupe(tableauImagesTemporaire, nombreInput, bool_erreur);	
+\end{lstlisting}
+
+			Puis on récupère un tableau de décalage qui constituent tous les décalages possibles entre les images. On compare toutes les coupes entre-elles. On récupère aussi la fréquence des décalages s'ils sont trouvés plusieurs fois. Un décalage est stocké par image coupée. Pour l'utiliser, il faut créer auparavant un tableau de la taille du nombre de décalage qui indique s'il faut calculer un décalage ou pas. Cela permet de ne pas recalculer un décalage si cela a déjà été fait. Par exemple, si on calcule un decalage entre la partie droite de l'image 1 avec la partie gauche de l'image 2 sachant qu'on clcule tous les decalage à partir de l'image 1, alors lorsqu'on calcule les décalages de l'image 2 par rapport aux autres images, on ne recalculera pas le decalage entre l'image 2 et l'image 1.
+\begin{lstlisting}
+decalageAPasCalculer = genererTableauDecalageAPasCalculer(nombreInput);
+decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
+\end{lstlisting}
+
+			Une fois ce travail effectué, on peut libérer le tableau d'images en noir et blanc.
+\begin{lstlisting}
+libererTableauImages2(tableauImagesTemporaire, nombreInput);
+\end{lstlisting}
+
+			Enfin, on colle les images en fonctions des décalages les plus fréquents et on récupère l'image la plus grande.
+\begin{lstlisting}
+imageFin = collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
+\end{lstlisting}
+
+			Dans la fonction principale, on récupère cette image et on la savegarde dans le fichier demandé.
+\begin{lstlisting}
+panorama = traitementPanorama(tableauImagesCouleur, nombreInput, bool_erreur);
+save(panorama, output, bool_erreur);
+\end{lstlisting}
+			
+
 		\section{Comment améliorer cet algorithme ?}%Ludo
 		
-		Améliorer l'algorithme pour coller toutes les images.
-		Améliorer la sélection des points clés pour en avoir moins et gagner du temps pour la comparaison.
-		Optimiser le traitement des images
-\chapter*{Conclusion}%Elie ou Quentin
+		La première chose à améliorer est l'algorithme pour coller toutes les images. Il n'est pas tout à fait au point et ne prend pas en compte tout les cas possibles.\\
+		Une autre amélioration serait de réduire au maximum la sélection des points clés pour en avoir moins et gagner du temps lors de la comparaison.\\
+		De plus il serait interessant d'accélérer le temps de traitement des images. \\
+	Et enfin il faudrait prendre en compte plus de cas, notre programme prend en charge uniquement les photos dont la correspondance se trouve sur le tiers extérieur de l'image.
 	
+\chapter*{Conclusion}%Elie ou Quentin
+	Pour conclure, on peut dire que ce projet était très compliqué à gérer, notamment parce que le temps imparti était très important (un semestre) mais aussi parce que le traitement d'image est plus compliqué que ce que l'on peut penser à première vue. De plus c'est la première fois, que la classe est laissée en autonomie tout au long du projet, il a donc fallu apprendre un nouveau langage, tout en avançant notre projet.
+	
+	Il a aussi fallu que tous les membres du groupe apprenne à se connaitre pour que le fonctionnement du groupe et l'efficacité du travail soit optimal. 
+	
+	Après de nombreuses recherches, de nombreux tests et des tentatives plus ou moins fructueuse, nous avons réussi a remplir les objectifs du projet pas à pas et à rendre un travail fonctionnel même s'il reste des améliorations à apporter.
 	
 \printbibliography
 \end{document}
