@@ -99,7 +99,7 @@
 \chapter*{Introduction}	
 		Le projet se conclue par ce dernier livrable en fin de semestre. L'objectif est donc de créer un programme qui assemble des images ou des photos pour réaliser un panorama.	Pour cela, il a fallu mettre en oeuvre toutes nos connaissances accumulées au cours des deux premiers mois, ainsi que nos recherches pour remplir l'objectif fixé par ce projet.
 		
-		Dans un premier temps, nous allons présenter les fonctions réalisées pour le second librable car elles ont été très utiles pour la réalisation de notre algorithme codé durant cette dernière partie.
+		Dans un premier temps, nous allons présenter les fonctions réalisées pour le second livrable car elles ont été très utiles pour la réalisation de notre algorithme codé durant cette dernière partie.
 		
 		Dans un second temps, nous allons présenter les étapes ainsi que les fonctions principales de notre algorithme qui relie les images entre elles. Puis, nous expliquerons les améliorations que nous aurions pu apporter au programme.
 		
@@ -124,7 +124,7 @@
 			  Chaque pixel d'une image binaire ne peut avoir pour valeurs que 0 ou 1.\\
 			  La fonction binary nécessite un seuil et une image en teintes de gris, le seuil étant choisit par l'utilisateur.\\
 			  
-			  On parcourt l'image en teintes de gris, et pour chaque pixel, si son instensité est supérieure au seuil, on lui alloue la valeur 0 qui correspond à la couleur blanche.  Si l'intensité du pixel est supérieure au seuil, on lui alloue la valeur 1 qui correspond à la couleur noire.\\
+			  On parcourt l'image en teintes de gris, et pour chaque pixel, si son intensité est supérieure au seuil, on lui alloue la valeur 0 qui correspond à la couleur blanche.  Si l'intensité du pixel est supérieure au seuil, on lui alloue la valeur 1 qui correspond à la couleur noire.\\
 			  Voici l'algorithme utilisé : \\
 
 
@@ -141,7 +141,7 @@
 			  Le but est de compter pour chaque intensité le nombre de pixels qui sont de cette intensité.\\
 			 
 			 D'abord on crée un tableau de taille égale à la teinte maximale de l'image dont on veut obtenir l'histogramme.\\
-			 Ensuite, on parcourt l'image et pour chaque pixel, on rajoute 1 dans la case du tableau qui correspond à l'instensité de ce pixel.\\\\\\
+			 Ensuite, on parcourt l'image et pour chaque pixel, on rajoute 1 dans la case du tableau qui correspond à l'intensité de ce pixel.\\\\\\
 			 
 
 			 
@@ -325,10 +325,10 @@ FIN POUR
 			
 \newpage
 \section{Algorithme de comparaison des points clés} %Ludo
-		Pour trouver les points clés, nous avons d'abord fait beaucoup de recherches sur internet. Une des méthodes citées était le ZNCC, un algorithme qui donne une note entre deux points. Il suffisait donc avec cette méthode de comparer cette note. Cependant nous l'avons testé et il y avait trop de similitude entre les points. La deuxième méthode trouvée était de comparer les valeurs de Harris. Or harris ne nous satisfaisait pas pour la recherche des points clés donc nous avons abandonné. Finallement nous avons arrêté nos recherches sur internet pour se mettre à réfléchir de nous même et à concevoir un algorithme simple pour comparer nos points clés.
+		Pour trouver les points clés, nous avons d'abord fait beaucoup de recherches sur internet. Une des méthodes citées était le ZNCC, un algorithme qui donne une note entre deux points. Il suffisait donc avec cette méthode de comparer cette note. Cependant nous l'avons testé et il y avait trop de similitudes entre les points. La deuxième méthode trouvée était de comparer les valeurs de Harris. Or harris ne nous satisfaisait pas pour la recherche des points clés donc nous l'avons abandonné. Finalement nous avons arrêté nos recherches sur internet pour réfléchir de nous même et à concevoir un algorithme simple pour comparer nos points clés.
 		
 		\subsection{Schématisation de notre algorithme}
-		Notre point de départ était de comparer des vecteurs dans chaque image. Nous avions d'abord essayé de comparer un seul vecteur sur des images coupé à l'ordinateur et le résultat était très satisfaisant. Par contre quand nous avons essayé cette méthode sur des photos cela n'a pas été concluant.
+		Notre point de départ était de comparer des vecteurs dans chaque image. Nous avions d'abord essayé de comparer un seul vecteur sur des images coupées à l'ordinateur et le résultat était très satisfaisant. Par contre quand nous avons essayé cette méthode sur des photos cela n'a pas été concluant.
 		
 		\subsubsection{Recherches}
 		Dans l'idée de comparer des vecteurs, nous avons d'abord essayé d'assembler deux photos à l'aide du logiciel Gimp. Voici le rendu :\\
@@ -341,7 +341,7 @@ FIN POUR
 				
 	
 		
-		De loin, le résultat n'est pas trop mal mais lorsqu'on se rapproche, on distingue clairement que si on aligne une partie de l'image, l'autre partie est complètement décallée. Ce phénomène est dû à la distortion de l'appareil photo. Nous avons donc recherché un moyen de corriger cette distortion. Pour cela nous avons utilisé la correction de Lens\cite{lens}.
+		De loin, le résultat n'est pas trop mal mais lorsqu'on se rapproche, on distingue clairement que si on aligne une partie de l'image, l'autre partie est complètement décalée. Ce phénomène est dû à la distorsion de l'appareil photo. Nous avons donc recherché un moyen de corriger cette distorsion. Pour cela nous avons utilisé la correction de Lens\cite{lens}.
 		%http://www.paulbourke.net/miscellaneous/lenscorrection/%.ous 
 	%screenshot%
 	\begin{figure}[htbp]
@@ -368,12 +368,12 @@ FinFonction
 \end{lstlisting}
 
 
-	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distortion. Pour vérifier cela nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
+	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distorsion. Pour vérifier cela, nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
 		
 		
 		
 		\paragraph{Sélection des vecteurs\\}
-		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous vons choisit de sélectionner 20 vecteurs de même origine dans une fênetre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
+		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous avons choisit de sélectionner 20 vecteurs de même origine dans une fenêtre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
 		
 		\paragraph{Recherche des correspondances\\}
 		
@@ -422,12 +422,59 @@ FONCTION comparer
 FinFonction		
 \end{lstlisting}
 		\section{Fonction de collage des images}%Elie
-		        Nous voulons coller les deux images A et B. Ces deux images ont des points clefs en commun. Grâce à ces points clefs en commun, on peut calculer le décalage de la première image par rapport à l'autre. 
-		        C'est ce décalage que va utiliser l'agorithme de collage.
-		        Il y a deux cas de figure, soit les décalages en abscisse et en ordonnées sont positifs, soit le décalage en abscisse est positif et celui en ordonnée négatif.
-		        Pour expliquer cet algorithme, nous allons nous concentrer sur le premier cas.
+
+		 Nous voulons coller les deux images A et B. Ces deux images ont des points clefs en commun. Grâce à ces points clefs en commun, on peut calculer le décalage de la première image par rapport à l'autre. \\
+		 C'est ce décalage que va utiliser l'agorithme de collage.\\\\
+		  Il y a grossièrement deux cas de figure, soit les décalages en abscisse et en ordonnées sont positifs, soit le décalage en abscisse est positif et celui en ordonnée négatif.\\
+		  Pour expliquer cet algorithme, nous allons nous concentrer sur le premier cas.\\
+		  Il faut d'abord calculer la taille de l'image finale.\\
 		        
+			  Calcul de la taille de l'image finale dans le cas où les décalages en abscisse et en ordonnée sont positifs: \\
+	
+
 		        
+	
+                   \begin{lstlisting}
+FONCTION taille
+{	
+largeur=max(largeurImage1, decalage.x+largeurImage2);
+hauteur=max(hauteurImage1,decalage.y+hImage2);
+On retourne la taille de l'image finale en hauteur et en largeur.
+ }
+                   \end{lstlisting}
+                   
+	       \begin{figure}[h]
+		\begin{center}
+		%shéma taille images
+		\end{center}
+		
+	\end{figure}	
+	        Après cette étape, on peut passer au collage à proprement parler. \\
+	        On obtient donc un plan dans lequel il faut faire rentrer ces deux images. \\On initialise donc d'abord l'image de la taille obtenue avec des pixels noirs.\\
+	        On écrit ensuite la première image à partir du point A(0,0) qui est l'origine. \\Ensuite on écrit la deuxième image à partir du point B(decalage.x, decalage.y).\\\\
+	 \begin{lstlisting}
+FONCTION fusion
+{	
+          matriceImageFinale=initMatrice(0, largeur, hauteur);
+          POUR (i=0; i<largeurImage1;i++)
+          {
+	        POUR (j=0;j<hauteurImage1;j++)
+	        {
+		    matriceImageFinale=image1.teinte[j][i];
+		}
+          }
+          POUR (i=decalage.x;i<decalage.x+largeurImage2;i++)
+          {
+               POUR (j=decalage.y,j<hauteurImage2,j++)
+               {
+                   matriceImageFinale=image2.teinte[j-decalage.y][i-decalage.x];
+               }
+          }
+          On retourne la matriceImageFinale
+ }
+                   \end{lstlisting}
+                   
+      Le cas où le décalage en ordonnée est négatif, la méthode est équivalente sauf que l'on colle l'image 1 à partir du point A (0, decalage.y) et on colle l'image 2 à partir du point B(decalage.x,0).\\
 		\section{Notre algorithme principal}
 			L'assemblage d'images se déroule suivant plusieurs étapes bien distinctes.
 			
