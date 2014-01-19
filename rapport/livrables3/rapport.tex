@@ -288,7 +288,7 @@ FIN POUR
 			
 			Pour finir cette détection, on parcourt l'image pour voir si un point blanc possède quinze voisins dans un carré de 15x15 pixels autour de lui. Cela peut s'apparenter à une forme de dilatation. Cette dernière opération est très utile lors de l'algorithme de comparaison des points clés expliqé ci-dessous.
 			
-		\section{Algorithme de comparaison des points clé} %Ludo
+		\section{Algorithme de comparaison des points clés} %Ludo
 		Pour trouver les points clés, nous avons d'abord fait beaucoup de recherches sur internet. Une des méthodes citées était le ZNCC, un algorithme qui donne une note entre deux points. Il suffisait donc avec cette méthode de comparer cette note. Cependant nous l'avons testé et il y avait trop de similitude entre les points. La deuxième méthode trouvée était de comparer les valeurs de Harris. Or harris ne nous satisfaisait pas pour la recherche des points clés donc nous avons abandonné. Finallement nous avons arrêté nos recherches sur internet pour se mettre à réfléchir de nous même et à concevoir un algorithme simple pour comparer nos points clés.
 		
 		\subsection{Schématisation de notre algorithme}
@@ -352,9 +352,22 @@ FinFonction
 		\section{Fonction de collage des images}%Elie
 		\section{Notre algorithme principal}
 		Le but de notre programme était de prendre en paramètre un certains nombre de photo et de les assembler en fonction de leurs correspondances. Nous devions trouver un moyen de savoir la position de chaque image entre elle. La méthode utilisée est de calculer tout les décalages possibles entre chaque image avec notre algorithme de comparaison et de prendre celui qui apparait le plus de fois. Pour chaque image nous avons donc son meilleur décalage associé à une image dans une certaine direction.
+\\\\
+\begin{lstlisting}
+Fonction panorama
+	charger les images en mémoires
+	charger les matrices des points clés
+	sélectionner des bandes pour chaque MatricePointClé
+	calculer tout les décalages possibles pour chaque image
+	coller les images en fonction des décalages
+	sauvegarder le résultat
+\end{lstlisting}
 		
 		\section{Comment améliorer cet algorithme ?}%Ludo
 		
+		Améliorer l'algorithme pour coller toutes les images.
+		Améliorer la sélection des points clés pour en avoir moins et gagner du temps pour la comparaison.
+		Optimiser le traitement des images
 \chapter*{Conclusion}%Elie ou Quentin
 	
 	
