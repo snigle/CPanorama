@@ -369,12 +369,12 @@ FinFonction
 \end{lstlisting}
 
 
-	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distortion. Pour vérifier cela nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
+	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distorsion. Pour vérifier cela, nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
 		
 		
 		
 		\paragraph{Sélection des vecteurs\\}
-		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous vons choisit de sélectionner 20 vecteurs de même origine dans une fênetre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
+		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous avons choisit de sélectionner 20 vecteurs de même origine dans une fenêtre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
 		
 		\paragraph{Recherche des correspondances\\}
 		
