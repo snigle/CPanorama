@@ -78,7 +78,6 @@
 }
 
 \begin{document}
-
 \title{Réalisation d'un panorama}
 
 \author{
@@ -323,8 +322,9 @@ FIN POUR
 			
 		\section{Algorithme de comparaison des points clé} %Ludo
 		\section{Fonction de collage des images}%Elie
+		        Nous voulons coller les deux images A et B. Ces deux images ont des points clefs en commun. 
 		\section{Notre algorithme principal}
-			L'assemblage d'image se déroule suivant plusieurs étapes bien distinctes.
+			L'assemblage d'images se déroule suivant plusieurs étapes bien distinctes.
 			
 			Dans un premier temps, on charge les images en paramètre dans un tableau d'images.
 \begin{lstlisting}
@@ -337,7 +337,7 @@ tableauImagesTemporaire = creationTableauImageTemporaire(tableauImagesCouleur, n
 tabCoupes = creerTableauCoupe(tableauImagesTemporaire, nombreInput, bool_erreur);	
 \end{lstlisting}
 
-			Puis on récupère un tableau de décalage qui constituent tous les décalages possibles entre les images. On compare toutes les coupes entre-elles. On récupère aussi la fréquence des décalages s'ils sont trouvés plusieurs fois. Un décalage est stocké par image coupée. Pour l'utiliser, il faut créer auparavant un tableau de la taille du nombre de décalage qui indique s'il faut calculer un décalage ou pas. Cela permet de ne pas recalculer un décalage si cela a déjà été fait. Par exemple, si on calcule un decalage entre la partie droite de l'image 1 avec la partie gauche de l'image 2 sachant qu'on clcule tous les decalage à partir de l'image 1, alors lorsqu'on calcule les décalages de l'image 2 par rapport aux autres images, on ne recalculera pas le decalage entre l'image 2 et l'image 1.
+			Puis on récupère un tableau de décalages qui constituent tous les décalages possibles entre les images. On compare toutes les coupes entre-elles. On récupère aussi la fréquence des décalages s'ils sont trouvés plusieurs fois. Un décalage est stocké par image coupée. Pour l'utiliser, il faut créer auparavant un tableau de la taille du nombre de décalages qui indique s'il faut calculer un décalage ou pas. Cela permet de ne pas recalculer un décalage si cela a déjà été fait. Par exemple, si on calcule un decalage entre la partie droite de l'image 1 avec la partie gauche de l'image 2 sachant qu'on calcule tous les decalage à partir de l'image 1, alors lorsqu'on calcule les décalages de l'image 2 par rapport aux autres images, on ne recalculera pas le decalage entre l'image 2 et l'image 1.
 \begin{lstlisting}
 decalageAPasCalculer = genererTableauDecalageAPasCalculer(nombreInput);
 decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
@@ -353,7 +353,7 @@ libererTableauImages2(tableauImagesTemporaire, nombreInput);
 imageFin = collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
 \end{lstlisting}
 
-			Dans la fonction principale, on récupère cette image et on la savegarde dans le fichier demandé.
+			Dans la fonction principale, on récupère cette image et on la sauvegarde dans le fichier demandé.
 \begin{lstlisting}
 panorama = traitementPanorama(tableauImagesCouleur, nombreInput, bool_erreur);
 save(panorama, output, bool_erreur);

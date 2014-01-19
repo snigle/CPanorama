@@ -78,7 +78,6 @@
 }
 
 \begin{document}
-
 \title{Réalisation d'un panorama}
 
 \author{
@@ -324,7 +323,7 @@ FIN POUR
 		\section{Algorithme de comparaison des points clé} %Ludo
 		\section{Fonction de collage des images}%Elie
 		\section{Notre algorithme principal}
-			L'assemblage d'image se déroule suivant plusieurs étapes bien distinctes.
+			L'assemblage d'images se déroule suivant plusieurs étapes bien distinctes.
 			
 			Dans un premier temps, on charge les images en paramètre dans un tableau d'images.
 \begin{lstlisting}
@@ -362,7 +361,9 @@ save(panorama, output, bool_erreur);
 		\section{Comment améliorer cet algorithme ?}%Ludo
 		
 \chapter*{Conclusion}%Elie ou Quentin
-	Pour conclure, on peut dire que ce projet était très compliqué à gérer, notamment parce que le temps imparti était très important (un semestre) mais aussi parce que le traitement d'image est plus compliqué que ce que l'on peut penser à première vue. De plus c'est la première fois, que la classe est laissée en autonomie tout au long du projet, il a donc fallu apprendre un nouveau langage, tout en avançant notre projet. Il a aussi fallu que tous les membres du groupe apprenne à se connaitre pour que le fonctionnement du groupe et l'efficacité du travail soit optimal. 
+	Pour conclure, on peut dire que ce projet était très compliqué à gérer, notamment parce que le temps imparti était très important (un semestre) mais aussi parce que le traitement d'image est plus compliqué que ce que l'on peut penser à première vue. De plus c'est la première fois, que la classe est laissée en autonomie tout au long du projet, il a donc fallu apprendre un nouveau langage, tout en avançant notre projet.
+	
+	Il a aussi fallu que tous les membres du groupe apprenne à se connaitre pour que le fonctionnement du groupe et l'efficacité du travail soit optimal. 
 	
 	Après de nombreuses recherches, de nombreux tests et des tentatives plus ou moins fructueuse, nous avons réussi a remplir les objectifs du projet pas à pas et à rendre un travail fonctionnel même s'il reste des améliorations à apporter.
 	
