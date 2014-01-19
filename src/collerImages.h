@@ -22,7 +22,20 @@
 #include "gestionListeCoordonnees.h"
 
 
-int estNoir(int** teinte, int y, int x, int k);
+/*!
+       \fn int pixelNoir(Image image, int x, int y, int ppm)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Vérifie si un pixel est noir      
+       \param image : (image) Image à tester
+       \param x : (int) position en x
+       \param y : (int) position en y
+       \param ppm : (int) vaut 3 si c'est un ppm
+       \return retourne 1 si le pixel est noir
+               
+       \remarks 
+
+*/
 int pixelNoir(Image image, int x, int y, int ppm);
 
 /*!

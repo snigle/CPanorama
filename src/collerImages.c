@@ -27,17 +27,6 @@ int* taille(ListePoints* decalage, int hImage1, int hImage2, int  lImage1, int l
 	return(taille);	
 }
 
-int estNoir(int** teinte, int y, int x, int k)
-{
-	int result;
-	int f;
-	result = 1;
-	for (f = 0; f < k; f += 1)
-	{
-		result = result && teinte[y][x+f];
-	}
-	return result;
-}
 
 int pixelNoir(Image image, int x, int y, int ppm)
 {

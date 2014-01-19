@@ -22,10 +22,59 @@ typedef struct sListe
 	struct sListe* suivant;
 }ListePoints;
 
+/*!
+       \fn ListePoints* maxListe(ListePoints* liste, ListePoints* max)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Renvoie le noeud ou la valeur de la liste est le maximum               
+       \param liste : (listepoints*) Liste à tester
+       \param max : (listepoints*) Premier noeud de la liste
+       \return retourne le noeud maximum
+               
+       \remarks 
 
+*/
 ListePoints* maxListe(ListePoints* liste, ListePoints* max);
+
+/*!
+       \fn ListePoints copieListe(ListePoints* liste)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Fait une copie de la liste en mémoire               
+       \param liste : (listepoints*) Liste à copier
+       \return retourne l'adresse de la nouvelle liste
+               
+       \remarks 
+
+*/
 ListePoints* copieListe(ListePoints* liste);
+
+/*!
+       \fn ListePoints* positionListe(ListePoints* list, int position)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Renvoie le n ème noeud de la liste               
+       \param list : (listepoints*) liste à tester
+       \param position : (int) position du noeud à rechercher
+       \return retourne le nème noeud
+               
+       \remarks 
+
+*/
 ListePoints* positionListe (ListePoints* list, int position);
+
+/*!
+       \fn int tailleListe(ListePoints* list, int position)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Renvoie la taille d'une liste               
+       \param list : (listepoints*) Liste à tester
+       \param position : (int) incrémenteur de récursivité, mettre à 0
+       \return retourne la taille de la liste
+               
+       \remarks 
+
+*/
 int tailleListe (ListePoints* list, int position);
 
 

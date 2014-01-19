@@ -287,7 +287,6 @@ Decalage* calculerTousLesDecalage(Image*** tab, int** decalageAPasCalculer, int 
 	for (l = 0; l < nombreImage; l += 1)
 	{
 		result[l].valeur.valeur = 0;
-		
 		for (i = 0; i < 2; i += 1)
 		{
 			for (j = 0; j < 4; j += 1)

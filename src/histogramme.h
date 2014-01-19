@@ -85,10 +85,48 @@ int calculMax(int* int_tabhist, int int_teinteMax);
 */
 int** Tracer(int* int_tabhist, int int_taille, int int_teinteMax);
 
+/*!
+       \fn void remplirNouvellesTeintes(Image image, int decalage)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief remplie des teintes de l'image               
+       \param image : (image) image à modifier
+       \param decalage : (int) décalage utilisé
+       
+               
+       \remarks 
+
+*/
 void remplirNouvellesTeintes (Image image, int decalage);
 
+/*!
+       \fn int calculMediane(int iterationMediane, int* histogramme)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Calcul la médiane en fonction de l'histogramme               
+       \param iterationmediane : (int) iteration de récursivité à 0
+       \param histogramme : (int*) histogramme ( tableau de int)
+       \return retourne la médiane
+               
+       \remarks 
+
+*/
 int calculMediane(int iterationMediane,int* histogramme);
 
+/*!
+       \fn int calculDecalage(Image im_image1, Image im_image2, int* m1supm2, int* int_bool_erreur)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Calcul le décalage               
+       \param im_image1 : (image) Image 1
+       \param im_image2 : (image) image 2
+       \param m1supm2 : (int*) 
+       \param int_bool_erreur : (int*) boolean d'erreur, (ne rien faire si vaut 1)	
+       \return retourne un décalage
+               
+       \remarks 
+
+*/
 int calculDecalage(Image im_image1, Image im_image2, int* m1supm2, int* int_bool_erreur);
 
 /*!

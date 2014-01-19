@@ -20,10 +20,20 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}R\'ecup\'eration des points cl\'e}{9}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Algorithme de comparaison des points cl\'e}{14}{section.2.2}
+\contentsline {section}{\numberline {2.2}Algorithme de comparaison des points cl\'es}{15}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Fonction de collage des images}{14}{section.2.3}
+\contentsline {subsection}{\numberline {2.2.1}Sch\'ematisation de notre algorithme}{15}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Notre algorithme principal}{14}{section.2.4}
+\contentsline {subsubsection}{Recherches}{15}{section*.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Comment am\'eliorer cet algorithme ?}{16}{section.2.5}
+\contentsline {paragraph}{S\'election des vecteurs\\}{17}{section*.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Recherche des correspondances\\}{17}{section*.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.2}Algorithme}{18}{subsection.2.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Fonction de collage des images}{19}{section.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.4}Notre algorithme principal}{21}{section.2.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.5}Comment am\'eliorer cet algorithme ?}{23}{section.2.5}

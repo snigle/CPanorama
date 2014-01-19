@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.11)  19 JAN 2014 20:41
-=======
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.11)  19 JAN 2014 20:07
->>>>>>> e9beabeba2027f7590c2f4a8de983e6146c7c2e7
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.11)  19 JAN 2014 16:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -606,13 +602,7 @@ Package biblatex Warning: Data encoding is 'latin1'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'rapport.bbl' found.
-(./rapport.bbl
-
-Package biblatex Warning: BibTeX reported the following issues
-(biblatex)                with 'lens':
-(biblatex)                - Invalid format of field 'month'.
-
-)
+(./rapport.bbl)
 Package biblatex Info: Reference section=0 on input line 80.
 Package biblatex Info: Reference segment=0 on input line 80.
 \c@lstlisting=\count284
@@ -643,12 +633,12 @@ LaTeX Info: Redefining \nameref on input line 80.
 \@outlinefile=\write4
 \openout4 = `rapport.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 93.
+LaTeX Font Info:    Try loading font information for U+msa on input line 94.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 93.
+LaTeX Font Info:    Try loading font information for U+msb on input line 94.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -662,262 +652,120 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.99 \chapter
-             *{Introduction} [1
+l.100 	\chapter
+               *{Introduction} [1
 
 ] [2
 
 ]
 Chapitre 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 111--121
+Underfull \hbox (badness 10000) in paragraph at lines 109--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--126
+Underfull \hbox (badness 10000) in paragraph at lines 122--124
 
  []
 
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 127--129
+Underfull \hbox (badness 10000) in paragraph at lines 125--127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--142
+Underfull \hbox (badness 10000) in paragraph at lines 138--140
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--145
+Underfull \hbox (badness 10000) in paragraph at lines 141--143
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--145
+Underfull \hbox (badness 10000) in paragraph at lines 141--143
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--145
+Underfull \hbox (badness 10000) in paragraph at lines 141--143
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 158--159
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
 
 Package frenchb.ldf Warning: Degrees would look better in TS1-encoding: 
 (frenchb.ldf)                add \usepackage{textcomp} to the preamble. 
-(frenchb.ldf)                Degrees used on input line 181.
+(frenchb.ldf)                Degrees used on input line 179.
 
 [5]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\cite' on input line 214.
+(hyperref)                removing `\cite' on input line 212.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 220--234
+Underfull \hbox (badness 10000) in paragraph at lines 218--232
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
 
  []
 
 [8]
 Chapitre 2.
+
+Overfull \hbox (18.07402pt too wide) in paragraph at lines 258--258
+[]\T1/cmr/bx/n/17.28 La dé-tec-tion des points d'in-té-rêts d'une image 
+ []
+
 [9
 
-] <imageBase.png, id=176, 1746.525pt x 1201.48875pt>
-File: imageBase.png Graphic file (type png)
- <use imageBase.png>
-Package pdftex.def Info: imageBase.png used on input line 280.
-(pdftex.def)             Requested size: 436.63019pt x 300.37146pt.
-
-Overfull \hbox (46.63019pt too wide) in paragraph at lines 280--281
- [][] 
- []
-
-[10 <./imageBase.png (PNG copy)>]
-<convo.png, id=181, 1746.525pt x 1201.48875pt>
-File: convo.png Graphic file (type png)
- <use convo.png>
-Package pdftex.def Info: convo.png used on input line 298.
-(pdftex.def)             Requested size: 436.63019pt x 300.37146pt.
-
-Overfull \hbox (46.63019pt too wide) in paragraph at lines 298--299
- [][] 
- []
-
-[11 <./convo.png (PNG copy)>] <binaire.png, id=186, 1746.525pt x 1201.48875pt>
-File: binaire.png Graphic file (type png)
-
-<use binaire.png>
-Package pdftex.def Info: binaire.png used on input line 305.
-(pdftex.def)             Requested size: 436.63019pt x 300.37146pt.
-
-Overfull \hbox (46.63019pt too wide) in paragraph at lines 305--306
- [][] 
- []
-
-[12 <./binaire.png (PNG copy)>]
-<erosionDilatation.png, id=192, 1746.525pt x 1201.48875pt>
-File: erosionDilatation.png Graphic file (type png)
-
-<use erosionDilatation.png>
-Package pdftex.def Info: erosionDilatation.png used on input line 313.
-(pdftex.def)             Requested size: 436.63019pt x 300.37146pt.
-
-Overfull \hbox (46.63019pt too wide) in paragraph at lines 313--314
- [][] 
- []
-
-[13 <./erosionDilatation.png (PNG copy)>]
-<enleverNonVoisin.png, id=197, 1746.525pt x 1201.48875pt>
-File: enleverNonVoisin.png Graphic file (type png)
-
-<use enleverNonVoisin.png>
-Package pdftex.def Info: enleverNonVoisin.png used on input line 322.
-(pdftex.def)             Requested size: 436.63019pt x 300.37146pt.
-
-Overfull \hbox (46.63019pt too wide) in paragraph at lines 322--323
- [][] 
- []
-
-[14 <./enleverNonVoisin.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 334--335
-
- []
-
-<decalage.png, id=202, 497.86pt x 492.84125pt>
-File: decalage.png Graphic file (type png)
- <use decalage.png>
-Package pdftex.def Info: decalage.png used on input line 339.
-(pdftex.def)             Requested size: 174.2536pt x 172.49701pt.
-
-<lensAvant.jpg, id=204, 301.125pt x 128.48pt>
-File: lensAvant.jpg Graphic file (type jpg)
- <use lensAvant.jpg>
-Package pdftex.def Info: lensAvant.jpg used on input line 349.
-(pdftex.def)             Requested size: 240.90031pt x 102.78412pt.
-
-<lensApres.jpg, id=205, 301.125pt x 128.48pt>
-File: lensApres.jpg Graphic file (type jpg)
- <use lensApres.jpg>
-Package pdftex.def Info: lensApres.jpg used on input line 349.
-(pdftex.def)             Requested size: 240.90031pt x 102.78412pt.
- [15 <./decalage.png (PNG copy)>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 359.
-
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 359.
-
-[16 <./lensAvant.jpg> <./lensApres.jpg>]
-<model.png, id=233, 361.35pt x 393.47pt>
-File: model.png Graphic file (type png)
- <use model.png>
-Package pdftex.def Info: model.png used on input line 390.
-(pdftex.def)             Requested size: 108.40584pt x 118.0419pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<fail.png, id=234, 229.85875pt x 340.27126pt>
-File: fail.png Graphic file (type png)
- <use fail.png>
-Package pdftex.def Info: fail.png used on input line 396.
-(pdftex.def)             Requested size: 68.95815pt x 102.08215pt.
-
-<success.png, id=235, 309.155pt x 388.45125pt>
-File: success.png Graphic file (type png)
- <use success.png>
-Package pdftex.def Info: success.png used on input line 396.
-(pdftex.def)             Requested size: 92.74721pt x 116.53627pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[17] [18 <./model.png> <./fail.png> <./success.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 430--435
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 430--435
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 436--437
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 450--453
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 450--453
-
- []
-
-[19] <collage.png, id=283, 798.73407pt x 431.36156pt>
-File: collage.png Graphic file (type png)
- <use collage.png>
-Package pdftex.def Info: collage.png used on input line 478.
-(pdftex.def)             Requested size: 319.48798pt x 172.54156pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[20] [21 <./collage.png>] [22] [23] [24
+] [10
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 533.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 270.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (19.33902pt too wide) in paragraph at lines 534--534
+Overfull \hbox (19.33902pt too wide) in paragraph at lines 271--271
 []\T1/cmr/m/n/12 David \T1/cmr/m/sc/12 Vers-non\T1/cmr/m/n/12 . \T1/cmr/m/it/12
  Ma-chine Vi-sion\T1/cmr/m/n/12 . 1991. Chap. 4. \T1/cmr/m/sc/12 url \T1/cmr/m/
 n/12 : [][]$\T1/cmtt/m/n/12 http : / / homepages .
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 534.
-[25
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 271.
+[11
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 534.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 271.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 534.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 534.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 271.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 271.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 45CD39FF1CA49DFF5FA9D84FF29F73D2;1056.
+(rerunfilecheck)             Checksum: C183DD508F548B7F71CDBF4A7EC071E8;1026.
 Package logreq Info: Writing requests to 'rapport.run.xml'.
 \openout1 = `rapport.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 13707 strings out of 493485
- 205219 string characters out of 3143526
- 563049 words of memory out of 3000000
- 16645 multiletter control sequences out of 15000+200000
+ 13446 strings out of 493485
+ 201479 string characters out of 3143526
+ 455049 words of memory out of 3000000
+ 16502 multiletter control sequences out of 15000+200000
  22362 words of font info for 61 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 31i,9n,45p,820b,1903s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,9n,45p,817b,1903s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
@@ -932,10 +780,10 @@ onts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm
 </usr/share/texmf/fonts/type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fo
 nts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-
 super/sftt1200.pfb>
-Output written on rapport.pdf (26 pages, 6046677 bytes).
+Output written on rapport.pdf (12 pages, 266794 bytes).
 PDF statistics:
- 449 PDF objects out of 1000 (max. 8388607)
- 388 compressed objects within 4 object streams
- 168 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 261 PDF objects out of 1000 (max. 8388607)
+ 228 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 113 words of extra memory for PDF output out of 10000 (max. 10000000)
 
