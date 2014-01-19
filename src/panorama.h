@@ -51,17 +51,7 @@ typedef struct Decalage
 
 
 
-/*!
-       \fn void afficherDecalage(Decalage decalage)
-       \author Poussou Elie <poussoueli@eisti.eu>
-       \date Fri 17 Jan 2014
-       \brief permet d'afficher un décalage               
-       \param decalage : (decalage) : le décalage 
-               
-       \remarks 
 
-*/
-void afficherDecalage(Decalage decalage);
 /*!
        \fn void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int image2, Image*** tab, Decalage* result)
        \author Poussou Elie <poussoueli@eisti.eu>

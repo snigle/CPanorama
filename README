@@ -4,12 +4,3 @@ $make doc
 
 Elle se trouvera dans le dossier ./doc/
 
-
-Pour le rapport ludo, tu pourra checker le .bib ? ca plante chez moi :/
-
-collerImages : ludo
-
-
-gestop,ListeCoordonne : ludo
-header : ludo
-histogramme : ludo

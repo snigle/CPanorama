@@ -1,26 +1,32 @@
 #include "collerImages.h"
 
+int max(int a, int b)
+{
+	return a > b ? a : b;
+}
+
 int* taille(ListePoints* decalage, int hImage1, int hImage2, int  lImage1, int lImage2)
 {
 	int hauteur;
 	int largeur;
 	int* taille;
 	taille=mallocBis(2*sizeof(int));
-	if(decalage->x>0 && decalage->y>0){
-		largeur=fmax(lImage1,decalage->x + lImage2);
-		hauteur=fmax(hImage1,decalage->y + hImage2);
+
+	if(decalage->x>=0 && decalage->y>=0){
+		largeur=max(lImage1,decalage->x + lImage2);
+		hauteur=max(hImage1,decalage->y + hImage2);
 	}
-	if(decalage->x>0 && decalage->y<0){
-		largeur=fmax(lImage1,decalage->x + lImage2);
-		hauteur=fmax(hImage2,(-decalage->y)+hImage1);
+	if(decalage->x>=0 && decalage->y<=0){
+		largeur=max(lImage1,decalage->x + lImage2);
+		hauteur=max(hImage2,(-decalage->y)+hImage1);
 	}
-	if(decalage->x<0 && decalage->y>0){
-		largeur=fmax(lImage2,(-decalage->x)+lImage1);
-		hauteur=fmax(hImage1,decalage->y + hImage2);
+	if(decalage->x<=0 && decalage->y>=0){
+		largeur=max(lImage2,(-decalage->x)+lImage1);
+		hauteur=max(hImage1,decalage->y + hImage2);
 	}
-	if(decalage->x<0 && decalage->y<0){
-		largeur=fmax(lImage2,(-decalage->x)+lImage1);
-		hauteur=fmax(hImage2,(-decalage->y)+hImage1);
+	if(decalage->x<=0 && decalage->y<=0){
+		largeur=max(lImage2,(-decalage->x)+lImage1);
+		hauteur=max(hImage2,(-decalage->y)+hImage1);
 	}
 	taille[0]=largeur;
 	taille[1]=hauteur;
@@ -159,41 +165,42 @@ int** fusionCas2(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 int** fusion(ListePoints* decalage, int largeur, int hauteur, Image image1, Image image2)
 {
 	int** matImageFinale;
-	if(decalage->x>0 && decalage->y>0){
+	if(decalage->x>=0 && decalage->y>=0){
 		matImageFinale=fusionCas1(decalage, largeur, hauteur, image1, image2);
 	}
 	
-	if(decalage->x>0 && decalage->y<0){
+	if(decalage->x>=0 && decalage->y<=0){
 		matImageFinale=fusionCas2(decalage, largeur, hauteur, image1, image2);
 	}
-	if (decalage->x<0 && decalage->y>0){
+	if (decalage->x<=0 && decalage->y>=0){
 		decalage->x = -decalage->x;
 		decalage->y = -decalage->y;
 		matImageFinale = fusionCas2(decalage, largeur, hauteur, image2, image1);
+		decalage->x = -decalage->x;
+		decalage->y = -decalage->y;
 	}
-	if(decalage->x<0 && decalage->y<0){
+	if(decalage->x<=0 && decalage->y<=0){
 		decalage->x = -decalage->x;
 		decalage->y = -decalage->y;
 		matImageFinale=fusionCas1(decalage, largeur, hauteur, image2, image1);
+		decalage->x = -decalage->x;
+		decalage->y = -decalage->y;
 	} 
 	return(matImageFinale);
 }	
 
-Image imageCollee (Image image1, Image image2, ListePoints* decalage)
+Image imageCollee (Image image1, Image image2, ListePoints decalage)
 {
 	Image imageFinale;
 	int teinteMax;
 	int* size;
 	int** matImageFinale;
 	char* type;
-	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) type="P2";
-	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) type="P3";
-	teinteMax=fmax(image1.teinteMax,image2.teinteMax);
-	
-	size=taille(decalage,image1.height,image2.height,image1.width,image2.width);
-	
-	matImageFinale=fusion(decalage, size[0], size[1],image1,image2);
-	
+	if(strcmp(image1.type,"P2")==0 && strcmp(image2.type,"P2")==0) type="P2";
+	if(strcmp(image1.type,"P3")==0 && strcmp(image2.type,"P3")==0) type="P3";
+	teinteMax=max(image1.teinteMax,image2.teinteMax);
+	size=taille(&decalage,image1.height,image2.height,image1.width,image2.width);
+	matImageFinale=fusion(&decalage, size[0], size[1],image1,image2);
 	imageFinale=creationImage(type,size[0],size[1],teinteMax, matImageFinale);
 	
 	return(imageFinale);

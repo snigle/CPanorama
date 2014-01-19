@@ -61,6 +61,7 @@ give: $(dirsrc)
 	@mkdir $(AUTEUR)/$(dirrapport)
 	@cp Makefile $(AUTEUR)/Makefile
 	@cp Doxyfile $(AUTEUR)/Doxyfile
+	@cp README $(AUTEUR)/README
 	@cp -r $(dirsrc)* $(AUTEUR)/$(dirsrc)
 	@cp -r $(dirrapport)rapport.pdf $(AUTEUR)/$(dirrapport)
 	tar cvzf $(AUTEUR)-$(PROG).tar.gz $(AUTEUR)/

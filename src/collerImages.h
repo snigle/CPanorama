@@ -120,7 +120,7 @@ int** fusion(ListePoints* decalage, int largeur, int hauteur, Image image1, Imag
        \remarks 
 
 */
-Image imageCollee(Image image1, Image image2, ListePoints* decalage);
+Image imageCollee(Image image1, Image image2, ListePoints decalage);
 
 
 

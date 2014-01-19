@@ -161,5 +161,7 @@ ListePoints* comparer(ListePoints* liste1, ListePoints* liste2, Image image2, in
 		parcourtListe1=parcourtListe1->suivant;
 	}
 	*bool_erreur = (result == NULL);
+	if (*bool_erreur)
+		result = ajoutCoordonnee(result, 0,0,0);
 	return result;
 }

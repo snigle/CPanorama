@@ -53,8 +53,6 @@ int** transformationCylidrique(Image image)
 			transformationCoordonnee(&xp, &yp,image,i,j);
 			for (f = 0; f < k; f += 1)
 			{
-				if(yp==0 && k==3)
-					printf("xp %d\n",xp);
 /*				if(yp>0 && xp>0 && yp<image.height && xp<image.width)*/
 				newTeinte[yp][xp*k+f] = image.teinte[i][j*k+f];
 			}
@@ -246,6 +244,8 @@ void calculerTousLesDecalageBis(int image1, int cylindre, int direction, int ima
 			result->positionImage=image2;
 		}
 	}
+/*	else*/
+/*	erreur(-1,EXIT);*/
 }
 
 
@@ -414,6 +414,7 @@ Image** creationTableauImageTemporaire(Image* imageOrigine, int nombreImageOrigi
 	Image** tableauImageTemporaire;
 	int i;
 	int ** newTeinte;
+	
 	tableauImageTemporaire= mallocBis(nombreImageOrigine * sizeof(Image*));
 	
 	for (i = 0; i < nombreImageOrigine; i += 1)
@@ -587,12 +588,22 @@ Image collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int
 		i = imageAvecMeilleurDecalage(decalages, nombreImage);
 		decalages[i].valeur.x+=origine[i].x;
 		decalages[i].valeur.y+=origine[i].y;
-		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], &decalages[i].valeur);
+		tmp = imageCollee(tableauImageCouleur[i], tableauImageCouleur[decalages[i].positionImage], decalages[i].valeur);
 		tableauImageCouleur[i] = tmp;
-		tableauImageCouleur[decalages[i].positionImage]=tmp;
+		tableauImageCouleur[decalages[i].positionImage]=copieImage(tmp);
 		nouvellesOrigines(decalages, origine, i);
 	}
 	return (copieImage(tableauImageCouleur[recupererImagePlusGrande(tableauImageCouleur, nombreImage)]));
+}
+
+void afficherDecalage(Decalage* decalages, int n)
+{
+	int i;
+	for (i = 0; i < n; i += 1)
+	{
+		printf("\n****Image %d****\nDecalage %dx%d : %f\n",i,decalages[i].valeur.x,decalages[i].valeur.y,decalages[i].valeur.valeur);
+		printf("Position image : %d\n",decalages[i].positionImage);
+	}
 }
 
 Image traitementPanorama(Image* tableauImagesCouleur, int nombreInput, int* bool_erreur)
@@ -607,19 +618,22 @@ Image traitementPanorama(Image* tableauImagesCouleur, int nombreInput, int* bool
 	tableauImagesTemporaire = creationTableauImageTemporaire(tableauImagesCouleur, nombreInput, bool_erreur);
 	if(!*bool_erreur)
 	{
-		tabCoupes = creerTableauCoupe(tableauImagesTemporaire, nombreInput, bool_erreur);	
+		tabCoupes = creerTableauCoupe(tableauImagesTemporaire, nombreInput, bool_erreur);
 		if(!*bool_erreur)
 		{
 			decalageAPasCalculer = genererTableauDecalageAPasCalculer(nombreInput);
 			printf("\nCalcul des décalages : ");
 			fflush(stdout);
 			decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
+			afficherDecalage(decalages,nombreInput);
 			libererTableauImages2(tableauImagesTemporaire, nombreInput);
 			imageFin = collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
 		}
 	}
 	return(imageFin);
 }
+
+
 
 int panorama(char** input, int nombreInput, char* output, int* bool_erreur)
 {
