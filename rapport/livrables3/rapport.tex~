@@ -368,12 +368,16 @@ FinFonction
 \end{lstlisting}
 
 
-	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distorsion. Pour vérifier cela, nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
+	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distorsion. Pour vérifier cela, nous avons de nouveau coller nos images après la correction avec Gimp, et les images s'assemblaient parfaitement.
 		
 		
 		
 		\paragraph{Sélection des vecteurs\\}
-		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous avons choisit de sélectionner 20 vecteurs de même origine dans une fenêtre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
+<<<<<<< HEAD
+		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous avons choisit de sélectionner 20 vecteurs de même origine dans une fenêtre de 30px sur 30px. Nous avons donc parcourus la première image et pour chaque point clé nous avons généré un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
+=======
+		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous avons choisit de sélectionner 20 vecteurs de même origine dans une fenêtre de 30px sur 30px. Nous avons donc parcouru la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
+>>>>>>> 442d943ead09ea0abb5cf58867639ea9d3e8211b
 		
 		\paragraph{Recherche des correspondances\\}
 		
@@ -443,12 +447,6 @@ On retourne la taille de l'image finale en hauteur et en largeur.
  }
                    \end{lstlisting}
                    
-	       \begin{figure}[h]
-		\begin{center}
-		%shéma taille images
-		\end{center}
-		
-	\end{figure}	
 	        Après cette étape, on peut passer au collage à proprement parler. \\
 	        On obtient donc un plan dans lequel il faut faire rentrer ces deux images. \\On initialise donc d'abord l'image de la taille obtenue avec des pixels noirs.\\
 	        On écrit ensuite la première image à partir du point A(0,0) qui est l'origine. \\Ensuite on écrit la deuxième image à partir du point B(decalage.x, decalage.y).\\\\
@@ -475,6 +473,12 @@ FONCTION fusion
                    \end{lstlisting}
                    
       Le cas où le décalage en ordonnée est négatif, la méthode est équivalente sauf que l'on colle l'image 1 à partir du point A (0, decalage.y) et on colle l'image 2 à partir du point B(decalage.x,0).\\
+       \begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=0.4]{collage.png}
+		\end{center}
+		\caption{Collage d'images dans les cas où les décalages en abscisse et en ordonnée sont positifs}
+	\end{figure}	
 		\section{Notre algorithme principal}
 			L'assemblage d'images se déroule suivant plusieurs étapes bien distinctes.
 			

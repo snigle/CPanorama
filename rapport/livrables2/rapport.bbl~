@@ -1,0 +1,148 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 1.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{cesar}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Cesarsouza}{C.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{C1}
+  \strng{fullhash}{C1}
+  \field{sortinit}{C}
+  \field{title}{Harris Corners Detector in C#}
+  \verb{url}
+  \verb http://crsouza.blogspot.fr/2010/05/harris-corners-detector-in-c.html
+  \endverb
+  \field{year}{2010}
+\endentry
+
+\entry{developper}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {developpez.com}{d.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{d1}
+  \strng{fullhash}{d1}
+  \field{sortinit}{D}
+  \field{title}{[image] Détecteur de Ligne (Hough)}
+  \verb{url}
+  \verb http://www.developpez.net/forums/d495285/autres-langages/algorithmes/co
+  \verb ntribuez/image-detecteur-ligne-hough/
+  \endverb
+  \field{year}{2008}
+\endentry
+
+\entry{ransacpdf}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Eric~MARCHAND}{E.~M.}%
+     {Ezio~MALIS}{E.~M.}%
+     {et}{e.}%
+     {}{}}%
+  }
+  \strng{namehash}{EMEMe1}
+  \strng{fullhash}{EMEMe1}
+  \field{sortinit}{E}
+  \field{title}{Méthode robustes d'estimation pour la vision robotique}
+  \verb{url}
+  \verb http://www.irisa.fr/lagadic/pdf/2005_jnrr_malis.pdf
+  \endverb
+  \field{year}{2005}
+\endentry
+
+\entry{operationpixel}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {operationpixel@free.fr}{o.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{o1}
+  \strng{fullhash}{o1}
+  \field{sortinit}{O}
+  \field{title}{Traitement d'images}
+  \verb{url}
+  \verb http://operationpixel.free.fr/pointinteret_fast.php
+  \endverb
+  \field{year}{2010}
+\endentry
+
+\entry{livre}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Versnon}{V.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{VD1}
+  \strng{fullhash}{VD1}
+  \field{sortinit}{V}
+  \field{chapter}{4}
+  \field{title}{Machine Vision}
+  \verb{url}
+  \verb http://homepages.inf.ed.ac.uk/rbf/BOOKS/VERNON/Chap004.pdf
+  \endverb
+  \field{year}{1991}
+\endentry
+
+\entry{wikiConvo}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wikipédia}{W.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{W1}
+  \strng{fullhash}{W1}
+  \field{sortinit}{W}
+  \field{title}{Kernel (Image processing)}
+  \verb{url}
+  \verb http://en.wikipedia.org/wiki/Kernel_(image_processing)
+  \endverb
+\endentry
+
+\entry{ransacwiki}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wikipédia}{W.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{W1}
+  \strng{fullhash}{W1}
+  \field{sortinit}{W}
+  \field{title}{RANSAC}
+  \verb{url}
+  \verb http://fr.wikipedia.org/wiki/RANSAC
+  \endverb
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

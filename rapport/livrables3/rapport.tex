@@ -447,12 +447,6 @@ On retourne la taille de l'image finale en hauteur et en largeur.
  }
                    \end{lstlisting}
                    
-	       \begin{figure}[h]
-		\begin{center}
-		%shéma taille images
-		\end{center}
-		
-	\end{figure}	
 	        Après cette étape, on peut passer au collage à proprement parler. \\
 	        On obtient donc un plan dans lequel il faut faire rentrer ces deux images. \\On initialise donc d'abord l'image de la taille obtenue avec des pixels noirs.\\
 	        On écrit ensuite la première image à partir du point A(0,0) qui est l'origine. \\Ensuite on écrit la deuxième image à partir du point B(decalage.x, decalage.y).\\\\
@@ -479,6 +473,12 @@ FONCTION fusion
                    \end{lstlisting}
                    
       Le cas où le décalage en ordonnée est négatif, la méthode est équivalente sauf que l'on colle l'image 1 à partir du point A (0, decalage.y) et on colle l'image 2 à partir du point B(decalage.x,0).\\
+       \begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=0.4]{collage.png}
+		\end{center}
+		\caption{Collage d'images dans les cas où les décalages en abscisse et en ordonnée sont positifs}
+	\end{figure}	
 		\section{Notre algorithme principal}
 			L'assemblage d'images se déroule suivant plusieurs étapes bien distinctes.
 			
