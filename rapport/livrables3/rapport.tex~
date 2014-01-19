@@ -1,0 +1,333 @@
+%Classe du Document% 
+\documentclass[a4paper,french,12pt]{report}
+
+
+%Packages utilisÃ©s
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+%\usepackage{layout}
+%\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{fixltx2e}
+%\usepackage{soul}
+%\usepackage{ulem}
+%\usepackage{eurosym}
+\usepackage{graphicx}
+%\usepackage{bookman}
+%\usepackage{charter}
+%\usepackage{newcent}
+%\usepackage{lmodern}
+%\usepackage{mathpazo}
+%\usepackage{mathptmx}
+%\usepackage{url}
+%\usepackage{verbatim}
+%\usepackage{moreverb}
+%\usepackage{listings}
+%\usepackage{fancyhdr}
+\usepackage{wrapfig}
+%\usepackage{color}
+%\usepackage{colortbl}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathrsfs}
+%\usepackage{asmthm}
+%\usepackage{makeidx}
+\usepackage{biblatex}
+\usepackage{listings}
+
+\bibliography{biblio.bib}
+
+\usepackage[nottoc, notlof, notlot]{tocbibind}
+
+
+\usepackage{hyperref}
+\hypersetup{
+	bookmarks=true,
+	colorlinks=true,
+	linkcolor=black, 
+}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue}\textbf,       % keyword style
+  language=bash,                 % the language of the code
+  morekeywords={*,Pour,Si,FinPour,FinSi,alors,SI,POUR CHAQUE, FAIRE,DEBUT PROGRAMME,FINSI,FINPOUR,POUR TOUT,POUR,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+% the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+   % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\begin{document}
+
+\title{Réalisation d'un panorama}
+
+\author{
+	\bsc{Ludovic Lamarche} \\ 
+	\bsc{Quentin Perales} \\ 
+	\bsc{Elie Poussou} \\ \\ \\ \\
+	E.I.S.T.I\\ 
+	PAU} 
+\date{\today}
+
+
+\maketitle
+\tableofcontents
+
+%\singlespacing
+\onehalfspacing
+%\doublespacing 
+
+\chapter*{Introduction}	
+		Le projet se conclue par ce dernier livrable en fin de semestre. L'objectif est donc de créer un programme qui assemble des images ou des photos pour réaliser un panorama.	Pour cela, il a fallu mettre en oeuvre toutes nos connaissances accumulées au cours des deux premiers mois, ainsi que nos recherches pour remplir l'objectif fixé par ce projet.
+		
+		Dans un premier temps, nous allons présenter les fonctions réalisées pour le second librable car elles ont été très utiles pour la réalisation de notre algorithme codé durant cette dernière partie.
+		
+		Dans un second temps, nous allons présenter les étapes ainsi que les fonctions principales de notre algorithme qui relie les images entre elles. Puis, nous expliquerons les améliorations que nous aurions pu apporter au programme.
+		
+		
+		
+\chapter{Les six fonctions du deuxième livrable}
+
+		\section{Grayscale}
+			La fonction Grayscale permet de transformer une image  couleur en teintes de gris.\\
+			Dans une image en couleur, chaque pixel est codé par 3 composantes (Rouge, Vert et Bleu).\\ En grayscale, chaque pixel sera codé par une seule composante.\\
+			La formule utilisée est la suivante : \\
+			$
+				    pixelGrayscale = 0,299 * pixel Rouge+ 0,587*pixel vert + 0,114 pixel bleu
+			$
+			\\
+			On parcourt donc l'image couleur, et on applique cette formule à chaque pixel, c'est à dire à ces trois composantes.\\
+			Cette fonction effectue donc une moyenne pondérée des pixels rouges, verts et bleus. \\
+			L'image obtenue sera donc 3 fois plus petite, et en noir et blanc.\\
+
+			
+		\section{Binnary}
+			  Chaque pixel d'une image binaire ne peut avoir pour valeurs que 0 ou 1.\\
+			  La fonction binary nécessite un seuil et une image en teintes de gris, le seuil étant choisit par l'utilisateur.\\
+			  
+			  On parcourt l'image en teintes de gris, et pour chaque pixel, si son instensité est supérieure au seuil, on lui alloue la valeur 0 qui correspond à la couleur blanche.  Si l'intensité du pixel est supérieure au seuil, on lui alloue la valeur 1 qui correspond à la couleur noire.\\
+			  Voici l'algorithme utilisé : \\
+
+
+			  	\begin{lstlisting}
+				   POUR TOUT les pixels de l'image
+				      SI le pixel >seuil
+				      pixel=1
+				    FINSI
+				  FINPOUR	
+			      \end{lstlisting}
+			  
+		\section{Histogramme}
+			  L'histogramme d'une image permet d'illustrer la répartition des teintes d'une image.\\
+			  Le but est de compter pour chaque intensité le nombre de pixels qui sont de cette intensité.\\
+			 
+			 D'abord on crée un tableau de taille égale à la teinte maximale de l'image dont on veut obtenir l'histogramme.\\
+			 Ensuite, on parcourt l'image et pour chaque pixel, on rajoute 1 dans la case du tableau qui correspond à l'instensité de ce pixel.\\\\\\
+			 
+
+			 
+			 On peut résumer tout ceci grâce à l'algorithme suivant :
+			 
+                 \begin{lstlisting}
+ tab : tableau d'entiers de taille égale à la teinte maximale de l'image
+			      
+POUR chaque pixel de l'image
+tab[teinte_pixel]++
+FINPOUR	
+                    \end{lstlisting}
+
+		 On peut choisir de tracer cet histogramme mais le tableau suffit.\\
+
+		\section{Dilate}
+		
+		Pour la dilatation nous avons utilisé un algorithme qui utilise des "objects pixel" tiré du livre Machine Vision\cite{livre}. Un objet pixel est un groupe de neuf pixels formant un carré de taille 3x3 et qui respecte certaines conditions. Pour simplifier l'algorithme on nomme chaque case de 0 à 8.
+		%Image du tableau de pixel.
+		\begin{table}[ht]
+			\centering
+			\begin{tabular}{|l|l|l|}\hline
+				3 & 2 & 1 \\\hline
+				4 & 8 & 0 \\\hline
+				5 & 6 & 7\\\hline
+				 
+			\end{tabular}
+		\end{table}
+			
+		Si on utilise les conventions de logique combinatoire, c'est à dire que le signe . signifie ET et le signe + signifie OU, les conditions d'un objet pixel se résume comme ceci :
+		\begin{center}
+		$8.[((1+2+3).5+6+7).\overline{4}.\overline{0}]$\\
+		$+ [(1+0+7).(3+4+5).\overline{2}.\overline{6}]$\\
+		$+ [3.(5+6+7+0+1).\overline{2}.\overline{4}]$\\
+		$+ [1.(3+4+5+6+7).\overline{2}.\overline{0}]$\\
+		$+ [7.(1+2+3+4+5).\overline{0}.\overline{6}]$\\
+		$+ [5.(7+°+1+2+3).\overline{4}.\overline{6}]	$
+		
+		\end{center}
+		
+Finallement, il suffit d'appliquer l'algorithme suivant :
+	\begin{lstlisting}
+POUR TOUT les pixels de l'image
+	SI le pixel est un objet pixel ALORS
+		copier le groupe de pixels dans l'image de destination
+	FINSI
+FINPOUR	
+	\end{lstlisting}
+	
+Étant donné que cette méthode enlève beaucoup de pixels, il n'est pas nécessaire de faire une érosion en suivant. Cependant nous avons utilisé un autre algorithme moins restrictif pour l'erosion.
+		\section{Erode}
+		
+Pour l'érosion nous utilisons un masque. Nous testons un groupe de pixel et nous assignons la valeur 1 si tout les pixels dans le masque sont à 1. Sinon on retourne un 0.
+Nous avons pris directement	l'algorithme d'opération pixel\cite{operationpixel} :
+\begin{lstlisting}
+destination : matrice de l'image érodée
+source : matrice de l'image à éroder
+x,y,k1,k2 : variables d'incrémentation
+
+POUR CHAQUE pixel de l'image FAIRE //x et y étant la position
+	POUR k1 allant de -1 à 1 FAIRE
+		POUR k2 allant de -1 à 1 FAIRE
+destination[x][y] = destination[x][y] ET source[x+k1][y+k2]
+		FINPOUR
+	FINPOUR
+FIN POUR
+\end{lstlisting}
+		
+		
+		\section{Convolution \cite{wikiConvo} } 
+			La convolution permet d'appliquer un filtre de convolution à une image en échelle de gris. Le but est d'affecter pour chaque pixel de l'image des coefficients aux pixels autour de celui-ci.
+			
+			La taille du filtre est variable, cependant, elle est toujours paire. Les filtres les plus utilisés sont les filtres de taille 3x3, mais parfois, les filtres de tailles supérieures sont requis.
+			Les filtres sont récupérés en début de fonction, une erreur est générée si le filtre n'est pas correct, c'est à dire si le fichier texte comporte des caractères autres que des chiffres ou nombres ou s'il n'y a pas assez de coefficients.
+			
+			Afin d'expliquer l'algorithme qui mène à la convolution, nous allons utiliser un filtre 3x3 sur une image. Prenons le filtre F suivant :\\
+			\begin{tabular}{lll}
+			   0 & 1 & 0 \\
+			   1 & 1 & 1 \\
+			   0 & 1 & 0 \\
+			\end{tabular}
+			\\
+			F est appliqué à un pixel p de coordonnées (x, y). La valeur du pixel après la convolution sera alors \\
+			$
+				nouvelleValeur = 0 * p(x-1, y-1) + 1 * p(x, y-1) + 0 * p(x+1,y-1) \\
+				+ 1 * p(x-1, y) + 1 * p(x, y) + 1 * p(x+1,y) \\ 
+				+ 0 * p(x-1, y+1) + 1 * p(x, y+1) + 0 * p(x+1,y+1)
+			$
+			\\
+			\newpage
+			De plus, on crée un décalage pour éviter d'assigner des coefficients à des pixels hors image. Pour un filtre 3x3, le décalage est de 1 ; pour 5x5, il est de 3 ; pour 7x7, il est de 5. On peut donc dire que
+			
+			\begin{equation}
+				decalage = \dfrac{taille - 1}{2} 
+			\end{equation}
+			
+			Voici un exemple de convolution que l'on peut obtenir : \\
+
+	\begin{tabular}{llllllllllllllll}
+	   35 & 40 & 41 & 45 & 50 &   &   &   &   &   &   & 35 & 40 & 41 & 45 & 50 \\
+	   40 & 40 & 42 & 46 & 52 &   & 0 & 1 & 0 &   &   & 35 & 40 & 41 & 45 & 50 \\
+	   42 & 46 & 50 & 55 & 55 & X & 0 & 0 & 0 &   & = & 40 & 40 & 42 & 46 & 52 \\
+	   48 & 52 & 56 & 58 & 60 &   & 0 & 0 & 0 &   &   & 42 & 46 & 50 & 55 & 55 \\
+	   56 & 60 & 65 & 70 & 75 &   &   &   &   &   &   & 56 & 60 & 65 & 70 & 75 \\
+	\end{tabular}
+
+
+	\vspace{2cm}
+		Après avoir vu certaines fonctions très utiles dans le traitement d'image, nous allons maintenant voir comment les enchaîner pour les rendre utiles lors de la création du panorama.
+
+
+\chapter{Notre algorithme d'automatisation d'un panorama}
+		Dans cette partie, nous allons expliquer plusieurs fonctions principales dans notre algorithme. 
+		
+		Tout d'abord, la récupération des points clés. Ensuite, la comparaison de ces points clés entre les images. Puis, la fonction de collage qui permet d'assembler deux images connaissant le décalage. Enfin, expliquer l'enchaînement de ces fonctions pour aboutir a notre programme.
+		
+		Pour finir cette partie, nous expliquerons les améliorations que nous pourrions apporter a notre code.
+		
+		%	Dire ce qu'on a essayé (Hough, Harris, Sift)			
+		\section{Récupération des points clé}
+			La récupération des points clés est une étapes cruciale dans la réalisation d'un panorama car ils permettent de savoir ce que l'image a de particulier, et de connaitre les formes qu'on pourrait comparer avec une autre image.
+	
+			Pour cela, nous avons mis en oeuvre plusieurs algorithmes que nous avons trouvé lors de nos recherches. Trois algorithmes majeurs ont été trouvés.
+			
+			Tout d'abord, la transformée de Hough devais nous permettre de récupérer les points issus de rencontre de droites ou de cercles. Cependant, lors de la comparaison de formes compliquées, les points trouvés n'étaient pas assez précis et suffisants pour permettre une comparaison efficace.
+			
+			Puis, nous avons codé le décodeur de Harris qui s'appuie sur des calculs mathématiques, notamment les matrices pour récupérer des points clés. Ce détecteur n'a pas toujours données des points pouvant être utilisés.
+			
+			Ensuite, nous avons commencé a coder la méthode SIFT, une méthode très efficace, mais très longue.
+			
+			Entre temps, nous avons trouvé un autre moyen pour trouver des points clé, qui utilisait les fonctions expliquées dans la partie précédente. 
+			
+			Raisonnons à partir de cette image : 
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{imageBase.png}
+		\end{figure}
+			
+		\newpage	
+			Pour cela, à partir d'une image en couleur, il faut la passer en greyscale puis effectuer une convolution avec un filtre de Prewitt.
+			
+			Cela permet de détecter les contours tout en limitant l'effet du bruit sur la photo.
+			\newline
+			filtre de Prewitt : 
+				\begin{tabular}{lll}
+				   1 & 1 & 1 \\
+				   0 & 0 & 0 \\
+				   -1 & -1 & -1 \\
+				\end{tabular}
+
+			
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{convo.png}
+		\end{figure}
+
+		Ensuite, on converti cette image en binaire avec un seuil de 100. 
+		
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{binaire.png}
+		\end{figure}
+		
+\newpage		
+		Enfin, on opère à une dilatation puis une érosion cinq fois de suite pour enlever les points esseulés.
+		
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{erosionDilatation.png}
+		\end{figure}
+\newpage
+			Pour finir cette détection, on parcourt l'image pour voir si un point blanc possède quinze voisins dans un carré de 15x15 pixels autour de lui. Cela peut s'apparenter à une forme de dilatation. Cette dernière opération est très utile lors de l'algorithme de comparaison des points clés expliqé ci-dessous.
+			
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{enleverNonVoisin.png}
+		\end{figure}
+			
+		\section{Algorithme de comparaison des points clé} %Ludo
+		\section{Fonction de collage des images}%Elie
+		\section{Notre algorithme principal}
+		\section{Comment améliorer cet algorithme ?}%Ludo
+		
+\chapter*{Conclusion}%Elie ou Quentin
+	
+	
+\printbibliography
+\end{document}

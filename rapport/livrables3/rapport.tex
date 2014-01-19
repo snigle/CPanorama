@@ -273,8 +273,18 @@ FIN POUR
 			
 			Ensuite, nous avons commencé a coder la méthode SIFT, une méthode très efficace, mais très longue.
 			
-			Entre temps, nous avons trouvé un autre moyen pour trouver des points clé, qui utilisait les fonctions expliquées précédemment. 
-			Pour cela, à partir d'une image en couleur, il faut la passer en greyscalepuis effectuer une convolution avec un filtre de Prewitt. Cela permet de détecter les contours tout en limitant l'effet du bruit sur la photo.
+			Entre temps, nous avons trouvé un autre moyen pour trouver des points clé, qui utilisait les fonctions expliquées dans la partie précédente. 
+			
+			Raisonnons à partir de cette image : 
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{imageBase.png}
+		\end{figure}
+			
+		\newpage	
+			Pour cela, à partir d'une image en couleur, il faut la passer en greyscale puis effectuer une convolution avec un filtre de Prewitt.
+			
+			Cela permet de détecter les contours tout en limitant l'effet du bruit sur la photo.
 			\newline
 			filtre de Prewitt : 
 				\begin{tabular}{lll}
@@ -282,11 +292,34 @@ FIN POUR
 				   0 & 0 & 0 \\
 				   -1 & -1 & -1 \\
 				\end{tabular}
-		\vspace{1,5cm}	
+
 			
-			Ensuite, on converti cette image en binaire avec un seuil de 100. Enfin, on opère à une dilatation puis une érosion cinq fois de suite pour enlever les points esseulés. 
-			
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{convo.png}
+		\end{figure}
+\newpage
+		Ensuite, on converti cette image en binaire avec un seuil de 100. 
+		
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{binaire.png}
+		\end{figure}
+		
+\newpage		
+		Enfin, on opère à une dilatation puis une érosion cinq fois de suite pour enlever les points esseulés.
+		
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{erosionDilatation.png}
+		\end{figure}
+\newpage
 			Pour finir cette détection, on parcourt l'image pour voir si un point blanc possède quinze voisins dans un carré de 15x15 pixels autour de lui. Cela peut s'apparenter à une forme de dilatation. Cette dernière opération est très utile lors de l'algorithme de comparaison des points clés expliqé ci-dessous.
+			
+		\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=0.25]{enleverNonVoisin.png}
+		\end{figure}
 			
 		\section{Algorithme de comparaison des points clé} %Ludo
 		\section{Fonction de collage des images}%Elie
