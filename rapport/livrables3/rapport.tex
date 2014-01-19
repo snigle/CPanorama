@@ -314,15 +314,120 @@ FIN POUR
 		\end{figure}
 \newpage
 			Pour finir cette détection, on parcourt l'image pour voir si un point blanc possède quinze voisins dans un carré de 15x15 pixels autour de lui. Cela peut s'apparenter à une forme de dilatation. Cette dernière opération est très utile lors de l'algorithme de comparaison des points clés expliqé ci-dessous.
-			
+	
+		
+
 		\begin{figure}[htbp]
 			\centering
 				\includegraphics[scale=0.25]{enleverNonVoisin.png}
 		\end{figure}
 			
-		\section{Algorithme de comparaison des points clé} %Ludo
+			
+\newpage
+\section{Algorithme de comparaison des points clés} %Ludo
+		Pour trouver les points clés, nous avons d'abord fait beaucoup de recherches sur internet. Une des méthodes citées était le ZNCC, un algorithme qui donne une note entre deux points. Il suffisait donc avec cette méthode de comparer cette note. Cependant nous l'avons testé et il y avait trop de similitude entre les points. La deuxième méthode trouvée était de comparer les valeurs de Harris. Or harris ne nous satisfaisait pas pour la recherche des points clés donc nous avons abandonné. Finallement nous avons arrêté nos recherches sur internet pour se mettre à réfléchir de nous même et à concevoir un algorithme simple pour comparer nos points clés.
+		
+		\subsection{Schématisation de notre algorithme}
+		Notre point de départ était de comparer des vecteurs dans chaque image. Nous avions d'abord essayé de comparer un seul vecteur sur des images coupé à l'ordinateur et le résultat était très satisfaisant. Par contre quand nous avons essayé cette méthode sur des photos cela n'a pas été concluant.
+		
+		\subsubsection{Recherches}
+		Dans l'idée de comparer des vecteurs, nous avons d'abord essayé d'assembler deux photos à l'aide du logiciel Gimp. Voici le rendu :\\
+		
+		%Figure du collage
+		
+			\begin{center}
+			\includegraphics[scale=0.35]{decalage.png}
+			\end{center}
+				
+	
+		
+		De loin, le résultat n'est pas trop mal mais lorsqu'on se rapproche, on distingue clairement que si on aligne une partie de l'image, l'autre partie est complètement décallée. Ce phénomène est dû à la distortion de l'appareil photo. Nous avons donc recherché un moyen de corriger cette distortion. Pour cela nous avons utilisé la correction de Lens\cite{lens}.
+		%http://www.paulbourke.net/miscellaneous/lenscorrection/%.ous 
+	%screenshot%
+	\begin{figure}[htbp]
+			\centering
+				\includegraphics[scale=.8]{lensAvant.jpg} \includegraphics[scale=.8]{lensApres.jpg}
+				\caption{Correction de Lens\cite{lens}} 
+		\end{figure}
+\\
+	Algorithme de Lens:
+	
+\begin{lstlisting}
+Pre-conditions : coordonnées x et y, largeur et hauteur de l'image
+Post-condition : retourne les nouvelles coordonnées
+Fonction LensCorrection
+	px = (2.0*x - largeur) / largeur;
+	py = (2.0*y - hauteur) / hauteur;
+	r = px^2 + py^2;
+	p2x = px * (1.0 - 0.02 * r);
+	p2y = py * (1.0 - 0.08 * r);
+	x = (p2x + 1)*largeur/2;
+	y = (p2y+1)*hauteur/2;
+
+FinFonction
+\end{lstlisting}
+
+
+	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distortion. Pour vérifier cela nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
+		
+		
+		
+		\paragraph{Sélection des vecteurs\\}
+		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous vons choisit de sélectionner 20 vecteurs de même origine dans une fênetre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
+		
+		\paragraph{Recherche des correspondances\\}
+		
+		Pour trouver des correspondances, il faut parcourir la deuxième image, et vérifier pour chaque point clé si les vecteurs calculés précédemment tombent sur un autre point clé ou non.
+		Pour parcourir les points clés, nous avons choisit d'utiliser des listes pour réduire la complexité du parcourt. Cependant pour vérifier que les coordonnées d'un vecteur tombe sur un point clé, nous avons utilisé une matrice pour accéder directement aux coordonnées données plutôt que de parcourir la liste jusqu'à trouver les coordonnées.
+		
+		%Figure des vecteurs%
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=0.3]{model.png}
+		\end{center}
+		\caption{Exemple de model de vecteurs}
+	\end{figure}
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=0.3]{fail.png}\includegraphics[scale=0.3]{success.png}
+		\caption{Schéma de la recherche des correspondances}
+		\end{center}
+		
+	\end{figure}	
+	
+\newpage
+		\subsection{Algorithme}
+
+		
+\begin{lstlisting}
+Pre-conditions :
+	Liste point clé image1
+	Liste point clé image2
+	Matrice image 2
+
+FONCTION comparer
+	Pour chaque point clé de la liste 1
+		tableau = Générer un tableau de 20 points proches
+		Pour chaque point de la liste 2
+			Pour chaque élément de tableau tant que TROUVE
+				vecteur = tableau[i]-tableau[0]
+				TROUVE = !matriceImage2[liste2+vecteur]		
+				//si le point de la matrice est à 0, c'est un point clé
+			FinPour
+			Si TROUVE
+				AjoutListe(CalculDécalage(tableau[0],liste2))
+		FinPour
+	FinPour
+	On retourne le décalage le plus présent
+FinFonction		
+\end{lstlisting}
 		\section{Fonction de collage des images}%Elie
-		        Nous voulons coller les deux images A et B. Ces deux images ont des points clefs en commun. 
+		        Nous voulons coller les deux images A et B. Ces deux images ont des points clefs en commun. Grâce à ces points clefs en commun, on peut calculer le décalage de la première image par rapport à l'autre. 
+		        C'est ce décalage que va utiliser l'agorithme de collage.
+		        Il y a deux cas de figure, soit les décalages en abscisse et en ordonnées sont positifs, soit le décalage en abscisse est positif et celui en ordonnée négatif.
+		        Pour expliquer cet algorithme, nous allons nous concentrer sur le premier cas.
+		        
+		        
 		\section{Notre algorithme principal}
 			L'assemblage d'images se déroule suivant plusieurs étapes bien distinctes.
 			
@@ -359,8 +464,14 @@ panorama = traitementPanorama(tableauImagesCouleur, nombreInput, bool_erreur);
 save(panorama, output, bool_erreur);
 \end{lstlisting}
 			
+
 		\section{Comment améliorer cet algorithme ?}%Ludo
 		
+		La première chose à améliorer est l'algorithme pour coller toutes les images. Il n'est pas tout à fait au point et ne prend pas en compte tout les cas possibles.\\
+		Une autre amélioration serait de réduire au maximum la sélection des points clés pour en avoir moins et gagner du temps lors de la comparaison.\\
+		De plus il serait interessant d'accélérer le temps de traitement des images. \\
+	Et enfin il faudrait prendre en compte plus de cas, notre programme prend en charge uniquement les photos dont la correspondance se trouve sur le tiers extérieur de l'image.
+	
 \chapter*{Conclusion}%Elie ou Quentin
 	Pour conclure, on peut dire que ce projet était très compliqué à gérer, notamment parce que le temps imparti était très important (un semestre) mais aussi parce que le traitement d'image est plus compliqué que ce que l'on peut penser à première vue. De plus c'est la première fois, que la classe est laissée en autonomie tout au long du projet, il a donc fallu apprendre un nouveau langage, tout en avançant notre projet.
 	

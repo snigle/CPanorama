@@ -268,7 +268,7 @@ void listeTestOption(int argc, char** argv, int* i, char** input, int* idInput, 
 	int bool_erreur;
 	char* currentInput;
 	char* currentOutput;
-	if((argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r") || !strcmp(argv[*i],"--help") || !strcmp(argv[*i],"-?")) && argc > 1 ) || *i==0)	{
+	if((argv[*i][0]=='-' && !(!strcmp(argv[*i],"-li") || !strcmp(argv[*i],"-i") || !strcmp(argv[*i],"-o") || !strcmp(argv[*i],"-lo") || !strcmp(argv[*i],"-r") || !strcmp(argv[*i],"--help") || !strcmp(argv[*i],"-?")) && argc > 1 ) && *i!=0)	{
 		currentInput = incrementerInputOutput (input,idInput,nombreInput,1);
 		currentOutput = incrementerInputOutput (output,idOutput,nombreOutput,0);
 	}
@@ -309,7 +309,7 @@ void appelerFonction(int argc, char** argv, char** input, int nombreInput, char*
 	{	
 			listeTestOption(argc,argv,&i,input,&idInput,nombreInput,output,&idOutput,nombreOutput);	
 	}
-	if(!idInput) afficherManuel();
+	if(argc==1) afficherManuel();
 } 
 
 

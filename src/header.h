@@ -270,6 +270,18 @@ int verifType(char* str_type);
 */
 int testType(Image im_image, char* str_type);
 
+
+/*!
+       \fn Image*** initArbre(int nbImages)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date dim. 19 janv. 2014
+       \brief Alloue de la mémoire pour créer un tableau utilisé dans le panorama               
+       \param nbimages : (int) nombre d'images
+       \return retourne l'adresse du tableau
+               
+       \remarks 
+
+*/
 Image*** initArbre(int nbImages);
 
 
