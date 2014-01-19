@@ -326,10 +326,10 @@ FIN POUR
 			
 \newpage
 \section{Algorithme de comparaison des points clés} %Ludo
-		Pour trouver les points clés, nous avons d'abord fait beaucoup de recherches sur internet. Une des méthodes citées était le ZNCC, un algorithme qui donne une note entre deux points. Il suffisait donc avec cette méthode de comparer cette note. Cependant nous l'avons testé et il y avait trop de similitude entre les points. La deuxième méthode trouvée était de comparer les valeurs de Harris. Or harris ne nous satisfaisait pas pour la recherche des points clés donc nous avons abandonné. Finallement nous avons arrêté nos recherches sur internet pour se mettre à réfléchir de nous même et à concevoir un algorithme simple pour comparer nos points clés.
+		Pour trouver les points clés, nous avons d'abord fait beaucoup de recherches sur internet. Une des méthodes citées était le ZNCC, un algorithme qui donne une note entre deux points. Il suffisait donc avec cette méthode de comparer cette note. Cependant nous l'avons testé et il y avait trop de similitudes entre les points. La deuxième méthode trouvée était de comparer les valeurs de Harris. Or harris ne nous satisfaisait pas pour la recherche des points clés donc nous l'avons abandonné. Finalement nous avons arrêté nos recherches sur internet pour réfléchir de nous même et à concevoir un algorithme simple pour comparer nos points clés.
 		
 		\subsection{Schématisation de notre algorithme}
-		Notre point de départ était de comparer des vecteurs dans chaque image. Nous avions d'abord essayé de comparer un seul vecteur sur des images coupé à l'ordinateur et le résultat était très satisfaisant. Par contre quand nous avons essayé cette méthode sur des photos cela n'a pas été concluant.
+		Notre point de départ était de comparer des vecteurs dans chaque image. Nous avions d'abord essayé de comparer un seul vecteur sur des images coupées à l'ordinateur et le résultat était très satisfaisant. Par contre quand nous avons essayé cette méthode sur des photos cela n'a pas été concluant.
 		
 		\subsubsection{Recherches}
 		Dans l'idée de comparer des vecteurs, nous avons d'abord essayé d'assembler deux photos à l'aide du logiciel Gimp. Voici le rendu :\\
@@ -342,7 +342,7 @@ FIN POUR
 				
 	
 		
-		De loin, le résultat n'est pas trop mal mais lorsqu'on se rapproche, on distingue clairement que si on aligne une partie de l'image, l'autre partie est complètement décallée. Ce phénomène est dû à la distortion de l'appareil photo. Nous avons donc recherché un moyen de corriger cette distortion. Pour cela nous avons utilisé la correction de Lens\cite{lens}.
+		De loin, le résultat n'est pas trop mal mais lorsqu'on se rapproche, on distingue clairement que si on aligne une partie de l'image, l'autre partie est complètement décalée. Ce phénomène est dû à la distorsion de l'appareil photo. Nous avons donc recherché un moyen de corriger cette distorsion. Pour cela nous avons utilisé la correction de Lens\cite{lens}.
 		%http://www.paulbourke.net/miscellaneous/lenscorrection/%.ous 
 	%screenshot%
 	\begin{figure}[htbp]
@@ -369,12 +369,12 @@ FinFonction
 \end{lstlisting}
 
 
-	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distortion. Pour vérifier cela nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
+	Nous avons testé cet algorithme sur plusieurs tirages et il corrigeait très bien cette distorsion. Pour vérifier cela, nous avons de nouveau coller nos images après la correction avec Gimp et les images s'assemblaient parfaitement.
 		
 		
 		
 		\paragraph{Sélection des vecteurs\\}
-		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous vons choisit de sélectionner 20 vecteurs de même origine dans une fênetre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
+		Une fois que les images étaient prêtes, nous avons pu réfléchir à comment comparer les vecteurs. Nous avons choisit de sélectionner 20 vecteurs de même origine dans une fenêtre de 30px sur 30px. Nous avons donc parcourue la première image et pour chaque point clé nous avons générer un tableau de 20 points proche de ce point clé. Avec ce tableau nous avons pu calculer nos 20 vecteurs.
 		
 		\paragraph{Recherche des correspondances\\}
 		
