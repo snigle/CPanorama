@@ -122,6 +122,19 @@ int** fusion(ListePoints* decalage, int largeur, int hauteur, Image image1, Imag
 */
 Image imageCollee(Image image1, Image image2, ListePoints decalage);
 
+/*!
+       \fn int max(int a, int b)
+       \author LAMARCHE Ludovic <lamarchelu@eisti.eu>
+       \date lun. 20 janv. 2014
+       \brief Retourne le max               
+       \param a : (int) entier
+       \param b : (int) entier
+       \return retourne le max
+               
+       \remarks 
+
+*/
+int max(int a, int b);
 
 
 #endif /* __COLLERIMAGES_H__ */

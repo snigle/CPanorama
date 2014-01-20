@@ -596,15 +596,15 @@ Image collerToutesLesImages(Decalage* decalages, Image* tableauImageCouleur, int
 	return (copieImage(tableauImageCouleur[recupererImagePlusGrande(tableauImageCouleur, nombreImage)]));
 }
 
-void afficherDecalage(Decalage* decalages, int n)
-{
-	int i;
-	for (i = 0; i < n; i += 1)
-	{
-		printf("\n****Image %d****\nDecalage %dx%d : %f\n",i,decalages[i].valeur.x,decalages[i].valeur.y,decalages[i].valeur.valeur);
-		printf("Position image : %d\n",decalages[i].positionImage);
-	}
-}
+/*void afficherDecalage(Decalage* decalages, int n)*/
+/*{*/
+/*	int i;*/
+/*	for (i = 0; i < n; i += 1)*/
+/*	{*/
+/*		printf("\n****Image %d****\nDecalage %dx%d : %f\n",i,decalages[i].valeur.x,decalages[i].valeur.y,decalages[i].valeur.valeur);*/
+/*		printf("Position image : %d\n",decalages[i].positionImage);*/
+/*	}*/
+/*}*/
 
 Image traitementPanorama(Image* tableauImagesCouleur, int nombreInput, int* bool_erreur)
 {
@@ -625,7 +625,6 @@ Image traitementPanorama(Image* tableauImagesCouleur, int nombreInput, int* bool
 			printf("\nCalcul des décalages : ");
 			fflush(stdout);
 			decalages = calculerTousLesDecalage(tabCoupes, decalageAPasCalculer, nombreInput);
-			afficherDecalage(decalages,nombreInput);
 			libererTableauImages2(tableauImagesTemporaire, nombreInput);
 			imageFin = collerToutesLesImages(decalages,tableauImagesCouleur, nombreInput);
 		}
