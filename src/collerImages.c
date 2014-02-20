@@ -56,6 +56,7 @@ int** fusionCas1(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 	int f;
 	k = !strcmp (image2.type,"P3") ? 3 :1;
 	matImageFinale=initMatrice(0,largeur*k, hauteur);
+		printf("cas1");
 	for(i=0;i<image1.width*k;i+=k){
 		for(j=0;j<image1.height;j++){
 			for (f = 0; f < k; f += 1){
@@ -82,6 +83,8 @@ int** fusionCas2(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 	int j;
 	int k;
 	int f;
+	int depart;
+	printf("cas2");
 	if(strcmp(image1.type,"P2")==0 && strcmp (image2.type,"P2")==0) k=1;
 	if(strcmp(image1.type,"P3")==0 && strcmp (image2.type,"P3")==0) k=3;
 	matImageFinale=initMatrice(0,largeur*k, hauteur);
@@ -92,7 +95,8 @@ int** fusionCas2(ListePoints* decalage, int largeur, int hauteur, Image image1, 
 			}	
 		}
 	}
-	for (i = (decalage->x+ image1.width)*k/2; i < image2.width*k + decalage->x*k; i += k){
+	depart = abs(decalage->x)<abs(decalage->y) ? decalage->x : (decalage->x+ image1.width)*k/2;
+	for (i = depart; i < image2.width*k + decalage->x*k; i += k){
 		for (j = 0; j < image2.height; j += 1){
 			if(!pixelNoir(image2,j,i-decalage->x*k+f,k))
 			{
